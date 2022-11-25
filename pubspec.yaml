@@ -28,6 +28,7 @@ dev_dependencies:
   cached_network_image: ^3.2.1
 
 
+
   flutter_lints: ^2.0.0
 
 
@@ -51,12 +52,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+  - family: NotoSansKR
+    fonts:
+      - asset: fonts/NotoSansKR/NotoSansKR-Black.otf
+      - asset: fonts/NotoSansKR/NotoSansKR-Bold.otf
+      - asset: fonts/NotoSansKR/NotoSansKR-Light.otf
+      - asset: fonts/NotoSansKR/NotoSansKR-Medium.otf
+      - asset: fonts/NotoSansKR/NotoSansKR-Regular.otf
+      - asset: fonts/NotoSansKR/NotoSansKR-Thin.otf
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
