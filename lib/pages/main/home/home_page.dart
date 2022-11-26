@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
         title: Row(
           children: [],
         ),
+
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -121,4 +122,11 @@ class HomePage extends StatelessWidget {
           }),
     );
   }
+}
+
+OutlineInputBorder _builderOutLineInputBorder() {
+  return OutlineInputBorder(
+    borderSide: const BorderSide(width: 0.5, color: Color(0xFFD4D5DD)),
+    borderRadius: BorderRadius.circular(8.0),
+  );
 }

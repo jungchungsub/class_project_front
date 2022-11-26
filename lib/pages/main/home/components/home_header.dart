@@ -9,16 +9,15 @@ class HomeHeader extends StatelessWidget {
       padding: const EdgeInsets.all(24.0),
       child: Column(
         children: [
-          Container(
-              child: ClipRRect(
+          ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.asset(
               "assets/home1.jpg",
               fit: BoxFit.cover,
               height: 100,
-              width: 350,
+              width:  400,
             ),
-          )),
+          ),
           SizedBox(height: 15),
           _buildRow(),
         ],
