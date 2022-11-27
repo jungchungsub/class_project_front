@@ -1,3 +1,5 @@
+import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+import 'package:finalproject_front/pages/lecture/lecture_detail/lecture_detail_page.dart';
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +29,8 @@ class _MainPageState extends State<MainPage> {
       children: [
         HomePage(),
         LikeMainPage(),
+        CategoryDetailPage(),
+        LectureDetailPage(),
       ],
     );
   }

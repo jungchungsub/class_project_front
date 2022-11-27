@@ -11,9 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Row(
-          children: [],
-        ),
+        elevation: 1.0,
 
         actions: [
           Padding(

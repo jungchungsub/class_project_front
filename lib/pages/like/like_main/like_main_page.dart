@@ -14,6 +14,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 1.0,
         title: Text(
           "찜목록",
           style: TextStyle(
@@ -62,7 +63,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
                   child: Image.asset(
                     "assets/home1.jpg",
                     fit: BoxFit.cover,
-                    width: 120,
+                    width: 110,
                   ),
                 ),
               ),
@@ -72,13 +73,13 @@ class _LikeMainPageState extends State<LikeMainPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("깔끔하고 아름다운aaaa1",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,),
+                      Text("깔끔하고 아름다운aaaa2",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,),
                         overflow: TextOverflow.ellipsis,maxLines: 2,),
                       Row(
                         children: [
-                          Icon(CupertinoIcons.star_fill,color: Colors.yellow,size:14,),
+                          Icon(CupertinoIcons.star_fill,color: Colors.yellow,size:16,),
                           SizedBox(width: 8,),
-                          Text("|   45개의 평가",style: TextStyle(fontSize: 12),),
+                          Text("|   45개의 평가",style: TextStyle(fontSize: 14),),
                         ],
                       ),
                       Row(

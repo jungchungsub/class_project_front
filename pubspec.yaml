@@ -26,6 +26,7 @@ dev_dependencies:
   intl: ^0.17.0
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.1
+  extended_image: ^6.0.1
 
 
   flutter_lints: ^2.0.0
