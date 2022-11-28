@@ -1,5 +1,4 @@
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LectureDetailPage extends StatelessWidget {
@@ -16,11 +15,14 @@ class LectureDetailPage extends StatelessWidget {
             slivers: [
               //child같은 개념이지만 조금 다르다
               SliverAppBar(
-                  leading: Icon(CupertinoIcons.back,color: Colors.black,),
+                  title: Text(
+                    'Testing title',
+                  ),
                   pinned: true,
                   //리스트시 앱바가 위에 고정되게 해준다.
                   expandedHeight: _size.width,
-                  //이미지보여줄 가로세로 길이를 동일하게 해준다. //디바이스 가로 길이만큼 준다
+                  //이미지보여줄 가로세로 길이를 동일하게 해준다. //디바이스 가로 길이만큼 준다.
+
                   primary: true,
                   flexibleSpace: Stack(
                     children: [
@@ -38,13 +40,12 @@ class LectureDetailPage extends StatelessWidget {
                         collapseMode: CollapseMode.none,
                         background: Container(
                           decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.black38, Colors.transparent],
-                              stops: [0.0,0.15]//gradient가 어떻게 자리를 잡을 것인지
-                            )
-                          ),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.black38, Colors.transparent],
+                                  stops: [0.0, 0.15] //gradient가 어떻게 자리를 잡을 것인지
+                                  )),
                         ),
                       )
                     ],
@@ -54,7 +55,7 @@ class LectureDetailPage extends StatelessWidget {
                 //builder메소드를 넣어줘야한다. CustomScrollView에 넣어줄수 있는 SliverList이다
                 return Container(
                   height: 100,
-                  color: Colors.white,
+                  color: Colors.accents[index % Colors.accents.length],
                 ); //index를 컬러 숫자 만큼 나눈 나머지다. accentColor가 처음부터 끝까지 실행될수 있게끔한다.
               }, childCount: 20)),
               //container같은 보통위젯들은 바로 주지 못한다.
