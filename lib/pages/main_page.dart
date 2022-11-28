@@ -43,6 +43,7 @@ class _MainPageState extends State<MainPage> {
   BottomNavigationBar _buildBottomNavigationBar() {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      currentIndex: _selectedIndex,
       showSelectedLabels: false,
       showUnselectedLabels: false,
       selectedItemColor: Color(0xff4880ED),
