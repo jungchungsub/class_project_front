@@ -1,3 +1,4 @@
+import 'package:finalproject_front/pages/payment/payment_detail_page.dart';
 import 'package:finalproject_front/pages/user/user_logout/user_logout_mypage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
@@ -35,6 +36,7 @@ class _MainPageState extends State<MainPage> {
         HomePage(),
         SearchMainPage(),
         LikeMainPage(),
+        paymentDetailPage(),
         UserLogoutMypage(),
       ],
     );
