@@ -1,5 +1,3 @@
-import 'package:finalproject_front/pages/search/search_detail_page.dart';
-import 'package:finalproject_front/pages/search/search_main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
