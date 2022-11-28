@@ -1,10 +1,13 @@
+import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
+import 'package:finalproject_front/pages/main/home/home_page.dart';
+
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
 import 'package:finalproject_front/pages/user/user_logout/user_logout_mypage.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
-
 import 'package:finalproject_front/pages/user/user_logout/user_logout_mypage.dart';
 
 import 'package:flutter/cupertino.dart';
