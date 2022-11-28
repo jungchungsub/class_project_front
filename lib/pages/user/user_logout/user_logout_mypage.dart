@@ -1,4 +1,5 @@
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
+import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -84,8 +85,8 @@ class UserLogoutMypage extends StatelessWidget {
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => JoinDivisionPage()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => JoinPage()));
           },
           child: Text(
             "${text}",
