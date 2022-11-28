@@ -52,28 +52,31 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 1.0,
       actions: [
-        OutlinedButton(
-          onPressed: () {},
-          child: Row(
-            children: [
-              Icon(
-                CupertinoIcons.search,
-                color: Colors.black,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                "Search....",
-                style: TextStyle(color: Colors.grey, fontSize: 14),
-              ),
-            ],
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: OutlinedButton(
+            onPressed: () {},
+            child: Row(
+              children: [
+                Icon(
+                  CupertinoIcons.search,
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "Search....",
+                  style: TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ],
+            ),
+            style: OutlinedButton.styleFrom(
+                maximumSize: Size(160, 40),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                )),
           ),
-          style: OutlinedButton.styleFrom(
-              maximumSize: Size(160, 40),
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              )),
         ),
         SizedBox(
           width: 10,
