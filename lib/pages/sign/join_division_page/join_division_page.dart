@@ -7,6 +7,15 @@ class JoinDivisionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage("https://picsum.photos/200"),
+          ),
+        ),
+      ),
+    );
   }
 }
