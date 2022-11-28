@@ -37,7 +37,7 @@ class CustomForm extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             )

@@ -1,4 +1,5 @@
 import 'package:finalproject_front/pages/main_page.dart';
+import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         "/main": (context) => MainPage(),
         "/login": (context) => JoinPage(),
         "/join": (context) => JoinPage(),
+        "/joinDivision": (context) => JoinDivisionPage(),
       },
       theme: theme(),
     );

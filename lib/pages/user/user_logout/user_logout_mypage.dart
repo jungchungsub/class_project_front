@@ -31,7 +31,7 @@ class UserLogoutMypage extends StatelessWidget {
             ),
           ),
           _divider(),
-          _textButton(context, "로그인/회원가입", "/join"),
+          _textButton(context, "로그인/회원가입", "/joinDivision"),
           _divider(),
           _textButton(context, "알람 설정", "/join"),
           _divider(),
