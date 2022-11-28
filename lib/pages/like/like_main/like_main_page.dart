@@ -73,7 +73,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "깔끔하고 아름다운aaaa2",
+                    "깔끔하고 아름다운aaaa 2",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
