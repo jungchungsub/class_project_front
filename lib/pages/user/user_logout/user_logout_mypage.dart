@@ -31,11 +31,11 @@ class UserLogoutMypage extends StatelessWidget {
             ),
           ),
           _divider(),
-          _textButton(context, "로그인/회원가입"),
+          _textButton(context, "로그인/회원가입", "/join"),
           _divider(),
-          _textButton(context, "알람 설정"),
+          _textButton(context, "알람 설정", "/join"),
           _divider(),
-          _textButton(context, "고객센터"),
+          _textButton(context, "고객센터", "/join"),
           _divider(),
         ],
       ),
@@ -78,15 +78,14 @@ class UserLogoutMypage extends StatelessWidget {
     );
   }
 
-  Widget _textButton(context, String text) {
+  Widget _textButton(context, String text, String path) {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0),
       child: Container(
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => JoinPage()));
+            Navigator.pushNamed(context, path);
           },
           child: Text(
             "${text}",
