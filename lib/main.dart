@@ -1,4 +1,5 @@
 import 'package:finalproject_front/pages/main_page.dart';
+import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       home: MainPage(),
+      theme: theme(),
     );
   }
 }

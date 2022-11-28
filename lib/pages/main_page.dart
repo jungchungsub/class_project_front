@@ -4,6 +4,9 @@ import 'package:finalproject_front/pages/lecture/lecture_detail_page.dart';
 import 'package:finalproject_front/pages/like/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home_page.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
+import 'package:finalproject_front/pages/search/search_main_page.dart';
+
+import 'package:finalproject_front/pages/user/user_logout/user_logout_mypage.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,19 +32,19 @@ class _MainPageState extends State<MainPage> {
   IndexedStack _buildIndexedStack() {
     return IndexedStack(
       index: _selectedIndex, //아이콘클릭시 화면 이동
-
       children: [
         HomePage(),
+        SearchMainPage(),
         LikeMainPage(),
-        CategoryDetailPage(),
-        LectureDetailPage(),
-        SearchDetailPage(),
       ],
     );
   }
 
   BottomNavigationBar _buildBottomNavigationBar() {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       onTap: (index) {
         setState(() {
           _selectedIndex = index;

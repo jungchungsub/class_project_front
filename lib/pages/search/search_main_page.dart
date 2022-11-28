@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class SearchDetailPage extends StatelessWidget {
-  const SearchDetailPage({Key? key}) : super(key: key);
+class SearchMainPage extends StatelessWidget {
+  const SearchMainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

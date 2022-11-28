@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 
 // TextTheme textTheme() {
 //   return TextTheme(
-//     headline1: NotoSansKR.openSans(fontSize: 20.0, color: Colors.black),
-//     headline2: GoogleFonts.openSans(fontSize: 18.0, color: Colors.black),
-//     subtitle1: GoogleFonts.openSans(fontSize: 16.0, color: Colors.black),
-//     subtitle2: GoogleFonts.openSans(fontSize: 14.0, color: Colors.grey),
-//     bodyText1: GoogleFonts.openSans(fontSize: 12.0, color: Colors.black),
-//     bodyText2: GoogleFonts.openSans(fontSize: 10.0, color: Colors.black),
+//     headlineLarge: TextStyle(
+//         fontFamily: 'NotoSansKR', fontSize: 20.0, color: Colors.black),
+//     headlineMedium: TextStyle(
+//         fontFamily: 'NotoSansKR', fontSize: 18.0, color: Colors.black),
+//     subtitle1:
+//         TextStyle(fontFamily: 'NotoSansKR', fontSize: 16, color: Colors.black),
+//     bodyLarge:
+//         TextStyle(fontFamily: 'NotoSansKR', fontSize: 14, color: Colors.black),
+//     bodyMedium:
+//         TextStyle(fontFamily: 'NotoSansKR', fontSize: 12),
+//     bodySmall: TextStyle(fontFamily: 'NotoSansKR', fontSize: 10),
 //   );
 // }
 
@@ -17,6 +22,6 @@ ThemeData theme() {
     // textTheme: textTheme(),
     fontFamily: "NotoSansKR",
     scaffoldBackgroundColor: Colors.white,
-    primaryColor: Color(0xff4880ED),
+    // primaryColor: Color(0xff4880ED),
   );
 }
