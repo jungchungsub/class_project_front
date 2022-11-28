@@ -1,5 +1,3 @@
-import 'package:finalproject_front/pages/main/home/components/home_body.dart';
-import 'package:finalproject_front/pages/main/home/components/home_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +10,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1.0,
-
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -61,7 +58,24 @@ class HomePage extends StatelessWidget {
             SliverList(
                 delegate: SliverChildListDelegate([
               Container(
-                child: HomeHeader(),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset(
+                          "assets/home1.jpg",
+                          fit: BoxFit.cover,
+                          height: 100,
+                          width: 400,
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      _buildRow(),
+                    ],
+                  ),
+                ),
               ),
               Container(
                 color: Colors.black12,
@@ -90,7 +104,9 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 12, right: 12),
               child: Column(
                 children: [
-                  Expanded(child: Image.asset("assets/home1.jpg", fit: BoxFit.cover)),
+                  Expanded(
+                      child:
+                          Image.asset("assets/home1.jpg", fit: BoxFit.cover)),
                   SizedBox(height: 10),
                   Text(
                     "안녕하세요 저희 서비스에 오셔서 감사합니다. ",
@@ -98,11 +114,13 @@ class HomePage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
+                      Icon(CupertinoIcons.heart_fill,
+                          color: Colors.red, size: 15),
                       SizedBox(width: 10),
                       Text(
                         "4.5 | 25개의 평가",
-                        style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -126,5 +144,64 @@ OutlineInputBorder _builderOutLineInputBorder() {
   return OutlineInputBorder(
     borderSide: const BorderSide(width: 0.5, color: Color(0xFFD4D5DD)),
     borderRadius: BorderRadius.circular(8.0),
+  );
+}
+
+Widget _buildDetailIcon(IconData mIcon) {
+  return Padding(
+    padding: EdgeInsets.all(10),
+    child: Stack(
+      children: [
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.black12,
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+        ),
+        Positioned(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(mIcon),
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Row _buildRow() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Column(
+        children: [
+          _buildDetailIcon(Icons.bike_scooter),
+          Text("뷰티, 운동"),
+        ],
+      ),
+      Column(
+        children: [
+          _buildDetailIcon(Icons.music_note),
+          Text("댄스, 뮤직"),
+        ],
+      ),
+      Column(
+        children: [
+          _buildDetailIcon(Icons.article_rounded),
+          Text("미술, 묵학"),
+        ],
+      ),
+      Column(
+        children: [
+          _buildDetailIcon(Icons.ac_unit_rounded),
+          Text("공예, 기타"),
+        ],
+      ),
+    ],
   );
 }
