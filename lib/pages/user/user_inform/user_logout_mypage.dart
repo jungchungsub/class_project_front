@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/theme.dart';
@@ -31,7 +32,7 @@ class UserLogoutMypage extends StatelessWidget {
             ),
           ),
           _divider(),
-          _textButton(context, "로그인", "/login"),
+          _textButton(context, "로그인", "/loginDivision"),
           _divider(),
           _textButton(context, "회원가입", "/joinDivision"),
           _divider(),
@@ -47,7 +48,6 @@ class UserLogoutMypage extends StatelessWidget {
   AppBar _appBar() {
     return AppBar(
       elevation: 1,
-      backgroundColor: Colors.white,
       leading: IconButton(
         onPressed: () {},
         icon: Icon(
@@ -76,7 +76,7 @@ class UserLogoutMypage extends StatelessWidget {
     return Divider(
       thickness: 1,
       height: 0, // 기본 설정된 패딩 값을 없애줌
-      color: Color(0xff929AAB),
+      color: gBorderColor,
     );
   }
 

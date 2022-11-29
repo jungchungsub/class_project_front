@@ -22,6 +22,10 @@ ThemeData theme() {
     // textTheme: textTheme(),
     fontFamily: "NotoSansKR",
     scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 1,
+    ),
     // primaryColor: Color(0xff4880ED),
   );
 }

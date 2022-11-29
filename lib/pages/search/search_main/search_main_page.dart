@@ -100,7 +100,6 @@ class SearchMainPage extends StatelessWidget {
 
   AppBar appBarMethod() {
     return AppBar(
-      backgroundColor: Colors.white,
       elevation: 1.0,
       leading: Icon(
         CupertinoIcons.back,

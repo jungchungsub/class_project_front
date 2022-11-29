@@ -1,14 +1,18 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DivisionButton extends StatelessWidget {
-  final String title;
-  final String subtitle;
   const DivisionButton({
-    required this.title,
-    required this.subtitle,
     Key? key,
+    required this.context,
+    required this.subtitle,
+    required this.title,
   }) : super(key: key);
+
+  final BuildContext context;
+  final String subtitle;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,7 @@ class DivisionButton extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
-                  color: Color(0xff6C6C6C),
+                  color: gSubTextColor,
                 ),
               ),
               SizedBox(height: 10),
