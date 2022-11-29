@@ -1,3 +1,4 @@
+import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
 
@@ -38,7 +39,7 @@ class _MainPageState extends State<MainPage> {
         HomePage(),
         SearchMainPage(),
         LikeMainPage(),
-        paymentDetailPage(),
+        PaymentDetailPage(),
         UserLogoutMypage(),
       ],
     );
@@ -59,10 +60,8 @@ class _MainPageState extends State<MainPage> {
       },
       items: [
         BottomNavigationBarItem(label: "홈", icon: Icon(CupertinoIcons.home)),
-        BottomNavigationBarItem(
-            label: "검색", icon: Icon(CupertinoIcons.square_on_square)),
-        BottomNavigationBarItem(
-            label: "찜", icon: Icon(CupertinoIcons.placemark)),
+        BottomNavigationBarItem(label: "검색", icon: Icon(CupertinoIcons.search)),
+        BottomNavigationBarItem(label: "찜", icon: Icon(CupertinoIcons.heart)),
         BottomNavigationBarItem(
             label: "채팅", icon: Icon(CupertinoIcons.chat_bubble_2)),
         BottomNavigationBarItem(
