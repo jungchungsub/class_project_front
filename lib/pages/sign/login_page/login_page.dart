@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
         width: 60,
         height: 60,
       ),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(30),
     );
   }
 
