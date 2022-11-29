@@ -39,39 +39,51 @@ class PaymentCardPage extends StatelessWidget {
           _advertisementText(Text1: '삼성카드', Text2: '2~7개월 무이자할부'),
           _divider(),
           SizedBox(height: 30),
-          _cardCategory(),
+          _cardCategory(context, "/paymentInform"),
           SizedBox(height: 15),
-          _cardCategory(),
+          _cardCategory(context, "/paymentInform"),
           SizedBox(height: 15),
-          _cardCategory(),
+          _cardCategory(context, "/paymentInform"),
           SizedBox(height: 15),
-          _cardCategory(),
+          _cardCategory(context, "/paymentInform"),
           SizedBox(height: 15),
         ],
       ),
     );
   }
 
-  Row _cardCategory() {
+  Row _cardCategory(context, String path) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
           child: CardType(
-            logoname: "토스",
+            logoname: "토스1",
             logoImage: "assets/samsung_logo.png",
           ),
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, path);
+          },
         ),
         SizedBox(width: 10),
-        CardType(
-          logoname: "페이북",
-          logoImage: "assets/paybook.png",
+        InkWell(
+          child: CardType(
+            logoname: "페이북",
+            logoImage: "assets/paybook.png",
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, path);
+          },
         ),
         SizedBox(width: 10),
-        CardType(
-          logoname: "신한",
-          logoImage: "assets/Shinhan.png",
+        InkWell(
+          child: CardType(
+            logoname: "신한",
+            logoImage: "assets/Shinhan.png",
+          ),
+          onTap: () {
+            Navigator.pushNamed(context, path);
+          },
         ),
       ],
     );
