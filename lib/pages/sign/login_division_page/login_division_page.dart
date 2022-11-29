@@ -9,82 +9,84 @@ class LoginDivisionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/background.gif"),
-                  fit: BoxFit.cover,
-                ),
-              ),
+        child: _loginBox(context),
+      ),
+    );
+  }
+
+  Stack _loginBox(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/background.gif"),
+              fit: BoxFit.cover,
             ),
-            Positioned(
-              bottom: 80,
-              left: 20,
-              child: Container(
-                width: 350,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      _outhButton(
-                          context, "/login", "assets/kakaologinbutton.png"),
-                      SizedBox(height: 8),
-                      _outhButton(
-                          context, "/login", "assets/appleloginbutton.png"),
-                      SizedBox(height: 8),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/login");
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              "다른 방법으로 시작",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
-                            ),
+          ),
+        ),
+        Positioned(
+          bottom: 80,
+          left: 20,
+          child: Container(
+            width: 350,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  _outhButton(context, "/login", "assets/kakaologinbutton.png"),
+                  SizedBox(height: 8),
+                  _outhButton(context, "/login", "assets/appleloginbutton.png"),
+                  SizedBox(height: 8),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/login");
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          "다른 방법으로 시작",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/main");
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          "로그인 전 둘러보기",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff8A8A8A),
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/main");
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              "로그인 전 둘러보기",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff8A8A8A),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    ),
+                  )
+                ],
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
