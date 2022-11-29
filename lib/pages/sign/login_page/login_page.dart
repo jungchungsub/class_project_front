@@ -1,5 +1,5 @@
 import 'package:finalproject_front/pages/sign/join_page/components/custom_form.dart';
-import 'package:finalproject_front/pages/sign/join_page/components/custom_text_form_field.dart';
+import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
