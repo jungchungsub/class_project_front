@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
@@ -5,12 +6,12 @@ import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_inform/components/payment_period.dart';
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
-import 'package:finalproject_front/pages/user/user_logout/user_logout_mypage.dart';
+import 'package:finalproject_front/pages/user/user_inform/user_logout_mypage.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
-import 'package:finalproject_front/pages/user/user_logout/user_logout_mypage.dart';
+import 'package:finalproject_front/pages/user/user_inform/user_logout_mypage.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _MainPageState extends State<MainPage> {
       currentIndex: _selectedIndex,
       showSelectedLabels: false,
       showUnselectedLabels: false,
-      selectedItemColor: Color(0xff4880ED),
+      selectedItemColor: gPrimaryColor, //Color(0xff4880ED),
       unselectedItemColor: Colors.black,
       onTap: (index) {
         setState(() {
