@@ -8,14 +8,14 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:extended_image/extended_image.dart';
 
-class paymentDetailPage extends StatefulWidget {
-  const paymentDetailPage({Key? key}) : super(key: key);
+class PaymentDetailPage extends StatefulWidget {
+  const PaymentDetailPage({Key? key}) : super(key: key);
 
   @override
-  State<paymentDetailPage> createState() => _paymentDetailPageState();
+  State<PaymentDetailPage> createState() => _PaymentDetailPageState();
 }
 
-class _paymentDetailPageState extends State<paymentDetailPage> {
+class _PaymentDetailPageState extends State<PaymentDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +39,13 @@ class _paymentDetailPageState extends State<paymentDetailPage> {
           PaymentPurpose(),
           _middleDivider(),
           _agree(),
-          _paymentButton()
+          _paymentButton(context, "/paymentCard"),
         ],
       ),
     );
   }
 
-  Padding _paymentButton() {
+  Padding _paymentButton(context, String path) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
       child: ConstrainedBox(
@@ -53,6 +53,7 @@ class _paymentDetailPageState extends State<paymentDetailPage> {
         child: TextButton(
           style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED)),
           onPressed: () {
+            Navigator.pushNamed(context, path);
             //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
           },
           child: Text(
