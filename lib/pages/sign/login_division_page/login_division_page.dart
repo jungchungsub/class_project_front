@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -75,7 +76,7 @@ class LoginDivisionPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xff8A8A8A),
+                            color: gSubTextColor,
                           ),
                         ),
                       ),

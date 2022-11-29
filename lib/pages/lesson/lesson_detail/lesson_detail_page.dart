@@ -2,8 +2,8 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LectureDetailPage extends StatelessWidget {
-  const LectureDetailPage({Key? key}) : super(key: key);
+class LessonDetailPage extends StatelessWidget {
+  const LessonDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

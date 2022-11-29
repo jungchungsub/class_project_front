@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/sign/join_page/components/custom_form.dart';
 import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,9 +37,7 @@ class LoginPage extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 "아이디, 비밀번호 찾기",
-                style: TextStyle(
-                  color: Color(0xff787272),
-                ),
+                style: TextStyle(color: gSubTextColor),
               ),
             ),
           ]),
@@ -63,7 +62,7 @@ class LoginPage extends StatelessWidget {
     return ConstrainedBox(
       constraints: BoxConstraints.tightFor(height: 50),
       child: TextButton(
-        style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED)),
+        style: TextButton.styleFrom(backgroundColor: gButtonOffColor),
         onPressed: () {
           //id,password validation체크 필요
           if (_formKey.currentState!.validate()) {
@@ -82,7 +81,6 @@ class LoginPage extends StatelessWidget {
   AppBar _appBar(BuildContext context) {
     return AppBar(
       elevation: 1,
-      backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(
         "로그인",

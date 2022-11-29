@@ -18,7 +18,6 @@ class JoinPage extends StatelessWidget {
   AppBar _appBar(BuildContext context) {
     return AppBar(
       elevation: 1,
-      backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(
         "회원가입",

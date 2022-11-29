@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -29,7 +30,7 @@ class JoinDivisionPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
-                        color: Color(0xff6C6C6C),
+                        color: gSubTextColor,
                       ),
                     ),
                   ],
@@ -63,7 +64,7 @@ class JoinDivisionPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
-                  color: Color(0xff6C6C6C),
+                  color: gSubTextColor,
                 ),
               ),
               SizedBox(height: 10),

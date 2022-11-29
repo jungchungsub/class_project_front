@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
@@ -51,7 +52,7 @@ class _MainPageState extends State<MainPage> {
       currentIndex: _selectedIndex,
       showSelectedLabels: false,
       showUnselectedLabels: false,
-      selectedItemColor: Color(0xff4880ED),
+      selectedItemColor: gPrimaryColor, //Color(0xff4880ED),
       unselectedItemColor: Colors.black,
       onTap: (index) {
         setState(() {
