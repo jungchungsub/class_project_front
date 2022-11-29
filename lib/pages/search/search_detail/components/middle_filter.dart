@@ -8,36 +8,75 @@ class MiddleFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+      child: Column(
         children: [
-          OutlinedButton(
-            onPressed: () {},
+          Padding(
+            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  CupertinoIcons.arrow_2_circlepath,
-                  color: Colors.black,
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Icon(
+                        CupertinoIcons.arrow_2_circlepath,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "초기화",
+                        style: TextStyle(color: Colors.black, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  style: OutlinedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  )),
                 ),
-                SizedBox(
-                  width: 5,
+                _middleFilterList("예산"),
+                _middleFilterList("지역"),
+                _middleFilterList("등급"),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Text(
+                    "총 100건",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Text(
-                  "초기화",
-                  style: TextStyle(color: Colors.black, fontSize: 14),
+                TextButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Icon(
+                        CupertinoIcons.arrow_up_arrow_down,
+                        color: Colors.black,
+                        size: 14,
+                      ),
+                      Text(
+                        "인기순",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-            style: OutlinedButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            )),
-          ),
-          _middleFilterList("예산"),
-          _middleFilterList("지역"),
-          _middleFilterList("등급"),
+          )
         ],
       ),
     );
