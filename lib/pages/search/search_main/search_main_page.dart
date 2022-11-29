@@ -1,7 +1,10 @@
+import 'package:finalproject_front/pages/search/search_main/components/recentSearch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
+import 'components/commend_search.dart';
 
 class SearchMainPage extends StatelessWidget {
   const SearchMainPage({Key? key}) : super(key: key);
@@ -9,7 +12,31 @@ class SearchMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarMethod(),
+      appBar: AppBar(
+        elevation: 1.0,
+        leading: Icon(
+          CupertinoIcons.back,
+          color: Colors.black,
+        ),
+        title: Text(
+          "검색어를 입력하세요.",
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          Icon(
+            CupertinoIcons.search,
+            color: Colors.grey,
+          ),
+          SizedBox(
+            width: 15,
+          )
+        ],
+      ),
       body: ListView(
         children: [
           Padding(
@@ -26,19 +53,19 @@ class SearchMainPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _commendSearch("취미"),
-              _commendSearch("운동"),
-              _commendSearch("댄스"),
-              _commendSearch("뮤직"),
+              CommendSearch(text: "취미"),
+              CommendSearch(text: "운동"),
+              CommendSearch(text: "댄스"),
+              CommendSearch(text: "뮤직"),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _commendSearch("미술"),
-              _commendSearch("문학"),
-              _commendSearch("공예"),
-              _commendSearch("기타"),
+              CommendSearch(text: "미술"),
+              CommendSearch(text: "문학"),
+              CommendSearch(text: "공예"),
+              CommendSearch(text: "기타"),
             ],
           ),
           Padding(
@@ -52,77 +79,13 @@ class SearchMainPage extends StatelessWidget {
               ),
             ),
           ),
-          _recentSearch("운동"),
-          _recentSearch("부산 공예"),
-          _recentSearch("필라테스 유명한곳"),
-          _recentSearch("미술학원"),
-          _recentSearch("음악공원"),
+          RecentSearch(text: "운동"),
+          RecentSearch(text: "부산 공예"),
+          RecentSearch(text: "필라테스 유명한곳"),
+          RecentSearch(text: "미술학원"),
+          RecentSearch(text: "음악공원"),
         ],
       ),
-    );
-  }
-
-  Padding _recentSearch(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "${text}",
-            style: TextStyle(fontSize: 14, color: Colors.black),
-          ),
-          Icon(
-            CupertinoIcons.clear_thick,
-          )
-        ],
-      ),
-    );
-  }
-
-  OutlinedButton _commendSearch(String text) {
-    return OutlinedButton(
-      onPressed: () {},
-      child: Row(
-        children: [
-          Text(
-            "${text}",
-            style: TextStyle(color: Colors.black, fontSize: 14),
-          ),
-        ],
-      ),
-      style: OutlinedButton.styleFrom(
-          shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      )),
-    );
-  }
-
-  AppBar appBarMethod() {
-    return AppBar(
-      elevation: 1.0,
-      leading: Icon(
-        CupertinoIcons.back,
-        color: Colors.black,
-      ),
-      title: Text(
-        "검색어를 입력하세요.",
-        style: TextStyle(
-          color: Colors.grey,
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      centerTitle: true,
-      actions: [
-        Icon(
-          CupertinoIcons.search,
-          color: Colors.grey,
-        ),
-        SizedBox(
-          width: 15,
-        )
-      ],
     );
   }
 }

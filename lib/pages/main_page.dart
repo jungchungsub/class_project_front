@@ -5,6 +5,7 @@ import 'package:finalproject_front/pages/main/home/home_page.dart';
 
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_inform/components/payment_period.dart';
+import 'package:finalproject_front/pages/search/search_detail/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
 import 'package:finalproject_front/pages/user/user_inform/user_logout_mypage.dart';
 import 'package:flutter/cupertino.dart';
