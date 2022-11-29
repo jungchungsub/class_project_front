@@ -1,6 +1,7 @@
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
+import 'package:finalproject_front/pages/payment/payment_inform/payment_inform_page.dart';
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/theme.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
+        "/paymentInform": (context) => PaymentInformPage(),
       },
       theme: theme(),
     );

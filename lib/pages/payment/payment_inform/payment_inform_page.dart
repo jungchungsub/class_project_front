@@ -17,7 +17,7 @@ class PaymentInformPage extends StatelessWidget {
           color: Colors.black,
         ),
         title: Text(
-          "주문하기",
+          "결제하기",
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
@@ -25,6 +25,23 @@ class PaymentInformPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Text(
+            "결제정보",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "50,000원",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          Divider(
+            thickness: 14,
+            height: 0,
+            color: const Color(0xffF0F0F0),
+          ),
+        ],
       ),
     );
   }
