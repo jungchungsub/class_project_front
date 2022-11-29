@@ -28,8 +28,7 @@ class CustomForm extends StatelessWidget {
                 onPressed: () {
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                   if (_formKey.currentState!.validate()) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.pushNamed(context, "/main");
                   }
                 },
                 child: Text(

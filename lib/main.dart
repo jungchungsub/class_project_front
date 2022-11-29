@@ -3,6 +3,7 @@ import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
+import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/main",
       routes: {
         "/main": (context) => MainPage(),
-        "/login": (context) => JoinPage(),
+        "/login": (context) => LoginPage(),
         "/join": (context) => JoinPage(),
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),
