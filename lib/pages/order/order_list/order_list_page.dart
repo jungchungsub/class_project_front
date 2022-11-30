@@ -1,17 +1,16 @@
-import 'package:finalproject_front/pages/payment/payment_inform/components/card_select.dart';
-import 'package:finalproject_front/pages/payment/payment_inform/components/email_text_form.dart';
-import 'package:finalproject_front/pages/payment/payment_inform/components/email_text_form_field.dart';
-import 'package:finalproject_front/pages/payment/payment_inform/components/installment.dart';
-import 'package:finalproject_front/pages/payment/payment_inform/components/payment_button.dart';
-import 'package:finalproject_front/pages/payment/payment_inform/components/payment_inform.dart';
-import 'package:finalproject_front/pages/payment/payment_inform/components/payment_period.dart';
+import 'package:finalproject_front/pages/order/order_list/components/card_select.dart';
+import 'package:finalproject_front/pages/order/order_list/components/email_text_form.dart';
+import 'package:finalproject_front/pages/order/order_list/components/installment.dart';
+import 'package:finalproject_front/pages/order/order_list/components/payment_button.dart';
+import 'package:finalproject_front/pages/order/order_list/components/payment_inform.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class PaymentInformPage extends StatelessWidget {
-  const PaymentInformPage({Key? key}) : super(key: key);
+class OrderListPage extends StatelessWidget {
+  const OrderListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
