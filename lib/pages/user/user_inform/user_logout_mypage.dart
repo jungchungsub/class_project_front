@@ -26,32 +26,44 @@ class UserLogoutMypage extends StatelessWidget {
               height: 100,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: NetworkImage("https://picsum.photos/200"),
+                    fit: BoxFit.cover),
               ),
             ),
           ),
-          CustomDivider(),
-          CustomTextButton(context: context, text: "로그인", path: "/loginDivision"),
-          CustomDivider(),
-          CustomTextButton(context: context, text: "회원가입", path: "/joinDivision"),
-          CustomDivider(),
+          _divider(),
+          CustomTextButton(
+              context: context, text: "로그인", path: "/loginDivision"),
+          _divider(),
+          CustomTextButton(
+              context: context, text: "회원가입", path: "/joinDivision"),
+          _divider(),
           CustomTextButton(context: context, text: "알람 설정", path: "/join"),
-          CustomDivider(),
+          _divider(),
           CustomTextButton(context: context, text: "고객센터", path: "/join"),
-          CustomDivider(),
+          _divider(),
         ],
       ),
     );
   }
 
+  Divider _divider() {
+    return Divider(
+      thickness: 1,
+      color: gBorderColor,
+    );
+  }
+
   AppBar _appBar() {
     return AppBar(
-      elevation: 1,
+      elevation: 1.0,
       leading: IconButton(
         onPressed: () {},
         icon: Icon(
           CupertinoIcons.bell,
           color: Colors.black,
+          size: 26,
         ),
       ),
       centerTitle: true,
@@ -59,7 +71,7 @@ class UserLogoutMypage extends StatelessWidget {
         onPressed: () {},
         child: Text(
           "로고",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
     );
