@@ -50,8 +50,7 @@ class Profile extends StatelessWidget {
                 border: Border.all(color: gBorderColor),
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
+                padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                 child: Row(
                   children: [
                     Icon(

@@ -1,7 +1,8 @@
 import 'package:finalproject_front/constants.dart';
+
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/components/class_list.dart';
-import 'package:finalproject_front/pages/payment/payment_detail/components/class_time.dart';
+
 import 'package:finalproject_front/pages/search/search_detail/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,13 +38,10 @@ class HomePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CategorySelect(
-                              path: "assets/sports.png", text: "뷰티・운동"),
-                          CategorySelect(
-                              path: "assets/Headphones.png", text: "댄스・뮤직"),
-                          CategorySelect(path: "assets/art.png", text: "미술・문학"),
-                          CategorySelect(
-                              path: "assets/Search.png", text: "공예・기타"),
+                          CategorySelect(image: "assets/sports.png", text: "뷰티・운동", path: "/categoryDetail"),
+                          CategorySelect(image: "assets/Headphones.png", text: "댄스・뮤직", path: "/categoryDetail"),
+                          CategorySelect(image: "assets/art.png", text: "미술・문학", path: "/categoryDetail"),
+                          CategorySelect(image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
                         ],
                       ),
                     ],
@@ -57,7 +55,7 @@ class HomePage extends StatelessWidget {
             ]))
           ];
         },
-        body: ClassList(),
+        body: ClassList(path: "/lessonDetail"),
       ),
     );
   }

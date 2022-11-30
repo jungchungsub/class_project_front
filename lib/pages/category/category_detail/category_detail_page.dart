@@ -1,6 +1,6 @@
 import 'package:finalproject_front/pages/category/category_detail/components/header_category.dart';
-import 'package:finalproject_front/pages/search/search_detail/components/category_datil_body.dart';
-import 'package:finalproject_front/pages/search/search_detail/components/middle_filter.dart';
+import 'package:finalproject_front/pages/search/search_detail/components/category_datil.dart';
+import 'package:finalproject_front/pages/search/search_detail/components/category_filter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +16,15 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1.0,
-        leading: Icon(
-          CupertinoIcons.back,
-          color: Colors.black,
-        ),
+        leading: IconButton(
+            icon: Icon(
+              CupertinoIcons.back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: Text(
           "뷰티 운동",
           style: TextStyle(

@@ -1,4 +1,4 @@
-import 'package:finalproject_front/pages/search/search_main/components/recentSearch.dart';
+import 'package:finalproject_front/pages/search/search_main/components/recent_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
