@@ -1,4 +1,4 @@
-import 'package:finalproject_front/pages/payment/payment_inform/components/payment_period.dart';
+import 'package:finalproject_front/pages/payment/payment_detail/components/payment_period.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
