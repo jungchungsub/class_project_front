@@ -84,7 +84,7 @@ class HomePage extends StatelessWidget {
         Icon(
           CupertinoIcons.bell,
           color: Colors.black,
-          size: 30,
+          size: 26,
         ),
         SizedBox(
           width: 10,

@@ -27,19 +27,19 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _authLogin("assets/kakaologin.png"),
-                SizedBox(width: 20),
+                SizedBox(width: 16),
                 _authLogin("assets/applelogin.png"),
               ],
             ),
             SizedBox(height: 16),
             _loginButton(context, "로그인 하기"),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "아이디, 비밀번호 찾기",
-                style: TextStyle(color: gSubTextColor),
-              ),
-            ),
+            // TextButton(
+            //   onPressed: () {},
+            //   child: Text(
+            //     "아이디, 비밀번호 찾기",
+            //     style: TextStyle(color: gSubTextColor),
+            //   ),
+            // ),
           ]),
         ),
       ),

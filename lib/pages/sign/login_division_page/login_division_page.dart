@@ -1,4 +1,8 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/sign/login_division_page/components/before_login_button.dart';
+import 'package:finalproject_front/pages/sign/login_division_page/components/login_button_form.dart';
+import 'package:finalproject_front/pages/sign/login_division_page/components/oauth_button.dart';
+import 'package:finalproject_front/pages/sign/login_division_page/components/other_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -8,102 +12,48 @@ class LoginDivisionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var mSize = MediaQuery.of(context).size;
+    print("width는? ${mSize.width}");
+    print("widt는?${mSize.width / 20}");
     return Scaffold(
       body: SafeArea(
-        child: _loginBox(context),
-      ),
-    );
-  }
-
-  Stack _loginBox(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/background.gif"),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 80,
-          left: 20,
-          child: Container(
-            width: 350,
+          child: Stack(
+        children: [
+          Container(
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  _outhButton(context, "/login", "assets/kakaologinbutton.png"),
-                  SizedBox(height: 8),
-                  _outhButton(context, "/login", "assets/appleloginbutton.png"),
-                  SizedBox(height: 8),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, "/login");
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 50,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          "다른 방법으로 시작",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, "/main");
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Text(
-                          "로그인 전 둘러보기",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: gSubTextColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+              image: DecorationImage(
+                image: AssetImage("assets/background.gif"),
+                fit: BoxFit.cover,
               ),
             ),
           ),
-        ),
-      ],
-    );
-  }
-
-  InkWell _outhButton(context, routeName, String imagePath) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, routeName);
-      },
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image:
-              DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
-        ),
-      ),
+          Positioned(
+            top: mSize.height * 0.5,
+            left: mSize.width / 20,
+            child: Container(
+              width: 350,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    OauthButton(context: context, routeName: "/login", imagePath: "assets/kakaologinbutton.png"),
+                    SizedBox(height: 8),
+                    OauthButton(context: context, routeName: "/login", imagePath: "assets/appleloginbutton.png"),
+                    SizedBox(height: 8),
+                    OtherButton(),
+                    SizedBox(height: 8),
+                    BeforeLoginButton()
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

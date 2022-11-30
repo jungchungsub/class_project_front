@@ -21,6 +21,7 @@ class CustomForm extends StatelessWidget {
             CustomTextFormField(text: "이메일"),
             SizedBox(height: 6),
             CustomTextFormField(text: "관심사"),
+            //개인 정보 제공 동의 폼 필요 -> API
             SizedBox(height: 50),
             ConstrainedBox(
               constraints: BoxConstraints.tightFor(height: 50),
