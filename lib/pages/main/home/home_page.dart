@@ -2,7 +2,7 @@ import 'package:finalproject_front/constants.dart';
 
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/components/class_list.dart';
-import 'package:finalproject_front/pages/payment/payment_detail/components/class_time.dart';
+
 import 'package:finalproject_front/pages/search/search_detail/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
 import 'package:flutter/cupertino.dart';

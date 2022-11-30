@@ -1,6 +1,5 @@
-import 'package:finalproject_front/pages/search/search_detail/components/category_datil_body.dart';
-import 'package:finalproject_front/pages/search/search_detail/components/middle_filter.dart';
-import 'package:finalproject_front/pages/search/search_detail/components/total_list_bar.dart';
+import 'package:finalproject_front/pages/search/search_detail/components/category_datil.dart';
+import 'package:finalproject_front/pages/search/search_detail/components/category_filter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +15,15 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1.0,
-        leading: Icon(
-          CupertinoIcons.back,
-          color: Colors.black,
-        ),
+        leading: IconButton(
+            icon: Icon(
+              CupertinoIcons.back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: Text(
           "뷰티 운동",
           style: TextStyle(
@@ -33,7 +37,6 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
       body: ListView(
         children: [
           MiddleFilter(),
-          TotalListBar(),
           CategoryDetailBody(),
           CategoryDetailBody(),
           CategoryDetailBody(),

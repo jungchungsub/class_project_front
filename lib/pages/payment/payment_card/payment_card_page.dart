@@ -16,10 +16,15 @@ class PaymentCardPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 1.0,
-        leading: Icon(
-          CupertinoIcons.back,
-          color: Colors.black,
-        ),
+        leading: IconButton(
+            icon: Icon(
+              CupertinoIcons.back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: Text(
           "결제하기",
           style: TextStyle(
@@ -50,13 +55,13 @@ class PaymentCardPage extends StatelessWidget {
             color: const Color(0xffF0F0F0),
           ),
           SizedBox(height: 30),
-          CardCategory(path: "/paymentInform"),
+          CardCategory(path: "/paymentDetail"),
           SizedBox(height: 15),
-          CardCategory(path: "/paymentInform"),
+          CardCategory(path: "/paymentDetail"),
           SizedBox(height: 15),
-          CardCategory(path: "/paymentInform"),
+          CardCategory(path: "/paymentDetail"),
           SizedBox(height: 15),
-          CardCategory(path: "/paymentInform"),
+          CardCategory(path: "/paymentDetail"),
           SizedBox(height: 15),
         ],
       ),

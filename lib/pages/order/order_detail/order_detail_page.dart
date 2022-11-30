@@ -1,41 +1,51 @@
-import 'package:finalproject_front/pages/order/order_detail/components/card_select.dart';
-import 'package:finalproject_front/pages/order/order_detail/components/email_text_form.dart';
-import 'package:finalproject_front/pages/order/order_detail/components/installment.dart';
+import 'package:finalproject_front/pages/order/order_detail/components/class_name.dart';
+import 'package:finalproject_front/pages/order/order_detail/components/class_time.dart';
 import 'package:finalproject_front/pages/order/order_detail/components/payment_button.dart';
-import 'package:finalproject_front/pages/order/order_detail/components/payment_inform.dart';
 
+import 'package:finalproject_front/pages/order/order_detail/components/payment_purpose.dart';
+import 'package:finalproject_front/pages/order/order_detail/components/total_money.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:extended_image/extended_image.dart';
 
-class OrderDetailPage extends StatelessWidget {
+class OrderDetailPage extends StatefulWidget {
   const OrderDetailPage({Key? key}) : super(key: key);
 
+  @override
+  State<OrderDetailPage> createState() => _OrderDetailPageState();
+}
+
+class _OrderDetailPageState extends State<OrderDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: Column(
+      body: ListView(
         children: [
-          PaymentInform(),
-          _divider(),
-          CardSelect(),
-          Installment(),
-          EmailTextForm(),
-          Text(
-            "구매 내용에 동의합니다.",
-            style: TextStyle(fontSize: 12, color: Color(0xff6C6C6C)),
+          ClassName(),
+          Divider(
+            thickness: 1,
+            height: 0,
+            color: const Color(0xff929AAB),
           ),
-          PaymentButton(path: "/main"),
+          ClassTime(),
+          _middleDivider(),
+          TotalMoney(),
+          _middleDivider(),
+          PaymentPurpose(),
+          _middleDivider(),
+          PaymentButton(path: "/paymentCard"),
         ],
       ),
     );
   }
 
-  Divider _divider() {
+  Divider _middleDivider() {
     return Divider(
       thickness: 14,
+      height: 0,
       color: const Color(0xffF0F0F0),
     );
   }
@@ -49,7 +59,7 @@ class OrderDetailPage extends StatelessWidget {
         color: Colors.black,
       ),
       title: Text(
-        "결제하기",
+        "주문하기",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,
