@@ -1,8 +1,8 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/buy_list.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/image_box.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/my_service.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/profile.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/buy_list.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/image_box.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/my_service.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
