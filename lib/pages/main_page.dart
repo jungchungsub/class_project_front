@@ -42,7 +42,7 @@ class _MainPageState extends State<MainPage> {
         HomePage(),
         SearchMainPage(),
         LikeMainPage(),
-        CategoryDetailPage(),
+        PaymentDetailPage(),
         UserLogoutMypage(),
       ],
     );

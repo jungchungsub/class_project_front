@@ -4,7 +4,9 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ClassList extends StatelessWidget {
-  const ClassList({Key? key}) : super(key: key);
+  final String path;
+
+  const ClassList({required this.path, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +24,20 @@ class ClassList extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
                 children: [
-                  Container(
-                    height: 90,
-                    width: 160,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "https://picsum.photos/id/${index + 1}/200"),
-                          fit: BoxFit.cover),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, "${path}");
+                    },
+                    child: Container(
+                      height: 90,
+                      width: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://picsum.photos/id/${index + 1}/200"),
+                            fit: BoxFit.cover),
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),

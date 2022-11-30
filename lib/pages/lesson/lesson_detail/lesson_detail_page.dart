@@ -1,4 +1,12 @@
 import 'package:extended_image/extended_image.dart';
+import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_cancel.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_curriculam.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_expert_information.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_place.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_possible_date.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_time.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lessson_title.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,47 +24,45 @@ class LessonDetailPage extends StatelessWidget {
             slivers: [
               //child같은 개념이지만 조금 다르다
               SliverAppBar(
-                  leading: Icon(CupertinoIcons.back),
+                  leading: Icon(
+                    CupertinoIcons.back,
+                    color: Colors.black,
+                  ),
                   pinned: true,
-                  //리스트시 앱바가 위에 고정되게 해준다.
-                  expandedHeight: _size.width,
+                  expandedHeight: 200.0,
                   //이미지보여줄 가로세로 길이를 동일하게 해준다. //디바이스 가로 길이만큼 준다.
-
                   primary: true,
-                  flexibleSpace: Stack(
-                    children: [
-                      FlexibleSpaceBar(
-                        background: SizedBox(
-                          height: _size.width,
-                          width: _size.width,
-                          child: ExtendedImage.network(
-                            "https://picsum.photos/200",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: SizedBox(
+                      height: 30,
+                      width: _size.width,
+                      child: ExtendedImage.network(
+                        "https://picsum.photos/250",
+                        fit: BoxFit.cover,
                       ),
-                      FlexibleSpaceBar(
-                        collapseMode: CollapseMode.none,
-                        background: Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.black38, Colors.transparent],
-                                  stops: [0.0, 0.15] //gradient가 어떻게 자리를 잡을 것인지
-                                  )),
-                        ),
-                      )
-                    ],
+                    ),
                   )),
               SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  //builder메소드를 넣어줘야한다. CustomScrollView에 넣어줄수 있는 SliverList이다
-                  return Container(
-                    height: 100,
-                    color: Colors.accents[index % Colors.accents.length],
-                  ); //index를 컬러 숫자 만큼 나눈 나머지다. accentColor가 처음부터 끝까지 실행될수 있게끔한다.
-                }, childCount: 10),
+                delegate: SliverChildListDelegate([
+                  LessonTitle(),
+                  Divider(
+                    thickness: 1,
+                    height: 0,
+                    color: const Color(0xff929AAB),
+                  ),
+                  LessonCurriculam(),
+                  LessonTime(),
+                  LessonPlace(),
+                  LessonPossibleDate(),
+                  LessonCancel(),
+                  LessonExpertInformation(),
+                  Container(),
+                  Container(color: Colors.purple, height: 100.0),
+                  Container(color: Colors.green, height: 200.0),
+                  Container(color: Colors.red, height: 150.0),
+                  Container(color: Colors.purple, height: 100.0),
+                  Container(color: Colors.green, height: 200.0),
+                ]),
               ),
               //container같은 보통위젯들은 바로 주지 못한다.
               //만약사용하고 싶다면 아래와 같이 SliverToBoxAdapter로 감싸준다.

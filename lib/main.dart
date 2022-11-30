@@ -1,3 +1,5 @@
+import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/paymentInform": (context) => PaymentInformPage(),
+        "/lessonDetail": (context) => LessonDetailPage(),
+        "/categoryDetail": (context) => CategoryDetailPage(),
       },
       theme: theme(),
     );
