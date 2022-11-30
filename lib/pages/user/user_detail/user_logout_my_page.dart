@@ -1,8 +1,8 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/custom_text_button.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/image_box.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/custom_text_button.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/image_box.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

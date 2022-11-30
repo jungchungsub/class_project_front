@@ -10,12 +10,12 @@ class JoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(context),
+      appBar: _buildAppBar(context),
       body: CustomForm(),
     );
   }
 
-  AppBar _appBar(BuildContext context) {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 1,
       centerTitle: true,
