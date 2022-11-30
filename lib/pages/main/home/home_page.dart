@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/components/class_list.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/components/class_time.dart';
@@ -50,8 +51,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Divider(
-                color: Colors.black,
-                height: 2,
+                color: gBorderColor,
+                thickness: 1.0,
               )
             ]))
           ];
