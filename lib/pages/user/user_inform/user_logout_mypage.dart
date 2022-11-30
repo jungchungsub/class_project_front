@@ -1,6 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
+import 'package:finalproject_front/pages/user/user_inform/components/custom_text_button.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,27 +33,37 @@ class UserLogoutMypage extends StatelessWidget {
             ),
           ),
           _divider(),
-          _textButton(context, "로그인", "/loginDivision"),
+          CustomTextButton(
+              context: context, text: "로그인", path: "/loginDivision"),
           _divider(),
-          _textButton(context, "회원가입", "/joinDivision"),
+          CustomTextButton(
+              context: context, text: "회원가입", path: "/joinDivision"),
           _divider(),
-          _textButton(context, "알람 설정", "/join"),
+          CustomTextButton(context: context, text: "알람 설정", path: "/join"),
           _divider(),
-          _textButton(context, "고객센터", "/join"),
+          CustomTextButton(context: context, text: "고객센터", path: "/join"),
           _divider(),
         ],
       ),
     );
   }
 
+  Divider _divider() {
+    return Divider(
+      thickness: 1,
+      color: gBorderColor,
+    );
+  }
+
   AppBar _appBar() {
     return AppBar(
-      elevation: 1,
+      elevation: 1.0,
       leading: IconButton(
         onPressed: () {},
         icon: Icon(
           CupertinoIcons.bell,
           color: Colors.black,
+          size: 26,
         ),
       ),
       centerTitle: true,
@@ -60,40 +71,7 @@ class UserLogoutMypage extends StatelessWidget {
         onPressed: () {},
         child: Text(
           "로고",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    );
-  }
-
-  Divider _divider() {
-    // return Container(
-    //     width: double.infinity,
-    //     height: 1,
-    //     child: ColoredBox(
-    //       color: Colors.black,
-    //     ));
-    return Divider(
-      thickness: 1,
-      height: 0, // 기본 설정된 패딩 값을 없애줌
-      color: gBorderColor,
-    );
-  }
-
-  Widget _textButton(context, String text, String path) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child: Container(
-        width: double.infinity,
-        child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, path);
-          },
-          child: Text(
-            "${text}",
-            style: TextStyle(color: Colors.black),
-          ),
-          style: TextButton.styleFrom(alignment: Alignment.bottomLeft),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
       ),
     );

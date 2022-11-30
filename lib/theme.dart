@@ -1,29 +1,41 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/noto_sans_kr.dart;
+import 'package:google_fonts/google_fonts.dart';
 
-TextTheme textTheme() {
-  return TextTheme(
-    headlineLarge: TextStyle(
-        fontFamily: 'NotoSansKR', fontSize: 20.0, color: Colors.black),
-    headlineMedium: TextStyle(
-        fontFamily: 'NotoSansKR', fontSize: 18.0, color: Colors.black),
-    subtitle1:
-        TextStyle(fontFamily: 'NotoSansKR', fontSize: 16, color: Colors.black),
-    bodyLarge:
-        TextStyle(fontFamily: 'NotoSansKR', fontSize: 14, color: Colors.black),
-    bodyMedium: TextStyle(fontFamily: 'NotoSansKR', fontSize: 12),
-    bodySmall: TextStyle(fontFamily: 'NotoSansKR', fontSize: 10),
+// TextTheme textTheme() {
+//   return TextTheme(
+//     headline1: GoogleFonts.notoSans(
+//         fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold),
+//     headline2: GoogleFonts.notoSans(fontSize: 18.0, color: Colors.black),
+//     headline3: GoogleFonts.notoSans(fontSize: 16.0, color: Colors.black),
+//     bodyText1: GoogleFonts.notoSans(fontSize: 16.0, color: Colors.black),
+//     bodyText2: GoogleFonts.notoSans(fontSize: 14.0, color: Color(0xff787272)),
+//     subtitle1: GoogleFonts.notoSans(
+//         fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold),
+//   );
+// }
+
+AppBarTheme appTheme() {
+  return AppBarTheme(
+    backgroundColor: Colors.white,
+    elevation: 0.0,
+  );
+}
+
+TextButtonThemeData textButtonTheme() {
+  // textbutton 기본 스타일 초기화
+  return TextButtonThemeData(
+    style: TextButton.styleFrom(
+      minimumSize: Size.zero,
+      padding: EdgeInsets.zero,
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    ),
   );
 }
 
 ThemeData theme() {
   return ThemeData(
-    fontFamily: "NotoSansKR",
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.white,
-      elevation: 1,
-    ),
-    // primaryColor: Color(0xff4880ED),
+    appBarTheme: appTheme(),
+    textButtonTheme: textButtonTheme(),
   );
 }
