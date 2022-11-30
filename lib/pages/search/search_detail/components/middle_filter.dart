@@ -23,6 +23,7 @@ class MiddleFilter extends StatelessWidget {
                       Icon(
                         CupertinoIcons.arrow_2_circlepath,
                         color: Colors.black,
+                        size: 16,
                       ),
                       SizedBox(
                         width: 5,

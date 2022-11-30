@@ -10,6 +10,7 @@ import 'package:finalproject_front/pages/sign/join_division_page/join_division_p
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
+import 'package:finalproject_front/pages/user/user_inform/user_login_my_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         "/paymentInform": (context) => PaymentInformPage(),
         "/lessonDetail": (context) => LessonDetailPage(),
         "/categoryDetail": (context) => CategoryDetailPage(),
+        "/LoginMypage": (context) => UserLoginMyPage()
       },
       theme: theme(),
     );

@@ -24,11 +24,12 @@ class LessonExpertInformation extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(14.0),
-              child: Text(
-                "부산광역시 부산진구 홍길동 23422",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [],
+                  )
+                ],
               ),
             ),
           ),
