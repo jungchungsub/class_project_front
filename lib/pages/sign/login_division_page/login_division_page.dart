@@ -13,8 +13,6 @@ class LoginDivisionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var mSize = MediaQuery.of(context).size;
-    print("width는? ${mSize.width}");
-    print("widt는?${mSize.width / 20}");
     return Scaffold(
       body: SafeArea(
           child: Stack(
@@ -40,9 +38,15 @@ class LoginDivisionPage extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    OauthButton(context: context, routeName: "/login", imagePath: "assets/kakaologinbutton.png"),
+                    OauthButton(
+                        context: context,
+                        routeName: "/login",
+                        imagePath: "assets/kakaologinbutton.png"),
                     SizedBox(height: 8),
-                    OauthButton(context: context, routeName: "/login", imagePath: "assets/appleloginbutton.png"),
+                    OauthButton(
+                        context: context,
+                        routeName: "/login",
+                        imagePath: "assets/appleloginbutton.png"),
                     SizedBox(height: 8),
                     OtherButton(),
                     SizedBox(height: 8),

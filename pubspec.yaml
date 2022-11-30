@@ -28,7 +28,7 @@ dev_dependencies:
   cached_network_image: ^3.2.1
   extended_image: ^6.0.1
   dropdown_button2: ^1.9.1
-  animated_bottom_navigation_bar: ^1.1.0
+  persistent_bottom_nav_bar: any
 
 
 
