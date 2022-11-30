@@ -43,6 +43,11 @@ class UserLogoutMypage extends StatelessWidget {
           _divider(),
           CustomTextButton(context: context, text: "고객센터", path: "/join"),
           _divider(),
+          CustomTextButton(
+              context: context,
+              text: "Login MyPage (임의 생성)",
+              path: "/LoginMypage"),
+          _divider(),
         ],
       ),
     );
