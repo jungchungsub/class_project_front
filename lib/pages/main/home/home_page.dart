@@ -105,12 +105,20 @@ class HomePage extends StatelessWidget {
           itemCount: 10,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
                 children: [
-                  Expanded(
-                      child:
-                          Image.asset("assets/home1.jpg", fit: BoxFit.cover)),
+                  Container(
+                    height: 90,
+                    width: 160,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "https://picsum.photos/id/${index + 1}/200"),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
                   SizedBox(height: 10),
                   Text(
                     "안녕하세요 저희 서비스에 오셔서 감사합니다. ",
