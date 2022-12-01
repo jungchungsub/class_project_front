@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         "/profileDetail": (context) => UserProfileDetailPage(),
         "/lessonList": (context) => LessonListPage(),
         "/searchMain": (context) => SearchMainPage(),
+        "/profileInsert": (context) => UserProfileInsertPage()
       },
       theme: theme(),
     );

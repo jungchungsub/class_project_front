@@ -2,15 +2,33 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
 import 'package:finalproject_front/pages/user/user_detail/components/image_box.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/career_select_button.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_career_list.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_certificate.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_education.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_id.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_image.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_insert_button.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_intro.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_place.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class UserProfileInsertPage extends StatelessWidget {
+class UserProfileInsertPage extends StatefulWidget {
   const UserProfileInsertPage({super.key});
+
+  @override
+  State<UserProfileInsertPage> createState() => _UserProfileInsertPageState();
+}
+
+class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
+  late ScrollController
+      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = new ScrollController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +42,22 @@ class UserProfileInsertPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ProfileImage(imagePath: "assets/picture.jpg"),
+              SizedBox(height: 20),
               ProfileId(),
               SizedBox(height: 20),
-              ProfileIntro(),
+              ProfileIntro(scrollAnimate),
               SizedBox(height: 20),
-              ProfilePlace(),
+              ProfilePlace(scrollAnimate),
               SizedBox(height: 20),
-              ProfileEducation(),
+              ProfileEducation(scrollAnimate),
+              SizedBox(height: 20),
+              ProfileCertificate(scrollAnimate),
               SizedBox(height: 20),
               ProfileCareer(),
+              SizedBox(height: 20),
+              ProfileCareerList(scrollAnimate),
+              SizedBox(height: 20),
+              ProfileInsertButton()
             ],
           ),
         ),
@@ -59,25 +84,11 @@ class UserProfileInsertPage extends StatelessWidget {
           }),
     );
   }
-}
 
-class ProfileImage extends StatelessWidget {
-  final String? imagePath;
-  const ProfileImage({
-    this.imagePath,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(150),
-      child: Image.asset(
-        "${imagePath}",
-        width: 80,
-        height: 80,
-        fit: BoxFit.cover,
-      ),
-    );
+  void scrollAnimate() {
+    Future.delayed(Duration(milliseconds: 600), () {
+      scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
+          duration: Duration(microseconds: 100), curve: Curves.easeIn);
+    });
   }
 }

@@ -2,7 +2,9 @@ import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePlace extends StatelessWidget {
-  const ProfilePlace({
+  final Function scrollAnimate;
+  const ProfilePlace(
+    this.scrollAnimate, {
     Key? key,
   }) : super(key: key);
 
@@ -20,6 +22,9 @@ class ProfilePlace extends StatelessWidget {
           ),
           SizedBox(height: 10),
           TextFormField(
+            onTap: (() {
+              scrollAnimate;
+            }),
             decoration: InputDecoration(
               hintText: "예) 부산, 서울, 경기도",
               hintStyle: TextStyle(

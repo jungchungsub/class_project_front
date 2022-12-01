@@ -1,9 +1,10 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
-class ProfileIntro extends StatelessWidget {
+class ProfileCareerList extends StatelessWidget {
   final Function scrollAnimate;
-  const ProfileIntro(
+
+  const ProfileCareerList(
     this.scrollAnimate, {
     Key? key,
   }) : super(key: key);
@@ -15,9 +16,15 @@ class ProfileIntro extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              "자기소개",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: "경력사항을 작성해 주세요.",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 10),
@@ -25,10 +32,8 @@ class ProfileIntro extends StatelessWidget {
             onTap: (() {
               scrollAnimate;
             }),
-            keyboardType: TextInputType.multiline,
-            maxLines: 6,
             decoration: InputDecoration(
-              hintText: "간략한 자기소개를 작성해주세요",
+              hintText: "예) 프리랜서1년",
               hintStyle: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,

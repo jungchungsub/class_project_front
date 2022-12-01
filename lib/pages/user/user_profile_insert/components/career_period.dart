@@ -4,14 +4,14 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-class CareerList extends StatefulWidget {
-  const CareerList({Key? key}) : super(key: key);
+class CareerPeriod extends StatefulWidget {
+  const CareerPeriod({Key? key}) : super(key: key);
 
   @override
-  State<CareerList> createState() => _CareerList();
+  State<CareerPeriod> createState() => _CareerList();
 }
 
-class _CareerList extends State<CareerList> {
+class _CareerList extends State<CareerPeriod> {
   final List<String> items = ['신입', '2~3년', '4~7년', '7~10년'];
   String? selectedValue;
 
@@ -21,11 +21,11 @@ class _CareerList extends State<CareerList> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton2(
           hint: Text(
-            '일시불',
+            '경력 기간을 선택 주세요.',
             style: TextStyle(
                 fontSize: 14,
                 color: gSubTextColor,
-                fontWeight: FontWeight.normal),
+                fontWeight: FontWeight.bold),
           ),
           items: items
               .map(

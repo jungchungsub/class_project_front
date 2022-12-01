@@ -2,7 +2,9 @@ import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
 class ProfileEducation extends StatelessWidget {
-  const ProfileEducation({
+  final Function scrollAnimate;
+  const ProfileEducation(
+    this.scrollAnimate, {
     Key? key,
   }) : super(key: key);
 
@@ -33,6 +35,9 @@ class ProfileEducation extends StatelessWidget {
           ),
           SizedBox(height: 10),
           TextFormField(
+            onTap: (() {
+              scrollAnimate;
+            }),
             decoration: InputDecoration(
               hintText: "예) 사이버 보안 전공",
               hintStyle: TextStyle(

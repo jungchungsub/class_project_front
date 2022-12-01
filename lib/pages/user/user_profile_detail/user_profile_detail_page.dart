@@ -1,7 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_content.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_header.dart';
-import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_insert_button.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_update_button.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_intro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class UserProfileDetailPage extends StatelessWidget {
               SizedBox(height: 10),
               ProfileContent(title: "경력기간", content: "신입"),
               SizedBox(height: 20),
-              ProfileInsertButton(),
+              ProfileUpdateButton(),
             ],
           ),
         ),

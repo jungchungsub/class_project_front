@@ -1,8 +1,8 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
-class ProfileInsertButton extends StatelessWidget {
-  const ProfileInsertButton({
+class ProfileUpdateButton extends StatelessWidget {
+  const ProfileUpdateButton({
     Key? key,
   }) : super(key: key);
 
