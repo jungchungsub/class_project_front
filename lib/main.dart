@@ -1,13 +1,17 @@
+import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
+import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
+
 import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
-
-import 'package:finalproject_front/pages/payment/payment_inform/payment_inform_page.dart';
 
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
+import 'package:finalproject_front/pages/user/user_detail/user_login_my_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail/user_profile_detail_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +35,11 @@ class MyApp extends StatelessWidget {
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
-        "/paymentInform": (context) => PaymentInformPage(),
+        "/orderDetail": (context) => OrderDetailPage(),
+        "/lessonDetail": (context) => LessonDetailPage(),
+        "/categoryDetail": (context) => CategoryDetailPage(),
+        "/loginMypage": (context) => UserLoginMyPage(),
+        "/profileDetail": (context) => UserProfileDetailPage()
       },
       theme: theme(),
     );
