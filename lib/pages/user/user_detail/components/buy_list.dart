@@ -2,7 +2,10 @@ import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
 class BuyList extends StatelessWidget {
+  final String path;
+
   const BuyList({
+    required this.path,
     Key? key,
   }) : super(key: key);
 
@@ -21,6 +24,7 @@ class BuyList extends StatelessWidget {
               InkWell(
                 onTap: () {
                   //전체보기 페이지로 이동
+                  Navigator.pushNamed(context, path);
                 },
                 child: Text(
                   "전체보기",
