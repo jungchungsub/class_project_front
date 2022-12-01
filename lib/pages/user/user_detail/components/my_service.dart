@@ -24,7 +24,9 @@ class MyService extends StatelessWidget {
           SizedBox(height: 10),
           _buildMyService(context, "고객센터", "/customerService"),
           SizedBox(height: 10),
-          _buildMyService(context, "판매내역 ", "/paymentSalesDetail"),
+          _buildMyService(context, "판매내역 임시 ", "/paymentSalesDetail"),
+          SizedBox(height: 10),
+          _buildMyService(context, "클래스 수정하러가기 임시 ", "/lessonUpdate"),
         ],
       ),
     );
