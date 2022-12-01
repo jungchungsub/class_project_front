@@ -1,11 +1,9 @@
 import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
-<<<<<<< HEAD
 
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
-=======
 import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
->>>>>>> 9310285902e336bb11b4b436f464182c60ec7626
+
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
@@ -72,7 +70,6 @@ class MyApp extends StatelessWidget {
         "/lessonUpdate": (context) => LessonUpdatePage(),
 
         "/chatList": (context) => ChatListPage(),
-
       },
       theme: theme(),
     );
