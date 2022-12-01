@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,12 +12,7 @@ class CareerList extends StatefulWidget {
 }
 
 class _CareerList extends State<CareerList> {
-  final List<String> items = [
-    '신입',
-    '2~3년',
-    '4~7년',
-    '7~10년'
-  ];
+  final List<String> items = ['신입', '2~3년', '4~7년', '7~10년'];
   String? selectedValue;
 
   @override
@@ -28,20 +24,22 @@ class _CareerList extends State<CareerList> {
             '일시불',
             style: TextStyle(
                 fontSize: 14,
-                color: ,
-                fontWeight: FontWeight.bold),
+                color: gSubTextColor,
+                fontWeight: FontWeight.normal),
           ),
           items: items
-              .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                        item,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                  ),)
+              .map(
+                (item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
               .toList(),
           value: selectedValue,
           onChanged: (value) {
