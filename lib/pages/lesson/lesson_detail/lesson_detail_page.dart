@@ -60,23 +60,39 @@ class LessonDetailPage extends StatelessWidget {
                   )),
               SliverList(
                 delegate: SliverChildListDelegate([
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Container(
-                        child: Column(
-                      children: [
-                        LessonTitle(),
-                        LessonCurriculam(),
-                        LessonTime(),
-                        LessonPlace(),
-                        LessonPossibleDate(),
-                        LessonCancel(),
-                        LessonExpertInformation(),
-                        LessonEvaluation(),
-                        PurchaseReview(),
-                        SizedBox(height: 30),
-                      ],
-                    )),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Container(
+                            child: Column(
+                          children: [
+                            LessonTitle(),
+                          ],
+                        )),
+                      ),
+                      Divider(
+                        thickness: 1,
+                        height: 0,
+                        color: gBorderColor,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Container(
+                            child: Column(
+                          children: [
+                            LessonCurriculam(),
+                            LessonTime(),
+                            LessonPlace(),
+                            LessonPossibleDate(),
+                            LessonCancel(),
+                            LessonExpertInformation(),
+                            LessonEvaluation(),
+                            PurchaseReview(),
+                          ],
+                        )),
+                      ),
+                    ],
                   ),
                 ]),
               ),
