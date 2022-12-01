@@ -1,13 +1,24 @@
 import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+<<<<<<< HEAD
+
+import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
+
+=======
 import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
+>>>>>>> 9310285902e336bb11b4b436f464182c60ec7626
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update/lesson_update_page.dart';
+
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
 
 import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
+import 'package:finalproject_front/pages/payment/payment_installment_list/payment_installment_list_page.dart';
+import 'package:finalproject_front/pages/payment/payment_sales_detail/payment_sales_detail_pages.dart';
+
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
 
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
@@ -48,6 +59,7 @@ class MyApp extends StatelessWidget {
         "/orderDetail": (context) => OrderDetailPage(),
         "/lessonDetail": (context) => LessonDetailPage(),
         "/categoryDetail": (context) => CategoryDetailPage(),
+
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(),
         "/lessonList": (context) => LessonListPage(),
@@ -55,7 +67,12 @@ class MyApp extends StatelessWidget {
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(),
         "/profileInsert": (context) => UserProfileInsertPage(),
+        "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
+        "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
+        "/lessonUpdate": (context) => LessonUpdatePage(),
+
         "/chatList": (context) => ChatListPage(),
+
       },
       theme: theme(),
     );

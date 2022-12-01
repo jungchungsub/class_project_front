@@ -18,11 +18,15 @@ class MyService extends StatelessWidget {
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
-          _buildMyService(context, "결제/환불내역", ""),
+          _buildMyService(context, "결제/환불내역", "/paymentInstallmentList"),
           SizedBox(height: 10),
           _buildMyService(context, "쿠폰/프로모션", "/userCoupon"),
           SizedBox(height: 10),
-          _buildMyService(context, "고객센터", "/customerService")
+          _buildMyService(context, "고객센터", "/customerService"),
+          SizedBox(height: 10),
+          _buildMyService(context, "판매내역 임시 ", "/paymentSalesDetail"),
+          SizedBox(height: 10),
+          _buildMyService(context, "클래스 수정하러가기 임시 ", "/lessonUpdate"),
         ],
       ),
     );
