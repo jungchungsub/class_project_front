@@ -20,7 +20,7 @@ class MyService extends StatelessWidget {
           SizedBox(height: 10),
           _buildMyService(context, "결제/환불내역", ""),
           SizedBox(height: 10),
-          _buildMyService(context, "쿠폰/프로모션", ""),
+          _buildMyService(context, "쿠폰/프로모션", "/userCoupon"),
           SizedBox(height: 10),
           _buildMyService(context, "고객센터", "/customerService")
         ],
