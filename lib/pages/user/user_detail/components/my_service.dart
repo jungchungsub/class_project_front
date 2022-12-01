@@ -18,7 +18,7 @@ class MyService extends StatelessWidget {
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
-          _buildMyService(context, "결제/환불내역", ""),
+          _buildMyService(context, "결제/환불내역", "/PaymentInstallmentList"),
           SizedBox(height: 10),
           _buildMyService(context, "쿠폰/프로모션", "/userCoupon"),
           SizedBox(height: 10),

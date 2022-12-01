@@ -11,6 +11,7 @@ import 'package:finalproject_front/pages/order/order_detail/order_detail_page.da
 
 import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
+import 'package:finalproject_front/pages/payment/payment_installment_list/payment_installment_list_page.dart';
 import 'package:finalproject_front/pages/payment/payment_sales_detail/payment_sales_detail_pages.dart';
 
 import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
@@ -61,7 +62,8 @@ class MyApp extends StatelessWidget {
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(),
         "/profileInsert": (context) => UserProfileInsertPage(),
-        "/paymentSalesDetailPage": (context) => PaymentSalesDetailPage(),
+        "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
+        "/PaymentInstallmentList": (context) => PaymentInstallmentListPage(),
       },
       theme: theme(),
     );
