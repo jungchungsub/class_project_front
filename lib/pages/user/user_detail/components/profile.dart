@@ -11,7 +11,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _buildProfileImage(),
+        _buildProfileImage(context, "/profileDetail"),
         SizedBox(width: 20),
         _buildProfileText(),
       ],
@@ -38,7 +38,7 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            "green123456",
+            "green1234567",
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
@@ -74,14 +74,19 @@ class Profile extends StatelessWidget {
     );
   }
 
-  ClipRRect _buildProfileImage() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(150),
-      child: Image.asset(
-        "assets/picture.jpg",
-        width: 80,
-        height: 80,
-        fit: BoxFit.cover,
+  InkWell _buildProfileImage(context, String routePath) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, "${routePath}");
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(150),
+        child: Image.asset(
+          "assets/picture.jpg",
+          width: 80,
+          height: 80,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

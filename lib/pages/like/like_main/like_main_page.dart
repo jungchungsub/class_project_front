@@ -41,11 +41,12 @@ class _LikeMainPageState extends State<LikeMainPage> {
       ),
       body: ListView(
         children: [
-          LikeList(),
-          LikeList(),
-          LikeList(),
-          LikeList(),
-          LikeList(),
+          LikeList(path: "/lessonDetail", image: "https://picsum.photos/201"),
+          LikeList(path: "/lessonDetail", image: "https://picsum.photos/202"),
+          LikeList(path: "/lessonDetail", image: "https://picsum.photos/203"),
+          LikeList(path: "/lessonDetail", image: "https://picsum.photos/204"),
+          LikeList(path: "/lessonDetail", image: "https://picsum.photos/205"),
+          LikeList(path: "/lessonDetail", image: "https://picsum.photos/206")
         ],
       ),
     );

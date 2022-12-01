@@ -12,31 +12,7 @@ class SearchMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 1.0,
-        leading: Icon(
-          CupertinoIcons.back,
-          color: Colors.black,
-        ),
-        title: Text(
-          "검색어를 입력하세요.",
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Icon(
-            CupertinoIcons.search,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            width: 15,
-          )
-        ],
-      ),
+      appBar: _buildappBar(context),
       body: ListView(
         children: [
           Padding(
@@ -86,6 +62,39 @@ class SearchMainPage extends StatelessWidget {
           RecentSearch(text: "음악공원"),
         ],
       ),
+    );
+  }
+
+  AppBar _buildappBar(BuildContext context) {
+    return AppBar(
+      elevation: 1.0,
+      leading: IconButton(
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+      title: Text(
+        "검색어를 입력하세요.",
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+      actions: [
+        Icon(
+          CupertinoIcons.search,
+          color: Colors.grey,
+        ),
+        SizedBox(
+          width: 15,
+        )
+      ],
     );
   }
 }
