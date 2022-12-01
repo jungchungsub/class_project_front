@@ -4,6 +4,10 @@ import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page
 
 import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
 
+import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
+
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
