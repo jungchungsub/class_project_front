@@ -38,7 +38,7 @@ class Profile extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            "green123456",
+            "green1234567",
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
@@ -50,7 +50,8 @@ class Profile extends StatelessWidget {
                 border: Border.all(color: gBorderColor),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                 child: Row(
                   children: [
                     Icon(
