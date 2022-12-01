@@ -1,6 +1,4 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_detail.dart';
-import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_header.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_content.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_header.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_update_button.dart';
