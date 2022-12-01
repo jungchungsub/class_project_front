@@ -18,33 +18,42 @@ class MyService extends StatelessWidget {
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
-          _buildMyService("결제/환불내역"),
+          _buildMyService(context, "결제/환불내역", "/paymentInstallmentList"),
           SizedBox(height: 10),
-          _buildMyService("쿠폰/프로모션"),
+          _buildMyService(context, "쿠폰/프로모션", "/userCoupon"),
           SizedBox(height: 10),
-          _buildMyService("고객센터"),
+          _buildMyService(context, "고객센터", "/customerService"),
+          SizedBox(height: 10),
+          _buildMyService(context, "판매내역 임시 ", "/paymentSalesDetail"),
+          SizedBox(height: 10),
+          _buildMyService(context, "클래스 수정하러가기 임시 ", "/lessonUpdate"),
         ],
       ),
     );
   }
 
-  Row _buildMyService(String service) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "$service",
-          style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
-              color: gSubTextColor),
-        ),
-        Icon(
-          CupertinoIcons.right_chevron,
-          size: 14,
-          color: gSubTextColor,
-        )
-      ],
+  _buildMyService(context, String service, String path) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, path);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "$service",
+            style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                color: gSubTextColor),
+          ),
+          Icon(
+            CupertinoIcons.right_chevron,
+            size: 14,
+            color: gSubTextColor,
+          )
+        ],
+      ),
     );
   }
 }

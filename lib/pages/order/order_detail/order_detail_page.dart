@@ -54,10 +54,15 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 1.0,
-      leading: Icon(
-        CupertinoIcons.back,
-        color: Colors.black,
-      ),
+      leading: IconButton(
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
       title: Text(
         "주문하기",
         style: TextStyle(

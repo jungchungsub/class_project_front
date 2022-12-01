@@ -48,7 +48,7 @@ class _PaymentPeriodState extends State<PaymentPeriod> {
                         item,
                         style: const TextStyle(
                             fontSize: 14,
-                            color: Color(0xff4880ED),
+                            color: Colors.black,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
