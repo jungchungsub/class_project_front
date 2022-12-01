@@ -14,7 +14,7 @@ class PaymentDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(context),
+      appBar: _buildAppbar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -41,7 +41,7 @@ class PaymentDetailPage extends StatelessWidget {
     );
   }
 
-  AppBar _appBar(context) {
+  AppBar _buildAppbar(context) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 1.0,
