@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_detail.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_header.dart';
@@ -35,16 +33,16 @@ class UserProfileDetailPage extends StatelessWidget {
   InkWell _buildProfileInsertButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "/ProfileInsertPage");
+        Navigator.pushNamed(context, "/profileInsert");
       },
       child: Container(
-        width: double.maxFinite,
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: gButtonOffColor,
         ),
-        child: Center(
+        child: Align(
+          alignment: Alignment.center,
           child: Text(
             "프로필 등록/수정하기",
             style: TextStyle(

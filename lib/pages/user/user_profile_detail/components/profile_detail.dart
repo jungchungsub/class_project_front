@@ -12,7 +12,8 @@ class ProfileDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildIntro("자기소개 작성하는 공간 충섭아 컨벤션이 너무 어려워 나 좀 살려줘 머리가 터질거같애 할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어"),
+          _buildIntro(
+              "자기소개 작성하는 공간 충섭아 컨벤션이 너무 어려워 나 좀 살려줘 머리가 터질거같애 할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어"),
           SizedBox(height: 10),
           _buildDetail("지역", "부산"),
           SizedBox(height: 10),
@@ -22,7 +23,6 @@ class ProfileDetail extends StatelessWidget {
           SizedBox(height: 10),
           _buildDetail("총 경력기간", "신입"),
           SizedBox(height: 10),
-          _buildDetail("경력사항", "0~1년"),
         ],
       ),
     );
@@ -51,7 +51,10 @@ class ProfileDetail extends StatelessWidget {
             decoration: BoxDecoration(),
             child: Text(
               "${introContent}",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: gSubTextColor),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: gSubTextColor),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
@@ -73,7 +76,10 @@ class ProfileDetail extends StatelessWidget {
           SizedBox(height: 5),
           Text(
             "${detailContent}",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: gSubTextColor),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: gSubTextColor),
           ),
         ],
       ),
