@@ -15,6 +15,7 @@ import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
 import 'package:finalproject_front/pages/stack_page.dart';
 import 'package:finalproject_front/pages/user/user_detail/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/user_profile_detail_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert/user_profile_insert_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/main",
       routes: {
+        // 라우팅 주소의 가장 앞에는 동사,명사
+        // 명사 + 명사는 읽기 부드러운 순서
+
         "/stack": (context) => StackPage(),
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
@@ -42,10 +46,11 @@ class MyApp extends StatelessWidget {
         "/orderDetail": (context) => OrderDetailPage(),
         "/lessonDetail": (context) => LessonDetailPage(),
         "/categoryDetail": (context) => CategoryDetailPage(),
-        "/loginMypage": (context) => UserLoginMyPage(),
+        "/loginMyPage": (context) => UserLoginMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(),
         "/lessonList": (context) => LessonListPage(),
         "/searchMain": (context) => SearchMainPage(),
+        "/profileInsert": (context) => UserProfileInsertPage()
       },
       theme: theme(),
     );

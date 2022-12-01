@@ -1,6 +1,8 @@
-import 'dart:ffi';
-
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_content.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_header.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_update_button.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail/components/profile_intro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -14,52 +16,27 @@ class UserProfileDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: _buildAppbar(context),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Header(),
-            Container(
-              color: Colors.grey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("소개"),
-                        SizedBox(height: 5),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(1),
-                          ),
-                          width: 30,
-                          height: 3,
-                        ),
-                        SizedBox(height: 5),
-                        Container(
-                          decoration: BoxDecoration(),
-                          child: Text(
-                            "자기소개 작성하는 공간 충섭아 컨벤션이 너무 어려워 나 좀 살려줘 머리가 터질거같애 할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어",
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Text("지역"),
-                        Text("부산"),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              ProfileHeader(),
+              SizedBox(height: 20),
+              ProfileIntro(
+                  introContent:
+                      "자기소개 작성하는 공간 충섭아 컨벤션이 너무 어려워 나 좀 살려줘 머리가 터질거같애 할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어"),
+              SizedBox(height: 10),
+              ProfileContent(title: "지역", content: "부산"),
+              SizedBox(height: 10),
+              ProfileContent(title: "학력전공", content: "컴퓨터공학과"),
+              SizedBox(height: 10),
+              ProfileContent(title: "보유자격증", content: "개인정보취급사"),
+              SizedBox(height: 10),
+              ProfileContent(title: "경력기간", content: "신입"),
+              SizedBox(height: 20),
+              ProfileUpdateButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -82,58 +59,6 @@ class UserProfileDetailPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           }),
-    );
-  }
-}
-
-class Header extends StatelessWidget {
-  const Header({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "이름 작성하는 부분",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Row(
-                  children: [
-                    Icon(CupertinoIcons.star_fill,
-                        color: Colors.yellow, size: 15),
-                    SizedBox(width: 10),
-                    Text(
-                      "4.5 | 25개의 평가",
-                      style: TextStyle(
-                          color: gSubTextColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(150),
-            child: Image.asset(
-              "assets/picture.jpg",
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
-            ),
-          )
-        ],
-      ),
     );
   }
 }
