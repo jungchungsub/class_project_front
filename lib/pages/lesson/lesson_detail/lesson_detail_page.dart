@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_bottom_bar.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_cancel.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_curriculam.dart';
 
@@ -26,6 +27,7 @@ class LessonDetailPage extends StatelessWidget {
       builder: (context, constrains) {
         Size _size = MediaQuery.of(context).size; //해당 디바이스의 사이즈를 가지고 온다.
         return Scaffold(
+          bottomSheet: BottomBar(),
           body: CustomScrollView(
             slivers: [
               //child같은 개념이지만 조금 다르다
@@ -69,67 +71,6 @@ class LessonDetailPage extends StatelessWidget {
                         LessonExpertInformation(),
                         LessonEvaluation(),
                         PurchaseReview(),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: gSubButtonColor, width: 2),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "문의",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              ConstrainedBox(
-                                constraints: BoxConstraints.tightFor(
-                                    height: 50, width: 240),
-                                child: TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xff4880ED),
-                                      minimumSize: Size(340, 50)),
-                                  onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, "/orderDetail");
-                                    //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
-                                  },
-                                  child: Text(
-                                    "50,000원 결제하기",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: gSubButtonColor, width: 2),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child:
-                                      Center(child: Icon(CupertinoIcons.heart)),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
                         SizedBox(height: 30),
                       ],
                     )),

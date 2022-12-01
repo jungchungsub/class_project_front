@@ -20,7 +20,7 @@ class UserLoginMyPage extends StatelessWidget {
           children: [
             Profile(),
             SizedBox(height: 20),
-            BuyList(),
+            BuyList(path: "/lessonList"),
             SizedBox(height: 20),
             MyService(),
             SizedBox(height: 80),
