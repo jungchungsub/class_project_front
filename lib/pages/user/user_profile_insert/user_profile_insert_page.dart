@@ -87,8 +87,12 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
 
   void scrollAnimate() {
     Future.delayed(Duration(milliseconds: 600), () {
+      //0.6초 이후 키보드 올라옴
+      // ViewInsets은 현재 페이지에서 내가 컨트롤 할 수 없는 영역을 뜻함,
+      // bottom은 키보드가 아래에서 올라오기 때문
       scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
-          duration: Duration(microseconds: 100), curve: Curves.easeIn);
+          duration: Duration(microseconds: 100), // 0.1초 이후 field가 올라간다.
+          curve: Curves.easeIn); //Curves - 올라갈때 애니메이션
     });
   }
 }
