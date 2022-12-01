@@ -1,8 +1,9 @@
 import 'package:finalproject_front/constants.dart';
+
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/custom_text_button.dart';
-import 'package:finalproject_front/pages/user/user_inform/components/image_box.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/custom_text_button.dart';
+import 'package:finalproject_front/pages/user/user_detail/components/image_box.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,28 +26,23 @@ class UserLogoutMyPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: ImageBox(),
           ),
-          __buildDivider(),
-          CustomTextButton(
-              context: context, text: "로그인", path: "/loginDivision"),
-          __buildDivider(),
-          CustomTextButton(
-              context: context, text: "회원가입", path: "/joinDivision"),
-          __buildDivider(),
+          _buildDivider(),
+          CustomTextButton(context: context, text: "로그인", path: "/loginDivision"),
+          _buildDivider(),
+          CustomTextButton(context: context, text: "회원가입", path: "/joinDivision"),
+          _buildDivider(),
           CustomTextButton(context: context, text: "알람 설정", path: "/join"),
-          __buildDivider(),
+          _buildDivider(),
           CustomTextButton(context: context, text: "고객센터", path: "/join"),
-          __buildDivider(),
-          CustomTextButton(
-              context: context,
-              text: "Login MyPage (임의 생성)",
-              path: "/LoginMypage"),
-          __buildDivider(),
+          _buildDivider(),
+          CustomTextButton(context: context, text: "Login MyPage (임의 생성)", path: "/LoginMypage"),
+          _buildDivider(),
         ],
       ),
     );
   }
 
-  Divider __buildDivider() {
+  Divider _buildDivider() {
     return Divider(
       thickness: 1,
       color: gBorderColor,

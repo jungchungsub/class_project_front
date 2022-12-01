@@ -2,13 +2,17 @@ import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_cancel.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_curriculam.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_evaluation.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_expert_information.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_place.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_possible_date.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_time.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lessson_title.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/purchase_review.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
