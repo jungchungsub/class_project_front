@@ -6,6 +6,7 @@ import 'package:finalproject_front/pages/order/order_detail/order_detail_page.da
 
 import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
+import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
 
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         "/loginMypage": (context) => UserLoginMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(),
         "/lessonList": (context) => LessonListPage(),
+        "/searchMain": (context) => SearchMainPage(),
       },
       theme: theme(),
     );

@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _homePageAppBar(),
+      appBar: _buildAppBar(context, "/searchMain"),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar _homePageAppBar() {
+  AppBar _buildAppBar(context, path) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 1.0,
@@ -80,7 +80,9 @@ class HomePage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "${path}");
+            },
             child: Row(
               children: [
                 Icon(
