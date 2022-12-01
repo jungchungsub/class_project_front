@@ -9,7 +9,7 @@ class CouponButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 20,
+      top: 30,
       right: 15,
       child: Container(
         width: 100,

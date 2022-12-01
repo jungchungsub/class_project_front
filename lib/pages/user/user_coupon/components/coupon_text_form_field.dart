@@ -9,7 +9,7 @@ class CouponTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         TextFormField(
           //1. 값이 없으면 plase enter some text 경고 화면 표시
           validator: (value) =>
