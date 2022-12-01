@@ -17,7 +17,6 @@ import 'package:finalproject_front/pages/user/user_detail/user_logout_my_page.da
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
