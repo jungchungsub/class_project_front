@@ -1,5 +1,6 @@
 import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
 
@@ -10,6 +11,7 @@ import 'package:finalproject_front/pages/sign/join_division_page/join_division_p
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
+import 'package:finalproject_front/pages/stack_page.dart';
 import 'package:finalproject_front/pages/user/user_detail/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/user_profile_detail_page.dart';
 import 'package:finalproject_front/theme.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: "/main",
       routes: {
+        "/stack": (context) => StackPage(),
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
         "/login": (context) => LoginPage(),
@@ -39,7 +42,8 @@ class MyApp extends StatelessWidget {
         "/lessonDetail": (context) => LessonDetailPage(),
         "/categoryDetail": (context) => CategoryDetailPage(),
         "/loginMypage": (context) => UserLoginMyPage(),
-        "/profileDetail": (context) => UserProfileDetailPage()
+        "/profileDetail": (context) => UserProfileDetailPage(),
+        "/lessonList": (context) => LessonListPage(),
       },
       theme: theme(),
     );

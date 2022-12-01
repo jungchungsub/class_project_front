@@ -15,19 +15,21 @@ class PaymentDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
-      body: Column(
-        children: [
-          PaymentInform(),
-          _divider(),
-          CardSelect(),
-          Installment(),
-          EmailTextForm(),
-          Text(
-            "구매 내용에 동의합니다.",
-            style: TextStyle(fontSize: 12, color: Color(0xff6C6C6C)),
-          ),
-          PaymentButton(path: "/main"),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            PaymentInform(),
+            _divider(),
+            CardSelect(),
+            Installment(),
+            EmailTextForm(),
+            Text(
+              "구매 내용에 동의합니다.",
+              style: TextStyle(fontSize: 12, color: Color(0xff6C6C6C)),
+            ),
+            PaymentButton(path: "/main"),
+          ],
+        ),
       ),
     );
   }
