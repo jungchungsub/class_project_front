@@ -5,6 +5,7 @@ import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update/lesson_update_page.dart';
 
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
         "/userCoupon": (context) => UserCouponPage(),
         "/profileInsert": (context) => UserProfileInsertPage(),
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
-        "/PaymentInstallmentList": (context) => PaymentInstallmentListPage(),
+        "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
+        "/l": (context) => LessonUpdatePage(),
       },
       theme: theme(),
     );
