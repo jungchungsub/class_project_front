@@ -1,9 +1,9 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
-class LessonCount extends StatelessWidget {
+class LessonPrice extends StatelessWidget {
   final Function scrollAnimate;
-  const LessonCount(
+  const LessonPrice(
     this.scrollAnimate, {
     Key? key,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class LessonCount extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "수강횟수",
+              "가격",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
@@ -27,12 +27,13 @@ class LessonCount extends StatelessWidget {
           TextFormField(
             onTap: (() {}),
             decoration: InputDecoration(
-              hintText: "수강 횟수를 입력하세요",
+              hintText: "ex) 50,000원",
               hintStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
                 color: gSubTextColor,
               ),
+
               //3. 기본 textFormfield 디자인 - enabledBorder
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: gBorderColor, width: 3.0),
