@@ -13,20 +13,24 @@ class UserLoginMyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildappBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Profile(),
-            SizedBox(height: 20),
-            BuyList(path: "/lessonList"),
-            SizedBox(height: 20),
-            MyService(),
-            SizedBox(height: 80),
-            ImageBox(),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Profile(),
+                SizedBox(height: 20),
+                BuyList(path: "/lessonList"),
+                SizedBox(height: 20),
+                MyService(),
+                SizedBox(height: 60),
+                ImageBox(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

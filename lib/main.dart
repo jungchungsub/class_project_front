@@ -49,7 +49,6 @@ class MyApp extends StatelessWidget {
       initialRoute: "/main",
       routes: {
         // 라우팅 주소의 가장 앞에는 동사,명사
-        // 명사 + 명사는 읽기 부드러운 순서
         "/stack": (context) => StackPage(),
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
