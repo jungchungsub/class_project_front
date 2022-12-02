@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
 import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
