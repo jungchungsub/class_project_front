@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LessonDeadLine extends StatefulWidget {
-  const LessonDeadLine({Key? key}) : super(key: key);
+  final String date;
+  const LessonDeadLine({required this.date, Key? key}) : super(key: key);
 
   @override
   State<LessonDeadLine> createState() => _LessonDeadLineState();
@@ -41,10 +42,13 @@ class _LessonDeadLineState extends State<LessonDeadLine> {
                 borderRadius: BorderRadius.circular(15),
               ),
               alignment: Alignment.centerLeft,
-              child: Text(
-                'DatePicker 띄우기',
-                style: TextStyle(
-                  color: gSubTextColor,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '',
+                  style: TextStyle(
+                    color: gSubTextColor,
+                  ),
                 ),
               ),
             ),

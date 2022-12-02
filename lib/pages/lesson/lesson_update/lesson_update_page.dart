@@ -47,7 +47,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                 LessonPlace(scrollAnimate),
                 LessonCategory(),
                 LessonPrice(scrollAnimate),
-                LessonDeadLine(),
+                LessonDeadLine(date: ''),
                 LessonBottomButton(),
               ],
             ),
