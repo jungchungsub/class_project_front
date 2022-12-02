@@ -25,49 +25,55 @@ class HomePage extends StatelessWidget {
                   padding: const EdgeInsets.all(24.0),
                   child: Column(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
-                          "assets/home1.jpg",
-                          fit: BoxFit.cover,
-                          height: 100,
-                          width: 400,
-                        ),
-                      ),
+                      _buildMainImage(),
                       SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CategorySelect(
-                              image: "assets/sports.png",
-                              text: "뷰티・운동",
-                              path: "/categoryDetail"),
-                          CategorySelect(
-                              image: "assets/Headphones.png",
-                              text: "댄스・뮤직",
-                              path: "/categoryDetail"),
-                          CategorySelect(
-                              image: "assets/art.png",
-                              text: "미술・문학",
-                              path: "/categoryDetail"),
-                          CategorySelect(
-                              image: "assets/Search.png",
-                              text: "공예・기타",
-                              path: "/categoryDetail"),
-                        ],
-                      ),
+                      _buildCategory(),
                     ],
                   ),
                 ),
               ),
-              Divider(
-                color: gBorderColor,
-                thickness: 1.0,
-              )
+              _buildDivider()
             ]))
           ];
         },
-        body: ClassList(path: "/lessonDetail"),
+        body: ClassList(routePath: "/lessonDetail"),
+      ),
+    );
+  }
+
+  Divider _buildDivider() {
+    return Divider(
+      color: gBorderColor,
+      thickness: 1.0,
+    );
+  }
+
+  Row _buildCategory() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CategorySelect(
+            image: "assets/sports.png", text: "뷰티・운동", path: "/categoryDetail"),
+        CategorySelect(
+            image: "assets/Headphones.png",
+            text: "댄스・뮤직",
+            path: "/categoryDetail"),
+        CategorySelect(
+            image: "assets/art.png", text: "미술・문학", path: "/categoryDetail"),
+        CategorySelect(
+            image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
+      ],
+    );
+  }
+
+  ClipRRect _buildMainImage() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: Image.asset(
+        "assets/home1.jpg",
+        fit: BoxFit.cover,
+        height: 100,
+        width: 400,
       ),
     );
   }

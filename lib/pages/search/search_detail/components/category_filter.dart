@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class MiddleFilter extends StatelessWidget {
-  const MiddleFilter({Key? key}) : super(key: key);
+class CategoryFilter extends StatelessWidget {
+  const CategoryFilter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

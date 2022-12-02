@@ -3,8 +3,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class PaymentButton extends StatelessWidget {
-  final String path;
-  const PaymentButton({required this.path, Key? key}) : super(key: key);
+  final String routePath;
+  const PaymentButton({required this.routePath, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class PaymentButton extends StatelessWidget {
         style: TextButton.styleFrom(
             backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
         onPressed: () {
-          Navigator.pushNamed(context, path);
+          Navigator.pushNamed(context, routePath);
           //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
         },
         child: Text(
