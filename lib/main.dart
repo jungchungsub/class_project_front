@@ -11,6 +11,7 @@ import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_review/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/lesson_update_page.dart';
 
 import 'package:finalproject_front/pages/main_page.dart';
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
 
         "/chatList": (context) => ChatListPage(),
         "/userUpdate": (context) => UserUpdatePage(),
+        "/reviewInsert": (context) => LessonReviewInsertPage()
       },
       theme: theme(),
     );
