@@ -21,8 +21,7 @@ class UserProfileInsertPage extends StatefulWidget {
 }
 
 class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
-  late ScrollController
-      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {

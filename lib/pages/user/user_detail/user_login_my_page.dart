@@ -12,7 +12,7 @@ class UserLoginMyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildappBar(),
+      appBar: _buildappBar(context),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -31,7 +31,7 @@ class UserLoginMyPage extends StatelessWidget {
     );
   }
 
-  AppBar _buildappBar() {
+  AppBar _buildappBar(BuildContext context) {
     return AppBar(
       elevation: 1.0,
       leading: IconButton(
@@ -54,7 +54,9 @@ class UserLoginMyPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 15, right: 20),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, "/userUpdate");
+            },
             child: Text(
               "계정 설정",
               style: TextStyle(
