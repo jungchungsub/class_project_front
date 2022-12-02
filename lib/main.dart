@@ -2,11 +2,11 @@ import 'package:finalproject_front/pages/category/category_detail/category_detai
 
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
-import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
-import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';

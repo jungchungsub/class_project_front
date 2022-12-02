@@ -1,10 +1,11 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/chat/chat_list/components/chat_card_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
+import 'components/chat_card.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({super.key});
@@ -14,12 +15,12 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
-  final List<ChatCardList> items = [
-    ChatCardList(name: "아이유", message: "충섭아 놀러가자", date: "오후 11:00"),
-    ChatCardList(name: "아이유", message: "충섭아 사랑해", date: "오후 11:00"),
-    ChatCardList(name: "아이유", message: "충섭아 미안해", date: "오후 11:00"),
-    ChatCardList(name: "아이유", message: "충섭아 짜증나", date: "오후 11:00"),
-    ChatCardList(name: "아이유", message: "충섭아 연락하지마", date: "오후 11:00"),
+  final List<ChatCard> items = [
+    ChatCard(name: "아이유", message: "충섭아 놀러가자", date: "오후 11:00"),
+    ChatCard(name: "아이유", message: "충섭아 사랑해", date: "오후 11:00"),
+    ChatCard(name: "아이유", message: "충섭아 미안해", date: "오후 11:00"),
+    ChatCard(name: "아이유", message: "충섭아 짜증나", date: "오후 11:00"),
+    ChatCard(name: "아이유", message: "충섭아 연락하지마", date: "오후 11:00"),
   ];
   @override
   Widget build(BuildContext context) {
