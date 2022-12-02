@@ -4,7 +4,7 @@ import 'package:finalproject_front/pages/category/category_detail_page.dart';
 
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
-import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
+import 'package:finalproject_front/pages/like/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
 
@@ -15,7 +15,7 @@ import 'package:finalproject_front/pages/user/user_detail/user_login_my_page.dar
 import 'package:finalproject_front/pages/user/user_detail/user_logout_my_page.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:finalproject_front/pages/like/like_main/like_main_page.dart';
+import 'package:finalproject_front/pages/like/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:finalproject_front/pages/user/user_detail/user_logout_my_page.dart';
 
