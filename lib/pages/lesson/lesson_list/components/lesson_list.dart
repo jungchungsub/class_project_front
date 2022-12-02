@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class LessonList extends StatelessWidget {
   final String image;
+
   final String routePath;
   const LessonList({
     required this.image,
@@ -77,7 +78,7 @@ class LessonList extends StatelessWidget {
                     SizedBox(height: 10),
                     InkWell(
                       onTap: (() {
-                        //클래스 수정하기로 가는 링크
+                        Navigator.pushNamed(context, "${routePath}");
                       }),
                       child: Container(
                         width: double.infinity,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AdvertisementText extends StatelessWidget {
-  final String Text1;
-  final String Text2;
+  final String cardName;
+  final String text;
 
   const AdvertisementText({
-    required this.Text1,
-    required this.Text2,
+    required this.cardName,
+    required this.text,
     Key? key,
   }) : super(key: key);
 
@@ -21,11 +21,11 @@ class AdvertisementText extends StatelessWidget {
           height: 50,
         ),
         Text(
-          "${Text1}",
+          "${cardName}",
           style: TextStyle(fontSize: 14),
         ),
         Text(
-          "${Text2}",
+          "${text}",
           style: TextStyle(fontSize: 14),
         ),
       ],

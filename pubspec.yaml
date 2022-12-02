@@ -29,6 +29,7 @@ dev_dependencies:
   extended_image: ^6.0.1
   dropdown_button2: ^1.9.1
   persistent_bottom_nav_bar: any
+  fluttertoast: ^8.1.1
 
 
 

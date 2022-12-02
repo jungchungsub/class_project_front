@@ -5,8 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class LikeList extends StatelessWidget {
   final String image;
-  final String path;
-  const LikeList({required this.path, required this.image, Key? key})
+  final String routePath;
+  const LikeList({required this.routePath, required this.image, Key? key})
       : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class LikeList extends StatelessWidget {
       padding: const EdgeInsets.only(top: 16, right: 8, bottom: 8, left: 8),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, "${path}");
+          Navigator.pushNamed(context, "${routePath}");
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

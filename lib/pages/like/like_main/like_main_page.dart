@@ -16,12 +16,18 @@ class _LikeMainPageState extends State<LikeMainPage> {
       appBar: _buildAppbar(),
       body: ListView(
         children: [
-          LikeList(path: "/lessonDetail", image: "https://picsum.photos/201"),
-          LikeList(path: "/lessonDetail", image: "https://picsum.photos/202"),
-          LikeList(path: "/lessonDetail", image: "https://picsum.photos/203"),
-          LikeList(path: "/lessonDetail", image: "https://picsum.photos/204"),
-          LikeList(path: "/lessonDetail", image: "https://picsum.photos/205"),
-          LikeList(path: "/lessonDetail", image: "https://picsum.photos/206")
+          LikeList(
+              routePath: "/lessonDetail", image: "https://picsum.photos/201"),
+          LikeList(
+              routePath: "/lessonDetail", image: "https://picsum.photos/202"),
+          LikeList(
+              routePath: "/lessonDetail", image: "https://picsum.photos/203"),
+          LikeList(
+              routePath: "/lessonDetail", image: "https://picsum.photos/204"),
+          LikeList(
+              routePath: "/lessonDetail", image: "https://picsum.photos/205"),
+          LikeList(
+              routePath: "/lessonDetail", image: "https://picsum.photos/206")
         ],
       ),
     );
