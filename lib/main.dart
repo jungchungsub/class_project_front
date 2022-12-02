@@ -30,7 +30,7 @@ import 'package:finalproject_front/pages/sign/login_division_page/login_division
 import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
 import 'package:finalproject_front/pages/stack_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
-import 'package:finalproject_front/pages/user/user_detail/user_login_my_page.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail/user_profile_detail_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/user_profile_insert_page.dart';
 import 'package:finalproject_front/pages/user/user_update/user_update_page.dart';
