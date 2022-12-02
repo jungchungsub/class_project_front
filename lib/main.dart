@@ -11,6 +11,7 @@ import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_list/lesson_list_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_review/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/lesson_update_page.dart';
 
 import 'package:finalproject_front/pages/main_page.dart';
@@ -50,7 +51,6 @@ class MyApp extends StatelessWidget {
       initialRoute: "/main",
       routes: {
         // 라우팅 주소의 가장 앞에는 동사,명사
-        // 명사 + 명사는 읽기 부드러운 순서
         "/stack": (context) => StackPage(),
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
@@ -76,6 +76,7 @@ class MyApp extends StatelessWidget {
 
         "/chatList": (context) => ChatListPage(),
         "/userUpdate": (context) => UserUpdatePage(),
+        "/reviewInsert": (context) => LessonReviewInsertPage()
       },
       theme: theme(),
     );
