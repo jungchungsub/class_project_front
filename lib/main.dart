@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
         "/lessonUpdate": (context) => LessonUpdatePage(),
-
         "/chatList": (context) => ChatListPage(),
         "/userUpdate": (context) => UserUpdatePage(),
         "/reviewInsert": (context) => LessonReviewInsertPage()

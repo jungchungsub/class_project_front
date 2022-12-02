@@ -13,6 +13,9 @@ class LessonTime extends StatelessWidget {
     return Container(
       child: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(

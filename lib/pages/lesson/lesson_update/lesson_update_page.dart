@@ -1,6 +1,11 @@
+import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_bottom_button.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_price.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_category.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_count.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_curriculum.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_deadline.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_image.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_place.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_time.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update/components/lesson_title.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,11 +35,23 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          LessonImage(),
-          LessonTitle(scrollAnimate),
-          LessonCurriculum(scrollAnimate),
-          LessonTime(scrollAnimate),
-          LessonCount(scrollAnimate),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                LessonImage(),
+                LessonTitle(scrollAnimate),
+                LessonCurriculum(scrollAnimate),
+                LessonTime(scrollAnimate),
+                LessonCount(scrollAnimate),
+                LessonPlace(scrollAnimate),
+                LessonCategory(),
+                LessonPrice(scrollAnimate),
+                LessonDeadLine(),
+                LessonBottomButton(),
+              ],
+            ),
+          ),
         ],
       ),
     );

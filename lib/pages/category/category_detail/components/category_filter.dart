@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class MiddleFilter extends StatelessWidget {
-  const MiddleFilter({Key? key}) : super(key: key);
+class CategoryFilter extends StatelessWidget {
+  const CategoryFilter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +35,16 @@ class MiddleFilter extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(15)),
             )),
           ),
-          _middleFilterList("예산"),
-          _middleFilterList("지역"),
-          _middleFilterList("등급"),
+          _buildCategoryFilterList("예산"),
+          _buildCategoryFilterList("지역"),
+          _buildCategoryFilterList("등급"),
         ],
       ),
     );
   }
 }
 
-OutlinedButton _middleFilterList(String text) {
+OutlinedButton _buildCategoryFilterList(String text) {
   return OutlinedButton(
     onPressed: () {},
     child: Row(

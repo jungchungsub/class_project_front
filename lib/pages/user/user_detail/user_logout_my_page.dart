@@ -27,15 +27,20 @@ class UserLogoutMyPage extends StatelessWidget {
             child: ImageBox(),
           ),
           _buildDivider(),
-          CustomTextButton(context: context, text: "로그인", path: "/loginDivision"),
+          CustomTextButton(
+              context: context, text: "로그인", path: "/loginDivision"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "회원가입", path: "/joinDivision"),
+          CustomTextButton(
+              context: context, text: "회원가입", path: "/joinDivision"),
           _buildDivider(),
           CustomTextButton(context: context, text: "알람 설정", path: "/join"),
           _buildDivider(),
           CustomTextButton(context: context, text: "고객센터", path: "/join"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "Login MyPage (임의 생성)", path: "/LoginMypage"),
+          CustomTextButton(
+              context: context,
+              text: "Login MyPage (임의 생성)",
+              path: "/LoginMypage"),
           _buildDivider(),
         ],
       ),
