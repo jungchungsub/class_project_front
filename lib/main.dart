@@ -1,9 +1,9 @@
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
