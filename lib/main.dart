@@ -32,8 +32,9 @@ import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.
 import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_installment_list/payment_installment_list_page.dart';
 import 'package:finalproject_front/pages/payment/payment_sales_detail/payment_sales_detail_pages.dart';
+import 'package:finalproject_front/pages/search/search_detail_page.dart';
 
-import 'package:finalproject_front/pages/search/search_main/search_main_page.dart';
+import 'package:finalproject_front/pages/search/search_main_page.dart';
 
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
@@ -89,7 +90,8 @@ class MyApp extends StatelessWidget {
         "/chatList": (context) => ChatListPage(),
 
         "/userUpdate": (context) => UserUpdatePage(),
-        "/reviewInsert": (context) => LessonReviewInsertPage()
+        "/reviewInsert": (context) => LessonReviewInsertPage(),
+        "/searchDetail": (context) => SearchDetailPage()
       },
       theme: theme(),
     );
