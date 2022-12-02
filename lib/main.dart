@@ -28,10 +28,10 @@ import 'package:finalproject_front/pages/lesson/lesson_list_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
 
-import 'package:finalproject_front/pages/payment/payment_card/payment_card_page.dart';
-import 'package:finalproject_front/pages/payment/payment_detail/payment_detail_page.dart';
-import 'package:finalproject_front/pages/payment/payment_installment_list/payment_installment_list_page.dart';
-import 'package:finalproject_front/pages/payment/payment_sales_detail/payment_sales_detail_pages.dart';
+import 'package:finalproject_front/pages/payment/payment_card_page.dart';
+import 'package:finalproject_front/pages/payment/payment_detail_page.dart';
+import 'package:finalproject_front/pages/payment/payment_installment_list_page.dart';
+import 'package:finalproject_front/pages/payment/payment_sales_detail_pages.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
 
 import 'package:finalproject_front/pages/search/search_main_page.dart';
