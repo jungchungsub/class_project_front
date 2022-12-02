@@ -1,4 +1,3 @@
-import 'package:finalproject_front/pages/category/components/category_filter.dart';
 import 'package:finalproject_front/pages/search/search_detail/components/category_datil.dart';
 import 'package:finalproject_front/pages/search/search_detail/components/category_filter.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +15,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          CategoryFilter(),
+          // CategoryFilter(),
           CategoryDetailBody(),
           CategoryDetailBody(),
           CategoryDetailBody(),
