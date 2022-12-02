@@ -1,42 +1,58 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CategoryDetailPage extends StatefulWidget {
+class SearchDetailPage extends StatefulWidget {
   @override
-  State<CategoryDetailPage> createState() => _CategoryDetailPageState();
+  State<SearchDetailPage> createState() => _SearchDetailPageState();
 }
 
-class _CategoryDetailPageState extends State<CategoryDetailPage> {
+class _SearchDetailPageState extends State<SearchDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _buildHeaderCategory(),
-          ),
-          Image.asset(
-            "assets/home1.jpg",
-            fit: BoxFit.cover,
-            height: 120,
-          ),
           _buildCategoryFilter(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
+          _buildCategoryDetail(),
+          _buildCategoryDetail(),
+          _buildCategoryDetail(),
+          _buildCategoryDetail(),
+          _buildCategoryDetail(),
+          _buildCategoryDetail(),
         ],
       ),
     );
   }
 
-  Padding _buildCategoryDetilaBody() {
+  AppBar _buildAppbar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 1.0,
+      leading: IconButton(
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+      title: Text(
+        "뷰티 운동",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+    );
+  }
+
+  Padding _buildCategoryDetail() {
     return Padding(
-      padding: const EdgeInsets.only(top: 16, right: 8, bottom: 8, left: 8),
+      padding: const EdgeInsets.only(top: 6, right: 8, bottom: 8, left: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -58,7 +74,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "깔끔하고 아름다운aaaaaaaa2",
+                    "깔끔하고 아름다운aaaaa11",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -139,8 +155,6 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                   )),
                 ),
                 _buildMiddleFilterList("예산"),
-                _buildMiddleFilterList("지역"),
-                _buildMiddleFilterList("등급"),
               ],
             ),
           ),
@@ -197,71 +211,6 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
           shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       )),
-    );
-  }
-
-  Row _buildHeaderCategory() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "전체",
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          "뷰티・운동",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-        Text(
-          "댄스・뮤직",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-        Text(
-          "미술・문학",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-        Text(
-          "공예・기타",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-      ],
-    );
-  }
-
-  AppBar _buildAppbar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 1.0,
-      leading: IconButton(
-          icon: Icon(
-            CupertinoIcons.back,
-            color: Colors.black,
-            size: 30,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          }),
-      title: Text(
-        "뷰티 운동",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      centerTitle: true,
     );
   }
 }
