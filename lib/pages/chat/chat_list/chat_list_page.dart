@@ -1,6 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/chat/chat_list/components/chat_card_list.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -36,13 +37,34 @@ class _ChatListPageState extends State<ChatListPage> {
                 color: Colors.white,
                 size: 40,
               )),
-          key: ValueKey(index.toString()),
+          // key: ValueKey(index.toString()),
+          key: Key('item ${items[index]}'),
           child: items[index],
           // onDismissed: (direction) { // 상태관리에 필요함.
           //   setState(() {
           //     items.removeAt(index);
           //   });
           // },
+          confirmDismiss: (DismissDirection direction) async {
+            return await showDialog(
+                context: context,
+                builder: ((context) {
+                  return AlertDialog(
+                    title: Text("정말 삭제를 하시겠습니까?"),
+                    content: Text("삭제하면 채팅방의 모든 내용은 삭제 됩니다."),
+                    actions: <Widget>[
+                      TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child: const Text("Delete")),
+                      SizedBox(width: 10),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text("Cancel"),
+                      ),
+                    ],
+                  );
+                }));
+          },
         ),
       ),
     );
