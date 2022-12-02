@@ -21,7 +21,7 @@ class LessonBottomButton extends StatelessWidget {
                   backgroundColor: Color(0xff4880ED),
                   minimumSize: Size(150, 50)),
               onPressed: () {
-                //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
+                Navigator.pop(context);
               },
               child: Text(
                 "수정",
