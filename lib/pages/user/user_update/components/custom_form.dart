@@ -1,7 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 
 import 'package:finalproject_front/pages/main/home/home_page.dart';
-import 'package:finalproject_front/pages/payment/payment_detail/components/email_text_form_field.dart';
+
 import 'package:flutter/material.dart';
 
 import 'user_email_text_field.dart';
@@ -14,7 +14,8 @@ class CustomForm extends StatefulWidget {
 }
 
 class _CustomFormState extends State<CustomForm> {
-  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController
+      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {
@@ -24,11 +25,14 @@ class _CustomFormState extends State<CustomForm> {
 
   final _formKey = GlobalKey<FormState>();
   // 글로벌 key
-  TextEditingController _emailController = TextEditingController(text: "green1234@naver.com");
+  TextEditingController _emailController =
+      TextEditingController(text: "green1234@naver.com");
   // DB에 저장되어 있는 값을 가져오는 역할.
-  TextEditingController _phoneNumberController = TextEditingController(text: "01012345678");
+  TextEditingController _phoneNumberController =
+      TextEditingController(text: "01012345678");
 
-  TextEditingController _passwordController = TextEditingController(text: "비밀번호 자리야 충섭아 뻐큐머겅");
+  TextEditingController _passwordController =
+      TextEditingController(text: "비밀번호 자리야 충섭아 뻐큐머겅");
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +43,15 @@ class _CustomFormState extends State<CustomForm> {
         child: Column(
           children: [
             //CustomTextFormField(text: "이메일"),
-            UserEmailTextField(emailController: _emailController, scrollAnimate),
+            UserEmailTextField(
+                emailController: _emailController, scrollAnimate),
             SizedBox(height: 6),
             //CustomTextFormField(text: "연락처"),
-            UserPhoneNumberTextField(phoneNumberController: _phoneNumberController, scrollAnimate),
+            UserPhoneNumberTextField(
+                phoneNumberController: _phoneNumberController, scrollAnimate),
             SizedBox(height: 6),
-            UserPasswordTextField(passwordController: _passwordController, scrollAnimate),
+            UserPasswordTextField(
+                passwordController: _passwordController, scrollAnimate),
             //CustomTextFormField(text: "비밀번호"),
             SizedBox(height: 6),
             //개인 정보 제공 동의 폼 필요 -> API
