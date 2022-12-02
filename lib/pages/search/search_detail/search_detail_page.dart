@@ -15,7 +15,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          CategoryFilter(),
+          // CategoryFilter(),
           CategoryDetailBody(),
           CategoryDetailBody(),
           CategoryDetailBody(),

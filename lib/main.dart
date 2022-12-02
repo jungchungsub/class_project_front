@@ -1,4 +1,4 @@
-import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+import 'package:finalproject_front/pages/category/category_detail_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
