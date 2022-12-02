@@ -24,15 +24,11 @@ class ProfileHeader extends StatelessWidget {
                 SizedBox(height: 10),
                 Row(
                   children: [
-                    Icon(CupertinoIcons.star_fill,
-                        color: Colors.yellow, size: 16),
+                    Icon(CupertinoIcons.star_fill, color: Colors.yellow, size: 16),
                     SizedBox(width: 10),
                     Text(
                       "4.5 | 25개의 평가",
-                      style: TextStyle(
-                          color: gSubTextColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14),
+                      style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
                     ),
                   ],
                 ),
