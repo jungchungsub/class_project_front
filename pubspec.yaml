@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
 
 
-
+  flutter_rating_bar: ^4.0.1
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -29,6 +29,7 @@ dev_dependencies:
   extended_image: ^6.0.1
   dropdown_button2: ^1.9.1
   persistent_bottom_nav_bar: any
+
 
 
 

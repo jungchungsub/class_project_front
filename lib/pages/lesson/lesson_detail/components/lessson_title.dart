@@ -70,11 +70,6 @@ class LessonTitle extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
-            thickness: 1,
-            height: 0,
-            color: const Color(0xff929AAB),
-          ),
         ],
       ),
     );

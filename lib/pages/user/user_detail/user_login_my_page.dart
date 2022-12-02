@@ -12,26 +12,30 @@ class UserLoginMyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildappBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Profile(),
-            SizedBox(height: 20),
-            BuyList(path: "/lessonList"),
-            SizedBox(height: 20),
-            MyService(),
-            SizedBox(height: 80),
-            ImageBox(),
-          ],
-        ),
+      appBar: _buildappBar(context),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Profile(),
+                SizedBox(height: 20),
+                BuyList(path: "/lessonList"),
+                SizedBox(height: 20),
+                MyService(),
+                SizedBox(height: 60),
+                ImageBox(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  AppBar _buildappBar() {
+  AppBar _buildappBar(BuildContext context) {
     return AppBar(
       elevation: 1.0,
       leading: IconButton(
@@ -54,7 +58,9 @@ class UserLoginMyPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 15, right: 20),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, "/userUpdate");
+            },
             child: Text(
               "계정 설정",
               style: TextStyle(

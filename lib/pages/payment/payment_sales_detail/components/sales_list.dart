@@ -1,12 +1,24 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:flutter/material.dart';
 
-class LessonList extends StatelessWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
+
+class SalesList extends StatelessWidget {
   final String image;
-  final String routePath;
-  const LessonList({
+  final String title;
+  final String category;
+  final String total;
+  final String price;
+  final String date;
+
+  const SalesList({
     required this.image,
-    required this.routePath,
+    required this.title,
+    required this.category,
+    required this.total,
+    required this.price,
+    required this.date,
     Key? key,
   }) : super(key: key);
 
@@ -24,7 +36,7 @@ class LessonList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
                     Row(
@@ -46,27 +58,39 @@ class LessonList extends StatelessWidget {
                           width: 10,
                         ),
                         Container(
-                          width: 210,
+                          width: 230,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 200,
+                                    child: Text(
+                                      "${title}.",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Icon(
+                                    CupertinoIcons.gear,
+                                  )
+                                ],
                               ),
                               Text(
-                                "전문가 : 유리아",
+                                "카테고리 : ${category}",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "50000원",
+                                "총판매 : ${total}개",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "마감일자 : 2022.12.07",
+                                "가격 : ${price}원",
                                 style: TextStyle(fontSize: 12),
                               )
                             ],
@@ -88,19 +112,28 @@ class LessonList extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: (() {
-                              Navigator.pushNamed(context, "${routePath}");
-                            }),
-                            child: Text(
-                              "리뷰 작성하기",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: gButtonOffColor,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "${date}",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: gButtonOffColor,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
+                              Text(
+                                "판매중",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: gButtonOffColor,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
                         ),
                       ),

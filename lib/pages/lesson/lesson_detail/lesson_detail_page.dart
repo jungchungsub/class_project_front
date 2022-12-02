@@ -1,5 +1,8 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_cancel.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_curriculam.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_bottom_bar.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_cancel.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/components/lesson_curriculam.dart';
@@ -31,49 +34,42 @@ class LessonDetailPage extends StatelessWidget {
           body: CustomScrollView(
             slivers: [
               //child같은 개념이지만 조금 다르다
-              SliverAppBar(
-                  leading: IconButton(
-                      icon: Icon(
-                        CupertinoIcons.back,
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                  pinned: true,
-                  expandedHeight: 200.0,
-                  //이미지보여줄 가로세로 길이를 동일하게 해준다. //디바이스 가로 길이만큼 준다.
-                  primary: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: SizedBox(
-                      height: 30,
-                      width: _size.width,
-                      child: ExtendedImage.network(
-                        "https://picsum.photos/250",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )),
+              _buildSliverAppbar(context, _size),
               SliverList(
                 delegate: SliverChildListDelegate([
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Container(
-                        child: Column(
-                      children: [
-                        LessonTitle(),
-                        LessonCurriculam(),
-                        LessonTime(),
-                        LessonPlace(),
-                        LessonPossibleDate(),
-                        LessonCancel(),
-                        LessonExpertInformation(),
-                        LessonEvaluation(),
-                        PurchaseReview(),
-                        SizedBox(height: 30),
-                      ],
-                    )),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Container(
+                            child: Column(
+                          children: [
+                            LessonTitle(),
+                          ],
+                        )),
+                      ),
+                      Divider(
+                        thickness: 1,
+                        height: 0,
+                        color: gBorderColor,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Container(
+                            child: Column(
+                          children: [
+                            LessonCurriculam(),
+                            LessonTime(),
+                            LessonPlace(),
+                            LessonPossibleDate(),
+                            LessonCancel(),
+                            LessonExpertInformation(),
+                            LessonEvaluation(),
+                            PurchaseReview(),
+                          ],
+                        )),
+                      ),
+                    ],
                   ),
                 ]),
               ),
@@ -85,5 +81,32 @@ class LessonDetailPage extends StatelessWidget {
         );
       },
     );
+  }
+
+  SliverAppBar _buildSliverAppbar(BuildContext context, Size _size) {
+    return SliverAppBar(
+        leading: IconButton(
+            icon: Icon(
+              CupertinoIcons.back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        pinned: true,
+        expandedHeight: 200.0,
+        //이미지보여줄 가로세로 길이를 동일하게 해준다. //디바이스 가로 길이만큼 준다.
+        primary: true,
+        flexibleSpace: FlexibleSpaceBar(
+          background: SizedBox(
+            height: 30,
+            width: _size.width,
+            child: ExtendedImage.network(
+              "https://picsum.photos/250",
+              fit: BoxFit.cover,
+            ),
+          ),
+        ));
   }
 }
