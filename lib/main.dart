@@ -4,10 +4,26 @@ import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
+
+import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
+
+import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
+
+import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
+
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
+
+import 'package:finalproject_front/pages/lesson/lesson_list_page.dart';
 
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
@@ -32,7 +48,7 @@ import 'package:finalproject_front/pages/user/user_update/user_update_page.dart'
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/lesson/lesson_list/lesson_list_page.dart';
+import 'pages/lesson/lesson_list_page.dart';
 
 void main() {
   runApp(const MyApp());
