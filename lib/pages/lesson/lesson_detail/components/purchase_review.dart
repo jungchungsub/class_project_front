@@ -23,6 +23,9 @@ class PurchaseReview extends StatelessWidget {
           _buildReview(),
           _buildReview(),
           _buildReview(),
+          SizedBox(
+            height: 60,
+          ),
         ],
       ),
     );
