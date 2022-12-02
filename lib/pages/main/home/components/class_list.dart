@@ -44,6 +44,8 @@ class ClassList extends StatelessWidget {
                       "안녕하세요 저희 서비스에 오셔서 감사합니다. ",
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       children: [

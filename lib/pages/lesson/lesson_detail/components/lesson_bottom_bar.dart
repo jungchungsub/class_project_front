@@ -59,7 +59,10 @@ class BottomBar extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: Icon(CupertinoIcons.heart)),
+                child: Center(
+                    child: Icon(
+                  CupertinoIcons.heart,
+                )),
               ),
             )
           ],
