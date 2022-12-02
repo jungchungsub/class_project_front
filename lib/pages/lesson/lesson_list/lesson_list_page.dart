@@ -14,13 +14,20 @@ class LessonListPage extends StatelessWidget {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          LessonList(image: "https://picsum.photos/201", path: "/lessonUpdate"),
-          LessonList(image: "https://picsum.photos/202", path: "/lessonUpdate"),
-          LessonList(image: "https://picsum.photos/203", path: "/lessonUpdate"),
-          LessonList(image: "https://picsum.photos/204", path: "/lessonUpdate"),
-          LessonList(image: "https://picsum.photos/205", path: "/lessonUpdate"),
-          LessonList(image: "https://picsum.photos/206", path: "/lessonUpdate"),
-          LessonList(image: "https://picsum.photos/207", path: "/lessonUpdate"),
+          LessonList(
+              image: "https://picsum.photos/201", routePath: "/reviewInsert"),
+          LessonList(
+              image: "https://picsum.photos/202", routePath: "/reviewInsert"),
+          LessonList(
+              image: "https://picsum.photos/203", routePath: "/reviewInsert"),
+          LessonList(
+              image: "https://picsum.photos/204", routePath: "/reviewInsert"),
+          LessonList(
+              image: "https://picsum.photos/205", routePath: "/reviewInsert"),
+          LessonList(
+              image: "https://picsum.photos/206", routePath: "/reviewInsert"),
+          LessonList(
+              image: "https://picsum.photos/207", routePath: "/reviewInsert"),
         ],
       ),
     );
@@ -43,7 +50,7 @@ class LessonListPage extends StatelessWidget {
       title: TextButton(
         onPressed: () {},
         child: Text(
-          "클래스리스트",
+          "구매한 클래스",
           style: TextStyle(
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),

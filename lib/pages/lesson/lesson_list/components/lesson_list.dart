@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 class LessonList extends StatelessWidget {
   final String image;
-  final String path;
+
+  final String routePath;
   const LessonList({
     required this.image,
-    required this.path,
+    required this.routePath,
     Key? key,
   }) : super(key: key);
 
@@ -77,7 +78,7 @@ class LessonList extends StatelessWidget {
                     SizedBox(height: 10),
                     InkWell(
                       onTap: (() {
-                        Navigator.pushNamed(context, "${path}");
+                        Navigator.pushNamed(context, "${routePath}");
                       }),
                       child: Container(
                         width: double.infinity,
@@ -88,14 +89,19 @@ class LessonList extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "수정하기",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: gButtonOffColor,
+                          child: InkWell(
+                            onTap: (() {
+                              Navigator.pushNamed(context, "${routePath}");
+                            }),
+                            child: Text(
+                              "리뷰 작성하기",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: gButtonOffColor,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
