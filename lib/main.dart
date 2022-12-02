@@ -1,12 +1,12 @@
-import 'package:finalproject_front/pages/category/category_detail/category_detail_page.dart';
+import 'package:finalproject_front/pages/category/category_detail_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
-import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
 
-import 'package:finalproject_front/pages/chat/chat_list/chat_list_page.dart';
+import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 
 import 'package:finalproject_front/pages/customer/customer_service/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail/lesson_detail_page.dart';
@@ -73,7 +73,6 @@ class MyApp extends StatelessWidget {
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
         "/lessonUpdate": (context) => LessonUpdatePage(),
-
         "/chatList": (context) => ChatListPage(),
         "/userUpdate": (context) => UserUpdatePage(),
         "/reviewInsert": (context) => LessonReviewInsertPage()

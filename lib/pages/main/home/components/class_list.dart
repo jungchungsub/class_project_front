@@ -4,15 +4,15 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ClassList extends StatelessWidget {
-  final String path;
+  final String routePath;
 
-  const ClassList({required this.path, Key? key}) : super(key: key);
+  const ClassList({required this.routePath, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "${path}");
+        Navigator.pushNamed(context, "${routePath}");
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
@@ -44,6 +44,8 @@ class ClassList extends StatelessWidget {
                       "안녕하세요 저희 서비스에 오셔서 감사합니다. ",
                       style:
                           TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       children: [

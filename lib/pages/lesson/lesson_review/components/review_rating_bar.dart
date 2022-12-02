@@ -4,7 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 RatingBar ReviewRatingBar() {
   return RatingBar.builder(
     initialRating: 3,
-    minRating: 1,
+    minRating: 0,
     direction: Axis.horizontal,
     allowHalfRating: true,
     itemCount: 5,

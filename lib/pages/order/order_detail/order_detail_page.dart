@@ -21,28 +21,32 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
+      appBar: _buildAppbar(),
       body: ListView(
         children: [
           ClassName(),
-          Divider(
-            thickness: 1,
-            height: 0,
-            color: const Color(0xff929AAB),
-          ),
+          _buildDivider(),
           ClassTime(),
-          _middleDivider(),
+          _buildMiddleDivider(),
           TotalMoney(),
-          _middleDivider(),
+          _buildMiddleDivider(),
           PaymentPurpose(),
-          _middleDivider(),
-          PaymentButton(path: "/paymentCard"),
+          _buildMiddleDivider(),
+          PaymentButton(routePath: "/paymentCard"),
         ],
       ),
     );
   }
 
-  Divider _middleDivider() {
+  Divider _buildDivider() {
+    return Divider(
+      thickness: 1,
+      height: 0,
+      color: const Color(0xff929AAB),
+    );
+  }
+
+  Divider _buildMiddleDivider() {
     return Divider(
       thickness: 14,
       height: 0,
@@ -50,7 +54,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  AppBar _appBar() {
+  AppBar _buildAppbar() {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 1.0,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ChatCardList extends StatelessWidget {
+class ChatCard extends StatelessWidget {
   final String name;
   final String message;
   final String date;
-  const ChatCardList({
+  const ChatCard({
     required this.name,
     required this.message,
     required this.date,

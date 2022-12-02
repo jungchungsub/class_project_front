@@ -48,11 +48,7 @@ class LessonDetailPage extends StatelessWidget {
                           ],
                         )),
                       ),
-                      Divider(
-                        thickness: 1,
-                        height: 0,
-                        color: gBorderColor,
-                      ),
+                      _buildDivider(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
@@ -80,6 +76,14 @@ class LessonDetailPage extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Divider _buildDivider() {
+    return Divider(
+      thickness: 1,
+      height: 0,
+      color: gBorderColor,
     );
   }
 

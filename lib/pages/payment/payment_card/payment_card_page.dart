@@ -13,28 +13,7 @@ class PaymentCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1.0,
-        leading: IconButton(
-            icon: Icon(
-              CupertinoIcons.back,
-              color: Colors.black,
-              size: 30,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-        title: Text(
-          "결제하기",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: _buildAppbar(context),
       body: Column(
         children: [
           SizedBox(height: 20),
@@ -42,18 +21,10 @@ class PaymentCardPage extends StatelessWidget {
             "신용/체크카드",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          AdvertisementText(Text1: 'BC카드', Text2: '2~7개월 무이자할부'),
-          Divider(
-            thickness: 1,
-            height: 0,
-            color: const Color(0xffF0F0F0),
-          ),
-          AdvertisementText(Text1: '삼성카드', Text2: '2~7개월 무이자할부'),
-          Divider(
-            thickness: 1,
-            height: 0,
-            color: const Color(0xffF0F0F0),
-          ),
+          AdvertisementText(cardName: 'BC카드', text: '2~7개월 무이자할부'),
+          _buildDivider(),
+          AdvertisementText(cardName: '삼성카드', text: '2~7개월 무이자할부'),
+          _buildDivider(),
           SizedBox(height: 30),
           CardCategory(path: "/paymentDetail"),
           SizedBox(height: 15),
@@ -65,6 +36,39 @@ class PaymentCardPage extends StatelessWidget {
           SizedBox(height: 15),
         ],
       ),
+    );
+  }
+
+  Divider _buildDivider() {
+    return Divider(
+      thickness: 1,
+      height: 0,
+      color: const Color(0xffF0F0F0),
+    );
+  }
+
+  AppBar _buildAppbar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 1.0,
+      leading: IconButton(
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+      title: Text(
+        "결제하기",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
     );
   }
 }

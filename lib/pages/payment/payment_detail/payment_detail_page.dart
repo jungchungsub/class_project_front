@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/components/card_select.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/components/email_text_form.dart';
 import 'package:finalproject_front/pages/payment/payment_detail/components/installment.dart';
@@ -19,22 +20,22 @@ class PaymentDetailPage extends StatelessWidget {
         child: Column(
           children: [
             PaymentInform(),
-            _divider(),
+            _buildDivider(),
             CardSelect(),
             Installment(),
             EmailTextForm(),
             Text(
               "구매 내용에 동의합니다.",
-              style: TextStyle(fontSize: 12, color: Color(0xff6C6C6C)),
+              style: TextStyle(fontSize: 12, color: gSubTextColor),
             ),
-            PaymentButton(path: "/main"),
+            PaymentButton(routePath: "/main"),
           ],
         ),
       ),
     );
   }
 
-  Divider _divider() {
+  Divider _buildDivider() {
     return Divider(
       thickness: 14,
       color: const Color(0xffF0F0F0),
