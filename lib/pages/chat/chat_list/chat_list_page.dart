@@ -13,38 +13,42 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
+  final List<ChatCardList> items = [
+    ChatCardList(name: "아이유", message: "충섭아 놀러가자", date: "오후 11:00"),
+    ChatCardList(name: "아이유", message: "충섭아 사랑해", date: "오후 11:00"),
+    ChatCardList(name: "아이유", message: "충섭아 미안해", date: "오후 11:00"),
+    ChatCardList(name: "아이유", message: "충섭아 짜증나", date: "오후 11:00"),
+    ChatCardList(name: "아이유", message: "충섭아 연락하지마", date: "오후 11:00"),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppber(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(CupertinoIcons.search),
-                hintText: "닉네임과 메모로 검색하세요.",
-                hintStyle: TextStyle(fontWeight: FontWeight.bold),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: gBorderColor,
-                    width: 1,
-                  ),
-                ),
-              ),
-            ),
-            ChatCardList(name: "아이유", message: "사랑해 충섭아", date: "오후 11:00"),
-            ChatCardList(name: "아이유", message: "싫어해 충섭아", date: "오후 11:00"),
-            ChatCardList(name: "아이유", message: "충섭이는 바보야", date: "오후 11:00"),
-            ChatCardList(name: "아이유", message: "충섭이는 굉장해", date: "오후 11:00"),
-            ChatCardList(name: "아이유", message: "충섭아 놀러가자", date: "오후 11:00"),
-          ],
+      appBar: _buildAppbar(),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) => Dismissible(
+          // 익명함수
+          direction: DismissDirection.endToStart, // 한쪽 방향만 가능
+          background: Container(
+              color: Colors.red,
+              child: Icon(
+                Icons.delete_forever,
+                color: Colors.white,
+                size: 40,
+              )),
+          key: ValueKey(index.toString()),
+          child: items[index],
+          // onDismissed: (direction) { // 상태관리에 필요함.
+          //   setState(() {
+          //     items.removeAt(index);
+          //   });
+          // },
         ),
       ),
     );
   }
 
-  AppBar _buildAppber() {
+  AppBar _buildAppbar() {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 1.0,
@@ -81,6 +85,21 @@ class _ChatListPageState extends State<ChatListPage> {
           ),
         ),
       ],
+      bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50.0),
+          child: TextFormField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(CupertinoIcons.search),
+              hintText: "닉네임과 메모로 검색하세요.",
+              hintStyle: TextStyle(fontWeight: FontWeight.bold),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: gBorderColor,
+                  width: 1,
+                ),
+              ),
+            ),
+          )),
     );
   }
 }
