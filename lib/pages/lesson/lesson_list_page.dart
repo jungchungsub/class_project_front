@@ -1,18 +1,38 @@
 import 'package:finalproject_front/constants.dart';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LessonList extends StatelessWidget {
-  final String image;
-
-  final String routePath;
-  const LessonList({
-    required this.image,
-    required this.routePath,
-    Key? key,
-  }) : super(key: key);
+class LessonListPage extends StatelessWidget {
+  const LessonListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppbar(context),
+      body: ListView(
+        children: [
+          _buildLessonList(
+              context, "https://picsum.photos/201", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/202", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/203", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/204", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/205", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/206", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/207", "/reviewInsert")
+        ],
+      ),
+    );
+  }
+
+  Container _buildLessonList(
+      BuildContext context, String image, String routePath) {
     return Container(
       child: Column(
         children: [
@@ -112,6 +132,31 @@ class LessonList extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  AppBar _buildAppbar(context) {
+    return AppBar(
+      elevation: 1.0,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          CupertinoIcons.back,
+          color: Colors.black,
+          size: 26,
+        ),
+      ),
+      centerTitle: true,
+      title: TextButton(
+        onPressed: () {},
+        child: Text(
+          "구매한 클래스",
+          style: TextStyle(
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
