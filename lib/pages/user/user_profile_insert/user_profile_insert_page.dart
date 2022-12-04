@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
+
 import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
-import 'package:finalproject_front/pages/user/components/image_box.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/career_select_button.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_career_list.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_certificate.dart';

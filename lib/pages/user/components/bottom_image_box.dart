@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ImageBox extends StatelessWidget {
-  const ImageBox({
+class BottomImageBox extends StatelessWidget {
+  const BottomImageBox({
     Key? key,
   }) : super(key: key);
 

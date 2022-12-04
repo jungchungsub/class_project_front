@@ -1,9 +1,10 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/user/components/image_box.dart';
-import 'package:finalproject_front/pages/user/components/custom_text_button.dart';
+import 'package:finalproject_front/pages/user/components/service_text_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
+import 'components/bottom_image_box.dart';
 
 class UserLogoutMyPage extends StatelessWidget {
   const UserLogoutMyPage({super.key});
@@ -18,18 +19,16 @@ class UserLogoutMyPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ImageBox(),
+            child: BottomImageBox(),
           ),
           _buildDivider(),
-          CustomTextButton(context: context, text: "로그인", routePath: "/loginDivision"),
+          _buildServiceText(context, "/loginDivision", "로그인"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "회원가입", routePath: "/joinDivision"),
+          _buildServiceText(context, "/joinDivision", "회원가입"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "알람 설정", routePath: "/join"),
+          _buildServiceText(context, "/join", "알람 설정"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "고객센터", routePath: "/join"),
-          _buildDivider(),
-          CustomTextButton(context: context, text: "Login MyPage (임의 생성)", routePath: "/LoginMypage"),
+          _buildServiceText(context, "/join", "고객센터"),
           _buildDivider(),
         ],
       ),
@@ -64,4 +63,23 @@ class UserLogoutMyPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildServiceText(BuildContext context, String routePath, String text) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+    child: Container(
+      width: double.infinity,
+      child: TextButton(
+        onPressed: () {
+          Navigator.pushNamed(context, routePath);
+        },
+        child: Text(
+          "${text}",
+          style: TextStyle(color: Colors.black),
+        ),
+        style: TextButton.styleFrom(alignment: Alignment.bottomLeft),
+      ),
+    ),
+  );
 }

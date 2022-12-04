@@ -1,10 +1,10 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/user/components/image_box.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'components/bottom_image_box.dart';
 import 'components/profile_image.dart';
 
 class UserLoginMyPage extends StatelessWidget {
@@ -38,7 +38,7 @@ class UserLoginMyPage extends StatelessWidget {
                 SizedBox(height: gap_s),
                 ServiceText(routePath: "/lessonUpdate", serviceText: "클래스 수정하러가기 임시"),
                 SizedBox(height: gap_xl),
-                ImageBox(),
+                BottomImageBox(),
               ],
             ),
           ),
