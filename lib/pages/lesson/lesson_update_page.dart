@@ -1,19 +1,10 @@
-import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/lesson/components/content_box.dart';
-
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-
+import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:finalproject_front/pages/main_page.dart';
-import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LessonUpdatePage extends StatefulWidget {
@@ -43,11 +34,11 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
             child: Column(
               children: [
                 _buildLessonImage(),
-                ContentBox(scrollAnimate, text: "서비스제목", content: "서비스 제목자리입니다", lines: 1),
-                ContentBox(scrollAnimate, text: "커리큘럼", content: "상세설명", lines: 6),
-                ContentBox(scrollAnimate, text: "수강횟수", content: "수강 횟수를 입력하세요", lines: 1),
-                ContentBox(scrollAnimate, text: "수강시간", content: "수강 시간을 입력하세요", lines: 1),
-                ContentBox(scrollAnimate, text: "수강장소", content: "ex) 부산시 진구 그린아카데미", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
+                CustomTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
                 _buildLessonCategory(),
                 _buildLessonDeadLine(),
                 _buildLessonBottomButton(),

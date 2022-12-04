@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/lesson/components/content_box.dart';
+import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -48,7 +48,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
               ),
               _buildReviewRatingBar(),
               SizedBox(height: 20),
-              ContentBox(scrollAnimate, text: "리뷰작성", content: "악플은 안대요><", lines: 6),
+              CustomTextField(scrollAnimate, fieldTitle: "리뷰작성", hint: "악플은 안대요><", lines: 6),
               SizedBox(height: 20),
               _buildReviewInsertButton(context),
             ],
