@@ -1,8 +1,12 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
-class ProfileUpdateButton extends StatelessWidget {
-  const ProfileUpdateButton({
+class ArachachaButton extends StatelessWidget {
+  final String buttonText;
+  final String buttonRoutePath;
+  const ArachachaButton({
+    required this.buttonRoutePath,
+    required this.buttonText,
     Key? key,
   }) : super(key: key);
 
