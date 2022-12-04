@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/lesson/components/content_box.dart';
 
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -42,13 +43,12 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
             child: Column(
               children: [
                 _buildLessonImage(),
-                _buildLessonContentBox(scrollAnimate, "서비스제목", "서비스 제목 자리 입니다", 1),
-                _buildLessonContentBox(scrollAnimate, "커리큘럼", "상세설명", 6),
-                _buildLessonContentBox(scrollAnimate, "수강횟수", "수강 횟수를 입력하세요", 1),
-                _buildLessonContentBox(scrollAnimate, "수강시간", "수강 시간을 입력하세요", 1),
-                _buildLessonContentBox(scrollAnimate, "수강장소", "ex) 부산시 진구 그린아카데미", 1),
+                ContentBox(scrollAnimate, text: "서비스제목", content: "서비스 제목자리입니다", lines: 1),
+                ContentBox(scrollAnimate, text: "커리큘럼", content: "상세설명", lines: 6),
+                ContentBox(scrollAnimate, text: "수강횟수", content: "수강 횟수를 입력하세요", lines: 1),
+                ContentBox(scrollAnimate, text: "수강시간", content: "수강 시간을 입력하세요", lines: 1),
+                ContentBox(scrollAnimate, text: "수강장소", content: "ex) 부산시 진구 그린아카데미", lines: 1),
                 _buildLessonCategory(),
-                _buildLessonContentBox(scrollAnimate, "가격", "ex)50,000", 1),
                 _buildLessonDeadLine(),
                 _buildLessonBottomButton(),
               ],
@@ -151,50 +151,9 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
     );
   }
 
-  Container _buildLessonContentBox(Function scrollAnimate, String text, String content, int lines) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "${text}",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextFormField(
-            onTap: (() {
-              scrollAnimate;
-            }),
-            keyboardType: TextInputType.multiline,
-            maxLines: lines,
-            decoration: InputDecoration(
-              hintText: "${content}",
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor,
-              ),
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Container _buildLessonContentBox(Function scrollAnimate, String text, String content, int lines) {
+  //   return;
+  // }
 
   Container _buildLessonImage() {
     return Container(
