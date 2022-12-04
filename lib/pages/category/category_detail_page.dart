@@ -1,5 +1,3 @@
-import 'package:finalproject_front/pages/search/search_detail/components/category_datil.dart';
-import 'package:finalproject_front/pages/search/search_detail/components/category_filter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

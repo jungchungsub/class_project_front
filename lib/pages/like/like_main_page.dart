@@ -1,17 +1,32 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class LikeList extends StatelessWidget {
-  final String image;
-  final String routePath;
-  const LikeList({required this.routePath, required this.image, Key? key})
-      : super(key: key);
+class LikeMainPage extends StatefulWidget {
+  const LikeMainPage({Key? key}) : super(key: key);
 
   @override
+  State<LikeMainPage> createState() => _LikeMainPageState();
+}
+
+class _LikeMainPageState extends State<LikeMainPage> {
+  @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppbar(),
+      body: ListView(
+        children: [
+          _buildLikeList("/lessonDetail", "https://picsum.photos/201"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/202"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/203"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/204"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/205"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/206"),
+        ],
+      ),
+    );
+  }
+
+  Padding _buildLikeList(String routePath, String image) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
@@ -98,6 +113,35 @@ class LikeList extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  AppBar _buildAppbar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 1.0,
+      title: Text(
+        "찜목록",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(top: 15, right: 20),
+          child: Text(
+            "필터",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
