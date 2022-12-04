@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
-import 'package:finalproject_front/pages/user/components/bottom_image_box.dart';
+import 'package:finalproject_front/pages/user/components/image_box.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/career_select_button.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_career_list.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert/components/profile_certificate.dart';
@@ -21,8 +21,7 @@ class UserProfileInsertPage extends StatefulWidget {
 }
 
 class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
-  late ScrollController
-      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {

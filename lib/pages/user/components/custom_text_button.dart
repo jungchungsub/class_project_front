@@ -5,12 +5,12 @@ class CustomTextButton extends StatelessWidget {
     Key? key,
     required this.context,
     required this.text,
-    required this.path,
+    required this.routePath,
   }) : super(key: key);
 
   final BuildContext context;
   final String text;
-  final String path;
+  final String routePath;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CustomTextButton extends StatelessWidget {
         width: double.infinity,
         child: TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, path);
+            Navigator.pushNamed(context, routePath);
           },
           child: Text(
             "${text}",

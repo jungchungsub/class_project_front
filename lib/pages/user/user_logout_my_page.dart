@@ -1,14 +1,8 @@
 import 'package:finalproject_front/constants.dart';
-
-import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
-import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
-import 'package:finalproject_front/pages/user/user_detail/components/custom_text_button.dart';
-import 'package:finalproject_front/pages/user/components/bottom_image_box.dart';
-import 'package:finalproject_front/theme.dart';
+import 'package:finalproject_front/pages/user/components/image_box.dart';
+import 'package:finalproject_front/pages/user/components/custom_text_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:extended_image/extended_image.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class UserLogoutMyPage extends StatelessWidget {
@@ -27,20 +21,15 @@ class UserLogoutMyPage extends StatelessWidget {
             child: ImageBox(),
           ),
           _buildDivider(),
-          CustomTextButton(
-              context: context, text: "로그인", path: "/loginDivision"),
+          CustomTextButton(context: context, text: "로그인", routePath: "/loginDivision"),
           _buildDivider(),
-          CustomTextButton(
-              context: context, text: "회원가입", path: "/joinDivision"),
+          CustomTextButton(context: context, text: "회원가입", routePath: "/joinDivision"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "알람 설정", path: "/join"),
+          CustomTextButton(context: context, text: "알람 설정", routePath: "/join"),
           _buildDivider(),
-          CustomTextButton(context: context, text: "고객센터", path: "/join"),
+          CustomTextButton(context: context, text: "고객센터", routePath: "/join"),
           _buildDivider(),
-          CustomTextButton(
-              context: context,
-              text: "Login MyPage (임의 생성)",
-              path: "/LoginMypage"),
+          CustomTextButton(context: context, text: "Login MyPage (임의 생성)", routePath: "/LoginMypage"),
           _buildDivider(),
         ],
       ),
