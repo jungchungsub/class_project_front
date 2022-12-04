@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/sign/join_page/components/custom_form.dart';
+import 'package:finalproject_front/pages/sign/components/join_custom_form.dart';
 import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,8 +71,7 @@ class LoginPage extends StatelessWidget {
         },
         child: Text(
           "${buttontext}",
-          style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );

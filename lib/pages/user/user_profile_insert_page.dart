@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
-import 'package:finalproject_front/pages/user/components/career_select_button.dart';
+import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
