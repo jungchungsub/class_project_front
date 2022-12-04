@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -34,14 +35,23 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
             child: Column(
               children: [
                 _buildLessonImage(),
+                SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
+                SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
+                SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
+                SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
+                SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
+                SizedBox(height: gap_l),
                 _buildLessonCategory(),
+                SizedBox(height: gap_l),
                 _buildLessonDeadLine(),
+                SizedBox(height: gap_l),
                 _buildLessonBottomButton(),
+                SizedBox(height: gap_l),
               ],
             ),
           ),
@@ -53,9 +63,6 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
   Column _buildLessonBottomButton() {
     return Column(
       children: [
-        SizedBox(
-          height: 20,
-        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -80,9 +87,6 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
               ),
             )
           ],
-        ),
-        SizedBox(
-          height: 20,
         ),
       ],
     );
@@ -115,9 +119,6 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
     return Container(
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Row(
             children: [
               Text(
@@ -127,7 +128,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: gap_m),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: gBorderColor, width: 3),
@@ -151,9 +152,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
       child: Container(
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-            ),
+            SizedBox(height: gap_l),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -168,7 +167,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 15),
+                SizedBox(width: gap_l),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -179,7 +178,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 15),
+                    SizedBox(height: gap_l),
                     Text(
                       "apple.jpg",
                       style: TextStyle(
@@ -332,9 +331,6 @@ class _buildLessonDeadLineState extends State<_buildLessonDeadLine> {
     return Container(
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(

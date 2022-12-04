@@ -1,3 +1,4 @@
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -36,28 +37,28 @@ class PaymentCardPage extends StatelessWidget {
     );
   }
 
-  Row _buildCardCategory(BuildContext context, String path) {
+  Row _buildCardCategory(BuildContext context, String imagePath) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InkWell(
           child: _buildCardType("assets/samsung_logo.png", "토스"),
           onTap: () {
-            Navigator.pushNamed(context, path);
+            Navigator.pushNamed(context, imagePath);
           },
         ),
-        SizedBox(width: 10),
+        SizedBox(width: gap_m),
         InkWell(
           child: _buildCardType("assets/paybook.png", "페이북"),
           onTap: () {
-            Navigator.pushNamed(context, path);
+            Navigator.pushNamed(context, imagePath);
           },
         ),
-        SizedBox(width: 10),
+        SizedBox(width: gap_m),
         InkWell(
           child: _buildCardType("assets/Shinhan.png", "신한"),
           onTap: () {
-            Navigator.pushNamed(context, path);
+            Navigator.pushNamed(context, imagePath);
           },
         ),
       ],
@@ -69,9 +70,7 @@ class PaymentCardPage extends StatelessWidget {
       children: [
         Container(
           height: 90,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Color(0xffF8F8F8)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(0xffF8F8F8)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
