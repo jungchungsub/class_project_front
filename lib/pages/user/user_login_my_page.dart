@@ -104,10 +104,13 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId, 
                 color: gClientColor,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text(
-                "${userState}",
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+              child: Padding(
+                padding: const EdgeInsets.all(2),
+                child: Text(
+                  "${userState}",
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             SizedBox(height: 10),
