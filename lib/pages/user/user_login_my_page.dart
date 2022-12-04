@@ -13,7 +13,7 @@ class UserLoginMyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildappBar(context),
+      appBar: _buildAppBar(context),
       body: ListView(
         children: [
           Padding(
@@ -51,7 +51,7 @@ class UserLoginMyPage extends StatelessWidget {
     );
   }
 
-  AppBar _buildappBar(BuildContext context) {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 1.0,
       leading: IconButton(
@@ -108,10 +108,13 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId, 
                 color: gClientColor,
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text(
-                "${userState}",
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+              child: Padding(
+                padding: const EdgeInsets.all(2),
+                child: Text(
+                  "${userState}",
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             SizedBox(height: 10),
