@@ -52,7 +52,7 @@ class LessonDetailPage extends StatelessWidget {
                             _buildLessonContentBox("장소", "부산광역시 부산진구 홍길동", 55, 1),
                             _buildLessonPossibleDate(),
                             _buildLessonContentBox("취소 및 환불규정", "취소 및 환불을 하면 솰라솰라 10회 피티 이용제한이 생기면서 한국 중국 러시아 일본 베트남 말레시아 영국 미국 북한 필리핀 브라질", 200, 6),
-                            _buildLessonExpertInformation(),
+                            _buildLessonExpertInformation("전문가 정보", "김동진", "한국대학교 경호학과 졸업, 다수 대회에서 수상경력 있습니다."),
                             _buildLessonEvaluation(),
                             _buildPurchaseReview(),
                           ],
@@ -272,13 +272,13 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildLessonExpertInformation() {
+  Container _buildLessonExpertInformation(String title, String name, String content) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "전문가 정보",
+            "${title}",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
@@ -307,64 +307,26 @@ class LessonDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "마르코 선생님",
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "연락 가능 시간 01 ~ 03시",
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
+                            "${name}",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                Divider(
-                  thickness: 1,
-                  height: 0,
-                  color: const Color(0xff929AAB),
-                ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "총작업수",
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
-                            ),
-                            Text(
-                              "만족도",
-                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "150건",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "100%",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "${content}",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
