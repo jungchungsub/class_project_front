@@ -48,7 +48,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
               ),
               _buildReviewRatingBar(),
               SizedBox(height: 20),
-              ContentBox(scrollAnimate, text: "리뷰작성", content: "악플은 안대요><", lines: 6),
+              ContentBox(scrollAnimate, text: "리뷰작성", hintText: "악플은 안대요><", lines: 6),
               SizedBox(height: 20),
               _buildReviewInsertButton(context),
             ],
