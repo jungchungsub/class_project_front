@@ -208,7 +208,7 @@ class PaymentInstallmentListPage extends StatelessWidget {
             Navigator.pop(context);
           }),
       title: Text(
-        "결제/환불내역",
+        "결제/취소내역",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,
