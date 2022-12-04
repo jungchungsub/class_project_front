@@ -2,7 +2,6 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/ArachachaButton.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
-import 'package:finalproject_front/pages/sign/components/custom_text_form_field.dart';
 import 'package:finalproject_front/pages/sign/components/join_category_period.dart';
 import 'package:finalproject_front/pages/sign/components/join_category_select_button.dart';
 import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';

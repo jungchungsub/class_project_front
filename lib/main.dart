@@ -16,7 +16,7 @@ import 'package:finalproject_front/pages/search/search_main_page.dart';
 import 'package:finalproject_front/pages/sign/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page.dart';
-import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
+import 'package:finalproject_front/pages/sign/login_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
