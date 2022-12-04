@@ -13,7 +13,7 @@ class UserLoginMyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildappBar(context),
+      appBar: _buildAppBar(context),
       body: ListView(
         children: [
           Padding(
@@ -47,7 +47,7 @@ class UserLoginMyPage extends StatelessWidget {
     );
   }
 
-  AppBar _buildappBar(BuildContext context) {
+  AppBar _buildAppBar(BuildContext context) {
     return AppBar(
       elevation: 1.0,
       leading: IconButton(
