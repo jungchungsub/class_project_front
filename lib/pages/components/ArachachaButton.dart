@@ -1,8 +1,12 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
-class ProfileUpdateButton extends StatelessWidget {
-  const ProfileUpdateButton({
+class ArachachaButton extends StatelessWidget {
+  final String buttonText;
+  final String buttonRoutePath;
+  const ArachachaButton({
+    required this.buttonRoutePath,
+    required this.buttonText,
     Key? key,
   }) : super(key: key);
 
@@ -10,7 +14,7 @@ class ProfileUpdateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "/profileInsert");
+        Navigator.pushNamed(context, "${buttonRoutePath}");
       },
       child: Container(
         height: 50,
@@ -21,7 +25,7 @@ class ProfileUpdateButton extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            "프로필 등록/수정하기",
+            "${buttonText}",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,

@@ -1,12 +1,19 @@
+import 'dart:ffi';
+
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
-class ProfileIntro extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final Function scrollAnimate;
-  const ProfileIntro(
-    this.scrollAnimate, {
-    Key? key,
-  }) : super(key: key);
+  final String fieldTitle;
+  final String? subTitle;
+  final String hint;
+  final int lines;
+
+  const CustomTextField(this.scrollAnimate, {this.subTitle, required this.fieldTitle, required this.hint, required this.lines, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +22,20 @@ class ProfileIntro extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              "자기소개",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: "${fieldTitle}",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  if (subTitle != null)
+                    TextSpan(
+                      text: "${subTitle}",
+                      style: TextStyle(color: gSubTextColor, fontSize: 10, fontWeight: FontWeight.bold),
+                    )
+                ],
+              ),
             ),
           ),
           SizedBox(height: 10),
@@ -26,11 +44,11 @@ class ProfileIntro extends StatelessWidget {
               scrollAnimate;
             }),
             keyboardType: TextInputType.multiline,
-            maxLines: 6,
+            maxLines: lines,
             decoration: InputDecoration(
-              hintText: "간략한 자기소개를 작성해주세요",
+              hintText: "${hint}",
               hintStyle: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: FontWeight.normal,
                 color: gSubTextColor,
               ),

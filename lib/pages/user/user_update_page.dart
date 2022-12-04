@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/user/user_detail/components/custom_text_button.dart';
-import 'package:finalproject_front/pages/user/user_update/components/custom_form.dart';
+import 'package:finalproject_front/pages/user/components/update_form.dart';
+import 'package:finalproject_front/pages/user/components/service_text_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +17,13 @@ class UserUpdatePage extends StatelessWidget {
           children: [
             CustomForm(),
             _buildDivider(),
-            CustomTextButton(context: context, text: "전문가 정보", path: "/loginDivision"),
+            ServiceTextButton(context: context, text: "전문가 정보", routePath: "/loginDivision"),
             _buildDivider(),
-            CustomTextButton(context: context, text: "알람 설정", path: "/joinDivision"),
+            ServiceTextButton(context: context, text: "알람 설정", routePath: "/joinDivision"),
             _buildDivider(),
-            CustomTextButton(context: context, text: "로그아웃", path: "/loginDivision"),
+            ServiceTextButton(context: context, text: "로그아웃", routePath: "/logoutMyPage"),
             _buildDivider(),
-            CustomTextButton(context: context, text: "회원 탈퇴", path: "/joinDivision"),
+            ServiceTextButton(context: context, text: "회원 탈퇴", routePath: "/joinDivision"),
             _buildDivider(),
           ],
         ),

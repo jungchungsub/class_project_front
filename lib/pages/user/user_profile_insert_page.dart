@@ -1,0 +1,135 @@
+import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/components/custom_text_field.dart';
+import 'package:finalproject_front/pages/user/components/career_select_button.dart';
+import 'package:finalproject_front/size.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class UserProfileInsertPage extends StatefulWidget {
+  const UserProfileInsertPage({super.key});
+
+  @override
+  State<UserProfileInsertPage> createState() => _UserProfileInsertPageState();
+}
+
+class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
+  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = new ScrollController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: _buildAppbar(context),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(gap_l),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildProfileImage(context, "assets/picture.jpg"),
+              SizedBox(height: gap_l),
+              _buildProfileId(context, "green1234"),
+              SizedBox(height: gap_l),
+              CustomTextField(scrollAnimate, fieldTitle: "자기소개", hint: "간략한 자기소개를 작성해주세요.", lines: 6),
+              SizedBox(height: gap_l),
+              CustomTextField(scrollAnimate, fieldTitle: "지역을 작성해주세요.", hint: "예)부산,서울,경기도", lines: 1),
+              SizedBox(height: gap_l),
+              CustomTextField(scrollAnimate, fieldTitle: "학력 전공을 작성해주세요", hint: "예)사이버 보안전공", lines: 1, subTitle: "선택사항"),
+              SizedBox(height: gap_l),
+              ProfileCareerSeleteButton(),
+              SizedBox(height: gap_l),
+              CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  AppBar _buildAppbar(BuildContext context) {
+    return AppBar(
+      elevation: 1,
+      centerTitle: true,
+      title: Text(
+        "프로필 등록/수정",
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+      leading: IconButton(
+          icon: Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+    );
+  }
+
+  void scrollAnimate() {
+    Future.delayed(Duration(milliseconds: 600), () {
+      //0.6초 이후 키보드 올라옴
+      // ViewInsets은 현재 페이지에서 내가 컨트롤 할 수 없는 영역을 뜻함,
+      // bottom은 키보드가 아래에서 올라오기 때문
+      scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
+          duration: Duration(microseconds: 100), // 0.1초 이후 field가 올라간다.
+          curve: Curves.easeIn); //Curves - 올라갈때 애니메이션
+    });
+  }
+}
+
+Widget _buildProfileImage(BuildContext context, String imagePath) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(150),
+    child: Image.asset(
+      "${imagePath}",
+      width: 80,
+      height: 80,
+      fit: BoxFit.cover,
+    ),
+  );
+}
+
+Widget _buildProfileId(BuildContext context, String userId) {
+  return Container(
+    child: Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "아이디",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(height: 10),
+        TextFormField(
+          readOnly: true,
+          decoration: InputDecoration(
+            hintText: "${userId}",
+            hintStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
+            //3. 기본 textFormfield 디자인 - enabledBorder
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: gBorderColor, width: 3.0),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            //마우스 올리고 난 후 스타일
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: gBorderColor, width: 3.0),
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
