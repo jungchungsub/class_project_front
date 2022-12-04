@@ -1,13 +1,13 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:finalproject_front/pages/user/user_profile_insert/components/career_period.dart';
+import 'package:finalproject_front/pages/user/components/career_period.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class ProfileCareer extends StatelessWidget {
-  const ProfileCareer({Key? key}) : super(key: key);
+class ProfileCareerSeleteButton extends StatelessWidget {
+  const ProfileCareerSeleteButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

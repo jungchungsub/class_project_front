@@ -5,34 +5,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class ContentBox extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final Function scrollAnimate;
-  final String text;
-<<<<<<< HEAD
-  final String hintText;
+  final String fieldTitle;
+  final String? subTitle;
+  final String hint;
   final int lines;
 
-  const ContentBox(this.scrollAnimate, {required this.text, required this.hintText, required this.lines, Key? key}) : super(key: key);
-=======
-  final String content;
-  final int lines;
-
-  const ContentBox(this.scrollAnimate, {required this.text, required this.content, required this.lines, Key? key}) : super(key: key);
->>>>>>> 79519373546531f6939f60e209d66def64fb390a
+  const CustomTextField(this.scrollAnimate, {this.subTitle, required this.fieldTitle, required this.hint, required this.lines, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              "${text}",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: "${fieldTitle}",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  if (subTitle != null)
+                    TextSpan(
+                      text: "${subTitle}",
+                      style: TextStyle(color: gSubTextColor, fontSize: 10, fontWeight: FontWeight.bold),
+                    )
+                ],
+              ),
             ),
           ),
           SizedBox(height: 10),
@@ -43,11 +46,7 @@ class ContentBox extends StatelessWidget {
             keyboardType: TextInputType.multiline,
             maxLines: lines,
             decoration: InputDecoration(
-<<<<<<< HEAD
-              hintText: "${hintText}",
-=======
-              hintText: "${content}",
->>>>>>> 79519373546531f6939f60e209d66def64fb390a
+              hintText: "${hint}",
               hintStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.normal,

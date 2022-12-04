@@ -1,62 +1,30 @@
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
-
-import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
-import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
-import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
-
 import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
-import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
-
-import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-
 import 'package:finalproject_front/pages/lesson/lesson_list_page.dart';
-
+import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail/order_detail_page.dart';
-
 import 'package:finalproject_front/pages/payment/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_installment_list_page.dart';
 import 'package:finalproject_front/pages/payment/payment_sales_detail_pages.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
-
 import 'package:finalproject_front/pages/search/search_main_page.dart';
-
 import 'package:finalproject_front/pages/sign/join_division_page/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page/login_page.dart';
-
-import 'package:finalproject_front/pages/user/user_coupon/user_coupon_page.dart';
-import 'package:finalproject_front/pages/user/user_detail/user_login_my_page.dart';
-import 'package:finalproject_front/pages/user/user_profile_detail/user_profile_detail_page.dart';
-import 'package:finalproject_front/pages/user/user_profile_insert/user_profile_insert_page.dart';
-import 'package:finalproject_front/pages/user/user_update/user_update_page.dart';
+import 'package:finalproject_front/pages/user/user_coupon_page.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page.dart';
+import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert_page.dart';
+import 'package:finalproject_front/pages/user/user_update_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
-
-import 'pages/lesson/lesson_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -85,6 +53,7 @@ class MyApp extends StatelessWidget {
         "/categoryDetail": (context) => CategoryDetailPage(),
 
         "/loginMyPage": (context) => UserLoginMyPage(),
+        "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(),
         "/lessonList": (context) => LessonListPage(),
         "/searchMain": (context) => SearchMainPage(),
