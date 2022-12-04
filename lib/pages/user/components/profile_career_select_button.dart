@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:finalproject_front/pages/user/components/career_period.dart';
+import 'package:finalproject_front/pages/user/components/profile_career_period.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -29,7 +29,7 @@ class ProfileCareerSeleteButton extends StatelessWidget {
               border: Border.all(color: gBorderColor, width: 3),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: CareerPeriod(),
+            child: ProfileCareerPeriod(),
             width: size.width,
             height: 60,
           )
