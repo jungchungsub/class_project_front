@@ -8,10 +8,17 @@ import 'package:flutter/src/widgets/framework.dart';
 class ContentBox extends StatelessWidget {
   final Function scrollAnimate;
   final String text;
+<<<<<<< HEAD
   final String hintText;
   final int lines;
 
   const ContentBox(this.scrollAnimate, {required this.text, required this.hintText, required this.lines, Key? key}) : super(key: key);
+=======
+  final String content;
+  final int lines;
+
+  const ContentBox(this.scrollAnimate, {required this.text, required this.content, required this.lines, Key? key}) : super(key: key);
+>>>>>>> 79519373546531f6939f60e209d66def64fb390a
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,11 @@ class ContentBox extends StatelessWidget {
             keyboardType: TextInputType.multiline,
             maxLines: lines,
             decoration: InputDecoration(
+<<<<<<< HEAD
               hintText: "${hintText}",
+=======
+              hintText: "${content}",
+>>>>>>> 79519373546531f6939f60e209d66def64fb390a
               hintStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
