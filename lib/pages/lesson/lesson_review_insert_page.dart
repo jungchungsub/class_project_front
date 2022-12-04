@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/lesson/components/content_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -13,8 +14,7 @@ class LessonReviewInsertPage extends StatefulWidget {
 }
 
 class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
-  late ScrollController
-      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
               ),
               _buildReviewRatingBar(),
               SizedBox(height: 20),
-              _buildReviewContent(scrollAnimate),
+              ContentBox(scrollAnimate, text: "리뷰작성", content: "악플은 안대요><", lines: 6),
               SizedBox(height: 20),
               _buildReviewInsertButton(context),
             ],
@@ -81,45 +81,6 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Column _buildReviewContent(Function scrollAnimate) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "리뷰 작성",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 10),
-        TextFormField(
-          onTap: (() {
-            scrollAnimate;
-          }),
-          maxLines: 6,
-          decoration: InputDecoration(
-            hintText: "악플은 안대요 ><",
-            hintStyle: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-              color: gSubTextColor,
-            ),
-            //3. 기본 textFormfield 디자인 - enabledBorder
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: gBorderColor, width: 3.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            //마우스 올리고 난 후 스타일
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: gBorderColor, width: 3.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -163,13 +124,11 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
 
   void scrollAnimate() {
     Future.delayed(Duration(milliseconds: 600), () {
-      scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
-          duration: Duration(microseconds: 100), curve: Curves.easeIn);
+      scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom, duration: Duration(microseconds: 100), curve: Curves.easeIn);
     });
   }
 
-  Container _buildLessonCard(String lessongImage, String lessonTitle,
-      String expertName, String lessonPrice, String lessongEndDate) {
+  Container _buildLessonCard(String lessongImage, String lessonTitle, String expertName, String lessonPrice, String lessongEndDate) {
     return Container(
       child: Column(
         children: [
@@ -192,9 +151,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                           width: 110,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                image: AssetImage("${lessongImage}"),
-                                fit: BoxFit.cover),
+                            image: DecorationImage(image: AssetImage("${lessongImage}"), fit: BoxFit.cover),
                           ),
                         ),
                       ),
@@ -208,8 +165,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                           children: [
                             Text(
                               "${lessonTitle}",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),

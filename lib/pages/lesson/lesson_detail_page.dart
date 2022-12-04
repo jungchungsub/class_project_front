@@ -37,13 +37,21 @@ class LessonDetailPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
                             child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ////////////
-                            _buildLessonCurriculum(),
-                            _buildLessonTime(),
-                            _buildLessonPlace(),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 16, bottom: 16),
+                              child: Text(
+                                "120,000원",
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            _buildLessonContentBox("커리큘럼", "간단한 서비스 설명", 120, 2),
+                            _buildLessonContentBox("레슨시간", "108분", 55, 1),
+                            _buildLessonContentBox("레슨횟수", "10회", 55, 1),
+                            _buildLessonContentBox("장소", "부산광역시 부산진구 홍길동", 55, 1),
                             _buildLessonPossibleDate(),
-                            _buildLessonCancel(),
+                            _buildLessonContentBox("취소 및 환불규정", "취소 및 환불을 하면 솰라솰라 10회 피티 이용제한이 생기면서 한국 중국 러시아 일본 베트남 말레시아 영국 미국 북한 필리핀 브라질", 200, 6),
                             _buildLessonExpertInformation(),
                             _buildLessonEvaluation(),
                             _buildPurchaseReview(),
@@ -91,19 +99,14 @@ class LessonDetailPage extends StatelessWidget {
             ConstrainedBox(
               constraints: BoxConstraints.tightFor(height: 50, width: 240),
               child: TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff4880ED),
-                    minimumSize: Size(340, 50)),
+                style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
                 onPressed: () {
                   Navigator.pushNamed(context, "/orderDetail");
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                 },
                 child: Text(
                   "50,000원 결제하기",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -124,39 +127,6 @@ class LessonDetailPage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Column _buildLessonCancel() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "취소 및 환불규정",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
-        Container(
-          height: 150,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Text(
-              "취소 및 환불을 하면 솰라솰라 10회 피티 이용제한이 생기면서 한국 중국 러시아 일본 베트남 말레시아 영국 미국 북한 필리핀 브라질 한국 축구 화이팅입니다",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        )
-      ],
     );
   }
 
@@ -230,10 +200,7 @@ class LessonDetailPage extends StatelessWidget {
                       ),
                       Text(
                         "124개의 평가",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: gSubTextColor),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                       )
                     ],
                   )
@@ -260,9 +227,7 @@ class LessonDetailPage extends StatelessWidget {
                 width: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  image: DecorationImage(
-                      image: NetworkImage("https://picsum.photos/200"),
-                      fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
                 ),
               ),
               SizedBox(width: 20),
@@ -290,8 +255,7 @@ class LessonDetailPage extends StatelessWidget {
               )
             ],
           ),
-          Text("대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 방법 진짜 알려줘요",
-              style: TextStyle(fontSize: 16)),
+          Text("대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 방법 진짜 알려줘요", style: TextStyle(fontSize: 16)),
           SizedBox(
             height: 40,
           ),
@@ -335,9 +299,7 @@ class LessonDetailPage extends StatelessWidget {
                         width: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                              image: NetworkImage("https://picsum.photos/200"),
-                              fit: BoxFit.cover),
+                          image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
                         ),
                       ),
                       SizedBox(width: 10),
@@ -346,15 +308,11 @@ class LessonDetailPage extends StatelessWidget {
                         children: [
                           Text(
                             "마르코 선생님",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "연락 가능 시간 01 ~ 03시",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: gSubTextColor),
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                           ),
                         ],
                       ),
@@ -376,17 +334,11 @@ class LessonDetailPage extends StatelessWidget {
                           children: [
                             Text(
                               "총작업수",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: gSubTextColor),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                             ),
                             Text(
                               "만족도",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: gSubTextColor),
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                             ),
                           ],
                         ),
@@ -414,41 +366,6 @@ class LessonDetailPage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _buildLesoonPlace() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "장소",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 55,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FD),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                "부산광역시 부산진구 홍길동 23422",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
             ),
           ),
           SizedBox(
@@ -487,41 +404,6 @@ class LessonDetailPage extends StatelessWidget {
                   _buildDate(text: "토요일 : 18:00 ~ 23:00"),
                   _buildDate(text: "일요일 : 18:00 ~ 23:00"),
                 ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _buildLessonPlace() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "장소",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 55,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FD),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                "부산광역시 부산진구 홍길동 23422",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
               ),
             ),
           ),
@@ -608,25 +490,18 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildLessonCurriculum() {
+  Container _buildLessonContentBox(String title, String content, double heig, int max) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 16),
-            child: Text(
-              "120,000원",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
           Text(
-            "커리큘럼",
+            "${title}",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           Container(
-            height: 55,
+            height: heig,
             width: double.infinity,
             decoration: BoxDecoration(
               color: const Color(0xffEAF2FD),
@@ -635,10 +510,12 @@ class LessonDetailPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(14.0),
               child: Text(
-                "간단한 서비스 설명",
+                "${content}",
                 style: TextStyle(
                   fontSize: 16,
                 ),
+                maxLines: max,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
@@ -658,10 +535,7 @@ class LessonDetailPage extends StatelessWidget {
           SizedBox(height: 30),
           Text(
             "뷰티・운동",
-            style: TextStyle(
-                color: gSubTextColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 14),
+            style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
           ),
           Text(
             "내몸 상태 바로 알기 내몸에 꼭 맞는 운동",
@@ -704,10 +578,7 @@ class LessonDetailPage extends StatelessWidget {
                 ),
                 Text(
                   "평가 16개",
-                  style: TextStyle(
-                      color: gSubTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14),
+                  style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
                 )
               ],
             ),
