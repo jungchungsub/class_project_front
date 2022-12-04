@@ -42,13 +42,13 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
             child: Column(
               children: [
                 _buildLessonImage(),
-                _buildLessonTitle(scrollAnimate),
-                _buildLessonCurriculum(scrollAnimate),
-                _buildLessonCount(scrollAnimate),
-                _buildLessonTime(),
-                _buildLessonPlace(scrollAnimate),
+                _buildLessonContentBox(scrollAnimate, "서비스제목", "서비스 제목 자리 입니다", 1),
+                _buildLessonContentBox(scrollAnimate, "커리큘럼", "상세설명", 6),
+                _buildLessonContentBox(scrollAnimate, "수강횟수", "수강 횟수를 입력하세요", 1),
+                _buildLessonContentBox(scrollAnimate, "수강시간", "수강 시간을 입력하세요", 1),
+                _buildLessonContentBox(scrollAnimate, "수강장소", "ex) 부산시 진구 그린아카데미", 1),
                 _buildLessonCategory(),
-                _buildLessonPrice(scrollAnimate),
+                _buildLessonContentBox(scrollAnimate, "가격", "ex)50,000", 1),
                 _buildLessonDeadLine(),
                 _buildLessonBottomButton(),
               ],
@@ -69,33 +69,23 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: Color(0xff4880ED),
-                  minimumSize: Size(150, 50)),
+              style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(150, 50)),
               onPressed: () {
                 Navigator.pop(context);
               },
               child: Text(
                 "수정",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             TextButton(
-              style: TextButton.styleFrom(
-                  backgroundColor: Color(0xff4880ED),
-                  minimumSize: Size(150, 50)),
+              style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(150, 50)),
               onPressed: () {
                 //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
               },
               child: Text(
                 "삭제",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
               ),
             )
           ],
@@ -104,47 +94,6 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
           height: 20,
         ),
       ],
-    );
-  }
-
-  Container _buildLessonTime() {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "수강시간",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextFormField(
-            onTap: (() {}),
-            decoration: InputDecoration(
-              hintText: "수강시간을 입력하세요",
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor,
-              ),
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -169,48 +118,6 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
         //gravity: ToastGravity.CENTER,  //위치(default 는 아래)
       );
     });
-  }
-
-  Container _buildLessonPrice(Function scrollAnimate) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "가격",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextFormField(
-            onTap: (() {}),
-            decoration: InputDecoration(
-              hintText: "ex) 50,000원",
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor,
-              ),
-
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Container _buildLessonCategory() {
@@ -244,7 +151,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
     );
   }
 
-  Container _buildLessonPlace(Function scrollAnimate) {
+  Container _buildLessonContentBox(Function scrollAnimate, String text, String content, int lines) {
     return Container(
       child: Column(
         children: [
@@ -254,90 +161,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "장소",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextFormField(
-            onTap: (() {}),
-            decoration: InputDecoration(
-              hintText: "ex) 부산시 진구 그린 아카데미 502호",
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor,
-              ),
-
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container _buildLessonCount(Function scrollAnimate) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "수강횟수",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextFormField(
-            onTap: (() {}),
-            decoration: InputDecoration(
-              hintText: "수강 횟수를 입력하세요",
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor,
-              ),
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container _buildLessonCurriculum(Function scrollAnimate) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "커리큘럼",
+              "${text}",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ),
@@ -347,50 +171,9 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
               scrollAnimate;
             }),
             keyboardType: TextInputType.multiline,
-            maxLines: 6,
+            maxLines: lines,
             decoration: InputDecoration(
-              hintText: "상세 설명을 입력하세요",
-              hintStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor,
-              ),
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container _buildLessonTitle(Function scrollAnimate) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "서비스 제목",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextFormField(
-            onTap: (() {}),
-            decoration: InputDecoration(
-              hintText: "서비스 제목자리 입니다",
+              hintText: "${content}",
               hintStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.normal,
@@ -431,9 +214,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                     width: 180,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage("https://picsum.photos/201"),
-                          fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage("https://picsum.photos/201"), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -571,10 +352,7 @@ class _CategoryPeriodState extends State<CategoryPeriod> {
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Text(
                         item,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ))
