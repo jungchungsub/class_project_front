@@ -13,32 +13,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
   flutter_rating_bar: ^4.0.1
+  google_fonts: ^3.0.1
+  font_awesome_flutter: ^10.2.1
+  intl: ^0.17.0
+  cached_network_image: ^3.2.1
+  extended_image: ^6.0.1
+  dropdown_button2: ^1.9.1
+  fluttertoast: ^8.1.1
   cupertino_icons: ^1.0.2
+  flutter_lints: ^2.0.0
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  google_fonts: ^3.0.1
-  font_awesome_flutter: ^10.2.1
-  intl: ^0.17.0
-  cupertino_icons: ^1.0.2
-  cached_network_image: ^3.2.1
-  extended_image: ^6.0.1
-  dropdown_button2: ^1.9.1
-  persistent_bottom_nav_bar: any
-  fluttertoast: ^8.1.1
-
-
-
-
-  flutter_lints: ^2.0.0
-
 
 flutter:
-
 
   uses-material-design: true
 
