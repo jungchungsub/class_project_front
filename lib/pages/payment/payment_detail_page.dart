@@ -313,12 +313,15 @@ class _PaymentPeriodState extends State<PaymentPeriod> {
           items: items
               .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ))
               .toList(),

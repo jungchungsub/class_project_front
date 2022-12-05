@@ -70,9 +70,7 @@ class PaymentCardPage extends StatelessWidget {
       children: [
         Container(
           height: 90,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Color(0xffF8F8F8)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(0xffF8F8F8)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
