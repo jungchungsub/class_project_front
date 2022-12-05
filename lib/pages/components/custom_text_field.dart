@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,7 +13,12 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final int lines;
 
-  const CustomTextField(this.scrollAnimate, {this.subTitle, required this.fieldTitle, required this.hint, required this.lines, Key? key})
+  const CustomTextField(this.scrollAnimate,
+      {this.subTitle,
+      required this.fieldTitle,
+      required this.hint,
+      required this.lines,
+      Key? key})
       : super(key: key);
 
   @override
@@ -32,13 +38,16 @@ class CustomTextField extends StatelessWidget {
                   if (subTitle != null)
                     TextSpan(
                       text: "${subTitle}",
-                      style: TextStyle(color: gSubTextColor, fontSize: 10, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: gSubTextColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold),
                     )
                 ],
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: gap_m),
           TextFormField(
             onTap: (() {
               scrollAnimate;
@@ -54,12 +63,12 @@ class CustomTextField extends StatelessWidget {
               ),
               //3. 기본 textFormfield 디자인 - enabledBorder
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
+                borderSide: BorderSide(color: gClientColor, width: 3.0),
                 borderRadius: BorderRadius.circular(15),
               ),
               //마우스 올리고 난 후 스타일
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
+                borderSide: BorderSide(color: gClientColor, width: 3.0),
                 borderRadius: BorderRadius.circular(15),
               ),
             ),

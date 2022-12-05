@@ -1,3 +1,4 @@
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
     );
   }
 
-  Padding _buildCategoryDetail(String routePath, String image) {
+  Padding _buildCategoryDetail(String routePath, String imagePath) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
@@ -71,8 +72,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
                     width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage("${image}"), fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -117,8 +117,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
                         children: [
                           Text(
                             "50,000원",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             width: 140,
@@ -160,7 +159,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
                         size: 16,
                       ),
                       SizedBox(
-                        width: 5,
+                        width: gap_s,
                       ),
                       Text(
                         "초기화",
@@ -199,10 +198,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
                       ),
                       Text(
                         "인기순",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
+                        style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -215,13 +211,13 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
     );
   }
 
-  OutlinedButton _buildMiddleFilterList(String text) {
+  OutlinedButton _buildMiddleFilterList(String textButton) {
     return OutlinedButton(
       onPressed: () {},
       child: Row(
         children: [
           Text(
-            "${text}",
+            "${textButton}",
             style: TextStyle(color: Colors.black, fontSize: 14),
           ),
         ],

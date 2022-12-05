@@ -1,4 +1,4 @@
-import 'package:finalproject_front/pages/components/ArachachaButton.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(height: gap_l),
-            ArachachaButton(buttonRoutePath: "/main", buttonText: "로그인"),
+            CustomMainButton(buttonRoutePath: "/main", buttonText: "로그인"),
           ]),
         ),
       ),
