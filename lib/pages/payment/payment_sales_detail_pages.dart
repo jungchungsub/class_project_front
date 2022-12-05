@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -20,7 +21,7 @@ class PaymentSalesDetailPage extends StatelessWidget {
   Column _buildTotalSales() {
     return Column(
       children: [
-        SizedBox(height: 30),
+        SizedBox(height: gap_l),
         Container(
           height: 100,
           color: gContentBoxColor,
@@ -33,10 +34,7 @@ class PaymentSalesDetailPage extends StatelessWidget {
                 children: [
                   Text(
                     "판매완료 금액",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: gPrimaryColor),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: gPrimaryColor),
                   ),
                   Text(
                     "50,000원",
@@ -56,10 +54,7 @@ class PaymentSalesDetailPage extends StatelessWidget {
                   children: [
                     Text(
                       "판매중",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: gPrimaryColor),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: gPrimaryColor),
                     ),
                     Text(
                       "10개",
@@ -130,12 +125,11 @@ class PaymentSalesDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildSalesList(String image, String title, String category,
-      String total, String price, String date) {
+  Container _buildSalesList(String imagePath, String SaleTitle, String category, String total, String price, String date) {
     return Container(
       child: Column(
         children: [
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -156,14 +150,12 @@ class PaymentSalesDetailPage extends StatelessWidget {
                             width: 110,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: NetworkImage("${image}"),
-                                  fit: BoxFit.cover),
+                              image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: gap_m,
                         ),
                         Container(
                           width: 230,
@@ -176,10 +168,8 @@ class PaymentSalesDetailPage extends StatelessWidget {
                                   Container(
                                     width: 200,
                                     child: Text(
-                                      "${title}.",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
+                                      "${SaleTitle}.",
+                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -206,7 +196,7 @@ class PaymentSalesDetailPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: gap_m),
                     InkWell(
                       onTap: (() {
                         //클래스 수정하기로 가는 링크

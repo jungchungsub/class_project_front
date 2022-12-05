@@ -1,10 +1,10 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/material.dart';
 
-class ArachachaButton extends StatelessWidget {
+class CustomMainButton extends StatelessWidget {
   final String buttonText;
   final String buttonRoutePath;
-  const ArachachaButton({
+  const CustomMainButton({
     required this.buttonRoutePath,
     required this.buttonText,
     Key? key,

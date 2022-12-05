@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/components/ArachachaButton.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomForm extends StatefulWidget {
@@ -40,7 +40,7 @@ class _CustomFormState extends State<CustomForm> {
             SizedBox(height: 6),
             //개인 정보 제공 동의 폼 필요 -> API
             SizedBox(height: 50),
-            ArachachaButton(buttonRoutePath: "/loginMyPage", buttonText: "수정완료")
+            CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "수정완료")
           ],
         ),
       ),
