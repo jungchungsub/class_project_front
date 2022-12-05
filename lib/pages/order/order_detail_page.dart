@@ -1,3 +1,4 @@
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -33,7 +34,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   Padding _buildClassName() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 8, bottom: 20, left: 8),
+      padding: const EdgeInsets.only(top: 20, right: 10, bottom: 20, left: 10),
       child: Column(
         children: [
           Row(
@@ -85,7 +86,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(CupertinoIcons.app),
-                    SizedBox(width: 10),
+                    SizedBox(width: gap_m),
                     Text(
                       "주문 내용을 확인하였으며, 결제에 동의합니다.(필수)",
                       style: TextStyle(fontSize: 14),
@@ -96,7 +97,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: ConstrainedBox(
               constraints: BoxConstraints.tightFor(height: 50),
               child: TextButton(
@@ -173,7 +174,7 @@ class _ClassTimeState extends State<ClassTime> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+            padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
             child: Row(
               children: [
                 Text(
@@ -285,7 +286,7 @@ class _TotalMoneyState extends State<TotalMoney> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
                 child: Text(
                   "결제금액",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -294,7 +295,7 @@ class _TotalMoneyState extends State<TotalMoney> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 Row(
@@ -370,7 +371,7 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+            padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
             child: Row(
               children: [
                 Text(
@@ -380,9 +381,9 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
               ],
             ),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: [
                 Row(
@@ -392,7 +393,7 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                       color: Color(0xff8A8A8A),
                     ),
                     SizedBox(
-                      width: 15,
+                      width: gap_l,
                     ),
                     Text(
                       "일반결제",
@@ -404,7 +405,7 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: gap_l),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: const Color(0xffF0F0F0), width: 3),
@@ -445,9 +446,9 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: gap_l),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.only(bottom: gap_l),
                   child: Row(
                     children: [
                       Icon(
@@ -455,7 +456,7 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                         color: Color(0xff8A8A8A),
                       ),
                       SizedBox(
-                        width: 15,
+                        width: gap_l,
                       ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
@@ -464,7 +465,7 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: gap_l),
               ],
             ),
           ),

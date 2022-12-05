@@ -1,5 +1,6 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/components/ArachachaButton.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
+
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:finalproject_front/pages/sign/components/join_category_period.dart';
@@ -31,7 +32,7 @@ class CustomForm extends StatelessWidget {
             SizedBox(height: gap_m),
             //개인 정보 제공 동의 폼 필요 -> API
             SizedBox(height: gap_xl),
-            ArachachaButton(buttonRoutePath: "/main", buttonText: "회원가입 완료")
+            CustomMainButton(buttonRoutePath: "/main", buttonText: "회원가입 완료")
           ],
         ),
       ),

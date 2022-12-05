@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,10 @@ class CustomerServicePage extends StatelessWidget {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                _buildImageBox(),
+                _buildImageBox("https://picsum.photos/200"),
                 _buildCustomerNotice(),
                 _buildFrequentlyAskedQuestion(),
               ],
@@ -35,7 +36,7 @@ class CustomerServicePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 30,
+            height: gap_xl,
           ),
           Text(
             "FAQ",
@@ -50,14 +51,14 @@ class CustomerServicePage extends StatelessWidget {
     );
   }
 
-  Column _buildFaqList(String text) {
+  Column _buildFaqList(String faqText) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 8),
           child: Text(
-            "${text}",
+            "${faqText}",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
@@ -87,14 +88,14 @@ class CustomerServicePage extends StatelessWidget {
     );
   }
 
-  Column _buildNotice(String text) {
+  Column _buildNotice(String noticeText) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 8),
           child: Text(
-            "${text}",
+            "${noticeText}",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
@@ -106,7 +107,7 @@ class CustomerServicePage extends StatelessWidget {
     );
   }
 
-  Padding _buildImageBox() {
+  Padding _buildImageBox(String imagePath) {
     return Padding(
       padding: const EdgeInsets.only(top: 20, bottom: 30),
       child: Container(
@@ -114,9 +115,7 @@ class CustomerServicePage extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-              image: NetworkImage("https://picsum.photos/200"),
-              fit: BoxFit.cover),
+          image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
         ),
       ),
     );
@@ -140,8 +139,7 @@ class CustomerServicePage extends StatelessWidget {
         onPressed: () {},
         child: Text(
           "크몽 고객센터",
-          style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );

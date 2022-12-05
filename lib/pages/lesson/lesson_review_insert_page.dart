@@ -1,5 +1,7 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -47,37 +49,11 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                 ),
               ),
               _buildReviewRatingBar(),
-              SizedBox(height: 20),
+              SizedBox(height: gap_l),
               CustomTextField(scrollAnimate, fieldTitle: "리뷰작성", hint: "악플은 안대요><", lines: 6),
-              SizedBox(height: 20),
-              _buildReviewInsertButton(context),
+              SizedBox(height: gap_l),
+              CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "저장하고 완료")
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  InkWell _buildReviewInsertButton(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, "/loginMyPage");
-      },
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: gButtonOffColor,
-        ),
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            "저장하고 완료",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
           ),
         ),
       ),
@@ -128,11 +104,11 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
     });
   }
 
-  Container _buildLessonCard(String lessongImage, String lessonTitle, String expertName, String lessonPrice, String lessongEndDate) {
+  Container _buildLessonCard(String imagePath, String lessonTitle, String expertName, String lessonPrice, String lessongEndDate) {
     return Container(
       child: Column(
         children: [
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: gBorderColor, width: 3),
@@ -151,7 +127,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                           width: 110,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(image: AssetImage("${lessongImage}"), fit: BoxFit.cover),
+                            image: DecorationImage(image: AssetImage("${imagePath}"), fit: BoxFit.cover),
                           ),
                         ),
                       ),
@@ -195,7 +171,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: gap_m),
                 ],
               ),
             ),
