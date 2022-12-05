@@ -21,14 +21,17 @@ class UserLoginMyPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildUserProfile(context, "의뢰인", "green1234", "전문가", "assets/picture.jpg", "/profileDetail"),
+                _buildUserProfile(context, "의뢰인", "green1234", "전문가",
+                    "assets/picture.jpg", "/profileDetail"),
                 SizedBox(height: gap_l),
                 Text(
                   "나의 서비스",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: gap_m),
-                ServiceText(routePath: "/paymentInstallmentList", serviceText: "결제/취소 내역"),
+                ServiceText(
+                    routePath: "/paymentInstallmentList",
+                    serviceText: "결제/취소 내역"),
                 SizedBox(height: gap_s),
                 ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
                 SizedBox(height: gap_s),
@@ -36,11 +39,18 @@ class UserLoginMyPage extends StatelessWidget {
                 SizedBox(height: gap_s),
                 ServiceText(routePath: "/customerService", serviceText: "고객센터"),
                 SizedBox(height: gap_s),
-                ServiceText(routePath: "/lessonInsert", serviceText: "클래스 등록 임시"),
+                ServiceText(
+                    routePath: "/lessonInsert", serviceText: "클래스 등록 임시"),
                 SizedBox(height: gap_s),
-                ServiceText(routePath: "/lessonUpdate", serviceText: "클래스 수정하러가기 임시"),
+                ServiceText(
+                    routePath: "/lessonUpdate", serviceText: "클래스 수정하러가기 임시"),
                 SizedBox(height: gap_s),
-                ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역 임시"),
+                ServiceText(
+                    routePath: "/paymentSalesDetail", serviceText: "판매내역 임시"),
+                SizedBox(height: gap_xl),
+                ServiceText(routePath: "/testReview", serviceText: "판매내역 임시"),
+                SizedBox(height: gap_xl),
+                ServiceText(routePath: "/testImage", serviceText: "판매내역 임시"),
                 SizedBox(height: gap_xl),
                 BottomImageBox(),
               ],
@@ -92,7 +102,8 @@ class UserLoginMyPage extends StatelessWidget {
   }
 }
 
-Widget _buildUserProfile(BuildContext context, String userState, String userId, String changeState, String profileImagePath, String routePath) {
+Widget _buildUserProfile(BuildContext context, String userState, String userId,
+    String changeState, String profileImagePath, String routePath) {
   return Row(
     children: [
       ProfileImage(profileImagePath: profileImagePath, routePath: routePath),
@@ -131,7 +142,8 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId, 
                   border: Border.all(color: gBorderColor),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 3.0, horizontal: 5.0),
                   child: Row(
                     children: [
                       Icon(
@@ -156,7 +168,8 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId, 
   );
 }
 
-Widget _buildShoppingList(BuildContext context, String shoppingListTitle, String routePath, String shoppingListsubTitle, String hintText) {
+Widget _buildShoppingList(BuildContext context, String shoppingListTitle,
+    String routePath, String shoppingListsubTitle, String hintText) {
   return Container(
     child: Column(
       children: [
