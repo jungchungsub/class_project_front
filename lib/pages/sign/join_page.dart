@@ -12,7 +12,8 @@ class JoinPage extends StatefulWidget {
 }
 
 class _JoinPageState extends State<JoinPage> {
-  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController
+      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {
@@ -24,7 +25,7 @@ class _JoinPageState extends State<JoinPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: CustomForm(scrollAnimate),
+      body: JoinCustomForm(scrollAnimate),
     );
   }
 
