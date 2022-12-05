@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,14 +9,14 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LessonUpdatePage extends StatefulWidget {
-  const LessonUpdatePage({Key? key}) : super(key: key);
+class LessonInsertPage extends StatefulWidget {
+  const LessonInsertPage({Key? key}) : super(key: key);
 
   @override
-  State<LessonUpdatePage> createState() => _LessonUpdatePageState();
+  State<LessonInsertPage> createState() => _LessonInsertPageState();
 }
 
-class _LessonUpdatePageState extends State<LessonUpdatePage> {
+class _LessonInsertPageState extends State<LessonInsertPage> {
   late ScrollController scrollController;
 
   @override
@@ -34,7 +35,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                _buildLessonImage(),
+                _buildLessonImage("https://picsum.photos/200"),
                 SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
                 SizedBox(height: gap_l),
@@ -45,50 +46,16 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                 CustomTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
                 SizedBox(height: gap_l),
                 CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
-                SizedBox(height: gap_l),
                 _buildLessonCategory(),
-                SizedBox(height: gap_l),
                 _buildLessonDeadLine(),
                 SizedBox(height: gap_l),
-                _buildLessonBottomButton(),
+                CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "프로필 등록"),
                 SizedBox(height: gap_l),
               ],
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Column _buildLessonBottomButton() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(150, 50)),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                "수정",
-                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(150, 50)),
-              onPressed: () {
-                //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
-              },
-              child: Text(
-                "삭제",
-                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
-      ],
     );
   }
 
@@ -119,6 +86,9 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
     return Container(
       child: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Row(
             children: [
               Text(
@@ -128,7 +98,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
               ),
             ],
           ),
-          SizedBox(height: gap_m),
+          SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: gBorderColor, width: 3),
@@ -147,12 +117,14 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
   //   return;
   // }
 
-  Container _buildLessonImage() {
+  Container _buildLessonImage(String imagePath) {
     return Container(
       child: Container(
         child: Column(
           children: [
-            SizedBox(height: gap_l),
+            SizedBox(
+              height: 30,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -163,11 +135,11 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                     width: 180,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(image: NetworkImage("https://picsum.photos/201"), fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
                     ),
                   ),
                 ),
-                SizedBox(width: gap_l),
+                SizedBox(width: 15),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -178,7 +150,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: gap_l),
+                    SizedBox(height: 15),
                     Text(
                       "apple.jpg",
                       style: TextStyle(
@@ -192,7 +164,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                     SizedBox(height: 15),
                     InkWell(
                       onTap: (() {
-                        //클래스 수정하기로 가는 링크
+                        //클래스 등록하기로 가는 링크
                       }),
                       child: Container(
                         width: 120,
@@ -204,7 +176,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Text(
-                            "사진 수정하기",
+                            "사진 등록하기",
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -239,7 +211,7 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
             Navigator.pop(context);
           }),
       title: Text(
-        "클래스 수정하기",
+        "클래스 등록하기",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,
@@ -331,6 +303,9 @@ class _buildLessonDeadLineState extends State<_buildLessonDeadLine> {
     return Container(
       child: Column(
         children: [
+          SizedBox(
+            height: gap_l,
+          ),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(

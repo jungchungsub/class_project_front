@@ -9,3 +9,4 @@ const gSubButtonColor = Color(0xFF696969);
 const gSubTextColor = Color(0xFF787272);
 const gClientColor = Color(0xffB9D4F1);
 const gExpertColor = Color(0xff88BEF5);
+const gDivider = Color(0xffF0F0F0);

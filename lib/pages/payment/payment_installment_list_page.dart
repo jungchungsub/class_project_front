@@ -81,7 +81,7 @@ class PaymentInstallmentListPage extends StatelessWidget {
     );
   }
 
-  Container _buildSalesList(String imagePath, String title, String category, String total, String price, String date) {
+  Container _buildSalesList(String imagePath, String Saletitle, String category, String total, String price, String date) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -121,7 +121,7 @@ class PaymentInstallmentListPage extends StatelessWidget {
                               Container(
                                 width: 230,
                                 child: Text(
-                                  "${title}.",
+                                  "${Saletitle}.",
                                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
@@ -173,7 +173,7 @@ class PaymentInstallmentListPage extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "환불완료",
+                            "결제 완료",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -208,7 +208,7 @@ class PaymentInstallmentListPage extends StatelessWidget {
             Navigator.pop(context);
           }),
       title: Text(
-        "결제/환불내역",
+        "결제/취소내역",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,

@@ -79,8 +79,7 @@ class SearchMainPage extends StatelessWidget {
     );
   }
 
-  OutlinedButton _buildCommendSearch(
-      BuildContext context, String text, String routePath) {
+  OutlinedButton _buildCommendSearch(BuildContext context, String textCategory, String routePath) {
     return OutlinedButton(
       onPressed: () {
         Navigator.pushNamed(context, routePath);
@@ -88,7 +87,7 @@ class SearchMainPage extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            "${text}",
+            "${textCategory}",
             style: TextStyle(color: Colors.black, fontSize: 14),
           ),
         ],

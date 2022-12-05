@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/components/ArachachaButton.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -34,7 +34,7 @@ class UserProfileDetailPage extends StatelessWidget {
               SizedBox(height: 10),
               _buildProfileContent(context, "경력기간", "신입"),
               SizedBox(height: 20),
-              ArachachaButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기")
+              CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기")
             ],
           ),
         ),

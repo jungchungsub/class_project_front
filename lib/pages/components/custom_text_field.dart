@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -46,7 +47,7 @@ class CustomTextField extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: gap_m),
           TextFormField(
             onTap: (() {
               scrollAnimate;
