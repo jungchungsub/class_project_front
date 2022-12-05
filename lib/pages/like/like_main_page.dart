@@ -15,18 +15,18 @@ class _LikeMainPageState extends State<LikeMainPage> {
       appBar: _buildAppbar(),
       body: ListView(
         children: [
-          _buildLikeList("/lessonDetail", "https://picsum.photos/201"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/202"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/203"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/204"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/205"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/206"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/201", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/202", "깔끔하고 아름다운 웹디자인을 해드립니다.", 123, "50,000"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/203", "깔끔하고 아름다운 웹디자인을 해드립니다.", 4315, "50,000"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/204", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/205", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
+          _buildLikeList("/lessonDetail", "https://picsum.photos/206", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
         ],
       ),
     );
   }
 
-  Padding _buildLikeList(String routePath, String image) {
+  Padding _buildLikeList(String routePath, String imagePath, String likeTitle, int likeEvaluation, String price) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
@@ -46,8 +46,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
                     width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                          image: NetworkImage("${image}"), fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -62,7 +61,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
                         width: 220,
                         height: 50,
                         child: Text(
-                          "깔끔하고 아름다운 웹디자인을 해드립니다아아.",
+                          "${likeTitle}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -82,7 +81,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
                             width: 8,
                           ),
                           Text(
-                            "|   45개의 평가",
+                            "|  ${likeEvaluation}개의 평가",
                             style: TextStyle(fontSize: 14),
                           ),
                         ],
@@ -91,9 +90,8 @@ class _LikeMainPageState extends State<LikeMainPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "50,000원",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            "${price}원",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             width: 140,
