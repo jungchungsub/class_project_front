@@ -23,15 +23,15 @@ class PaymentCardPage extends StatelessWidget {
           _buildDivider(),
           _buildAdvertisementText("삼성카드", '2~7개월 무이자할부'),
           _buildDivider(),
-          SizedBox(height: 30),
+          SizedBox(height: gap_xl),
           _buildCardCategory(context, "/paymentDetail"),
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           _buildCardCategory(context, "/paymentDetail"),
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           _buildCardCategory(context, "/paymentDetail"),
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           _buildCardCategory(context, "/paymentDetail"),
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
         ],
       ),
     );
@@ -70,7 +70,9 @@ class PaymentCardPage extends StatelessWidget {
       children: [
         Container(
           height: 90,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(0xffF8F8F8)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Color(0xffF8F8F8)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

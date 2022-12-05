@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,9 @@ class OrderDetailPage extends StatefulWidget {
   @override
   State<OrderDetailPage> createState() => _OrderDetailPageState();
 }
+
+int counter = 1;
+int totalPrice = 5000;
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
   @override
@@ -48,14 +54,21 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     width: 250,
                     child: Text(
                       "유튜브로 홈트하기 - 전세계의 운동 영상을",
-                      style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child: Text("드록바쌤", style: TextStyle(fontSize: 14, color: const Color(0xff787272), fontWeight: FontWeight.bold)),
+                    child: Text("드록바쌤",
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: const Color(0xff787272),
+                            fontWeight: FontWeight.bold)),
                   )
                 ],
               ),
@@ -64,7 +77,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 width: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
+                  image: DecorationImage(
+                      image: NetworkImage("https://picsum.photos/200"),
+                      fit: BoxFit.cover),
                 ),
               ),
             ],
@@ -101,14 +116,19 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             child: ConstrainedBox(
               constraints: BoxConstraints.tightFor(height: 50),
               child: TextButton(
-                style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
+                style: TextButton.styleFrom(
+                    backgroundColor: Color(0xff4880ED),
+                    minimumSize: Size(340, 50)),
                 onPressed: () {
                   Navigator.pushNamed(context, routePath);
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                 },
                 child: Text(
-                  "50,000원 결제하기",
-                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  "${totalPrice}원 결제하기",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -204,11 +224,13 @@ class _ClassTimeState extends State<ClassTime> {
                           children: [
                             Text(
                               "1회당 레슨시간(분)",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               "105분",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -223,11 +245,13 @@ class _ClassTimeState extends State<ClassTime> {
                           children: [
                             Text(
                               "레슨 횟수",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               "10회",
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -240,20 +264,40 @@ class _ClassTimeState extends State<ClassTime> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("50,000원", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text("$totalPrice",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       Container(
                         width: 120,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              color: Color(0xffF3F3F3),
-                              child: Icon(CupertinoIcons.minus),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  counter--;
+                                  totalPrice -= 5000;
+                                });
+                              },
+                              child: Container(
+                                color: Color(0xffF3F3F3),
+                                child: Icon(CupertinoIcons.minus),
+                              ),
                             ),
-                            Text("2", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                            Container(
-                              color: Color(0xffF3F3F3),
-                              child: Icon(CupertinoIcons.add),
+                            Text("${counter}",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold)),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  counter++;
+                                  totalPrice += 5000;
+                                });
+                              },
+                              child: Container(
+                                color: Color(0xffF3F3F3),
+                                child: Icon(CupertinoIcons.add),
+                              ),
                             ),
                           ],
                         ),
@@ -303,11 +347,17 @@ class _TotalMoneyState extends State<TotalMoney> {
                   children: [
                     Text(
                       "총 서비스 금액",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff787272)),
                     ),
                     Text(
-                      "100,000원",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      "${totalPrice}원",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff787272)),
                     ),
                   ],
                 ),
@@ -317,11 +367,17 @@ class _TotalMoneyState extends State<TotalMoney> {
                   children: [
                     Text(
                       "쿠폰 할인",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff787272)),
                     ),
                     Text(
                       "0원",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff787272)),
                     ),
                   ],
                 ),
@@ -339,11 +395,15 @@ class _TotalMoneyState extends State<TotalMoney> {
                     children: [
                       Text(
                         "총 결제금액",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "100,000원",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff4880ED)),
+                        "${totalPrice}원",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff4880ED)),
                       ),
                     ],
                   ),
@@ -408,37 +468,45 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                 SizedBox(height: gap_l),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xffF0F0F0), width: 3),
+                    border:
+                        Border.all(color: const Color(0xffF0F0F0), width: 3),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 10, left: 4, bottom: 10, right: 4),
+                    padding: const EdgeInsets.only(
+                        top: 10, left: 4, bottom: 10, right: 4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: const Color(0xffF0F0F0), width: 3),
+                            border: Border.all(
+                                color: const Color(0xffF0F0F0), width: 3),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 8, right: 32, bottom: 8, left: 32),
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 32, bottom: 8, left: 32),
                             child: Text(
                               "신용카드",
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: const Color(0xffF0F0F0), width: 3),
+                            border: Border.all(
+                                color: const Color(0xffF0F0F0), width: 3),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 8, right: 32, bottom: 8, left: 32),
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 32, bottom: 8, left: 32),
                             child: Text(
                               "무통장 입금",
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
                             ),
                           ),
                         )
@@ -460,7 +528,8 @@ class _PaymentPurposeState extends State<PaymentPurpose> {
                       ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.asset("assets/kakaoPay.png", fit: BoxFit.cover, height: 30),
+                        child: Image.asset("assets/kakaoPay.png",
+                            fit: BoxFit.cover, height: 30),
                       ),
                     ],
                   ),
