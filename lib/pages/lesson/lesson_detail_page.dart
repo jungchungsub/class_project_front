@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,28 +25,39 @@ class LessonDetailPage extends StatelessWidget {
                   Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Container(
-                            child: Column(
-                          children: [
-                            _buildLessonTitle(),
-                          ],
-                        )),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: _buildLessonTitle("뷰티・운동", "내 몸 상태 바로 알기 내 몸에 꼭 맞는 운동", 16),
                       ),
                       _buildDivider(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
                             child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ////////////
-                            _buildLessonCurriculum(),
-                            _buildLessonTime(),
-                            _buildLessonPlace(),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 16, bottom: 16),
+                              child: Text(
+                                "120,000원",
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            _buildLessonContentBox("커리큘럼", "간단한 서비스 설명", 120, 2),
+                            SizedBox(height: gap_l),
+                            _buildLessonContentBox("레슨시간", "108분", 55, 1),
+                            SizedBox(height: gap_l),
+                            _buildLessonContentBox("레슨횟수", "10회", 55, 1),
+                            SizedBox(height: gap_l),
+                            _buildLessonContentBox("장소", "부산광역시 부산진구 홍길동", 55, 1),
+                            SizedBox(height: gap_l),
                             _buildLessonPossibleDate(),
-                            _buildLessonCancel(),
-                            _buildLessonExpertInformation(),
-                            _buildLessonEvaluation(),
+                            SizedBox(height: gap_l),
+                            _buildLessonContentBox("취소 및 환불규정", "취소 및 환불을 하면 솰라솰라 10회 피티 이용제한이 생기면서 한국 중국 러시아 일본 베트남 말레시아 영국 미국 북한 필리핀 브라질", 200, 6),
+                            SizedBox(height: gap_l),
+                            _buildLessonExpertInformation("전문가 정보", "김동진", "한국대학교 경호학과 졸업, 다수 대회에서 수상경력 있습니다."),
+                            SizedBox(height: gap_l),
+                            _buildLessonEvaluation(4.7, 124),
+                            SizedBox(height: gap_l),
                             _buildPurchaseReview(),
                           ],
                         )),
@@ -91,19 +103,14 @@ class LessonDetailPage extends StatelessWidget {
             ConstrainedBox(
               constraints: BoxConstraints.tightFor(height: 50, width: 240),
               child: TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff4880ED),
-                    minimumSize: Size(340, 50)),
+                style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
                 onPressed: () {
                   Navigator.pushNamed(context, "/orderDetail");
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                 },
                 child: Text(
                   "50,000원 결제하기",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -127,39 +134,6 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Column _buildLessonCancel() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "취소 및 환불규정",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 10),
-        Container(
-          height: 150,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Text(
-              "취소 및 환불을 하면 솰라솰라 10회 피티 이용제한이 생기면서 한국 중국 러시아 일본 베트남 말레시아 영국 미국 북한 필리핀 브라질 한국 축구 화이팅입니다",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        )
-      ],
-    );
-  }
-
   Container _buildPurchaseReview() {
     return Container(
       child: Column(
@@ -170,21 +144,21 @@ class LessonDetailPage extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 20,
+            height: gap_l,
           ),
-          _buildReview(),
-          _buildReview(),
-          _buildReview(),
-          _buildReview(),
+          _buildReview("이현성", "https://picsum.photos/206", "대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 진짜 잘알려줘요"),
+          _buildReview("아따맘마", "https://picsum.photos/201", "대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 진짜 잘알려줘요"),
+          _buildReview("아이유", "https://picsum.photos/204", "대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 진짜 잘알려줘요"),
+          _buildReview("드록바", "https://picsum.photos/203", "대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 진짜 잘알려줘요"),
           SizedBox(
-            height: 60,
+            height: gap_xxl,
           ),
         ],
       ),
     );
   }
 
-  Container _buildLessonEvaluation() {
+  Container _buildLessonEvaluation(double evaluation, int totalEvaluation) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,23 +179,23 @@ class LessonDetailPage extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "4.7",
+                    "${evaluation}",
                     style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(width: 15),
+                  SizedBox(width: gap_l),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           _buildStar(CupertinoIcons.star_fill),
-                          SizedBox(width: 5),
+                          SizedBox(width: gap_s),
                           _buildStar(CupertinoIcons.star_fill),
-                          SizedBox(width: 5),
+                          SizedBox(width: gap_s),
                           _buildStar(CupertinoIcons.star_fill),
-                          SizedBox(width: 5),
+                          SizedBox(width: gap_s),
                           _buildStar(CupertinoIcons.star_fill),
-                          SizedBox(width: 5),
+                          SizedBox(width: gap_s),
                           _buildStar(CupertinoIcons.star_fill),
                         ],
                       ),
@@ -229,11 +203,8 @@ class LessonDetailPage extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "124개의 평가",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: gSubTextColor),
+                        "$totalEvaluation개의 평가",
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                       )
                     ],
                   )
@@ -241,15 +212,12 @@ class LessonDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          )
         ],
       ),
     );
   }
 
-  Container _buildReview() {
+  Container _buildReview(String reviewName, String imagePath, String reviewContent) {
     return Container(
       child: Column(
         children: [
@@ -260,9 +228,7 @@ class LessonDetailPage extends StatelessWidget {
                 width: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  image: DecorationImage(
-                      image: NetworkImage("https://picsum.photos/200"),
-                      fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
                 ),
               ),
               SizedBox(width: 20),
@@ -270,7 +236,7 @@ class LessonDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "제갈택",
+                    "${reviewName}",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -290,8 +256,7 @@ class LessonDetailPage extends StatelessWidget {
               )
             ],
           ),
-          Text("대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 방법 진짜 알려줘요",
-              style: TextStyle(fontSize: 16)),
+          Text("${reviewContent}", style: TextStyle(fontSize: 16)),
           SizedBox(
             height: 40,
           ),
@@ -308,13 +273,13 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildLessonExpertInformation() {
+  Container _buildLessonExpertInformation(String title, String name, String content) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "전문가 정보",
+            "${title}",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
@@ -335,9 +300,7 @@ class LessonDetailPage extends StatelessWidget {
                         width: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                              image: NetworkImage("https://picsum.photos/200"),
-                              fit: BoxFit.cover),
+                          image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
                         ),
                       ),
                       SizedBox(width: 10),
@@ -345,115 +308,29 @@ class LessonDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "마르코 선생님",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "연락 가능 시간 01 ~ 03시",
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: gSubTextColor),
+                            "${name}",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                Divider(
-                  thickness: 1,
-                  height: 0,
-                  color: const Color(0xff929AAB),
-                ),
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "총작업수",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: gSubTextColor),
-                            ),
-                            Text(
-                              "만족도",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: gSubTextColor),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(
-                              "150건",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "100%",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "${content}",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
-          SizedBox(
-            height: 20,
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _buildLesoonPlace() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "장소",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 55,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FD),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                "부산광역시 부산진구 홍길동 23422",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          )
         ],
       ),
     );
@@ -490,26 +367,23 @@ class LessonDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          )
         ],
       ),
     );
   }
 
-  Container _buildLessonPlace() {
+  Container _buildLessonContentBox(String title, String content, double heig, int max) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "장소",
+            "${title}",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: gap_m),
           Container(
-            height: 55,
+            height: heig,
             width: double.infinity,
             decoration: BoxDecoration(
               color: const Color(0xffEAF2FD),
@@ -518,153 +392,32 @@ class LessonDetailPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(14.0),
               child: Text(
-                "부산광역시 부산진구 홍길동 23422",
+                "${content}",
                 style: TextStyle(
                   fontSize: 16,
                 ),
+                maxLines: max,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          )
         ],
       ),
     );
   }
 
-  Container _buildLessonTime() {
+  Container _buildLessonTitle(String lessonCategory, String lessonContent, int contentReview) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: gap_xl),
           Text(
-            "수강시간",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FD),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "1회당 레슨시간(분)",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        "105분",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "레슨 횟수",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        "10회",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _buildLessonCurriculum() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 16),
-            child: Text(
-              "120,000원",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            "${lessonCategory}",
+            style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
           ),
           Text(
-            "커리큘럼",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10),
-          Container(
-            height: 55,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FD),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Text(
-                "간단한 서비스 설명",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
-      ),
-    );
-  }
-
-  Container _buildLessonTitle() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 30),
-          Text(
-            "뷰티・운동",
-            style: TextStyle(
-                color: gSubTextColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 14),
-          ),
-          Text(
-            "내몸 상태 바로 알기 내몸에 꼭 맞는 운동",
+            "${lessonContent}",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Padding(
@@ -702,12 +455,10 @@ class LessonDetailPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(width: gap_m),
                 Text(
-                  "평가 16개",
-                  style: TextStyle(
-                      color: gSubTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14),
+                  "평가 $contentReview개",
+                  style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
                 )
               ],
             ),

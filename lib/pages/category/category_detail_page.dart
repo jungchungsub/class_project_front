@@ -1,5 +1,5 @@
-import 'package:finalproject_front/pages/search/search_detail/components/category_datil.dart';
-import 'package:finalproject_front/pages/search/search_detail/components/category_filter.dart';
+import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,30 +15,28 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _buildHeaderCategory(),
-          ),
+          _buildHeaderCategory(),
           Image.asset(
             "assets/home1.jpg",
             fit: BoxFit.cover,
             height: 120,
           ),
-          _buildCategoryFilter(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
-          _buildCategoryDetilaBody(),
+          _buildCategoryFilter("초기화", "예산", 100, "인기순"),
+          _buildCategoryDetilaBody("https://picsum.photos/200", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000"),
+          _buildCategoryDetilaBody("https://picsum.photos/201", "안녕하세요", 45, "10,000"),
+          _buildCategoryDetilaBody("https://picsum.photos/202", "반갑습니다", 45, "20,000"),
+          _buildCategoryDetilaBody("https://picsum.photos/203", "너무너무배고파요", 45, "30,000"),
+          _buildCategoryDetilaBody("https://picsum.photos/204", "운동같이하실분 구합니다. 저는 부산에서 살아요", 45, "40,000"),
+          _buildCategoryDetilaBody("https://picsum.photos/205", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000"),
+          _buildCategoryDetilaBody("https://picsum.photos/206", "깔끔하고 아름다운 디자인을 해드립니다", 45, "60,000"),
         ],
       ),
     );
   }
 
-  Padding _buildCategoryDetilaBody() {
+  Padding _buildCategoryDetilaBody(String imagePath, String categoryTitle, int evaluation, String price) {
     return Padding(
-      padding: const EdgeInsets.only(top: 16, right: 8, bottom: 8, left: 8),
+      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -46,10 +44,13 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
             padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                "assets/home1.jpg",
-                fit: BoxFit.cover,
+              child: Container(
+                height: 90,
                 width: 110,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
+                ),
               ),
             ),
           ),
@@ -59,14 +60,18 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "깔끔하고 아름다운aaaaaaaa2",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  Container(
+                    width: 220,
+                    height: 50,
+                    child: Text(
+                      "${categoryTitle}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
                   ),
                   Row(
                     children: [
@@ -76,10 +81,10 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                         size: 16,
                       ),
                       SizedBox(
-                        width: 8,
+                        width: gap_s,
                       ),
                       Text(
-                        "|   45개의 평가",
+                        "| ${evaluation}개의 평가",
                         style: TextStyle(fontSize: 14),
                       ),
                     ],
@@ -88,9 +93,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        "50,000원",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                        "${price}",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Icon(
                         CupertinoIcons.heart_fill,
@@ -108,14 +112,13 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     );
   }
 
-  Container _buildCategoryFilter() {
+  Container _buildCategoryFilter(String reset, String budget, int total, String filterText) {
     return Container(
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+            padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 OutlinedButton(
                   onPressed: () {},
@@ -127,10 +130,10 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                         size: 16,
                       ),
                       SizedBox(
-                        width: 5,
+                        width: gap_s,
                       ),
                       Text(
-                        "초기화",
+                        "${reset}",
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
                     ],
@@ -140,9 +143,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                     borderRadius: BorderRadius.all(Radius.circular(15)),
                   )),
                 ),
-                _buildMiddleFilterList("예산"),
-                _buildMiddleFilterList("지역"),
-                _buildMiddleFilterList("등급"),
+                SizedBox(width: gap_l),
+                _buildMiddleFilterList("${budget}"),
               ],
             ),
           ),
@@ -153,7 +155,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               children: [
                 Container(
                   child: Text(
-                    "총 100건",
+                    "총 ${total}건",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -167,11 +169,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                         size: 14,
                       ),
                       Text(
-                        "인기순",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
+                        "${filterText}",
+                        style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -202,43 +201,34 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     );
   }
 
-  Row _buildHeaderCategory() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "전체",
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
-        Text(
-          "뷰티・운동",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-        Text(
-          "댄스・뮤직",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-        Text(
-          "미술・문학",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-        Text(
-          "공예・기타",
-          style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff6c6c6c)),
-        ),
-      ],
+  Padding _buildHeaderCategory() {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "전체",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "뷰티・운동",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
+          ),
+          Text(
+            "댄스・뮤직",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
+          ),
+          Text(
+            "미술・문학",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
+          ),
+          Text(
+            "공예・기타",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
+          ),
+        ],
+      ),
     );
   }
 

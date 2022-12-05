@@ -1,4 +1,7 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
+import 'package:finalproject_front/pages/components/custom_text_field.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -13,8 +16,7 @@ class LessonReviewInsertPage extends StatefulWidget {
 }
 
 class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
-  late ScrollController
-      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {
@@ -47,79 +49,14 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                 ),
               ),
               _buildReviewRatingBar(),
-              SizedBox(height: 20),
-              _buildReviewContent(scrollAnimate),
-              SizedBox(height: 20),
-              _buildReviewInsertButton(context),
+              SizedBox(height: gap_l),
+              CustomTextField(scrollAnimate, fieldTitle: "리뷰작성", hint: "악플은 안대요><", lines: 6),
+              SizedBox(height: gap_l),
+              CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "저장하고 완료")
             ],
           ),
         ),
       ),
-    );
-  }
-
-  InkWell _buildReviewInsertButton(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, "/loginMyPage");
-      },
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: gButtonOffColor,
-        ),
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            "저장하고 완료",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Column _buildReviewContent(Function scrollAnimate) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "리뷰 작성",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 10),
-        TextFormField(
-          onTap: (() {
-            scrollAnimate;
-          }),
-          maxLines: 6,
-          decoration: InputDecoration(
-            hintText: "악플은 안대요 ><",
-            hintStyle: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-              color: gSubTextColor,
-            ),
-            //3. 기본 textFormfield 디자인 - enabledBorder
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: gBorderColor, width: 3.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            //마우스 올리고 난 후 스타일
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: gBorderColor, width: 3.0),
-              borderRadius: BorderRadius.circular(15),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -163,17 +100,15 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
 
   void scrollAnimate() {
     Future.delayed(Duration(milliseconds: 600), () {
-      scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
-          duration: Duration(microseconds: 100), curve: Curves.easeIn);
+      scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom, duration: Duration(microseconds: 100), curve: Curves.easeIn);
     });
   }
 
-  Container _buildLessonCard(String lessongImage, String lessonTitle,
-      String expertName, String lessonPrice, String lessongEndDate) {
+  Container _buildLessonCard(String imagePath, String lessonTitle, String expertName, String lessonPrice, String lessongEndDate) {
     return Container(
       child: Column(
         children: [
-          SizedBox(height: 15),
+          SizedBox(height: gap_l),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: gBorderColor, width: 3),
@@ -192,9 +127,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                           width: 110,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                                image: AssetImage("${lessongImage}"),
-                                fit: BoxFit.cover),
+                            image: DecorationImage(image: AssetImage("${imagePath}"), fit: BoxFit.cover),
                           ),
                         ),
                       ),
@@ -208,8 +141,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                           children: [
                             Text(
                               "${lessonTitle}",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -239,7 +171,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
                       )
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: gap_m),
                 ],
               ),
             ),
