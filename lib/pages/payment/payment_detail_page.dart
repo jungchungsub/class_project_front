@@ -38,16 +38,14 @@ class PaymentDetailPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextButton(
-        style: TextButton.styleFrom(
-            backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
+        style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
         onPressed: () {
           Navigator.pushNamed(context, routePath);
           //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
         },
         child: Text(
           "다음",
-          style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -79,8 +77,7 @@ class PaymentDetailPage extends StatelessWidget {
   TextFormField _buildTextFormField(String text) {
     return TextFormField(
       //1. 값이 없으면 plase enter some text 경고 화면 표시
-      validator: (value) =>
-          value!.isEmpty ? "${text}을 입력해주세요." : null, // 입력된 값은 value에 저장된다.
+      validator: (value) => value!.isEmpty ? "${text}을 입력해주세요." : null, // 입력된 값은 value에 저장된다.
       // 2. 해당 textformfield가 비밀번호 입력 양식이라면 ***표시 처리 해줌.
       obscureText: text == "Password" ? true : false,
       decoration: InputDecoration(
@@ -92,23 +89,23 @@ class PaymentDetailPage extends StatelessWidget {
           ),
           //3. 기본 textFormfield 디자인 - enabledBorder
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           ),
           //4. 터치시 TextFormField디자인 - focusedBorder
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           ),
           //5. 에러 발생시 TextformField디자인 - errorBorder
           errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           ),
 
           //6. 에러 발생 후 손가락 터치 디자인  - focusedErrorBorder
           focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           )),
     );
@@ -132,7 +129,7 @@ class PaymentDetailPage extends StatelessWidget {
             SizedBox(height: gap_m),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: gBorderColor, width: 3),
+                border: Border.all(color: gClientColor, width: 3),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: PaymentPeriod(),
@@ -167,15 +164,14 @@ class PaymentDetailPage extends StatelessWidget {
                   width: 220,
                   height: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(color: gBorderColor, width: 3),
+                    border: Border.all(color: gClientColor, width: 3),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       "토스",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -305,10 +301,7 @@ class _PaymentPeriodState extends State<PaymentPeriod> {
         child: DropdownButton2(
           hint: Text(
             '일시불',
-            style: TextStyle(
-                fontSize: 14,
-                color: gPrimaryColor,
-                fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 14, color: gPrimaryColor, fontWeight: FontWeight.bold),
           ),
           items: items
               .map((item) => DropdownMenuItem<String>(
@@ -317,10 +310,7 @@ class _PaymentPeriodState extends State<PaymentPeriod> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         item,
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ))
