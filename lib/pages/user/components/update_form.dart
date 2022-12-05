@@ -1,6 +1,9 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
+import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
 import 'package:flutter/material.dart';
+
+import '../../../size.dart';
 
 class CustomForm extends StatefulWidget {
   @override
@@ -38,6 +41,21 @@ class _CustomFormState extends State<CustomForm> {
             SizedBox(height: 6),
             _buildTextField("비밀번호", _passwordController, scrollAnimate),
             SizedBox(height: 6),
+            Container(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "관심사 선택",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  SizedBox(height: gap_m),
+                  CategorySelectButton(),
+                ],
+              ),
+            ),
             //개인 정보 제공 동의 폼 필요 -> API
             SizedBox(height: 50),
             CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "수정완료")
@@ -69,12 +87,12 @@ class _CustomFormState extends State<CustomForm> {
             decoration: InputDecoration(
               //3. 기본 textFormfield 디자인 - enabledBorder
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
+                borderSide: BorderSide(color: gClientColor, width: 3.0),
                 borderRadius: BorderRadius.circular(10),
               ),
               //마우스 올리고 난 후 스타일
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gBorderColor, width: 3.0),
+                borderSide: BorderSide(color: gClientColor, width: 3.0),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
