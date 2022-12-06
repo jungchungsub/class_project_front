@@ -1,4 +1,4 @@
-class UserReqDto {
+class UserRespDto {
   String username;
   String password;
   String email;
@@ -6,7 +6,7 @@ class UserReqDto {
   String role;
   List<int> categoryId;
 
-  UserReqDto(
+  UserRespDto(
       {required this.username,
       required this.password,
       required this.email,
@@ -15,7 +15,7 @@ class UserReqDto {
       required this.categoryId});
 
   // json -> dynamic
-  factory UserReqDto.fromJson(Map<String, dynamic> json) => UserReqDto(
+  factory UserRespDto.fromJson(Map<String, dynamic> json) => UserRespDto(
       username: json["username"],
       password: json["password"],
       email: json["email"],
