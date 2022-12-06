@@ -1,7 +1,10 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/dto/request/user_req_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomMainButton extends StatelessWidget {
+class CustomMainButton extends ConsumerWidget {
   final String buttonText;
   final String buttonRoutePath;
   const CustomMainButton({
@@ -11,9 +14,17 @@ class CustomMainButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rc = ref.read(userController);
     return InkWell(
       onTap: () {
+        rc.join(UserReqDto(
+            username: "cos",
+            password: "1234",
+            email: "ssar@naver.com",
+            phoneNum: "01012345678",
+            role: "수강생",
+            categoryId: [1, 2, 3, 4]));
         Navigator.pushNamed(context, "${buttonRoutePath}");
       },
       child: Container(
