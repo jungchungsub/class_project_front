@@ -37,9 +37,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
     Category(id: 7, name: "공예"),
     Category(id: 8, name: "기타"),
   ];
-  final _items = _category
-      .map((category) => MultiSelectItem<Category>(category, category.name))
-      .toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
+  final _items = _category.map((category) => MultiSelectItem<Category>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
 
   List<dynamic> _selectCategory = []; // 담을 공간
   final _multiSelectKey = GlobalKey<FormFieldState>();
@@ -55,9 +53,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
     return MultiSelectDialogField(
       items: _items,
       title: Text("관심사"),
-      //selectedColor: Colors.blue,
       itemsTextStyle: TextStyle(color: Colors.black),
-      // itemsTextStyle: TextStyle(color: Colors.black45),
       isDismissible: true,
       cancelText: Text(
         "취소",
