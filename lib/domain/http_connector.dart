@@ -1,0 +1,41 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart';
+
+final httpConnector = Provider<HttpConnector>((ref) {
+  return HttpConnector();
+});
+
+class HttpConnector {
+// header에 content 타입 필요
+  Map<String, String> headers = {
+    "Content-Type": "application/json;charset=utf-8"
+  };
+
+  final host = "http://localhost:8000";
+  final Client _client = Client();
+
+  Future<Response> get(String path) async {
+    Uri uri = Uri.parse("${host}${path}");
+    Response response = await _client.get(uri);
+    return response;
+  }
+
+  Future<Response> post(String path, String body) async {
+    Uri uri = Uri.parse("${host}${path}");
+    Response response = await _client.post(uri, body: body, headers: headers);
+    print(headers); // 로그인 시 정보 확인
+    return response;
+  }
+
+  Future<Response> delete(String path) async {
+    Uri uri = Uri.parse("${host}${path}");
+    Response response = await _client.delete(uri, headers: headers);
+    return response;
+  }
+
+  Future<Response> put(String path, String body) async {
+    Uri uri = Uri.parse("${host}${path}");
+    Response response = await _client.put(uri, body: body, headers: headers);
+    return response;
+  }
+}
