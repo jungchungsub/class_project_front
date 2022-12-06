@@ -20,11 +20,6 @@ class UserHttpRepository {
 
 // 회원가입
   Future<ResponseDto> join(UserReqDto userReqDto) async {
-    //임시데이터
-
-    userReqDto =
-        UserReqDto(username: "ssar", password: "1234", email: "1234@naver.com", phoneNum: "01012345678", role: "USER", categoryId: [1, 2, 3]);
-
     String body = jsonEncode(userReqDto.toJson()); // 값을 json으로 body에 담아서 전달
     print("body값 확인 ${body}");
     Response resp = await _ref.read(httpConnector).post("/api/join", body);

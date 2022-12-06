@@ -4,6 +4,8 @@ import 'package:finalproject_front/dto/request/user_req_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../dto/request/category_req_dto.dart';
+
 class CustomMainButton extends ConsumerWidget {
   final String buttonText;
   final String buttonRoutePath;
@@ -16,10 +18,24 @@ class CustomMainButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rc = ref.read(userController);
+    List<Category> _selectCategory = [
+      Category(id: 1, name: "뷰티"),
+      Category(id: 2, name: "운동"),
+      Category(id: 3, name: "댄스"),
+    ];
+
     return InkWell(
       onTap: () {
         rc.join(
-            UserReqDto(username: "cos", password: "1234", email: "ssar@naver.com", phoneNum: "01012345678", role: "USER", categoryId: [1, 2, 3, 4]));
+          UserReqDto(
+            username: "cos",
+            password: "1234",
+            email: "ssar@naver.com",
+            phoneNum: "01012345678",
+            role: "USER",
+            category: _selectCategory,
+          ),
+        );
         Navigator.pushNamed(context, "${buttonRoutePath}");
       },
       child: Container(

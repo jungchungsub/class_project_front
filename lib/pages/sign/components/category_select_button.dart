@@ -1,11 +1,9 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet_field.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+
+import '../../../dto/request/category_req_dto.dart';
 
 class CategorySelectButton extends StatefulWidget {
   const CategorySelectButton({super.key});
@@ -14,19 +12,9 @@ class CategorySelectButton extends StatefulWidget {
   State<CategorySelectButton> createState() => _CategorySelectButtonState();
 }
 
-class Category {
-  final int id;
-  final String name;
-
-  Category({
-    required this.id,
-    required this.name,
-  });
-}
-
 class _CategorySelectButtonState extends State<CategorySelectButton> {
   // ignore: prefer_final_fields
-  static List<dynamic> _category = [
+  static List<Category> _category = [
     // 리스트
     Category(id: 1, name: "뷰티"),
     Category(id: 2, name: "운동"),
@@ -39,7 +27,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
   ];
   final _items = _category.map((category) => MultiSelectItem<Category>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
 
-  List<dynamic> _selectCategory = []; // 담을 공간
+  List<Category>? _selectCategory = []; // null이 가능하다, 초기값은 null이다.
   final _multiSelectKey = GlobalKey<FormFieldState>();
   @override
   void initState() {
@@ -50,7 +38,8 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiSelectDialogField(
+    return MultiSelectDialogField<Category>(
+      //버튼에 사용할 value타입을 Category 오브젝트 타입임을 선언
       items: _items,
       title: Text("관심사"),
       itemsTextStyle: TextStyle(color: Colors.black),
@@ -80,8 +69,11 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
         "관심사를 선택해 주세요.",
         style: TextStyle(fontSize: 16, color: gSubTextColor),
       ),
+
       onConfirm: (results) {
-        _selectCategory = results;
+        setState(() {
+          _selectCategory = results;
+        });
         print(_selectCategory);
       },
     );
