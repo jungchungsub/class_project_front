@@ -4,8 +4,8 @@ import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LessonListPage extends StatelessWidget {
-  const LessonListPage({Key? key}) : super(key: key);
+class LessonClientListPage extends StatelessWidget {
+  const LessonClientListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +13,27 @@ class LessonListPage extends StatelessWidget {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          _buildLessonList(context, "https://picsum.photos/201", "/reviewInsert"),
-          _buildLessonList(context, "https://picsum.photos/202", "/reviewInsert"),
-          _buildLessonList(context, "https://picsum.photos/203", "/reviewInsert"),
-          _buildLessonList(context, "https://picsum.photos/204", "/reviewInsert"),
-          _buildLessonList(context, "https://picsum.photos/205", "/reviewInsert"),
-          _buildLessonList(context, "https://picsum.photos/206", "/reviewInsert"),
-          _buildLessonList(context, "https://picsum.photos/207", "/reviewInsert")
+          _buildLessonList(
+              context, "https://picsum.photos/201", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/202", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/203", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/204", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/205", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/206", "/reviewInsert"),
+          _buildLessonList(
+              context, "https://picsum.photos/207", "/reviewInsert")
         ],
       ),
     );
   }
 
-  Container _buildLessonList(BuildContext context, String imagePath, String routePath) {
+  Container _buildLessonList(
+      BuildContext context, String imagePath, String routePath) {
     return Container(
       child: Column(
         children: [
@@ -50,7 +58,9 @@ class LessonListPage extends StatelessWidget {
                             width: 110,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
+                              image: DecorationImage(
+                                  image: NetworkImage("${imagePath}"),
+                                  fit: BoxFit.cover),
                             ),
                           ),
                         ),
@@ -64,7 +74,8 @@ class LessonListPage extends StatelessWidget {
                             children: [
                               Text(
                                 "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -144,7 +155,8 @@ class LessonListPage extends StatelessWidget {
         onPressed: () {},
         child: Text(
           "구매한 클래스",
-          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );

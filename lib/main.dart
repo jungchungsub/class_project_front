@@ -2,8 +2,9 @@ import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_expert_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_list_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
@@ -18,6 +19,7 @@ import 'package:finalproject_front/pages/sign/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page.dart';
+
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
@@ -56,7 +58,8 @@ class MyApp extends StatelessWidget {
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(),
-        "/lessonList": (context) => LessonListPage(),
+        "/lessonClientList": (context) => LessonClientListPage(),
+        "/lessonExpertList": (context) => LessonExpertListPage(),
         "/searchMain": (context) => SearchMainPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(),
