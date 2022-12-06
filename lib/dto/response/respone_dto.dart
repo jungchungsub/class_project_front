@@ -1,8 +1,8 @@
 import 'package:extended_image/extended_image.dart';
 
 class ResponseDto<T> {
-  String msg;
-  T data;
+  String? msg;
+  T? data;
 
   ResponseDto({required this.msg, required this.data});
 

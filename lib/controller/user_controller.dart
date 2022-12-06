@@ -14,14 +14,12 @@ import '../dto/request/user_req_dto.dart';
  * Page가 Controller만 리스닝함.
  */
 final userController = Provider<UserController>((ref) {
-  final userHttpRepositoryPS =
-      ref.read(userHttpRepository); // 컨트롤러 + Repository
+  final userHttpRepositoryPS = ref.read(userHttpRepository); // 컨트롤러 + Repository
   return UserController(ref);
 });
 
 class UserController {
-  final context =
-      navigatorKey.currentContext!; // 모든 컨트롤러가 필요 왜? 어떤 페이지인지 알아야하기 때문
+  final context = navigatorKey.currentContext!; // 모든 컨트롤러가 필요 왜? 어떤 페이지인지 알아야하기 때문
   final Ref _ref;
   UserController(this._ref);
 

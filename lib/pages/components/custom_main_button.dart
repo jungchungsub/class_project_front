@@ -18,13 +18,8 @@ class CustomMainButton extends ConsumerWidget {
     final rc = ref.read(userController);
     return InkWell(
       onTap: () {
-        rc.join(UserReqDto(
-            username: "cos",
-            password: "1234",
-            email: "ssar@naver.com",
-            phoneNum: "01012345678",
-            role: "수강생",
-            categoryId: [1, 2, 3, 4]));
+        rc.join(
+            UserReqDto(username: "cos", password: "1234", email: "ssar@naver.com", phoneNum: "01012345678", role: "USER", categoryId: [1, 2, 3, 4]));
         Navigator.pushNamed(context, "${buttonRoutePath}");
       },
       child: Container(

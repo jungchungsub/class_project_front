@@ -7,9 +7,7 @@ final httpConnector = Provider<HttpConnector>((ref) {
 
 class HttpConnector {
 // header에 content 타입 필요
-  Map<String, String> headers = {
-    "Content-Type": "application/json;charset=utf-8"
-  };
+  Map<String, String> headers = {"Content-Type": "application/json;charset=utf-8"};
 
   final host = "http://localhost:8000";
   final Client _client = Client();
@@ -21,9 +19,13 @@ class HttpConnector {
   }
 
   Future<Response> post(String path, String body) async {
+    print("여긴 실행됨?");
     Uri uri = Uri.parse("${host}${path}");
+    print("uri 값 확인${uri}");
+    print("http_connector에서 body확인${body}");
     Response response = await _client.post(uri, body: body, headers: headers);
-    print(headers); // 로그인 시 정보 확인
+    print("응답 코드는 실행됨?${response}");
+
     return response;
   }
 
