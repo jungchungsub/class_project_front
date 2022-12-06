@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class LessonInsertPage extends StatefulWidget {
   const LessonInsertPage({Key? key}) : super(key: key);
@@ -32,24 +35,30 @@ class _LessonInsertPageState extends State<LessonInsertPage> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                _buildLessonImage("https://picsum.photos/200"),
+                _buildImageInsert(),
+                CustomTextField(scrollAnimate,
+                    fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
+                CustomTextField(scrollAnimate,
+                    fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
+                CustomTextField(scrollAnimate,
+                    fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
+                CustomTextField(scrollAnimate,
+                    fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
-                SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
+                CustomTextField(scrollAnimate,
+                    fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
                 _buildLessonCategory(),
-                _buildLessonDeadLine(),
                 SizedBox(height: gap_l),
-                CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "프로필 등록"),
+                _buildDeadLine(),
+                SizedBox(height: gap_l),
+                CustomMainButton(
+                    buttonRoutePath: "/loginMyPage", buttonText: "프로필 등록"),
                 SizedBox(height: gap_l),
               ],
             ),
@@ -93,7 +102,7 @@ class _LessonInsertPageState extends State<LessonInsertPage> {
             children: [
               Text(
                 "카테고리 선택",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -116,86 +125,6 @@ class _LessonInsertPageState extends State<LessonInsertPage> {
   // Container _buildLessonContentBox(Function scrollAnimate, String text, String content, int lines) {
   //   return;
   // }
-
-  Container _buildLessonImage(String imagePath) {
-    return Container(
-      child: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 100,
-                    width: 180,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "클래스 사진 등록",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Text(
-                      "apple.jpg",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: gSubTextColor,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 15),
-                    InkWell(
-                      onTap: (() {
-                        //클래스 등록하기로 가는 링크
-                      }),
-                      child: Container(
-                        width: 120,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: gContentBoxColor,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text(
-                            "사진 등록하기",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: gButtonOffColor,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   AppBar _buildAppbar(BuildContext context) {
     return AppBar(
@@ -269,12 +198,9 @@ class _CategoryPeriodState extends State<CategoryPeriod> {
           items: items
               .map((item) => DropdownMenuItem<String>(
                     value: item,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Text(
-                        item,
-                        style: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
+                    child: Text(
+                      item,
+                      style: const TextStyle(fontSize: 14, color: Colors.black),
                     ),
                   ))
               .toList(),
@@ -290,77 +216,162 @@ class _CategoryPeriodState extends State<CategoryPeriod> {
   }
 }
 
-class _buildLessonDeadLine extends StatefulWidget {
-  const _buildLessonDeadLine({Key? key}) : super(key: key);
+class _buildDeadLine extends StatefulWidget {
+  const _buildDeadLine({Key? key}) : super(key: key);
 
   @override
-  State<_buildLessonDeadLine> createState() => _buildLessonDeadLineState();
+  State<_buildDeadLine> createState() => _buildDeadLineState();
 }
 
-class _buildLessonDeadLineState extends State<_buildLessonDeadLine> {
+class _buildDeadLineState extends State<_buildDeadLine> {
+  TextEditingController dateInput = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: gap_l,
+          Text(
+            "마감일자",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "마감일자",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextButton(
-            onPressed: () {
-              _buildShowDatePickerPop();
-            },
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                border: Border.all(color: gBorderColor, width: 3),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '',
-                  style: TextStyle(
-                    color: gSubTextColor,
+          SizedBox(height: gap_m),
+          Container(
+              decoration: BoxDecoration(),
+              child: Center(
+                  child: TextField(
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: gClientColor, width: 3.0),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  //마우스 올리고 난 후 스타일
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: gClientColor, width: 3.0),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-              ),
-            ),
-          ),
+                controller: dateInput,
+                //TextField의 편집 컨트롤러
+                readOnly: true,
+                //true로 설정하면 사용자가 텍스트를 편집할 수 없습니다.
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      //DateTime.now() - 오늘 전에는 선택못하게
+                      lastDate: DateTime(2100));
+
+                  if (pickedDate != null) {
+                    print(
+                        pickedDate); //pickDate 출력 형식 => 2021-03-10 00:00:00.000
+                    String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                    print(
+                        formattedDate); //intl 패키지를 사용하여 형식화된 날짜 출력 =>  2021-03-16
+                    setState(() {
+                      dateInput.text =
+                          formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
+                    });
+                  } else {}
+                },
+              ))),
         ],
       ),
     );
   }
+}
 
-  void _buildShowDatePickerPop() {
-    Future<DateTime?> selectedDate = showDatePicker(
-      context: context,
-      initialDate: DateTime.now(), //초기값
-      firstDate: DateTime(2020), //시작일
-      lastDate: DateTime(2023), //마지막일
-      builder: (BuildContext context, Widget? child) {
-        return Theme(
-          data: ThemeData.dark(), //다크 테마
-          child: child!,
-        );
-      },
+class _buildImageInsert extends StatefulWidget {
+  const _buildImageInsert({Key? key}) : super(key: key);
+
+  @override
+  State<_buildImageInsert> createState() => __buildImageInsertState();
+}
+
+class __buildImageInsertState extends State<_buildImageInsert> {
+  XFile? _pickedFile;
+  final ImagePicker imgpicker = ImagePicker();
+  XFile? imagefile;
+
+  @override
+  Widget build(BuildContext context) {
+    final _imageSize = MediaQuery.of(context).size.width / 4;
+    return Column(
+      children: [
+        _builderImageUploader(),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
     );
+  }
 
-    selectedDate.then((dateTime) {
-      Fluttertoast.showToast(
-        msg: dateTime.toString(),
-        toastLength: Toast.LENGTH_LONG,
-        //gravity: ToastGravity.CENTER,  //위치(default 는 아래)
-      );
-    });
+  openImages() async {
+    try {
+      var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
+      //you can use ImageCourse.camera for Camera capture
+      if (pickedfile != null) {
+        imagefile = pickedfile;
+        setState(() {});
+      } else {
+        print("No image is selected.");
+      }
+    } catch (e) {
+      print("error while picking file.");
+    }
+  }
+
+  Widget _builderImageUploader() {
+    return Row(
+      children: [
+        //open button ----------------
+        imagefile != null
+            ? Container(
+                child: Card(
+                child: Container(
+                  width: 180,
+                  height: 100,
+                  child: Image.file(
+                    File(imagefile!.path),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ))
+            : Container(),
+        SizedBox(width: gap_m),
+        Container(
+          height: 90,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "클래스 사진 등록",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 30,
+                width: 140,
+                child: ElevatedButton(
+                  onPressed: () {
+                    openImages();
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: gContentBoxColor,
+                    primary: gPrimaryColor,
+                  ),
+                  child: Text("이미지 선택",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

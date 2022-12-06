@@ -35,7 +35,8 @@ class UserLoginMyPage extends StatelessWidget {
                 SizedBox(height: gap_s),
                 ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
                 SizedBox(height: gap_s),
-                ServiceText(routePath: "/lessonList", serviceText: "수강중인 레슨"),
+                ServiceText(
+                    routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
                 SizedBox(height: gap_s),
                 ServiceText(routePath: "/customerService", serviceText: "고객센터"),
                 SizedBox(height: gap_s),
@@ -48,8 +49,6 @@ class UserLoginMyPage extends StatelessWidget {
                 ServiceText(
                     routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
                 SizedBox(height: gap_s),
-                ServiceText(routePath: "/testImage", serviceText: "카메라"),
-                SizedBox(height: gap_xl),
                 BottomImageBox(),
               ],
             ),
