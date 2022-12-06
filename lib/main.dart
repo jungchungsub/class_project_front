@@ -1,3 +1,4 @@
+import 'package:finalproject_front/models/lesson.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/orderDetail": (context) => OrderDetailPage(),
-        "/lessonDetail": (context) => LessonDetailPage(),
+        "/lessonDetail": (context) => LessonDetailPage(lesson: lessonList[0]),
         "/categoryDetail": (context) => CategoryDetailPage(),
 
         "/loginMyPage": (context) => UserLoginMyPage(),

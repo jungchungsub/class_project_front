@@ -1,11 +1,13 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/lesson.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LessonDetailPage extends StatelessWidget {
-  const LessonDetailPage({Key? key}) : super(key: key);
+  final Lesson lesson;
+  const LessonDetailPage({required this.lesson, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,8 @@ class LessonDetailPage extends StatelessWidget {
                         child: Container(
                             child: Column(
                           children: [
-                            _buildLessonTitle(),
+                            _buildLessonTitle(lesson.lessonTitle,
+                                "내 몸 상태 바로 알기 내몸에 꼭 맞는 운동", 16)
                           ],
                         )),
                       ),
@@ -39,15 +42,7 @@ class LessonDetailPage extends StatelessWidget {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 16, bottom: 16),
-                              child: Text(
-                                "120,000원",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                            _buildLessonPrice("50,000"),
                             _buildLessonContentBox(
                                 "커리큘럼", "간단한 서비스 설명", 120, 2),
                             _buildLessonContentBox("레슨시간", "108분", 55, 1),
@@ -62,7 +57,7 @@ class LessonDetailPage extends StatelessWidget {
                                 6),
                             _buildLessonExpertInformation("전문가 정보", "김동진",
                                 "한국대학교 경호학과 졸업, 다수 대회에서 수상경력 있습니다."),
-                            _buildLessonEvaluation(),
+                            _buildLessonEvaluation(4.6, 124),
                             _buildPurchaseReview(),
                           ],
                         )),
@@ -73,11 +68,20 @@ class LessonDetailPage extends StatelessWidget {
               ),
               //container같은 보통위젯들은 바로 주지 못한다.
               //만약사용하고 싶다면 아래와 같이 SliverToBoxAdapter로 감싸준다.
-              SliverToBoxAdapter(child: Container()),
             ],
           ),
         );
       },
+    );
+  }
+
+  Padding _buildLessonPrice(String lessonPrice) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 16),
+      child: Text(
+        "${lessonPrice}원",
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
     );
   }
 
@@ -132,10 +136,6 @@ class LessonDetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "구매후기 62개",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
           SizedBox(
             height: 20,
           ),
@@ -151,7 +151,7 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildLessonEvaluation() {
+  Container _buildLessonEvaluation(double evaluation, int totalReview) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +172,7 @@ class LessonDetailPage extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "4.7",
+                    "${evaluation}",
                     style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(width: 15),
@@ -196,7 +196,7 @@ class LessonDetailPage extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "124개의 평가",
+                        "${totalReview}개의 평가",
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -499,21 +499,22 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildLessonTitle() {
+  Container _buildLessonTitle(
+      String lessonCategory, String lessonTitle, int lessonReview) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 30),
           Text(
-            "뷰티・운동",
+            "${lessonCategory}",
             style: TextStyle(
                 color: gSubTextColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 14),
           ),
           Text(
-            "내몸 상태 바로 알기 내몸에 꼭 맞는 운동",
+            "${lessonTitle}",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Padding(
@@ -552,7 +553,7 @@ class LessonDetailPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "평가 16개",
+                  "평가 ${lessonReview}개",
                   style: TextStyle(
                       color: gSubTextColor,
                       fontWeight: FontWeight.bold,
