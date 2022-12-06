@@ -339,7 +339,10 @@ class __buildImageInsertState extends State<_buildImageInsert> {
                   ),
                 ),
               ))
-            : Container(),
+            : Container(
+                width: 180,
+                height: 100,
+              ),
         SizedBox(width: gap_m),
         Container(
           height: 90,
