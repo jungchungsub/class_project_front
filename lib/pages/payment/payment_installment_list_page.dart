@@ -14,179 +14,95 @@ class PaymentInstallmentListPage extends StatelessWidget {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          _buildInstallmentLists(),
+          _buildInstallmentLists(context),
         ],
       ),
     );
   }
 
-  Column _buildInstallmentLists() {
+  Column _buildInstallmentLists(
+    BuildContext context,
+  ) {
     return Column(
       children: [
         SizedBox(height: gap_l),
-        _buildSalesList(
-          "https://picsum.photos/201",
-          "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-          "웹개발",
-          "15",
-          "50,000원",
-          "22.01.09",
-        ),
+        _buildSalesList(context, "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다", "50,000",
+            "22.01.09", "/lessonDetail"),
         SizedBox(height: gap_l),
-        _buildSalesList(
-          "https://picsum.photos/201",
-          "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-          "웹개발",
-          "15",
-          "50,000원",
-          "22.01.09",
-        ),
+        _buildSalesList(context, "출장 메이크업을 합리적인 가격에 진행해 드립니다", "77,000",
+            "22.01.09", "/lessonDetail"),
         SizedBox(height: gap_l),
-        _buildSalesList(
-          "https://picsum.photos/201",
-          "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-          "웹개발",
-          "15",
-          "50,000원",
-          "22.01.09",
-        ),
+        _buildSalesList(context, "천연향료 에센셜오일을 알아본 후 향수를 만들어드립니다", "70,000",
+            "22.01.09", "/lessonDetail"),
         SizedBox(height: gap_l),
-        _buildSalesList(
-          "https://picsum.photos/201",
-          "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-          "웹개발",
-          "15",
-          "50,000원",
-          "22.01.09",
-        ),
+        _buildSalesList(context, "레슨경력 7년차 전문댄서가 맞춤형 댄스 수업해 드립니다", "50,000",
+            "22.01.09", "/lessonDetail"),
         SizedBox(height: gap_l),
-        _buildSalesList(
-          "https://picsum.photos/201",
-          "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-          "웹개발",
-          "15",
-          "50,000원",
-          "22.01.09",
-        ),
+        _buildSalesList(context, "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다", "50,000",
+            "22.01.09", "/lessonDetail"),
         SizedBox(height: gap_l),
-        _buildSalesList(
-          "https://picsum.photos/201",
-          "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-          "웹개발",
-          "15",
-          "50,000원",
-          "22.01.09",
-        ),
+        _buildSalesList(context, "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다", "50,000",
+            "22.01.09", "/lessonDetail"),
+        SizedBox(height: gap_l),
+        _buildSalesList(context, "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다", "50,000",
+            "22.01.09", "/lessonDetail"),
+        SizedBox(height: gap_l),
+        _buildSalesList(context, "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다", "50,000",
+            "22.01.09", "/lessonDetail"),
+        SizedBox(height: gap_l),
       ],
     );
   }
 
-  Container _buildSalesList(String imagePath, String Saletitle, String category, String total, String price, String date) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: gBorderColor, width: 3),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Container(
-                        height: 90,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
+  InkWell _buildSalesList(
+      context, String saletitle, String price, String date, String routePath) {
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, "${routePath}");
+      },
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: gBorderColor, width: 3),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 320,
+                        height: 50,
+                        child: Text(
+                          "${saletitle}.",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: 230,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 230,
-                                child: Text(
-                                  "${Saletitle}.",
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            "카테고리 : ${category}",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Text(
-                            "총판매 : ${total}개",
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Text(
-                            "가격 : ${price}원",
-                            style: TextStyle(fontSize: 12),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: gap_m),
-                InkWell(
-                  onTap: (() {
-                    //클래스 수정하기로 가는 링크
-                  }),
-                  child: Container(
-                    width: double.infinity,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: gContentBoxColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${date}",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: gButtonOffColor,
-                            ),
-                            textAlign: TextAlign.center,
+                            "가격 : ${price}원",
+                            style: TextStyle(fontSize: 14),
                           ),
                           Text(
-                            "결제 완료",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: gButtonOffColor,
-                            ),
-                            textAlign: TextAlign.center,
+                            "결제 날짜 : ${date}",
+                            style: TextStyle(fontSize: 14),
                           ),
                         ],
-                      ),
-                    ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
         ),
