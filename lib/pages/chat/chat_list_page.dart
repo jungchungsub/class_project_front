@@ -117,7 +117,7 @@ class _ChatListPageState extends State<ChatListPage> {
               hintStyle: TextStyle(fontWeight: FontWeight.bold),
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: gBorderColor,
+                  color: gClientColor,
                   width: 1,
                 ),
               ),

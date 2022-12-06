@@ -26,7 +26,7 @@ class ProfileCareerSeleteButton extends StatelessWidget {
           SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: gBorderColor, width: 3),
+              border: Border.all(color: gClientColor, width: 3),
               borderRadius: BorderRadius.circular(10),
             ),
             child: ProfileCareerPeriod(),
