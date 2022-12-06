@@ -92,23 +92,23 @@ class PaymentDetailPage extends StatelessWidget {
           ),
           //3. 기본 textFormfield 디자인 - enabledBorder
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           ),
           //4. 터치시 TextFormField디자인 - focusedBorder
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           ),
           //5. 에러 발생시 TextformField디자인 - errorBorder
           errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           ),
 
           //6. 에러 발생 후 손가락 터치 디자인  - focusedErrorBorder
           focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: gBorderColor, width: 3.0),
+            borderSide: BorderSide(color: gClientColor, width: 3.0),
             borderRadius: BorderRadius.circular(10),
           )),
     );
@@ -132,7 +132,7 @@ class PaymentDetailPage extends StatelessWidget {
             SizedBox(height: gap_m),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: gBorderColor, width: 3),
+                border: Border.all(color: gClientColor, width: 3),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: PaymentPeriod(),
@@ -167,7 +167,7 @@ class PaymentDetailPage extends StatelessWidget {
                   width: 220,
                   height: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(color: gBorderColor, width: 3),
+                    border: Border.all(color: gClientColor, width: 3),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(

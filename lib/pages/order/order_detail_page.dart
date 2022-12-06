@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:finalproject_front/constants.dart';
+
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +64,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: [
                     Icon(
                       CupertinoIcons.check_mark_circled,
-                      color: Color(0xff8A8A8A),
+                      color: gClientColor,
                     ),
                     SizedBox(
                       width: gap_l,
