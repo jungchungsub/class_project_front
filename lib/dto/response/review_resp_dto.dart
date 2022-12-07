@@ -5,7 +5,7 @@ class ReviewRespDto {
 
   String username;
   String reviewContent;
-  Double lessonGrade;
+  double lessonGrade;
 
   ReviewRespDto({
     required this.username,

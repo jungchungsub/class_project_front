@@ -4,9 +4,9 @@ import 'review_resp_dto.dart';
 
 class LessonRespDto {
   String lessonName;
-  Int lessonPrice;
-  Int lessonTime;
-  Int lessonCount;
+  int lessonPrice;
+  int lessonTime;
+  int lessonCount;
   String lessonPlace;
   String possibleDays;
   String lessonPolicy;
