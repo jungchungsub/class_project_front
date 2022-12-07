@@ -14,23 +14,25 @@ class UserLogoutMyPage extends StatelessWidget {
     final String text;
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: BottomImageBox(),
-          ),
-          _buildDivider(),
-          _buildServiceText(context, "/loginDivision", "로그인"),
-          _buildDivider(),
-          _buildServiceText(context, "/joinDivision", "회원가입"),
-          _buildDivider(),
-          _buildServiceText(context, "/join", "알람 설정"),
-          _buildDivider(),
-          _buildServiceText(context, "/join", "고객센터"),
-          _buildDivider(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: BottomImageBox(),
+            ),
+            _buildDivider(),
+            _buildServiceText(context, "/loginDivision", "로그인"),
+            _buildDivider(),
+            _buildServiceText(context, "/joinDivision", "회원가입"),
+            _buildDivider(),
+            _buildServiceText(context, "/join", "알람 설정"),
+            _buildDivider(),
+            _buildServiceText(context, "/join", "고객센터"),
+            _buildDivider(),
+          ],
+        ),
       ),
     );
   }

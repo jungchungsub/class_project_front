@@ -30,22 +30,26 @@ class _LoginPageState extends State<LoginPage> {
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(gap_l),
-          child: ListView(children: [
-            CustomTextField(scrollAnimate, fieldTitle: "아이디", hint: "아이디를 입력해주세요.", lines: 1),
-            SizedBox(height: gap_l),
-            CustomTextField(scrollAnimate, fieldTitle: "비밀번호", hint: "비밀번호를 입력해주세요.", lines: 1),
-            SizedBox(height: gap_l),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                _buildOauthLogin("assets/kakaologin.png"),
-                SizedBox(width: gap_l),
-                _buildOauthLogin("assets/applelogin.png"),
+                CustomTextField(scrollAnimate, fieldTitle: "아이디", hint: "아이디를 입력해주세요.", lines: 1),
+                SizedBox(height: gap_l),
+                CustomTextField(scrollAnimate, fieldTitle: "비밀번호", hint: "비밀번호를 입력해주세요.", lines: 1),
+                SizedBox(height: gap_l),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildOauthLogin("assets/kakaologin.png"),
+                    SizedBox(width: gap_l),
+                    _buildOauthLogin("assets/applelogin.png"),
+                  ],
+                ),
+                SizedBox(height: gap_l),
+                CustomMainButton(buttonRoutePath: "/main", buttonText: "로그인"),
               ],
             ),
-            SizedBox(height: gap_l),
-            CustomMainButton(buttonRoutePath: "/main", buttonText: "로그인"),
-          ]),
+          ),
         ),
       ),
     );
