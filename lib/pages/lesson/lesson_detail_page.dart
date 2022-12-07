@@ -1,6 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/models/lesson.dart';
+import 'package:finalproject_front/models/review.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -31,7 +32,7 @@ class LessonDetailPage extends StatelessWidget {
                         child: Container(
                             child: Column(
                           children: [
-                            _buildLessonTitle("뷰티・운동", lesson.LessonName, 16)
+                            _buildLessonTitle("뷰티・운동", lesson.lessonName, 16)
                           ],
                         )),
                       ),
@@ -139,10 +140,18 @@ class LessonDetailPage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
-          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
-          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
-          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
+          _buildReview(
+            lesson.reviewTotal[0].username,
+            lesson.reviewTotal[0].reviewContent,
+          ),
+          _buildReview(
+            lesson.reviewTotal[1].username,
+            lesson.reviewTotal[1].reviewContent,
+          ),
+          _buildReview(
+            lesson.reviewTotal[0].username,
+            lesson.reviewTotal[0].reviewContent,
+          ),
           SizedBox(
             height: 60,
           ),
