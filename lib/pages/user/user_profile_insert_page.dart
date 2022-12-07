@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';
 import 'package:finalproject_front/size.dart';
@@ -45,6 +46,8 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
               ProfileCareerSeleteButton(),
               SizedBox(height: gap_l),
               CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1),
+              SizedBox(height: gap_l),
+              CustomMainButton(buttonRoutePath: "/profileDetail", buttonText: "저장하기")
             ],
           ),
         ),

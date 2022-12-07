@@ -6,20 +6,20 @@ class UserReqDto {
   String email;
   String phoneNum;
   String role;
-  List<Category> category;
+  List<CategoryReqDto> category;
 
   UserReqDto(
       {required this.username, required this.password, required this.email, required this.phoneNum, required this.role, required this.category});
 
   // json -> dynamic
   factory UserReqDto.fromJson(Map<String, dynamic> json) => UserReqDto(
-      username: json["username"],
-      password: json["password"],
-      email: json["email"],
-      phoneNum: json["phoneNum"],
-      role: json["role"],
-      category: json["category"]);
-
+        username: json["username"],
+        password: json["password"],
+        email: json["email"],
+        phoneNum: json["phoneNum"],
+        role: json["role"],
+        category: (json["category"].map((e) => e == null ? null : CategoryReqDto.fromJson(e).toJson())),
+      );
 // dynamic -> json
   Map<String, dynamic> toJson() => {
         "username": username,
