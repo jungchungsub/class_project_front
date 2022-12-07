@@ -1,8 +1,11 @@
+import 'package:finalproject_front/models/search_lesson_resp_Dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchDetailPage extends StatefulWidget {
+  const SearchDetailPage({Key? key}) : super(key: key);
+
   @override
   State<SearchDetailPage> createState() => _SearchDetailPageState();
 }
@@ -15,13 +18,13 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
       body: ListView(
         children: [
           _buildCategoryFilter(),
-          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/201"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/202"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/203"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/204"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/205"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/206")
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200", "안녕하세요 아름답고 깔끔한 디자인 웹을 만들어 드립니다. 아무나 연락부탁드립니다", 50000),
         ],
       ),
     );
@@ -52,7 +55,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
     );
   }
 
-  Padding _buildCategoryDetail(String routePath, String imagePath) {
+  Padding _buildCategoryDetail(String routePath, String imagePath, String lessonTitle, int lessonPrice) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
@@ -87,7 +90,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
                         width: 220,
                         height: 50,
                         child: Text(
-                          "깔끔하고 아름다운 웹디자인을 해드립니다아아.",
+                          "${lessonTitle}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -116,7 +119,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
-                            "50,000원",
+                            "${lessonPrice}",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(

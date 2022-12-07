@@ -137,7 +137,7 @@ class LessonDetailPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 20,
+            height: gap_l,
           ),
           _buildReview(
             lesson.reviewTotal[0].username,
@@ -152,7 +152,7 @@ class LessonDetailPage extends ConsumerWidget {
             lesson.reviewTotal[2].reviewContent,
           ),
           SizedBox(
-            height: 60,
+            height: gap_xxl,
           ),
         ],
       ),

@@ -13,27 +13,19 @@ class LessonExpertListPage extends StatelessWidget {
       appBar: _buildAppbar(context),
       body: ListView(
         children: [
-          _buildLessonList(
-              context, "https://picsum.photos/201", "/lessonUpdate"),
-          _buildLessonList(
-              context, "https://picsum.photos/202", "/lessonUpdate"),
-          _buildLessonList(
-              context, "https://picsum.photos/203", "/lessonUpdate"),
-          _buildLessonList(
-              context, "https://picsum.photos/204", "/lessonUpdate"),
-          _buildLessonList(
-              context, "https://picsum.photos/205", "/lessonUpdate"),
-          _buildLessonList(
-              context, "https://picsum.photos/206", "/lessonUpdate"),
-          _buildLessonList(
-              context, "https://picsum.photos/207", "/lessonUpdate")
+          _buildLessonList(context, "https://picsum.photos/201", "/lessonUpdate"),
+          _buildLessonList(context, "https://picsum.photos/202", "/lessonUpdate"),
+          _buildLessonList(context, "https://picsum.photos/203", "/lessonUpdate"),
+          _buildLessonList(context, "https://picsum.photos/204", "/lessonUpdate"),
+          _buildLessonList(context, "https://picsum.photos/205", "/lessonUpdate"),
+          _buildLessonList(context, "https://picsum.photos/206", "/lessonUpdate"),
+          _buildLessonList(context, "https://picsum.photos/207", "/lessonUpdate")
         ],
       ),
     );
   }
 
-  Container _buildLessonList(
-      BuildContext context, String imagePath, String routePath) {
+  Container _buildLessonList(BuildContext context, String imagePath, String routePath) {
     return Container(
       child: Column(
         children: [
@@ -58,9 +50,7 @@ class LessonExpertListPage extends StatelessWidget {
                             width: 110,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                  image: NetworkImage("${imagePath}"),
-                                  fit: BoxFit.cover),
+                              image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
                             ),
                           ),
                         ),
@@ -74,8 +64,7 @@ class LessonExpertListPage extends StatelessWidget {
                             children: [
                               Text(
                                 "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -155,8 +144,7 @@ class LessonExpertListPage extends StatelessWidget {
         onPressed: () {},
         child: Text(
           "클래스 리스트",
-          style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );

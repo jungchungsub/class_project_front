@@ -1,5 +1,6 @@
 import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
+import 'package:finalproject_front/models/search_lesson_resp_Dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
