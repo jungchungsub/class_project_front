@@ -164,8 +164,8 @@ class LessonDetailPage extends ConsumerWidget {
             lesson.reviewTotal[1].reviewContent,
           ),
           _buildReview(
-            lesson.reviewTotal[0].username,
-            lesson.reviewTotal[0].reviewContent,
+            lesson.reviewTotal[2].username,
+            lesson.reviewTotal[2].reviewContent,
           ),
           SizedBox(
             height: 60,
@@ -243,6 +243,7 @@ class LessonDetailPage extends ConsumerWidget {
   Container _buildReview(String username, String reviewContent) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
