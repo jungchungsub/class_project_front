@@ -26,16 +26,16 @@ class CustomMainButton extends ConsumerWidget {
 
     return InkWell(
       onTap: () {
-        rc.join(
-          UserReqDto(
-            username: "cos",
-            password: "1234",
-            email: "ssar@naver.com",
-            phoneNum: "01012345678",
-            role: "USER",
-            category: _selectCategory,
-          ),
-        );
+        // rc.join(
+        //   UserReqDto(
+        //     username: "cos",
+        //     password: "1234",
+        //     email: "ssar@naver.com",
+        //     phoneNum: "01012345678",
+        //     role: "USER",
+        //     category: _selectCategory,
+        //   ),
+        // );
         Navigator.pushNamed(context, "${buttonRoutePath}");
       },
       child: Container(

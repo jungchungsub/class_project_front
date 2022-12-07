@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class UserProfileDetailPage extends StatelessWidget {
-  const UserProfileDetailPage({super.key});
+  final Profile profile;
+  const UserProfileDetailPage({required this.profile, super.key});
 
   @override
   Widget build(BuildContext context) {
