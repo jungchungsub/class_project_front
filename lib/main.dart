@@ -1,4 +1,5 @@
-import 'package:finalproject_front/models/lesson.dart';
+import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
+import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
 
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
-        "/profileDetail": (context) => UserProfileDetailPage(),
+        "/profileDetail": (context) => UserProfileDetailPage(profile: profileList[0]),
         "/lessonClientList": (context) => LessonClientListPage(),
         "/lessonExpertList": (context) => LessonExpertListPage(),
         "/searchMain": (context) => SearchMainPage(),

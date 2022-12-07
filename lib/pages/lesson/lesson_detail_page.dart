@@ -2,7 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/pages/lesson/store/lesson_detail_page_store.dart';
-import 'package:finalproject_front/models/lesson.dart';
+import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/models/review.dart';
 import 'package:finalproject_front/size.dart';
 
@@ -36,9 +36,7 @@ class LessonDetailPage extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
                             child: Column(
-                          children: [
-                            _buildLessonTitle("뷰티・운동", lesson.lessonName, 16)
-                          ],
+                          children: [_buildLessonTitle("뷰티・운동", lesson.lessonName, 16)],
                         )),
                       ),
                       _buildDivider(),
@@ -49,30 +47,19 @@ class LessonDetailPage extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 16, bottom: 16),
+                              padding: const EdgeInsets.only(top: 16, bottom: 16),
                               child: Text(
                                 "120,000원",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            _buildLessonContentBox(
-                                "커리큘럼", "간단한 서비스 설명", 120, 2),
-                            _buildLessonContentBox(
-                                "레슨시간", "${rm.lessonTime}", 55, 1),
-                            _buildLessonContentBox(
-                                "레슨횟수", "${rm.lessonCount}", 55, 1),
-                            _buildLessonContentBox(
-                                "장소", "${rm.lessonPlace}", 55, 1),
+                            _buildLessonContentBox("커리큘럼", "간단한 서비스 설명", 120, 2),
+                            _buildLessonContentBox("레슨시간", "${rm.lessonTime}", 55, 1),
+                            _buildLessonContentBox("레슨횟수", "${rm.lessonCount}", 55, 1),
+                            _buildLessonContentBox("장소", "${rm.lessonPlace}", 55, 1),
                             _buildLessonPossibleDate(lesson.possibleDays),
-                            _buildLessonContentBox(
-                                "취소 및 환불규정", "${rm.lessonPolicy}", 200, 6),
-                            _buildLessonExpertInformation(
-                                "https://picsum.photos/200",
-                                "전문가정보",
-                                "${rm.masterName}",
-                                "${rm.masterIntroduction}"),
+                            _buildLessonContentBox("취소 및 환불규정", "${rm.lessonPolicy}", 200, 6),
+                            _buildLessonExpertInformation("https://picsum.photos/200", "전문가정보", "${rm.masterName}", "${rm.masterIntroduction}"),
                             _buildLessonEvaluation(4.2, 500),
                             _buildPurchaseReview(ref),
                           ],
@@ -120,10 +107,7 @@ class LessonDetailPage extends ConsumerWidget {
                 },
                 child: Text(
                   "구매",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -221,10 +205,7 @@ class LessonDetailPage extends ConsumerWidget {
                       ),
                       Text(
                         "${totalReview}개의 평가",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: gSubTextColor),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                       )
                     ],
                   )
@@ -252,9 +233,7 @@ class LessonDetailPage extends ConsumerWidget {
                 width: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  image: DecorationImage(
-                      image: NetworkImage("https://picsum.photos/200"),
-                      fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
                 ),
               ),
               SizedBox(width: 20),
@@ -298,8 +277,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Container _buildLessonExpertInformation(
-      String image, String title, String name, String content) {
+  Container _buildLessonExpertInformation(String image, String title, String name, String content) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,9 +304,7 @@ class LessonDetailPage extends ConsumerWidget {
                         width: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
-                          image: DecorationImage(
-                              image: NetworkImage("${image}"),
-                              fit: BoxFit.cover),
+                          image: DecorationImage(image: NetworkImage("${image}"), fit: BoxFit.cover),
                         ),
                       ),
                       SizedBox(width: 10),
@@ -337,8 +313,7 @@ class LessonDetailPage extends ConsumerWidget {
                         children: [
                           Text(
                             "${name}",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -346,14 +321,12 @@ class LessonDetailPage extends ConsumerWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 16, bottom: 16, right: 16),
+                  padding: const EdgeInsets.only(left: 16, bottom: 16, right: 16),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "${content}",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.normal),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -478,8 +451,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Container _buildLessonContentBox(
-      String title, String content, double heig, int max) {
+  Container _buildLessonContentBox(String title, String content, double heig, int max) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -553,8 +525,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Container _buildLessonTitle(
-      String lessonCategory, String lessonTitle, int lessonReview) {
+  Container _buildLessonTitle(String lessonCategory, String lessonTitle, int lessonReview) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -562,10 +533,7 @@ class LessonDetailPage extends ConsumerWidget {
           SizedBox(height: 30),
           Text(
             "${lessonCategory}",
-            style: TextStyle(
-                color: gSubTextColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 14),
+            style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
           ),
           Text(
             "${lessonTitle}",
@@ -608,10 +576,7 @@ class LessonDetailPage extends ConsumerWidget {
                 ),
                 Text(
                   "평가 ${lessonReview}개",
-                  style: TextStyle(
-                      color: gSubTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14),
+                  style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
                 )
               ],
             ),
