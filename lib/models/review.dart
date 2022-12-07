@@ -21,13 +21,13 @@ List<Review> reviewList = [
   ),
   Review(
     id: 2,
-    username: "정충섭",
-    reviewContent: "너무좋았어요",
+    username: "아이유",
+    reviewContent: "너무좋았어요감사합니다아아아아아아아아아아아아아아아아",
     lessonGrade: 4.5,
   ),
   Review(
     id: 3,
-    username: "정충섭",
+    username: "이현성",
     reviewContent: "너무좋았어요",
     lessonGrade: 4.5,
   ),
