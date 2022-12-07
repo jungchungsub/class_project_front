@@ -15,7 +15,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
       body: ListView(
         children: [
           _buildCategoryFilter(),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/200"),
+          _buildCategoryDetail("/lessonDetail", "https://picsum.photos/200"),
           _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/201"),
           _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/202"),
           _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/203"),
