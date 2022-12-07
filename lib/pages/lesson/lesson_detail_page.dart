@@ -1,18 +1,23 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/lesson_controller.dart';
+import 'package:finalproject_front/pages/lesson/store/lesson_detail_page_store.dart';
 import 'package:finalproject_front/models/lesson.dart';
 import 'package:finalproject_front/models/review.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LessonDetailPage extends StatelessWidget {
+class LessonDetailPage extends ConsumerWidget {
   final Lesson lesson;
   const LessonDetailPage({required this.lesson, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rc = ref.read(lessonController);
+    final rm = ref.watch(lessonDetailPageStore);
     return LayoutBuilder(
       // layoutBuilder안에 넣는 이유는 해당디바이스 사이즈를 알기위해서 넣어준다.
       builder: (context, constrains) {
@@ -43,23 +48,33 @@ class LessonDetailPage extends StatelessWidget {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildLessonPrice(lesson.lessonPrice),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 16, bottom: 16),
+                              child: Text(
+                                "120,000원",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                            ),
                             _buildLessonContentBox(
                                 "커리큘럼", "간단한 서비스 설명", 120, 2),
-                            _buildLessonBox("레슨시간", lesson.lessonTime, 55, 1),
-                            _buildLessonBox("레슨횟수", lesson.lessonCount, 55, 1),
                             _buildLessonContentBox(
-                                "장소", "부산광역시 부산진구 홍길동", 55, 1),
+                                "레슨시간", "${rm.lessonTime}", 55, 1),
+                            _buildLessonContentBox(
+                                "레슨횟수", "${rm.lessonCount}", 55, 1),
+                            _buildLessonContentBox(
+                                "장소", "${rm.lessonPlace}", 55, 1),
                             _buildLessonPossibleDate(lesson.possibleDays),
                             _buildLessonContentBox(
-                                "취소 및 환불규정", lesson.lessonPolicy, 200, 6),
+                                "취소 및 환불규정", "${rm.lessonPolicy}", 200, 6),
                             _buildLessonExpertInformation(
-                                lesson.masterImage,
-                                "전문가 정보",
-                                lesson.masterName,
-                                lesson.masterIntroduction),
-                            _buildLessonEvaluation(4.6, 124),
-                            _buildPurchaseReview(),
+                                "https://picsum.photos/200",
+                                "전문가정보",
+                                "${rm.masterName}",
+                                "${rm.masterIntroduction}"),
+                            _buildLessonEvaluation(4.2, 500),
+                            _buildPurchaseReview(ref),
                           ],
                         )),
                       ),
@@ -132,7 +147,7 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildPurchaseReview() {
+  Container _buildPurchaseReview(WidgetRef ref) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

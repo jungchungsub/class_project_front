@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 
