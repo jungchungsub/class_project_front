@@ -14,20 +14,20 @@ class CategorySelectButton extends StatefulWidget {
 
 class _CategorySelectButtonState extends State<CategorySelectButton> {
   // ignore: prefer_final_fields
-  static List<Category> _category = [
+  static List<CategoryReqDto> _category = [
     // 리스트
-    Category(id: 1, name: "뷰티"),
-    Category(id: 2, name: "운동"),
-    Category(id: 3, name: "댄스"),
-    Category(id: 4, name: "뮤직"),
-    Category(id: 5, name: "미술"),
-    Category(id: 6, name: "문학"),
-    Category(id: 7, name: "공예"),
-    Category(id: 8, name: "기타"),
+    CategoryReqDto(id: 1, name: "뷰티"),
+    CategoryReqDto(id: 2, name: "운동"),
+    CategoryReqDto(id: 3, name: "댄스"),
+    CategoryReqDto(id: 4, name: "뮤직"),
+    CategoryReqDto(id: 5, name: "미술"),
+    CategoryReqDto(id: 6, name: "문학"),
+    CategoryReqDto(id: 7, name: "공예"),
+    CategoryReqDto(id: 8, name: "기타"),
   ];
-  final _items = _category.map((category) => MultiSelectItem<Category>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
+  final _items = _category.map((category) => MultiSelectItem<CategoryReqDto>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
 
-  List<Category>? _selectCategory = []; // null이 가능하다, 초기값은 null이다.
+  List<CategoryReqDto>? _selectCategory = []; // null이 가능하다, 초기값은 null이다.
   final _multiSelectKey = GlobalKey<FormFieldState>();
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiSelectDialogField<Category>(
+    return MultiSelectDialogField<CategoryReqDto>(
       //버튼에 사용할 value타입을 Category 오브젝트 타입임을 선언
       items: _items,
       title: Text("관심사"),

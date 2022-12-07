@@ -1,4 +1,5 @@
 class UserRespDto {
+  // 수정 필요
   String username;
   String password;
   String email;
@@ -7,12 +8,7 @@ class UserRespDto {
   List<int> categoryId;
 
   UserRespDto(
-      {required this.username,
-      required this.password,
-      required this.email,
-      required this.phoneNum,
-      required this.role,
-      required this.categoryId});
+      {required this.username, required this.password, required this.email, required this.phoneNum, required this.role, required this.categoryId});
 
   // json -> dynamic
   factory UserRespDto.fromJson(Map<String, dynamic> json) => UserRespDto(
@@ -24,12 +20,6 @@ class UserRespDto {
       categoryId: json["categoryId"]);
 
 // dynamic -> json
-  Map<String, dynamic> toJson() => {
-        "username": username,
-        "password": password,
-        "email": email,
-        "phoneNum": phoneNum,
-        "role": role,
-        "categoryId": categoryId
-      };
+  Map<String, dynamic> toJson() =>
+      {"username": username, "password": password, "email": email, "phoneNum": phoneNum, "role": role, "categoryId": categoryId};
 }

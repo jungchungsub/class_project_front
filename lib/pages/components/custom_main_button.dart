@@ -18,10 +18,10 @@ class CustomMainButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rc = ref.read(userController);
-    List<Category> _selectCategory = [
-      Category(id: 1, name: "뷰티"),
-      Category(id: 2, name: "운동"),
-      Category(id: 3, name: "댄스"),
+    List<CategoryReqDto> _selectCategory = [
+      CategoryReqDto(id: 1, name: "뷰티"),
+      CategoryReqDto(id: 2, name: "운동"),
+      CategoryReqDto(id: 3, name: "댄스"),
     ];
 
     return InkWell(
