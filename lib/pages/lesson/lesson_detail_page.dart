@@ -1,6 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/models/lesson.dart';
+import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,7 @@ class LessonDetailPage extends StatelessWidget {
                         child: Container(
                             child: Column(
                           children: [
-                            _buildLessonTitle(lesson.lessonTitle,
-                                "내 몸 상태 바로 알기 내몸에 꼭 맞는 운동", 16)
+                            _buildLessonTitle("뷰티・운동", lesson.LessonName, 16)
                           ],
                         )),
                       ),
@@ -42,21 +42,21 @@ class LessonDetailPage extends StatelessWidget {
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildLessonPrice("50,000"),
+                            _buildLessonPrice(lesson.lessonPrice),
                             _buildLessonContentBox(
                                 "커리큘럼", "간단한 서비스 설명", 120, 2),
-                            _buildLessonContentBox("레슨시간", "108분", 55, 1),
-                            _buildLessonContentBox("레슨횟수", "10회", 55, 1),
+                            _buildLessonBox("레슨시간", lesson.lessonTime, 55, 1),
+                            _buildLessonBox("레슨횟수", lesson.lessonCount, 55, 1),
                             _buildLessonContentBox(
                                 "장소", "부산광역시 부산진구 홍길동", 55, 1),
-                            _buildLessonPossibleDate(),
+                            _buildLessonPossibleDate(lesson.possibleDays),
                             _buildLessonContentBox(
-                                "취소 및 환불규정",
-                                "취소 및 환불을 하면 솰라솰라 10회 피티 이용제한이 생기면서 한국 중국 러시아 일본 베트남 말레시아 영국 미국 북한 필리핀 브라질",
-                                200,
-                                6),
-                            _buildLessonExpertInformation("전문가 정보", "김동진",
-                                "한국대학교 경호학과 졸업, 다수 대회에서 수상경력 있습니다."),
+                                "취소 및 환불규정", lesson.lessonPolicy, 200, 6),
+                            _buildLessonExpertInformation(
+                                lesson.masterImage,
+                                "전문가 정보",
+                                lesson.masterName,
+                                lesson.masterIntroduction),
                             _buildLessonEvaluation(4.6, 124),
                             _buildPurchaseReview(),
                           ],
@@ -75,7 +75,7 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Padding _buildLessonPrice(String lessonPrice) {
+  Padding _buildLessonPrice(int lessonPrice) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, bottom: 16),
       child: Text(
@@ -103,7 +103,7 @@ class LessonDetailPage extends StatelessWidget {
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                 },
                 child: Text(
-                  "50,000원 결제하기",
+                  "구매",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -139,10 +139,10 @@ class LessonDetailPage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          _buildReview(),
-          _buildReview(),
-          _buildReview(),
-          _buildReview(),
+          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
+          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
+          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
+          _buildReview(lesson.review.usernaeme, lesson.review.reviewContent),
           SizedBox(
             height: 60,
           ),
@@ -216,7 +216,7 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildReview() {
+  Container _buildReview(String username, String reviewContent) {
     return Container(
       child: Column(
         children: [
@@ -237,7 +237,7 @@ class LessonDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "제갈택",
+                    "${username}",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Row(
@@ -257,11 +257,9 @@ class LessonDetailPage extends StatelessWidget {
               )
             ],
           ),
-          Text("대박 한거랑 안한거랑 자신감 차이 머야! 평소에 자연스럽게 못해서 아쉬웠는데 방법 진짜 알려줘요",
-              style: TextStyle(fontSize: 16)),
-          SizedBox(
-            height: 40,
-          ),
+          SizedBox(height: gap_m),
+          Text("${reviewContent}", style: TextStyle(fontSize: 16)),
+          SizedBox(height: gap_xl),
         ],
       ),
     );
@@ -276,7 +274,7 @@ class LessonDetailPage extends StatelessWidget {
   }
 
   Container _buildLessonExpertInformation(
-      String title, String name, String content) {
+      String image, String title, String name, String content) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,7 +302,7 @@ class LessonDetailPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           image: DecorationImage(
-                              image: NetworkImage("https://picsum.photos/200"),
+                              image: NetworkImage("${image}"),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -347,7 +345,7 @@ class LessonDetailPage extends StatelessWidget {
     );
   }
 
-  Container _buildLessonPossibleDate() {
+  Container _buildLessonPossibleDate(String possibleDays) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,19 +362,13 @@ class LessonDetailPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Column(
-                children: [
-                  _buildDate(text: "월요일 : 18:00 ~ 23:00"),
-                  _buildDate(text: "화요일 : 18:00 ~ 23:00"),
-                  _buildDate(text: "수요일 : 18:00 ~ 23:00"),
-                  _buildDate(text: "목요일 : 18:00 ~ 23:00"),
-                  _buildDate(text: "금요일 : 18:00 ~ 23:00"),
-                  _buildDate(text: "토요일 : 18:00 ~ 23:00"),
-                  _buildDate(text: "일요일 : 18:00 ~ 23:00"),
-                ],
-              ),
-            ),
+                padding: const EdgeInsets.all(14.0),
+                child: Text(
+                  "${possibleDays}",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                )),
           ),
           SizedBox(
             height: 20,
@@ -463,6 +455,43 @@ class LessonDetailPage extends StatelessWidget {
 
   Container _buildLessonContentBox(
       String title, String content, double heig, int max) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${title}",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Container(
+            height: heig,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: const Color(0xffEAF2FD),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Text(
+                "${content}",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                maxLines: max,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          )
+        ],
+      ),
+    );
+  }
+
+  Container _buildLessonBox(String title, int content, double heig, int max) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -600,27 +629,5 @@ class LessonDetailPage extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class _buildDate extends StatelessWidget {
-  final String text;
-  const _buildDate({
-    required this.text,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          "${text}",
-          style: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-      ],
-    );
   }
 }
