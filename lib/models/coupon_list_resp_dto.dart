@@ -21,13 +21,13 @@ List<CouponListRespDto> couponListRespDto = [
   ),
   CouponListRespDto(
     id: 2,
-    title: "신규회원 디자인 2만원 할인",
+    title: "5만원 이상 구매시 10000만원 할인",
     price: 20000,
     expiredDate: "2022.12.09",
   ),
   CouponListRespDto(
     id: 3,
-    title: "신규회원 디자인 3만원 할인",
+    title: "3종목 이상 구매시 10% 할인",
     price: 30000,
     expiredDate: "2022.12.10",
   ),
