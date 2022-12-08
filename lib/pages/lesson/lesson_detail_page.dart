@@ -17,12 +17,13 @@ class LessonDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // final rc = ref.read(lessonController);
     // final rm = ref.watch(lessonDetailPageStore);
+
     return LayoutBuilder(
       // layoutBuilder안에 넣는 이유는 해당디바이스 사이즈를 알기위해서 넣어준다.
       builder: (context, constrains) {
         Size _size = MediaQuery.of(context).size; //해당 디바이스의 사이즈를 가지고 온다.
         return Scaffold(
-          bottomSheet: _buildLessonBottomBar(context),
+          bottomSheet: _buildLessonBar(),
           body: CustomScrollView(
             slivers: [
               //child같은 개념이지만 조금 다르다
@@ -84,49 +85,6 @@ class LessonDetailPage extends ConsumerWidget {
       child: Text(
         "${lessonPrice}원",
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Container _buildLessonBottomBar(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 50, width: 300),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Color(0xff4880ED),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, "/orderDetail");
-                  //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
-                },
-                child: Text(
-                  "구매",
-                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            Container(
-              height: 50,
-              decoration: BoxDecoration(
-                border: Border.all(color: gSubButtonColor, width: 2),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                    child: Icon(
-                  CupertinoIcons.heart,
-                )),
-              ),
-            )
-          ],
-        ),
       ),
     );
   }
@@ -507,7 +465,7 @@ class LessonDetailPage extends ConsumerWidget {
     return Divider(
       thickness: 1,
       height: 0,
-      color: gBorderColor,
+      color: gDivider,
     );
   }
 
@@ -536,5 +494,71 @@ class LessonDetailPage extends ConsumerWidget {
             ),
           ),
         ));
+  }
+}
+
+class _buildLessonBar extends StatefulWidget {
+  const _buildLessonBar({Key? key}) : super(key: key);
+
+  @override
+  State<_buildLessonBar> createState() => _buildLessonBarState();
+}
+
+class _buildLessonBarState extends State<_buildLessonBar> {
+  bool subcribeCheck = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints.tightFor(height: 50, width: 300),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Color(0xff4880ED),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, "/orderDetail");
+                  //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
+                },
+                child: Text(
+                  "구매",
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(color: gSubButtonColor, width: 2),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: (subcribeCheck == true)
+                      ? Center(
+                          child: Icon(
+                          CupertinoIcons.heart,
+                        ))
+                      : Center(
+                          child: Icon(
+                          CupertinoIcons.heart_fill,
+                          color: Colors.red,
+                        ))
+
+                  // child: Center(
+                  //     child: Icon(
+                  //   CupertinoIcons.heart,
+                  // )),
+
+                  ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

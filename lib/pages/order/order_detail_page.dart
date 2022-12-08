@@ -16,10 +16,10 @@ class OrderDetailPage extends StatefulWidget {
   State<OrderDetailPage> createState() => _OrderDetailPageState();
 }
 
-int counter = 1;
-int totalPrice = 5000;
-
 class _OrderDetailPageState extends State<OrderDetailPage> {
+  int counter = 1;
+  int totalPrice = 5000;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,126 +32,10 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           _buildMiddleDivider(),
           _buildMoney(),
           _buildMiddleDivider(),
-          _buildPurpose(),
+          _buildPaymentPurpose(),
           _buildMiddleDivider(),
+          _buildAgree(),
           _buildPaymentButton(context, "/paymentCard")
-        ],
-      ),
-    );
-  }
-
-  Container _buildPurpose() {
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
-            child: Row(
-              children: [
-                Text(
-                  "결제방법",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: gap_l),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      CupertinoIcons.check_mark_circled,
-                      color: gClientColor,
-                    ),
-                    SizedBox(
-                      width: gap_l,
-                    ),
-                    Text(
-                      "일반결제",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff8A8A8A),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: gap_l),
-                Container(
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: const Color(0xffF0F0F0), width: 3),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10, left: 4, bottom: 10, right: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: const Color(0xffF0F0F0), width: 3),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8, right: 32, bottom: 8, left: 32),
-                            child: Text(
-                              "신용카드",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: const Color(0xffF0F0F0), width: 3),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8, right: 32, bottom: 8, left: 32),
-                            child: Text(
-                              "무통장 입금",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: gap_l),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: gap_l),
-                  child: Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.circle,
-                        color: Color(0xff8A8A8A),
-                      ),
-                      SizedBox(
-                        width: gap_l,
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset("assets/kakaoPay.png",
-                            fit: BoxFit.cover, height: 30),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: gap_l),
-              ],
-            ),
-          ),
         ],
       ),
     );
@@ -181,17 +65,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: [
                     Text(
                       "총 서비스 금액",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
                     ),
                     Text(
                       "${totalPrice}원",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
                     ),
                   ],
                 ),
@@ -201,17 +79,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: [
                     Text(
                       "쿠폰 할인",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
                     ),
                     Text(
                       "0원",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
                     ),
                   ],
                 ),
@@ -229,15 +101,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     children: [
                       Text(
                         "총 결제금액",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         "${totalPrice}원",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff4880ED)),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff4880ED)),
                       ),
                     ],
                   ),
@@ -285,13 +153,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                           children: [
                             Text(
                               "1회당 레슨시간(분)",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               "105분",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -306,13 +172,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                           children: [
                             Text(
                               "레슨 횟수",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               "10회",
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -325,9 +189,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("$totalPrice",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text("$totalPrice", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       Container(
                         width: 120,
                         child: Row(
@@ -345,9 +207,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                                 child: Icon(CupertinoIcons.minus),
                               ),
                             ),
-                            Text("${counter}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold)),
+                            Text("${counter}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                             InkWell(
                               onTap: () {
                                 setState(() {
@@ -390,21 +250,14 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                     width: 250,
                     child: Text(
                       "유튜브로 홈트하기 - 전세계의 운동 영상을",
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child: Text("드록바쌤",
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: const Color(0xff787272),
-                            fontWeight: FontWeight.bold)),
+                    child: Text("드록바쌤", style: TextStyle(fontSize: 14, color: const Color(0xff787272), fontWeight: FontWeight.bold)),
                   )
                 ],
               ),
@@ -413,9 +266,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 width: 90,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: NetworkImage("https://picsum.photos/200"),
-                      fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
                 ),
               ),
             ],
@@ -427,49 +278,22 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   Container _buildPaymentButton(BuildContext context, String routePath) {
     return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 24.0, bottom: 24.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(CupertinoIcons.app),
-                    SizedBox(width: gap_m),
-                    Text(
-                      "주문 내용을 확인하였으며, 결제에 동의합니다.(필수)",
-                      style: TextStyle(fontSize: 14),
-                    )
-                  ],
-                ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+        child: ConstrainedBox(
+          constraints: BoxConstraints.tightFor(height: 50),
+          child: TextButton(
+            style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
+            onPressed: () {
+              Navigator.pushNamed(context, routePath);
+              //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
+            },
+            child: Text(
+              "${totalPrice}원 결제하기",
+              style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-            child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 50),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff4880ED),
-                    minimumSize: Size(340, 50)),
-                onPressed: () {
-                  Navigator.pushNamed(context, routePath);
-                  //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
-                },
-                child: Text(
-                  "${totalPrice}원 결제하기",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -512,6 +336,169 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
         ),
       ),
       centerTitle: true,
+    );
+  }
+}
+
+class _buildPaymentPurpose extends StatefulWidget {
+  const _buildPaymentPurpose({Key? key}) : super(key: key);
+
+  @override
+  State<_buildPaymentPurpose> createState() => __buildPaymentPurposeState();
+}
+
+class __buildPaymentPurposeState extends State<_buildPaymentPurpose> {
+  bool? _ischecked = true;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16, left: 20, right: 20),
+            child: Row(
+              children: [
+                Text(
+                  "결제방법",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: gap_l),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: [
+                    Checkbox(
+                        value: _ischecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            this._ischecked = value;
+                          });
+                        }),
+                    SizedBox(
+                      width: gap_l,
+                    ),
+                    Text(
+                      "일반결제",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff8A8A8A),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: gap_l),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: const Color(0xffF0F0F0), width: 3),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 4, bottom: 10, right: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xffF0F0F0), width: 3),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8, right: 32, bottom: 8, left: 32),
+                            child: Text(
+                              "신용카드",
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xffF0F0F0), width: 3),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8, right: 32, bottom: 8, left: 32),
+                            child: Text(
+                              "무통장 입금",
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: gap_l),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: gap_l),
+                  child: Row(
+                    children: [
+                      Checkbox(
+                          value: _ischecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this._ischecked = value!;
+                            });
+                          }),
+                      SizedBox(
+                        width: gap_l,
+                      ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.asset("assets/kakaoPay.png", fit: BoxFit.cover, height: 30),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: gap_l),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _buildAgree extends StatefulWidget {
+  const _buildAgree({Key? key}) : super(key: key);
+
+  @override
+  State<_buildAgree> createState() => __buildAgreeState();
+}
+
+class __buildAgreeState extends State<_buildAgree> {
+  bool? _ischecked = true;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0, bottom: 12.0, left: 15, right: 15),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Checkbox(
+                  value: _ischecked,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      this._ischecked = value;
+                    });
+                  }),
+              SizedBox(width: gap_m),
+              Text(
+                "주문 내용을 확인하였으며, 결제에 동의합니다.(필수)",
+                style: TextStyle(fontSize: 14),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
