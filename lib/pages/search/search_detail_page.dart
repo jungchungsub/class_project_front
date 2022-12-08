@@ -1,3 +1,4 @@
+import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/models/search_lesson_resp_Dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -127,7 +128,57 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
 
   OutlinedButton _buildMiddleFilterList(String textButton) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: () {
+        showModalBottomSheet(
+            context: context,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            builder: (context) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    textColor: gPrimaryColor,
+                    title: Text('1만 원 미만'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('1~5만 원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('5~10만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('10~15만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('15~20만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('20만원 이상'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            });
+      },
       child: Row(
         children: [
           Text(

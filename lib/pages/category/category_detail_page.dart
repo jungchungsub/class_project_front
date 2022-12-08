@@ -107,7 +107,55 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
 
   OutlinedButton _buildMiddleFilterList(String text) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    textColor: gPrimaryColor,
+                    title: Text('1만 원 미만'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('1~5만 원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('5~10만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('10~15만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('15~20만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('20만원 이상'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+              ;
+            });
+      },
       child: Row(
         children: [
           Text(

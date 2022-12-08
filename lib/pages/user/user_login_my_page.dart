@@ -43,6 +43,8 @@ class UserLoginMyPage extends StatelessWidget {
                   SizedBox(height: gap_s),
                   ServiceText(routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
                   SizedBox(height: gap_s),
+                  ServiceText(routePath: "/test", serviceText: "등록한레슨 전문가"),
+                  SizedBox(height: gap_s),
                   BottomImageBox(),
                 ],
               ),
