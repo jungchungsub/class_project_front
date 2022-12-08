@@ -44,6 +44,9 @@ class CustomTextField extends StatelessWidget {
             onTap: (() {
               scrollAnimate;
             }),
+            // onChanged: (value) { 데이터 저장해야함.
+
+            // },
             controller: fieldController,
             keyboardType: TextInputType.multiline,
             maxLines: lines,

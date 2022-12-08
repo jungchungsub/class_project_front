@@ -20,6 +20,7 @@ import 'package:finalproject_front/pages/sign/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page.dart';
+import 'package:finalproject_front/pages/subscribe/subscribe_main_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
@@ -62,24 +63,23 @@ class MyApp extends StatelessWidget {
         "/orderDetail": (context) => OrderDetailPage(),
         "/lessonDetail": (context) => LessonDetailPage(lesson: lessonList[0]),
         "/categoryDetail": (context) => CategoryDetailPage(),
-
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
-        "/profileDetail": (context) => UserProfileDetailPage(),
+        "/profileDetail": (context) => UserProfileDetailPage(), // 더미 적용
         "/lessonClientList": (context) => LessonClientListPage(),
         "/lessonExpertList": (context) => LessonExpertListPage(),
-        "/searchMain": (context) => SearchMainPage(),
+        "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
-        "/profileInsert": (context) => UserProfileInsertPage(),
+        "/profileInsert": (context) => UserProfileInsertPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
         "/lessonUpdate": (context) => LessonUpdatePage(),
         "/chatList": (context) => ChatListPage(),
-
+        "/subscribePage": (context) => SubscribePage(), // 더미 적용
         "/userUpdate": (context) => UserUpdatePage(),
         "/reviewInsert": (context) => LessonReviewInsertPage(),
-        "/searchDetail": (context) => SearchDetailPage(),
+        "/searchDetail": (context) => SearchDetailPage(), // 더미 적용
         "/lessonInsert": (context) => LessonInsertPage(),
       },
       theme: theme(),

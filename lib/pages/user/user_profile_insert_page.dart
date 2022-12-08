@@ -103,11 +103,11 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
   }
 }
 
-Widget _buildProfileImage(BuildContext context, String imagePath) {
+Widget _buildProfileImage(BuildContext context, String profileImagePath) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(150),
     child: Image.asset(
-      "${imagePath}",
+      "${profileImagePath}",
       width: 80,
       height: 80,
       fit: BoxFit.cover,

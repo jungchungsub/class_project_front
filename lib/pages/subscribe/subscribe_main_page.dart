@@ -2,14 +2,14 @@ import 'package:finalproject_front/models/subscribe_list_resp_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SubscribeMainPage extends StatefulWidget {
-  const SubscribeMainPage({Key? key}) : super(key: key);
+class SubscribePage extends StatefulWidget {
+  const SubscribePage({Key? key}) : super(key: key);
 
   @override
-  State<SubscribeMainPage> createState() => _SubscribeMainPageState();
+  State<SubscribePage> createState() => _SubscribePageState();
 }
 
-class _SubscribeMainPageState extends State<SubscribeMainPage> {
+class _SubscribePageState extends State<SubscribePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

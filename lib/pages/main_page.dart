@@ -30,8 +30,8 @@ class _MainPageState extends State<MainPage> {
       index: _selectedIndex, //아이콘클릭시 화면 이동
       children: [
         HomePage(),
-        SearchMainPage(),
-        SubscribeMainPage(),
+        SearchPage(),
+        SubscribePage(),
         ChatListPage(),
         UserLoginMyPage(),
       ],
