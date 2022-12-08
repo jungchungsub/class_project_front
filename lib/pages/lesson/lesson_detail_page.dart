@@ -35,7 +35,7 @@ class LessonDetailPage extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
                             child: Column(
-                          children: [_buildLessonTitle("뷰티・운동", lessonList[0].lessonName, 16)],
+                          children: [_buildLessonTitle("뷰티・운동", lessonList[0].lessonName, lessonList[0].totalReview)],
                         )),
                       ),
                       _buildDivider(),
@@ -441,7 +441,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Container _buildLessonTitle(String lessonCategory, String lessonTitle, int lessonReview) {
+  Container _buildLessonTitle(String lessonCategory, String lessonTitle, int totalReview) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -490,8 +490,9 @@ class LessonDetailPage extends ConsumerWidget {
                     ],
                   ),
                 ),
+                SizedBox(width: gap_s),
                 Text(
-                  "평가 ${lessonReview}개",
+                  "평가 ${totalReview}개",
                   style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
                 )
               ],

@@ -8,6 +8,7 @@ import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
+import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_card_page.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         "/loginDivision": (context) => LoginDivisionPage(),
         "/login": (context) => LoginPage(),
         "/join": (context) => JoinPage(),
+        "/home": (context) => HomePage(), //더미 적용
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
@@ -66,7 +68,7 @@ class MyApp extends StatelessWidget {
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(), // 더미 적용
-        "/lessonClientList": (context) => LessonClientListPage(),
+        "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
         "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),

@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -155,12 +156,12 @@ class lessonDetail extends StatelessWidget {
             width: 160,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(image: NetworkImage("https://picsum.photos/id/${itemIndex + 1}/200"), fit: BoxFit.cover),
+              image: DecorationImage(image: NetworkImage("${lessonList[itemIndex].lessonImage}"), fit: BoxFit.cover),
             ),
           ),
           SizedBox(height: gap_m),
           Text(
-            "안녕하세요 저희 서비스에 오셔서 감사합니다. ",
+            lessonList[itemIndex].lessonName,
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -170,7 +171,7 @@ class lessonDetail extends StatelessWidget {
               Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
               SizedBox(width: gap_m),
               Text(
-                "4.5 | 25개의 평가",
+                "${lessonList[itemIndex].reviewDtoList[0].lessonGrade} | ${lessonList[itemIndex].totalReview} 개의 평가",
                 style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
               ),
             ],
@@ -178,7 +179,7 @@ class lessonDetail extends StatelessWidget {
           Row(
             children: [
               Text(
-                "50000원",
+                "${lessonList[itemIndex].lessonPrice}원",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
