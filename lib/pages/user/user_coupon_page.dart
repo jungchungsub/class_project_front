@@ -37,7 +37,7 @@ class UserCouponPage extends StatelessWidget {
                       text: "사용 가능한 쿠폰",
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    // ViewStore만들고 데이터 가공 필요함.
+                    // ViewModel만들고 데이터 가공 필요함.
                     TextSpan(text: "12", style: TextStyle(fontSize: 16, color: gButtonOffColor, fontWeight: FontWeight.bold)),
                   ],
                 ),
@@ -163,7 +163,18 @@ class CouponCard extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+            // border: Border(
+            //   top: BorderSide(width: 3.0, color: gBorderColor),
+            //   bottom: BorderSide(width: 3.0, color: gBorderColor),
+            //   left: BorderSide(width: 3.0, color: gPrimaryColor),
+            //   right: BorderSide(width: 3.0, color: gBorderColor),
+            // ),
+            // color: Colors.white,
             border: Border.all(color: gBorderColor, width: 3),
+            gradient: LinearGradient(
+              stops: [0.02, 0.02],
+              colors: [gPrimaryColor, Colors.white],
+            ),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(
@@ -184,7 +195,7 @@ class CouponCard extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         children: [
-                          // ViewStore만들고 난 이후 데이터 가공 필요함.
+                          // ViewModel만들고 난 이후 데이터 가공 필요함.
                           TextSpan(text: "10", style: TextStyle(fontSize: 14, color: gButtonOffColor, fontWeight: FontWeight.bold)),
                           TextSpan(text: " 일 남음", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                         ],
