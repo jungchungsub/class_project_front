@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/master_lesson_list_resp_dto.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -10,22 +11,47 @@ class LessonExpertListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(context),
-      body: ListView(
-        children: [
-          _buildLessonList(context, "https://picsum.photos/201", "/lessonUpdate"),
-          _buildLessonList(context, "https://picsum.photos/202", "/lessonUpdate"),
-          _buildLessonList(context, "https://picsum.photos/203", "/lessonUpdate"),
-          _buildLessonList(context, "https://picsum.photos/204", "/lessonUpdate"),
-          _buildLessonList(context, "https://picsum.photos/205", "/lessonUpdate"),
-          _buildLessonList(context, "https://picsum.photos/206", "/lessonUpdate"),
-          _buildLessonList(context, "https://picsum.photos/207", "/lessonUpdate")
-        ],
+        appBar: _buildAppbar(context),
+        body: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: masterLessonList.length,
+            itemBuilder: ((BuildContext context, int index) {
+              return LessonExpertList(itemIndex: index);
+            })));
+  }
+
+  AppBar _buildAppbar(context) {
+    return AppBar(
+      elevation: 1.0,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          CupertinoIcons.back,
+          color: Colors.black,
+          size: 26,
+        ),
+      ),
+      centerTitle: true,
+      title: TextButton(
+        onPressed: () {},
+        child: Text(
+          "클래스 리스트",
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
+}
 
-  Container _buildLessonList(BuildContext context, String imagePath, String routePath) {
+class LessonExpertList extends StatelessWidget {
+  final int itemIndex;
+  const LessonExpertList({required this.itemIndex, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
@@ -50,7 +76,7 @@ class LessonExpertListPage extends StatelessWidget {
                             width: 110,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
+                              image: DecorationImage(image: NetworkImage("${masterLessonList[itemIndex].photo}"), fit: BoxFit.cover),
                             ),
                           ),
                         ),
@@ -63,21 +89,21 @@ class LessonExpertListPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
+                                "${masterLessonList[itemIndex].name}",
                                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                "전문가 : 유리아",
+                                "전문가 : ${masterLessonList[itemIndex].userDto.username}",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "50000원",
+                                "${masterLessonList[itemIndex].price}",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "마감일자 : 2022.12.07",
+                                "마감일자 : ${masterLessonList[itemIndex].expiredAt}",
                                 style: TextStyle(fontSize: 12),
                               )
                             ],
@@ -88,7 +114,7 @@ class LessonExpertListPage extends StatelessWidget {
                     SizedBox(height: 10),
                     InkWell(
                       onTap: (() {
-                        Navigator.pushNamed(context, "${routePath}");
+                        // Navigator.pushNamed(context, "${routePath}");
                       }),
                       child: Container(
                         width: double.infinity,
@@ -101,7 +127,7 @@ class LessonExpertListPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
                             onTap: (() {
-                              Navigator.pushNamed(context, "${routePath}");
+                              // Navigator.pushNamed(context, "${routePath}");
                             }),
                             child: Text(
                               "수정하기",
@@ -122,30 +148,6 @@ class LessonExpertListPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  AppBar _buildAppbar(context) {
-    return AppBar(
-      elevation: 1.0,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(
-          CupertinoIcons.back,
-          color: Colors.black,
-          size: 26,
-        ),
-      ),
-      centerTitle: true,
-      title: TextButton(
-        onPressed: () {},
-        child: Text(
-          "클래스 리스트",
-          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
       ),
     );
   }
