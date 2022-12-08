@@ -11,13 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LessonDetailPage extends ConsumerWidget {
-  final Lesson lesson;
-  const LessonDetailPage({required this.lesson, Key? key}) : super(key: key);
+  const LessonDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rc = ref.read(lessonController);
-    final rm = ref.watch(lessonDetailPageStore);
+    // final rc = ref.read(lessonController);
+    // final rm = ref.watch(lessonDetailPageStore);
     return LayoutBuilder(
       // layoutBuilder안에 넣는 이유는 해당디바이스 사이즈를 알기위해서 넣어준다.
       builder: (context, constrains) {
@@ -36,7 +35,7 @@ class LessonDetailPage extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
                             child: Column(
-                          children: [_buildLessonTitle("뷰티・운동", lesson.lessonName, 16)],
+                          children: [_buildLessonTitle("뷰티・운동", lessonList[0].lessonName, lessonList[0].totalReview)],
                         )),
                       ),
                       _buildDivider(),
@@ -49,17 +48,18 @@ class LessonDetailPage extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 16, bottom: 16),
                               child: Text(
-                                "120,000원",
+                                "${lessonList[0].lessonPrice}원",
                                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            _buildLessonContentBox("커리큘럼", "간단한 서비스 설명", 120, 2),
-                            _buildLessonContentBox("레슨시간", "${rm.lessonTime}", 55, 1),
-                            _buildLessonContentBox("레슨횟수", "${rm.lessonCount}", 55, 1),
-                            _buildLessonContentBox("장소", "${rm.lessonPlace}", 55, 1),
-                            _buildLessonPossibleDate(lesson.possibleDays),
-                            _buildLessonContentBox("취소 및 환불규정", "${rm.lessonPolicy}", 200, 6),
-                            _buildLessonExpertInformation("https://picsum.photos/200", "전문가정보", "${rm.masterName}", "${rm.masterIntroduction}"),
+                            _buildLessonContentBox("커리큘럼", lessonList[0].lessonCurriculum, 120, 2),
+                            _buildLessonContentBox("레슨시간", "${lessonList[0].lessonTime}", 55, 1),
+                            _buildLessonContentBox("레슨횟수", "${lessonList[0].lessonCount}", 55, 1),
+                            _buildLessonContentBox("장소", lessonList[0].lessonPlace, 55, 1),
+                            _buildLessonPossibleDate(lessonList[0].possibleDays),
+                            _buildLessonContentBox("취소 및 환불규정", lessonList[0].lessonPolicy, 200, 6),
+                            _buildLessonExpertInformation(
+                                lessonList[0].profileDto.masterImage, "전문가정보", lessonList[0].masterName, lessonList[0].profileDto.masterIntroduction),
                             _buildLessonEvaluation(4.2, 500),
                             _buildPurchaseReview(ref),
                           ],
@@ -137,22 +137,13 @@ class LessonDetailPage extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 20,
+            height: gap_l,
           ),
-          _buildReview(
-            lesson.reviewTotal[0].username,
-            lesson.reviewTotal[0].reviewContent,
-          ),
-          _buildReview(
-            lesson.reviewTotal[1].username,
-            lesson.reviewTotal[1].reviewContent,
-          ),
-          _buildReview(
-            lesson.reviewTotal[2].username,
-            lesson.reviewTotal[2].reviewContent,
-          ),
+          _buildReview(lessonList[0].reviewDtoList[0].username, lessonList[0].reviewDtoList[0].reviewContent),
+          _buildReview(lessonList[0].reviewDtoList[1].username, lessonList[0].reviewDtoList[1].reviewContent),
+          _buildReview(lessonList[0].reviewDtoList[2].username, lessonList[0].reviewDtoList[2].reviewContent),
           SizedBox(
-            height: 60,
+            height: gap_xxl,
           ),
         ],
       ),
@@ -376,81 +367,6 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Container _buildLessonTime() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "수강시간",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: const Color(0xffEAF2FD),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "1회당 레슨시간(분)",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        "105분",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "레슨 횟수",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        "10회",
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
-      ),
-    );
-  }
-
   Container _buildLessonContentBox(String title, String content, double heig, int max) {
     return Container(
       child: Column(
@@ -525,7 +441,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Container _buildLessonTitle(String lessonCategory, String lessonTitle, int lessonReview) {
+  Container _buildLessonTitle(String lessonCategory, String lessonTitle, int totalReview) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -574,8 +490,9 @@ class LessonDetailPage extends ConsumerWidget {
                     ],
                   ),
                 ),
+                SizedBox(width: gap_s),
                 Text(
-                  "평가 ${lessonReview}개",
+                  "평가 ${totalReview}개",
                   style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
                 )
               ],

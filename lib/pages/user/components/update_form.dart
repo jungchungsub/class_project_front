@@ -19,8 +19,9 @@ class _CustomFormState extends State<CustomForm> {
     scrollController = new ScrollController();
   }
 
+  // 글로벌 keys
   final _formKey = GlobalKey<FormState>();
-  // 글로벌 key
+
   final TextEditingController _emailController = TextEditingController(text: "green1234@naver.com");
   // DB에 저장되어 있는 값을 가져오는 역할.
   final TextEditingController _phoneNumberController = TextEditingController(text: "01012345678");

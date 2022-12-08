@@ -1,44 +1,62 @@
+import 'package:finalproject_front/models/subscribe_list_resp_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LikeMainPage extends StatefulWidget {
-  const LikeMainPage({Key? key}) : super(key: key);
+class SubscribePage extends StatefulWidget {
+  const SubscribePage({Key? key}) : super(key: key);
 
   @override
-  State<LikeMainPage> createState() => _LikeMainPageState();
+  State<SubscribePage> createState() => _SubscribePageState();
 }
 
-class _LikeMainPageState extends State<LikeMainPage> {
+class _SubscribePageState extends State<SubscribePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(),
-      body: ListView(
-        children: [
-          _buildLikeList("/lessonDetail", "https://picsum.photos/201", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/202", "깔끔하고 아름다운 웹디자인을 해드립니다.", 123, "50,000"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/203", "깔끔하고 아름다운 웹디자인을 해드립니다.", 4315, "50,000"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/204", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/205", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-          _buildLikeList("/lessonDetail", "https://picsum.photos/206", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-        ],
-      ),
-    );
+        appBar: _buildAppbar(),
+        body: ListView.builder(
+            shrinkWrap: true, //리스트 자식 높이 크기의 합 만큼으로 영역을 고정 시켜준다.
+            itemCount: subscribeListRespDto.length,
+            itemBuilder: ((BuildContext context, int index) {
+              return SubscribeLesson(itemIndex: index);
+            })));
   }
 
-  Padding _buildLikeList(String routePath, String imagePath, String likeTitle, int likeEvaluation, String price) {
+  AppBar _buildAppbar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 1.0,
+      title: Text(
+        "찜목록",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      centerTitle: true,
+    );
+  }
+}
+
+class SubscribeLesson extends StatelessWidget {
+  final int itemIndex;
+  const SubscribeLesson({required this.itemIndex, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, "${routePath}");
+          Navigator.pushNamed(context, "/lessonDetail");
         },
         child: Container(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
+                padding: const EdgeInsets.only(right: 10, left: 10, top: 4),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -46,7 +64,7 @@ class _LikeMainPageState extends State<LikeMainPage> {
                     width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage("${subscribeListRespDto[itemIndex].lessonDto.photo}"), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -58,10 +76,10 @@ class _LikeMainPageState extends State<LikeMainPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 220,
+                        width: 230,
                         height: 50,
                         child: Text(
-                          "${likeTitle}",
+                          "${subscribeListRespDto[itemIndex].lessonDto.name}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -81,20 +99,20 @@ class _LikeMainPageState extends State<LikeMainPage> {
                             width: 8,
                           ),
                           Text(
-                            "|  ${likeEvaluation}개의 평가",
+                            "|  55개의 평가",
                             style: TextStyle(fontSize: 14),
                           ),
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${price}원",
+                            "${subscribeListRespDto[itemIndex].lessonDto.price}",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
-                            width: 140,
+                            width: 160,
                           ),
                           Icon(
                             CupertinoIcons.heart_fill,
@@ -111,35 +129,6 @@ class _LikeMainPageState extends State<LikeMainPage> {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar _buildAppbar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 1.0,
-      title: Text(
-        "찜목록",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      centerTitle: true,
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(top: 15, right: 20),
-          child: Text(
-            "필터",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
