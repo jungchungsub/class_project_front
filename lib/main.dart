@@ -1,14 +1,12 @@
 import 'package:finalproject_front/models/coupon_list_resp_dto.dart';
 import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
-import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
-import 'package:finalproject_front/models/search_lesson_resp_Dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_expert_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
@@ -23,7 +21,6 @@ import 'package:finalproject_front/pages/sign/join_division_page.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/pages/sign/login_division_page.dart';
 import 'package:finalproject_front/pages/sign/login_page.dart';
-
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
@@ -70,12 +67,12 @@ class MyApp extends StatelessWidget {
 
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
-        "/profileDetail": (context) => UserProfileDetailPage(profile: profileList[0]),
+        "/profileDetail": (context) => UserProfileDetailPage(),
         "/lessonClientList": (context) => LessonClientListPage(),
         "/lessonExpertList": (context) => LessonExpertListPage(),
         "/searchMain": (context) => SearchMainPage(),
         "/customerService": (context) => CustomerServicePage(),
-        "/userCoupon": (context) => UserCouponPage(),
+        "/userCoupon": (context) => UserCouponPage(), // 더미 적용
         "/profileInsert": (context) => UserProfileInsertPage(),
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),

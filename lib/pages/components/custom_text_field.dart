@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CustomTextField extends StatelessWidget {
+  final TextEditingController? fieldController;
   final Function scrollAnimate;
   final String fieldTitle;
   final String? subTitle;
@@ -12,11 +13,7 @@ class CustomTextField extends StatelessWidget {
   final int lines;
 
   const CustomTextField(this.scrollAnimate,
-      {this.subTitle,
-      required this.fieldTitle,
-      required this.hint,
-      required this.lines,
-      Key? key})
+      {this.subTitle, this.fieldController, required this.fieldTitle, required this.hint, required this.lines, Key? key})
       : super(key: key);
 
   @override
@@ -36,10 +33,7 @@ class CustomTextField extends StatelessWidget {
                   if (subTitle != null)
                     TextSpan(
                       text: "${subTitle}",
-                      style: TextStyle(
-                          color: gSubTextColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: gSubTextColor, fontSize: 10, fontWeight: FontWeight.bold),
                     )
                 ],
               ),
@@ -50,6 +44,7 @@ class CustomTextField extends StatelessWidget {
             onTap: (() {
               scrollAnimate;
             }),
+            controller: fieldController,
             keyboardType: TextInputType.multiline,
             maxLines: lines,
             decoration: InputDecoration(

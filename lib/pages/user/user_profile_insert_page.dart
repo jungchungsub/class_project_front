@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';
@@ -22,6 +23,14 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
     scrollController = new ScrollController();
   }
 
+  final TextEditingController? _profileIntroduction = TextEditingController(text: "${profileList[0].introduction}");
+  // DB에 저장되어 있는 값을 가져오는 역할.
+  final TextEditingController? _profileRegion = TextEditingController(text: "${profileList[0].region}");
+
+  final TextEditingController? _profileCertification = TextEditingController(text: "${profileList[0].certification}");
+
+  final TextEditingController? _profileCareer = TextEditingController(text: "${profileList[0].carrerYear}");
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,19 +42,26 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildProfileImage(context, "assets/picture.jpg"),
+              _buildProfileImage(context, profileList[0].filePath),
               SizedBox(height: gap_l),
               _buildProfileId(context, "green1234"),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "자기소개", hint: "간략한 자기소개를 작성해주세요.", lines: 6),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "자기소개",
+                hint: "간략한 자기소개를 작성해주세요.",
+                lines: 6,
+                fieldController: _profileIntroduction,
+              ),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "지역을 작성해주세요.", hint: "예)부산,서울,경기도", lines: 1),
+              CustomTextField(scrollAnimate, fieldTitle: "지역을 작성해주세요.", hint: "예)부산,서울,경기도", lines: 1, fieldController: _profileRegion),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "학력 전공을 작성해주세요", hint: "예)사이버 보안전공", lines: 1, subTitle: "선택사항"),
+              CustomTextField(scrollAnimate,
+                  fieldTitle: "학력 전공을 작성해주세요", hint: "예)사이버 보안전공", lines: 1, subTitle: "선택사항", fieldController: _profileCertification),
               SizedBox(height: gap_l),
               ProfileCareerSeleteButton(),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1),
+              CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1, fieldController: _profileCareer),
               SizedBox(height: gap_l),
               CustomMainButton(buttonRoutePath: "/profileDetail", buttonText: "저장하기")
             ],
