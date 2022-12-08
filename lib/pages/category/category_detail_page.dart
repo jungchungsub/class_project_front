@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/lesson_category_list_resp_dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,104 +13,25 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(context),
-      body: ListView(
-        children: [
-          _buildHeaderCategory(),
-          Image.asset(
-            "assets/home1.jpg",
-            fit: BoxFit.cover,
-            height: 120,
-          ),
-          _buildCategoryFilter("초기화", "예산", 100, "인기순"),
-          _buildCategoryDetilaBody("https://picsum.photos/200", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/201", "안녕하세요", 45, "10,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/202", "반갑습니다", 45, "20,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/203", "너무너무배고파요", 45, "30,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/204", "운동같이하실분 구합니다. 저는 부산에서 살아요", 45, "40,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/205", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/206", "깔끔하고 아름다운 디자인을 해드립니다", 45, "60,000"),
-        ],
-      ),
-    );
-  }
-
-  Padding _buildCategoryDetilaBody(String imagePath, String categoryTitle, int evaluation, String price) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Container(
-                height: 90,
-                width: 110,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
-                ),
-              ),
+        appBar: _buildAppbar(context),
+        body: ListView(
+          children: [
+            _buildHeaderCategory(),
+            Image.asset(
+              "assets/home1.jpg",
+              fit: BoxFit.cover,
+              height: 120,
             ),
-          ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 220,
-                    height: 50,
-                    child: Text(
-                      "${categoryTitle}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.star_fill,
-                        color: Colors.yellow,
-                        size: 16,
-                      ),
-                      SizedBox(
-                        width: gap_s,
-                      ),
-                      Text(
-                        "| ${evaluation}개의 평가",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "${price}",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Icon(
-                        CupertinoIcons.heart_fill,
-                        color: Colors.red,
-                        size: 14,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+            _buildCategoryFilter("초기화", "예산", 100, "인기순"),
+            ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: lessonCategoryList.length,
+                itemBuilder: ((BuildContext context, int index) {
+                  return CategoryList(itemIndex: index);
+                })),
+          ],
+        ));
   }
 
   Container _buildCategoryFilter(String reset, String budget, int total, String filterText) {
@@ -254,6 +176,95 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         ),
       ),
       centerTitle: true,
+    );
+  }
+}
+
+class CategoryList extends StatelessWidget {
+  final int itemIndex;
+  const CategoryList({required this.itemIndex, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(
+                height: 90,
+                width: 110,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(image: NetworkImage(lessonCategoryList[itemIndex].lessonDto.lessonImage), fit: BoxFit.cover),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 220,
+                    height: 50,
+                    child: Text(
+                      "${lessonCategoryList[itemIndex].lessonDto.lessonName}",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "${lessonCategoryList[itemIndex].lessonDto.lessonAvgGrade}",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      SizedBox(width: gap_s),
+                      Icon(
+                        CupertinoIcons.star_fill,
+                        color: Colors.yellow,
+                        size: 16,
+                      ),
+                      SizedBox(
+                        width: gap_s,
+                      ),
+                      Text(
+                        "| ${lessonCategoryList[itemIndex].lessonDto.lessonReviewsCount}개의 평가",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        "${lessonCategoryList[itemIndex].lessonDto.lessonPrice}",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        CupertinoIcons.heart_fill,
+                        color: Colors.red,
+                        size: 14,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

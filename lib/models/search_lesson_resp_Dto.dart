@@ -12,7 +12,7 @@ class SearchLessonRespDto {
   });
 }
 
-List<SearchLessonRespDto> searchList = [
+List<SearchLessonRespDto> searchLessonRespDto = [
   SearchLessonRespDto(
     id: 1,
     name: "깔끔하고 아름다운 웹디자인을 해드립니다아아",
@@ -38,9 +38,21 @@ List<SearchLessonRespDto> searchList = [
     price: 30000,
   ),
   SearchLessonRespDto(
-    id: 4,
+    id: 5,
     name: "아름답고 깔끕한 웹디자인을 해드립니다아아.",
-    photo: "https://picsum.photos/203",
+    photo: "https://picsum.photos/204",
+    price: 30000,
+  ),
+  SearchLessonRespDto(
+    id: 5,
+    name: "아름답고 깔끕한 웹디자인을 해드립니다아아.",
+    photo: "https://picsum.photos/205",
+    price: 30000,
+  ),
+  SearchLessonRespDto(
+    id: 5,
+    name: "아름답고 깔끕한 웹디자인을 해드립니다아아.",
+    photo: "https://picsum.photos/206",
     price: 30000,
   )
 ];

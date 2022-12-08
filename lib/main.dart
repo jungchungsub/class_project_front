@@ -1,4 +1,3 @@
-import 'package:finalproject_front/models/coupon_list_resp_dto.dart';
 import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int cpIndexlength = couponListRespDto.length;
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
