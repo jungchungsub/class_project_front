@@ -1,31 +1,29 @@
+import 'package:finalproject_front/models/subscribe_list_resp_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LikeMainPage extends StatefulWidget {
-  const LikeMainPage({Key? key}) : super(key: key);
+class SubscribeMainPage extends StatefulWidget {
+  const SubscribeMainPage({Key? key}) : super(key: key);
 
   @override
-  State<LikeMainPage> createState() => _LikeMainPageState();
+  State<SubscribeMainPage> createState() => _SubscribeMainPageState();
 }
 
-class _LikeMainPageState extends State<LikeMainPage> {
+class _SubscribeMainPageState extends State<SubscribeMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: _buildAppbar(),
         body: ListView.builder(
             shrinkWrap: true, //리스트 자식 높이 크기의 합 만큼으로 영역을 고정 시켜준다.
-            itemCount: 1,
+            itemCount: subscribeListRespDto.length,
             itemBuilder: ((BuildContext context, int index) {
-              return Column(
-                children: [
-                  _buildLikeList("/lessonDetail", "https://picsum.photos/201", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-                  _buildLikeList("/lessonDetail", "https://picsum.photos/202", "깔끔하고 아름다운 웹디자인을 해드립니다.", 123, "50,000"),
-                  _buildLikeList("/lessonDetail", "https://picsum.photos/203", "깔끔하고 아름다운 웹디자인을 해드립니다.", 4315, "50,000"),
-                  _buildLikeList("/lessonDetail", "https://picsum.photos/204", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-                  _buildLikeList("/lessonDetail", "https://picsum.photos/205", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-                  _buildLikeList("/lessonDetail", "https://picsum.photos/206", "깔끔하고 아름다운 웹디자인을 해드립니다.", 45, "50,000"),
-                ],
+              return _buildLikeList(
+                "/lessonDetail",
+                "https://picsum.photos/201",
+                "깔끔하고 아름다운 웹디자인을 해드립니다.",
+                45,
+                "50,000",
               );
             })));
   }

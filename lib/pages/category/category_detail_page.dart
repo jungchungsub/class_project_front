@@ -12,26 +12,25 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(context),
-      body: ListView(
-        children: [
-          _buildHeaderCategory(),
-          Image.asset(
-            "assets/home1.jpg",
-            fit: BoxFit.cover,
-            height: 120,
-          ),
-          _buildCategoryFilter("초기화", "예산", 100, "인기순"),
-          _buildCategoryDetilaBody("https://picsum.photos/200", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/201", "안녕하세요", 45, "10,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/202", "반갑습니다", 45, "20,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/203", "너무너무배고파요", 45, "30,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/204", "운동같이하실분 구합니다. 저는 부산에서 살아요", 45, "40,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/205", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000"),
-          _buildCategoryDetilaBody("https://picsum.photos/206", "깔끔하고 아름다운 디자인을 해드립니다", 45, "60,000"),
-        ],
-      ),
-    );
+        appBar: _buildAppbar(context),
+        body: ListView(
+          children: [
+            _buildHeaderCategory(),
+            Image.asset(
+              "assets/home1.jpg",
+              fit: BoxFit.cover,
+              height: 120,
+            ),
+            _buildCategoryFilter("초기화", "예산", 100, "인기순"),
+            ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 8,
+                itemBuilder: ((context, index) {
+                  return _buildCategoryDetilaBody("https://picsum.photos/200", "깔끔하고 아름다운 디자인을 해드립니다", 45, "50,000");
+                })),
+          ],
+        ));
   }
 
   Padding _buildCategoryDetilaBody(String imagePath, String categoryTitle, int evaluation, String price) {
