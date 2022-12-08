@@ -35,19 +35,6 @@ class _SubscribePageState extends State<SubscribePage> {
         ),
       ),
       centerTitle: true,
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(top: 15, right: 20),
-          child: Text(
-            "필터",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -69,7 +56,7 @@ class SubscribeLesson extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
+                padding: const EdgeInsets.only(right: 10, left: 10, top: 4),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -89,7 +76,7 @@ class SubscribeLesson extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 220,
+                        width: 230,
                         height: 50,
                         child: Text(
                           "${subscribeListRespDto[itemIndex].lessonDto.name}",
@@ -118,14 +105,14 @@ class SubscribeLesson extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "${subscribeListRespDto[itemIndex].lessonDto.price}",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
-                            width: 140,
+                            width: 160,
                           ),
                           Icon(
                             CupertinoIcons.heart_fill,
