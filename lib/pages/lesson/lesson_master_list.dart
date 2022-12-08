@@ -1,24 +1,23 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/models/lesson_client_list_resp_dto.dart';
+import 'package:finalproject_front/models/master_lesson_list_resp_dto.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LessonClientListPage extends StatelessWidget {
-  const LessonClientListPage({Key? key}) : super(key: key);
+class LessonMasterListPage extends StatelessWidget {
+  const LessonMasterListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(context),
-      body: ListView.builder(
-        itemCount: LessonClientList.length,
-        itemBuilder: ((context, index) {
-          return BuyList(itemIndex: index);
-        }),
-      ),
-    );
+        appBar: _buildAppbar(context),
+        body: ListView.builder(
+            shrinkWrap: true,
+            itemCount: masterLessonList.length,
+            itemBuilder: ((BuildContext context, int index) {
+              return LessonExpertList(itemIndex: index);
+            })));
   }
 
   AppBar _buildAppbar(context) {
@@ -38,7 +37,7 @@ class LessonClientListPage extends StatelessWidget {
       title: TextButton(
         onPressed: () {},
         child: Text(
-          "구매한 클래스",
+          "클래스 리스트",
           style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
@@ -46,12 +45,9 @@ class LessonClientListPage extends StatelessWidget {
   }
 }
 
-class BuyList extends StatelessWidget {
+class LessonExpertList extends StatelessWidget {
   final int itemIndex;
-  const BuyList({
-    required this.itemIndex,
-    Key? key,
-  }) : super(key: key);
+  const LessonExpertList({required this.itemIndex, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +59,7 @@ class BuyList extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: gBorderColor, width: 3),
+                border: Border.all(color: const Color(0xffF0F0F0), width: 3),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
@@ -83,7 +79,7 @@ class BuyList extends StatelessWidget {
                               width: 110,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(image: NetworkImage("${LessonClientList[itemIndex].lessonImage}"), fit: BoxFit.cover),
+                                image: DecorationImage(image: NetworkImage("${masterLessonList[itemIndex].photo}"), fit: BoxFit.cover),
                               ),
                             ),
                           ),
@@ -96,21 +92,21 @@ class BuyList extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${LessonClientList[itemIndex].lessonTitle}",
+                                  "${masterLessonList[itemIndex].name}",
                                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  "전문가 : ${LessonClientList[itemIndex].masterName}",
+                                  "전문가 : ${masterLessonList[itemIndex].userDto.username}",
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 Text(
-                                  "${LessonClientList[itemIndex].lessonPrice}원",
+                                  "${masterLessonList[itemIndex].price}",
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 Text(
-                                  "마감일자 : ${LessonClientList[itemIndex].expiredDate}",
+                                  "마감일자 : ${masterLessonList[itemIndex].expiredAt}",
                                   style: TextStyle(fontSize: 12),
                                 )
                               ],
@@ -131,10 +127,10 @@ class BuyList extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: (() {
-                            Navigator.pushNamed(context, "/reviewInsert");
+                            Navigator.pushNamed(context, "/lessonUpdate");
                           }),
                           child: Text(
-                            "리뷰 작성하기",
+                            "수정하기",
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

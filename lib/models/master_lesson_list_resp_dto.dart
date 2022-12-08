@@ -57,4 +57,28 @@ List<MasterLessonRespDto> masterLessonList = [
     expiredAt: "2022.12.07",
     photo: "https://picsum.photos/204",
   ),
+  MasterLessonRespDto(
+    id: 5,
+    name: "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
+    userDto: UserDto(username: "이현성"),
+    price: 40000,
+    expiredAt: "2022.12.07",
+    photo: "https://picsum.photos/205",
+  ),
+  MasterLessonRespDto(
+    id: 6,
+    name: "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
+    userDto: UserDto(username: "이현성"),
+    price: 40000,
+    expiredAt: "2022.12.07",
+    photo: "https://picsum.photos/206",
+  ),
+  MasterLessonRespDto(
+    id: 7,
+    name: "깔끔하고 감각적인 최고의 홈페이지를 제작해드립니다.",
+    userDto: UserDto(username: "이현성"),
+    price: 40000,
+    expiredAt: "2022.12.07",
+    photo: "https://picsum.photos/207",
+  ),
 ];

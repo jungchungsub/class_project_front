@@ -4,7 +4,7 @@ import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_expert_list.dart';
+import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/profileDetail": (context) => UserProfileDetailPage(), // 더미 적용
         "/lessonClientList": (context) => LessonClientListPage(),
-        "/lessonExpertList": (context) => LessonExpertListPage(),
+        "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
