@@ -15,7 +15,7 @@ class LessonClientListPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: buyList.length,
         itemBuilder: ((context, index) {
-          return BuyList(context : itemList)
+          return BuyList(itemIndex: index);
         }),
       ),
     );
@@ -48,7 +48,8 @@ class LessonClientListPage extends StatelessWidget {
 
 class BuyList extends StatelessWidget {
   final int itemIndex;
-  const BuyList({required this.itemIndex,
+  const BuyList({
+    required this.itemIndex,
     Key? key,
   }) : super(key: key);
 
@@ -82,7 +83,7 @@ class BuyList extends StatelessWidget {
                               width: 110,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
+                                image: DecorationImage(image: NetworkImage("${buyList[itemIndex].lessonImage}"), fit: BoxFit.cover),
                               ),
                             ),
                           ),
@@ -130,7 +131,7 @@ class BuyList extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: (() {
-                            Navigator.pushNamed(context, "${routePath}");
+                            Navigator.pushNamed(context, "/reviewInsert");
                           }),
                           child: Text(
                             "리뷰 작성하기",
