@@ -1,6 +1,6 @@
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
-import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
+import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,9 @@ class JoinCustomForm extends StatelessWidget {
   final Function scrollAnimate;
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
   JoinCustomForm(this.scrollAnimate, {super.key});
+  final _id = TextEditingController();
+  final _password = TextEditingController();
+  final _email = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +21,29 @@ class JoinCustomForm extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CustomTextField(scrollAnimate, fieldTitle: "아이디", hint: "아이디를 입력해주세요", lines: 1),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "아이디",
+                hint: "아이디를 입력해주세요",
+                lines: 1,
+                fieldController: _id,
+              ),
               SizedBox(height: gap_m),
-              CustomTextField(scrollAnimate, fieldTitle: "비밀번호", hint: "비밀번호를 입력해주세요", lines: 1),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "비밀번호",
+                hint: "비밀번호를 입력해주세요",
+                lines: 1,
+                fieldController: _password,
+              ),
               SizedBox(height: gap_m),
-              CustomTextField(scrollAnimate, fieldTitle: "이메일", hint: "이메일를 입력해주세요", lines: 1),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "이메일",
+                hint: "이메일를 입력해주세요",
+                lines: 1,
+                fieldController: _email,
+              ),
               SizedBox(height: gap_m),
               Container(
                 child: Column(

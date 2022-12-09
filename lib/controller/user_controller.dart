@@ -6,7 +6,7 @@ import 'package:finalproject_front/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../dto/request/user_req_dto.dart';
+import '../dto/request/auth_req_dto.dart';
 
 /**
  * Controller은 비즈니스 로직을 담당
@@ -23,7 +23,7 @@ class UserController {
   final Ref _ref;
   UserController(this._ref);
 
-  void join(UserReqDto userReqDto) async {
-    ResponseDto respDto = await _ref.read(userHttpRepository).join(userReqDto);
+  void join(JoinReqDto joinReqDto) async {
+    ResponseDto respDto = await _ref.read(userHttpRepository).join(joinReqDto);
   }
 }

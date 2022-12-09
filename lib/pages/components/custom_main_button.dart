@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
-import 'package:finalproject_front/dto/request/user_req_dto.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,6 +9,7 @@ import '../../dto/request/category_req_dto.dart';
 class CustomMainButton extends ConsumerWidget {
   final String buttonText;
   final String buttonRoutePath;
+
   const CustomMainButton({
     required this.buttonRoutePath,
     required this.buttonText,
@@ -18,11 +19,6 @@ class CustomMainButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final rc = ref.read(userController);
-    List<CategoryReqDto> _selectCategory = [
-      CategoryReqDto(id: 1, name: "뷰티"),
-      CategoryReqDto(id: 2, name: "운동"),
-      CategoryReqDto(id: 3, name: "댄스"),
-    ];
 
     return InkWell(
       onTap: () {

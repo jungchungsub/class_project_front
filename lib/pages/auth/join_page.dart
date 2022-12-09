@@ -1,4 +1,4 @@
-import 'package:finalproject_front/pages/sign/components/join_custom_form.dart';
+import 'package:finalproject_front/pages/auth/components/join_custom_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -12,8 +12,7 @@ class JoinPage extends StatefulWidget {
 }
 
 class _JoinPageState extends State<JoinPage> {
-  late ScrollController
-      scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
 
   @override
   void initState() {

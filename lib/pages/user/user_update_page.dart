@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
+import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
 import 'package:finalproject_front/pages/user/components/update_form.dart';
 import 'package:finalproject_front/pages/user/components/service_text_button.dart';
 import 'package:flutter/cupertino.dart';
