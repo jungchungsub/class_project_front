@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,20 +20,19 @@ class UserProfileDetailPage extends StatelessWidget {
             children: [
               _buildProfileHeader(
                 context,
-                "아이유",
-                "assets/picture.jpg",
+                profileList[0].userDto.username,
+                profileList[0].filePath,
               ),
               SizedBox(height: 20),
-              _buildProfileIntro(context,
-                  "자기소개 작성하는 공간 충섭아 컨벤션이 너무 어려워 나 좀 살려줘 머리가 터질거같애 할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어할수있어"),
+              _buildProfileIntro(context, profileList[0].introduction),
               SizedBox(height: 10),
-              _buildProfileContent(context, "지역", "부산"),
+              _buildProfileContent(context, "지역", profileList[0].region),
               SizedBox(height: 10),
-              _buildProfileContent(context, "학력전공", "컴퓨터공학과"),
+              _buildProfileContent(context, "학력전공", profileList[0].carrer),
               SizedBox(height: 10),
-              _buildProfileContent(context, "보유자격증", "개인정보취급사"),
+              _buildProfileContent(context, "보유자격증", profileList[0].certification),
               SizedBox(height: 10),
-              _buildProfileContent(context, "경력기간", "신입"),
+              _buildProfileContent(context, "경력기간", profileList[0].carrerYear),
               SizedBox(height: 20),
               CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기")
             ],
@@ -42,7 +42,7 @@ class UserProfileDetailPage extends StatelessWidget {
     );
   }
 
-  Widget _buildProfileHeader(BuildContext context, String name, String profileImagePath) {
+  Widget _buildProfileHeader(BuildContext context, String userName, String profileImagePath) {
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,7 +52,7 @@ class UserProfileDetailPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${name}",
+                  "${userName}",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10),

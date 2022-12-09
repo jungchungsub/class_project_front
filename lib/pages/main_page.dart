@@ -1,8 +1,8 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
-import 'package:finalproject_front/pages/like/like_main_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page.dart';
 import 'package:finalproject_front/pages/search/search_main_page.dart';
+import 'package:finalproject_front/pages/subscribe/subscribe_main_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +30,8 @@ class _MainPageState extends State<MainPage> {
       index: _selectedIndex, //아이콘클릭시 화면 이동
       children: [
         HomePage(),
-        SearchMainPage(),
-        LikeMainPage(),
+        SearchPage(),
+        SubscribePage(),
         ChatListPage(),
         UserLoginMyPage(),
       ],

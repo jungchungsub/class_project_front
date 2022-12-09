@@ -14,46 +14,43 @@ class UserLoginMyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildUserProfile(context, "의뢰인", "green1234", "전문가",
-                    "assets/picture.jpg", "/profileDetail"),
-                SizedBox(height: gap_l),
-                Text(
-                  "나의 서비스",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: gap_m),
-                ServiceText(
-                    routePath: "/paymentInstallmentList",
-                    serviceText: "결제/취소 내역"),
-                SizedBox(height: gap_s),
-                ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
-                SizedBox(height: gap_s),
-                ServiceText(
-                    routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
-                SizedBox(height: gap_s),
-                ServiceText(routePath: "/customerService", serviceText: "고객센터"),
-                SizedBox(height: gap_s),
-                ServiceText(
-                    routePath: "/lessonInsert", serviceText: "레슨 등록 전문가 "),
-                SizedBox(height: gap_s),
-                ServiceText(
-                    routePath: "/paymentSalesDetail", serviceText: "판매내역 전문가"),
-                SizedBox(height: gap_s),
-                ServiceText(
-                    routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
-                SizedBox(height: gap_s),
-                BottomImageBox(),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildUserProfile(context, "의뢰인", "green1234", "전문가", "assets/picture.jpg", "/profileDetail"),
+                  SizedBox(height: gap_l),
+                  Text(
+                    "나의 서비스",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: gap_m),
+                  ServiceText(routePath: "/paymentInstallmentList", serviceText: "결제/취소 내역"),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/customerService", serviceText: "고객센터"),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/lessonInsert", serviceText: "레슨 등록 전문가 "),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역 전문가"),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
+                  SizedBox(height: gap_s),
+                  ServiceText(routePath: "/test", serviceText: "등록한레슨 전문가"),
+                  SizedBox(height: gap_s),
+                  BottomImageBox(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -99,8 +96,7 @@ class UserLoginMyPage extends StatelessWidget {
   }
 }
 
-Widget _buildUserProfile(BuildContext context, String userState, String userId,
-    String changeState, String profileImagePath, String routePath) {
+Widget _buildUserProfile(BuildContext context, String userState, String userId, String changeState, String profileImagePath, String routePath) {
   return Row(
     children: [
       ProfileImage(profileImagePath: profileImagePath, routePath: routePath),
@@ -139,8 +135,7 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId,
                   border: Border.all(color: gBorderColor),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 3.0, horizontal: 5.0),
+                  padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
                   child: Row(
                     children: [
                       Icon(
@@ -165,8 +160,7 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId,
   );
 }
 
-Widget _buildShoppingList(BuildContext context, String shoppingListTitle,
-    String routePath, String shoppingListsubTitle, String hintText) {
+Widget _buildShoppingList(BuildContext context, String shoppingListTitle, String routePath, String shoppingListsubTitle, String hintText) {
   return Container(
     child: Column(
       children: [

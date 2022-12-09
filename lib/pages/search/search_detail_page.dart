@@ -1,8 +1,12 @@
+import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/models/search_lesson_resp_Dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchDetailPage extends StatefulWidget {
+  const SearchDetailPage({Key? key}) : super(key: key);
+
   @override
   State<SearchDetailPage> createState() => _SearchDetailPageState();
 }
@@ -11,20 +15,19 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppbar(context),
-      body: ListView(
-        children: [
-          _buildCategoryFilter(),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/200"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/201"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/202"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/203"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/204"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/205"),
-          _buildCategoryDetail(r"/lessonDetail", "https://picsum.photos/206")
-        ],
-      ),
-    );
+        appBar: _buildAppbar(context),
+        body: ListView(
+          children: [
+            _buildCategoryFilter(),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: searchLessonRespDto.length,
+                itemBuilder: ((context, index) {
+                  return SearchLesson(itemIndex: index);
+                })),
+          ],
+        ));
   }
 
   AppBar _buildAppbar(BuildContext context) {
@@ -49,94 +52,6 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
         ),
       ),
       centerTitle: true,
-    );
-  }
-
-  Padding _buildCategoryDetail(String routePath, String imagePath) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, "${routePath}");
-        },
-        child: Container(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 90,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(image: NetworkImage("${imagePath}"), fit: BoxFit.cover),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 220,
-                        height: 50,
-                        child: Text(
-                          "깔끔하고 아름다운 웹디자인을 해드립니다아아.",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            CupertinoIcons.star_fill,
-                            color: Colors.yellow,
-                            size: 16,
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "|   45개의 평가",
-                            style: TextStyle(fontSize: 14),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "50,000원",
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 140,
-                          ),
-                          Icon(
-                            CupertinoIcons.heart_fill,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
@@ -213,7 +128,57 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
 
   OutlinedButton _buildMiddleFilterList(String textButton) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: () {
+        showModalBottomSheet(
+            context: context,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            builder: (context) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    textColor: gPrimaryColor,
+                    title: Text('1만 원 미만'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('1~5만 원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('5~10만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('10~15만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('15~20만원 이하'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text('20만원 이상'),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              );
+            });
+      },
       child: Row(
         children: [
           Text(
@@ -226,6 +191,100 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
           shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       )),
+    );
+  }
+}
+
+class SearchLesson extends StatelessWidget {
+  final int itemIndex;
+  const SearchLesson({required this.itemIndex, Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, "/lessonDetail", arguments: itemIndex);
+        },
+        child: Container(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    height: 90,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(image: NetworkImage(searchLessonRespDto[itemIndex].photo), fit: BoxFit.cover),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 220,
+                        height: 50,
+                        child: Text(
+                          "${searchLessonRespDto[itemIndex].name}",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            CupertinoIcons.star_fill,
+                            color: Colors.yellow,
+                            size: 16,
+                          ),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "|   45개의 평가",
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "${searchLessonRespDto[itemIndex].price}",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 140,
+                          ),
+                          Icon(
+                            CupertinoIcons.heart_fill,
+                            color: Colors.red,
+                            size: 20,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
