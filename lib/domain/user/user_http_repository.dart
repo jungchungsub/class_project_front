@@ -20,7 +20,7 @@ class UserHttpRepository {
   Future<ResponseDto> join(JoinReqDto joinReqDto) async {
     String requestBody = jsonEncode(joinReqDto.toJson());
 
-    Response response = await _ref.read(httpConnector).post("/join", requestBody);
+    Response response = await _ref.read(httpConnector).post("/api/join", requestBody);
 
     return toResponseDto(response); // ResponseDto 응답
   }

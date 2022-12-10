@@ -1,10 +1,8 @@
-// ignore: slash_for_doc_comments
-
 import 'package:finalproject_front/domain/user/user_http_repository.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
 
@@ -23,7 +21,20 @@ class UserController {
   final Ref _ref;
   UserController(this._ref);
 
-  void join(JoinReqDto joinReqDto) async {
+  void join(String username, String password, String email, String phoneNum, String role) async {
+    Logger().d("여기 실행됌?");
+    JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
+
     ResponseDto respDto = await _ref.read(userHttpRepository).join(joinReqDto);
+    // // 3. 비지니스 로직 처리
+    // if (respDto.status == 200) {
+    //   User user = User.fromJson(respDto.data);
+    //   print("가입된 유저 이름 : ${user.username}");
+    //   Navigator.popAndPushNamed(context, "/login");
+    //   // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
+    // } else {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text("회원가입 실패")),
+    //   );
   }
 }
