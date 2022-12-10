@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
         "/login": (context) => LoginPage(),
-        "/join": (context) => JoinPage(),
+        //"/join": (context) => JoinPage(),
         "/home": (context) => HomePage(), //더미 적용
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),

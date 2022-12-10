@@ -26,7 +26,6 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
     CategoryReqDto(id: 8, name: "기타"),
   ];
 
-  List<int> _categoryIds = [1, 2, 3, 4, 5, 6, 7, 8];
   final _items = _category.map((category) => MultiSelectItem<CategoryReqDto>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
 
   List<CategoryReqDto>? _selectCategory = []; // null이 가능하다, 초기값은 null이다.

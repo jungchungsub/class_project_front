@@ -10,9 +10,10 @@ import 'package:logger/logger.dart';
 import '../../../constants.dart';
 
 class JoinCustomForm extends ConsumerWidget {
+  final role;
   final Function scrollAnimate;
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
-  JoinCustomForm(this.scrollAnimate, {super.key});
+  JoinCustomForm(this.scrollAnimate, {required this.role, super.key});
   final _id = TextEditingController();
   final _password = TextEditingController();
   final _email = TextEditingController();
@@ -21,6 +22,7 @@ class JoinCustomForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uc = ref.read(userController);
+    Logger().d("회원가입 폼 페이지 출력 : ${role}");
     return Form(
       key: _formKey, // 해당 키로 Form의 상태를 관리 한다.
       child: Padding(
@@ -79,9 +81,7 @@ class JoinCustomForm extends ConsumerWidget {
               SizedBox(height: gap_xl),
               ElevatedButton(
                 onPressed: () {
-                  Logger().d("실행확인");
-                  uc.join(_id.text.trim(), _password.text.trim(), _email.text.trim(), _phoneNum.text.trim(), "USER");
-                  Logger().d("실행확인");
+                  uc.join(_id.text.trim(), _password.text.trim(), _email.text.trim(), _phoneNum.text.trim(), role);
                 },
                 child: Container(
                   height: 50,

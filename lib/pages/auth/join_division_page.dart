@@ -1,14 +1,21 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
+import 'package:finalproject_front/pages/auth/join_page.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class JoinDivisionPage extends StatelessWidget {
+class JoinDivisionPage extends ConsumerWidget {
   const JoinDivisionPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rc = ref.read(userController);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -18,11 +25,13 @@ class JoinDivisionPage extends StatelessWidget {
             children: [
               SizedBox(height: 50),
               SizedBox(
-                  width: size.width, child: _buildHeaderIntro(context, "어떤 서비스를 이용하고 싶으신가요?", "원하는 회원가입 유형을 선택하세요.\n의뢰인으로 가입 후에도 전문가 등록이 가능합니다.")),
+                width: size.width,
+                child: _buildHeaderIntro(context, "어떤 서비스를 이용하고 싶으신가요?", "원하는 회원가입 유형을 선택하세요.\n의뢰인으로 가입 후에도 전문가 등록이 가능합니다."),
+              ),
               SizedBox(height: 400),
-              _buildDivisionButton(context, "비즈니스 외주,아웃소싱을 원한다면", "의뢰인으로 가입", "/join"),
+              _buildDivisionButton(context, "비즈니스 외주,아웃소싱을 원한다면", "의뢰인으로 가입", "/join", "USER", rc),
               SizedBox(height: gap_l),
-              _buildDivisionButton(context, "전문성으로 수익창출을 원한다면", "전문가로 가입", "/join"),
+              _buildDivisionButton(context, "전문성으로 수익창출을 원한다면", "전문가로 가입", "/join", "MASTER", rc),
             ],
           ),
         ),
@@ -31,10 +40,12 @@ class JoinDivisionPage extends StatelessWidget {
   }
 }
 
-Widget _buildDivisionButton(BuildContext context, String divisionTitle, String divisionSubTitle, String routePath) {
+Widget _buildDivisionButton(BuildContext context, String divisionTitle, String divisionSubTitle, String routePath, String role, UserController rc) {
   return InkWell(
     onTap: () {
-      Navigator.pushNamed(context, routePath);
+      rc.joinDivisionButton(role);
+      Logger().d("여긴 실행되나? 버튼클릭");
+      //Navigator.pushNamed(context, routePath, arguments: JoinPage(role: "USER"));
     },
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
