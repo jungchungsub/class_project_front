@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:logger/logger.dart';
 
 final httpConnector = Provider<HttpConnector>((ref) {
   return HttpConnector();
@@ -19,12 +21,8 @@ class HttpConnector {
   }
 
   Future<Response> post(String path, String body) async {
-    print("여긴 실행됨?");
     Uri uri = Uri.parse("${host}${path}");
-    print("uri 값 확인${uri}");
-    print("http_connector에서 body확인${body}");
     Response response = await _client.post(uri, body: body, headers: headers);
-    print("응답 코드는 실행됨?${response}");
 
     return response;
   }

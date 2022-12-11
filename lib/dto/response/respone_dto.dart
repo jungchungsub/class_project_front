@@ -1,14 +1,20 @@
-import 'package:extended_image/extended_image.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
-class ResponseDto<T> {
+class ResponseDto {
   String? msg;
-  T? data;
+  dynamic data;
+  var statusCode;
 
-  ResponseDto({required this.msg, required this.data});
+  ResponseDto({required this.statusCode, required this.msg, required this.data});
 
   factory ResponseDto.fromJson(Map<String, dynamic> json) => ResponseDto(
         msg: json["msg"],
         data: json["data"],
+        statusCode: json["statusCode"],
       );
-  Map<String, dynamic> toJson() => {"msg": msg, "data": data};
+  Map<String, dynamic> toJson() => {
+        "msg": msg,
+        "data": data,
+        "statusCode": statusCode,
+      };
 }

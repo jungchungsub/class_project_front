@@ -28,7 +28,10 @@ dependencies:
   flutter_riverpod: ^2.0.0-dev.9
   http: ^0.13.5
   http_parser: ^4.0.1
-
+  shared_preferences: ^2.0.15
+  validators: ^3.0.0
+  logger: ^1.1.0
+  get: ^4.6.5
 
 
 dev_dependencies:

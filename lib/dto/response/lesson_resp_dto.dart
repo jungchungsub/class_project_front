@@ -1,8 +1,9 @@
-import 'dart:ffi';
+import 'package:extended_image/extended_image.dart';
 
 import 'review_resp_dto.dart';
 
 class LessonRespDto {
+  int? id;
   String lessonName;
   int lessonPrice;
   int lessonTime;
@@ -16,7 +17,8 @@ class LessonRespDto {
   List<ReviewRespDto> lessonReviewList;
 
   LessonRespDto(
-      {required this.lessonName,
+      {required this.id,
+      required this.lessonName,
       required this.lessonPrice,
       required this.lessonTime,
       required this.lessonCount,
@@ -29,6 +31,7 @@ class LessonRespDto {
       required this.lessonReviewList});
 
   factory LessonRespDto.fromJson(Map<String, dynamic> json) => LessonRespDto(
+        id: json["id"],
         lessonName: json["lessonName"],
         lessonPrice: json["lessonPrice"],
         lessonTime: json["lessonTime"],

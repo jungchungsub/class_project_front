@@ -3,7 +3,7 @@ import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
         "/login": (context) => LoginPage(),
-        "/join": (context) => JoinPage(),
+        //"/join": (context) => JoinPage(),
         "/home": (context) => HomePage(), //더미 적용
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),

@@ -1,25 +1,30 @@
 class UserRespDto {
   // 수정 필요
+  int id;
   String username;
-  String password;
-  String email;
-  String phoneNum;
   String role;
-  List<int> categoryId;
+  String createdAt;
 
-  UserRespDto(
-      {required this.username, required this.password, required this.email, required this.phoneNum, required this.role, required this.categoryId});
+  UserRespDto({
+    required this.id,
+    required this.username,
+    required this.role,
+    required this.createdAt,
+  });
 
   // json -> dynamic
   factory UserRespDto.fromJson(Map<String, dynamic> json) => UserRespDto(
-      username: json["username"],
-      password: json["password"],
-      email: json["email"],
-      phoneNum: json["phoneNum"],
-      role: json["role"],
-      categoryId: json["categoryId"]);
+        id: json["id"],
+        username: json["username"],
+        role: json["role"],
+        createdAt: json["createdAt"],
+      );
 
 // dynamic -> json
-  Map<String, dynamic> toJson() =>
-      {"username": username, "password": password, "email": email, "phoneNum": phoneNum, "role": role, "categoryId": categoryId};
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "username": username,
+        "role": role,
+        "createdAt": createdAt,
+      };
 }
