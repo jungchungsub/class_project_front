@@ -1,9 +1,11 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-import '../../../dto/request/category_req_dto.dart';
+import '../../../domain/category/category.dart';
 
 class CategorySelectButton extends StatefulWidget {
   const CategorySelectButton({super.key});
@@ -14,35 +16,37 @@ class CategorySelectButton extends StatefulWidget {
 
 class _CategorySelectButtonState extends State<CategorySelectButton> {
   // ignore: prefer_final_fields
-  static List<CategoryReqDto> _category = [
+  static List<Category> _category = [
     // 리스트
-    CategoryReqDto(id: 1, name: "뷰티"),
-    CategoryReqDto(id: 2, name: "운동"),
-    CategoryReqDto(id: 3, name: "댄스"),
-    CategoryReqDto(id: 4, name: "뮤직"),
-    CategoryReqDto(id: 5, name: "미술"),
-    CategoryReqDto(id: 6, name: "문학"),
-    CategoryReqDto(id: 7, name: "공예"),
-    CategoryReqDto(id: 8, name: "기타"),
+    Category(id: 1, name: "뷰티"),
+    Category(id: 2, name: "운동"),
+    Category(id: 3, name: "댄스"),
+    Category(id: 4, name: "뮤직"),
+    Category(id: 5, name: "미술"),
+    Category(id: 6, name: "문학"),
+    Category(id: 7, name: "공예"),
+    Category(id: 8, name: "기타"),
   ];
 
-  final _items = _category.map((category) => MultiSelectItem<CategoryReqDto>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
+  final _items = _category.map((category) => MultiSelectItem<Category>(category, category.name)).toList(); // 선택 가능한 항목을 보여줌 -> 리스트를 깊은 복사
 
-  List<CategoryReqDto>? _selectCategory = []; // null이 가능하다, 초기값은 null이다.
+  List<Category>? _selectCategory = []; // null이 가능하다, 초기값은 null이다.
+  List<int>? categoryId = [];
   final _multiSelectKey = GlobalKey<FormFieldState>();
+
   @override
   void initState() {
     // 선택된 아이템을 리스트에 담아줌
-    _selectCategory = _category;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiSelectDialogField<CategoryReqDto>(
+    return MultiSelectDialogField<Category>(
       //버튼에 사용할 value타입을 Category 오브젝트 타입임을 선언
       items: _items,
       title: Text("관심사"),
+      key: _multiSelectKey,
       itemsTextStyle: TextStyle(color: Colors.black),
       isDismissible: true,
       cancelText: Text(
@@ -74,8 +78,10 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
       onConfirm: (results) {
         setState(() {
           _selectCategory = results;
+          categoryId = _selectCategory?.map((e) => e.id).toList();
         });
-        print(_selectCategory);
+        Logger().d(_selectCategory);
+        Logger().d(categoryId);
       },
     );
   }

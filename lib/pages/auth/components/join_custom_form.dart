@@ -1,28 +1,28 @@
 import 'package:finalproject_front/controller/user_controller.dart';
-import 'package:finalproject_front/pages/components/custom_main_button.dart';
-import 'package:finalproject_front/pages/components/custom_text_field.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
+import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 import '../../../constants.dart';
 
 class JoinCustomForm extends ConsumerWidget {
-  final role;
-  final Function scrollAnimate;
-  final _formKey = GlobalKey<FormState>(); // 글로벌 key
   JoinCustomForm(this.scrollAnimate, {required this.role, super.key});
   final _id = TextEditingController();
   final _password = TextEditingController();
   final _email = TextEditingController();
   final _phoneNum = TextEditingController();
+  final role;
+  final Function scrollAnimate;
+  final _formKey = GlobalKey<FormState>(); // 글로벌 key
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uc = ref.read(userController);
-    Logger().d("회원가입 폼 페이지 출력 : ${role}");
+    final JoinReqDto joinReqDto = JoinReqDto.origin();
+
     return Form(
       key: _formKey, // 해당 키로 Form의 상태를 관리 한다.
       child: Padding(
@@ -73,7 +73,7 @@ class JoinCustomForm extends ConsumerWidget {
                       ),
                     ),
                     SizedBox(height: gap_m),
-                    CategorySelectButton(),
+                    CategorySelectButton()
                   ],
                 ),
               ),

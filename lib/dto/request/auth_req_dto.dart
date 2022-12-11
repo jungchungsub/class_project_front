@@ -1,11 +1,16 @@
-class JoinReqDto {
-  String username;
-  String password;
-  String email;
-  String phoneNum;
-  String role;
-  //List<CategoryReqDto> category; // -> int로 받아달라고 함.
+import 'category_req_dto.dart';
+import 'package:get/get.dart';
 
+class JoinReqDto {
+  String? username;
+  String? password;
+  String? email;
+  String? phoneNum;
+  String? role;
+  // List<int>? categoryId;
+  //List<int> categoryId = category.map((category) => category.id).toList();
+
+  JoinReqDto.origin();
   JoinReqDto({required this.username, required this.password, required this.email, required this.phoneNum, required this.role});
 
 // dynamic -> json
@@ -15,6 +20,6 @@ class JoinReqDto {
         "email": email,
         "phoneNum": phoneNum,
         "role": role,
-        // "category": category.map((e) => e.toJson()).toList()
+        // "categoryId": categoryId,
       };
 }

@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 
 class JoinPage extends StatefulWidget {
   String role;
+
   JoinPage({required this.role, super.key});
 
   @override
