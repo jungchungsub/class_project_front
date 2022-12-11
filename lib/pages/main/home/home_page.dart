@@ -1,15 +1,18 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lessonCT = ref.read(lessonController);
     return Scaffold(
       appBar: _buildAppBar(context, "/searchMain"),
       body: NestedScrollView(
@@ -33,13 +36,14 @@ class HomePage extends StatelessWidget {
               ]))
             ];
           },
-          body: _buildClassList(context, "/lessonDetail")),
+          body: _buildClassList(context, "/lessonDetail", lessonCT)),
     );
   }
 
-  InkWell _buildClassList(BuildContext context, String routePath) {
+  InkWell _buildClassList(BuildContext context, String routePath, LessonController lessonCT) {
     return InkWell(
       onTap: () {
+        lessonCT.getLessonDetail();
         Navigator.pushNamed(context, "${routePath}");
       },
       child: Padding(

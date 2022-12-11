@@ -54,6 +54,7 @@ class UserController {
     // 2. 통신 요청
     ResponseDto respDto = await _ref.read(userHttpRepository).login(loginReqDto);
     //3. 비지니스 로직 처리
+    Logger().d("controller status확인 : ${respDto.statusCode}");
     if (respDto.statusCode > 200 || respDto.statusCode < 300) {
       Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil("/main", (route) => false);
     } else {
