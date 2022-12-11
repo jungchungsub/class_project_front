@@ -4,8 +4,11 @@ import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart';
+import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
+import '../util/custom_alert_dialog.dart';
 
 /**
  * Controller은 비즈니스 로직을 담당
@@ -35,8 +38,12 @@ class UserController {
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
     ResponseDto respDto = await _ref.read(userHttpRepository).join(joinReqDto);
+    if (respDto.statusCode == 200) {
+      Navigator.popAndPushNamed(context, "/login");
+    } else {
+      CustomAlertDialog(context);
+    }
 
-    Navigator.popAndPushNamed(context, "/login");
     // // 3. 비지니스 로직 처리
     // if (respDto.status == 200) {
     //   User user = User.fromJson(respDto.data);
