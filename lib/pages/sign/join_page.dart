@@ -24,7 +24,6 @@ class _JoinPageState extends State<JoinPage> {
 
   @override
   Widget build(BuildContext context) {
-    Logger().d("Role확인 : ${widget.role}");
     return Scaffold(
       appBar: _buildAppBar(context),
       body: JoinCustomForm(scrollAnimate, role: widget.role),
