@@ -1,18 +1,20 @@
-import 'package:finalproject_front/pages/auth/components/join_custom_form.dart';
+import 'package:finalproject_front/pages/sign/components/join_custom_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:logger/logger.dart';
 
 class JoinPage extends StatefulWidget {
-  const JoinPage({super.key});
+  String role;
+
+  JoinPage({required this.role, super.key});
 
   @override
   State<JoinPage> createState() => _JoinPageState();
 }
 
 class _JoinPageState extends State<JoinPage> {
-  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  late ScrollController scrollController;
 
   @override
   void initState() {
@@ -22,9 +24,10 @@ class _JoinPageState extends State<JoinPage> {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("Role확인 : ${widget.role}");
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: JoinCustomForm(scrollAnimate),
+      body: JoinCustomForm(scrollAnimate, role: widget.role),
     );
   }
 

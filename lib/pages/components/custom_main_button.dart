@@ -5,7 +5,7 @@ import 'package:logger/logger.dart';
 
 class CustomMainButton extends StatelessWidget {
   final UserController? uc;
-  final action;
+  final Function? action;
   final String buttonText;
   final String buttonRoutePath;
 

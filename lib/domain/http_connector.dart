@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
+import 'package:logger/logger.dart';
 
 final httpConnector = Provider<HttpConnector>((ref) {
   return HttpConnector();
@@ -21,7 +22,6 @@ class HttpConnector {
   Future<Response> post(String path, String body) async {
     Uri uri = Uri.parse("${host}${path}");
     Response response = await _client.post(uri, body: body, headers: headers);
-
     return response;
   }
 

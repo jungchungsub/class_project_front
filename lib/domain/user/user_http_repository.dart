@@ -5,6 +5,7 @@ import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
+import 'package:logger/logger.dart';
 
 import '../../util/response_util.dart';
 
@@ -21,7 +22,7 @@ class UserHttpRepository {
     String requestBody = jsonEncode(joinReqDto.toJson());
 
     Response response = await _ref.read(httpConnector).post("/api/join", requestBody);
-
+    Logger().d("response확인 ${response.headers.toString()}");
     return toResponseDto(response); // ResponseDto 응답
   }
 }

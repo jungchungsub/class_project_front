@@ -1,8 +1,9 @@
 import 'package:finalproject_front/domain/user/user_http_repository.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
+import 'package:finalproject_front/pages/sign/join_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
 
@@ -21,11 +22,21 @@ class UserController {
   final Ref _ref;
   UserController(this._ref);
 
+  void joinDivisionButton(String role) {
+    if (role == "USER") {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+    }
+    if (role == "MASTER") {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+    }
+  }
+
   void join(String username, String password, String email, String phoneNum, String role) async {
-    Logger().d("여기 실행됌?");
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
     ResponseDto respDto = await _ref.read(userHttpRepository).join(joinReqDto);
+
+    Navigator.popAndPushNamed(context, "/login");
     // // 3. 비지니스 로직 처리
     // if (respDto.status == 200) {
     //   User user = User.fromJson(respDto.data);
