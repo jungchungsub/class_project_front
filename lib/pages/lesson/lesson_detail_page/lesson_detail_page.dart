@@ -52,7 +52,7 @@ class LessonDetailPage extends ConsumerWidget {
                               ),
                             ),
                             //_buildLessonContentBox("커리큘럼", rc.getLessonDetail(id), 120, 2),
-                            _buildLessonContentBox("레슨시간", "${rc.getLessonDetail(3)}", 55, 1),
+                            _buildLessonContentBox("레슨시간", "${rc.getLessonDetail}", 55, 1),
                             _buildLessonContentBox("레슨횟수", "${lessonList[0].lessonCount}", 55, 1),
                             _buildLessonContentBox("장소", lessonList[0].lessonPlace, 55, 1),
                             _buildLessonPossibleDate(lessonList[0].possibleDays),

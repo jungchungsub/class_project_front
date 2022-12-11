@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:finalproject_front/domain/http_connector.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
+import 'package:finalproject_front/dto/response/respone_dto.dart';
+import 'package:finalproject_front/util/response_util.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 
@@ -15,10 +17,10 @@ class LessonHttpRepository {
 
   Future<List<LessonRespDto>> getLessonDetail(int id) async {
     Response response = await _ref.read(httpConnector).get("/api/category/lesson/${id}");
-    List<LessonRespDto> lessonRespDto = [LessonRespDto.fromJson(jsonDecode(response.body))];
-    // dynamic data = lessonRespDto.lessonName;
-    // print(data);
-    return lessonRespDto;
+    ResponseDto responseDto = ResponseDto.fromJson(jsonDecode(response.body));
+    List<dynamic> dataList = responseDto.data;
+    List<LessonRespDto> LessonRespDtoList = dataList.map((lesson) => LessonRespDto.fromJson(lesson)).toList();
+    return LessonRespDtoList;
   }
 
   // Future<List<LessonRespDto>> getLatestLesonList() async {

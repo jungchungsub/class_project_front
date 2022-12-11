@@ -10,3 +10,10 @@ ResponseDto toResponseDto(Response response) {
   ResponseDto responseDto = ResponseDto.fromJson(responseMap); // Map -> Dart Class
   return responseDto;
 }
+
+ResponseDto toLessonResponseDto(Response response) {
+  Map<String, dynamic> responseMap = jsonDecode(response.body); // 문자열 -> Map
+
+  ResponseDto responseDto = ResponseDto.fromJson(responseMap); // Map -> Dart Class
+  return responseDto;
+}

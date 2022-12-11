@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:get/get_connect/http/src/response/response.dart';
+
 class ResponseDto {
   String? msg;
   dynamic data;
