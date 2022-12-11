@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class ReviewRespDto {
   // 테스트를 위해서 임의로 작성, 이후에 지워야함.
 
