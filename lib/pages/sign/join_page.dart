@@ -1,4 +1,4 @@
-import 'package:finalproject_front/pages/auth/components/join_custom_form.dart';
+import 'package:finalproject_front/pages/sign/components/join_custom_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';

@@ -1,12 +1,14 @@
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
-import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
+import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../../../constants.dart';
+import '../../components/custom_main_button.dart';
 
 class JoinCustomForm extends ConsumerWidget {
   JoinCustomForm(this.scrollAnimate, {required this.role, super.key});
@@ -83,33 +85,22 @@ class JoinCustomForm extends ConsumerWidget {
                 onPressed: () {
                   uc.join(_id.text.trim(), _password.text.trim(), _email.text.trim(), _phoneNum.text.trim(), role);
                 },
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: gButtonOffColor,
-                  ),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "회원가입 완료",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                style: ElevatedButton.styleFrom(
+                  primary: gButtonOffColor,
+                  minimumSize: Size(getScreenWidth(context), 60),
+                ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "회원가입 완료",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
-              // CustomMainButton(
-              //     buttonRoutePath: "/main",
-              //     buttonText: "회원가입 완료",
-              //     action: () {
-              //       Logger().d("실행확인");
-              //       uc.join(_id.text.trim(), _password.text.trim(), _email.text.trim(), _phoneNum.text.trim(), "USER");
-              //       Logger().d("실행확인");
-              //     })
             ],
           ),
         ),

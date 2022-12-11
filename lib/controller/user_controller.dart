@@ -1,7 +1,7 @@
 import 'package:finalproject_front/domain/user/user_http_repository.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
-import 'package:finalproject_front/pages/auth/join_page.dart';
+import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -35,6 +35,8 @@ class UserController {
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
     ResponseDto respDto = await _ref.read(userHttpRepository).join(joinReqDto);
+
+    Navigator.popAndPushNamed(context, "/login");
     // // 3. 비지니스 로직 처리
     // if (respDto.status == 200) {
     //   User user = User.fromJson(respDto.data);

@@ -1,6 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
-import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
+import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../size.dart';
