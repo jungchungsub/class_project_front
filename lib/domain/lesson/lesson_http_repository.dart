@@ -13,9 +13,9 @@ class LessonHttpRepository {
   Ref _ref;
   LessonHttpRepository(this._ref);
 
-  Future<LessonRespDto> getLessonDetail(int id) async {
-    Response response = await _ref.read(httpConnector).get("/api/lesson/${id}");
-    LessonRespDto lessonRespDto = LessonRespDto.fromJson(jsonDecode(response.body));
+  Future<List<LessonRespDto>> getLessonDetail(int id) async {
+    Response response = await _ref.read(httpConnector).get("/api/category/lesson/${id}");
+    List<LessonRespDto> lessonRespDto = [LessonRespDto.fromJson(jsonDecode(response.body))];
     // dynamic data = lessonRespDto.lessonName;
     // print(data);
     return lessonRespDto;

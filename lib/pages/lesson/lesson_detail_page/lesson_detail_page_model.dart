@@ -10,27 +10,20 @@ import 'package:http/http.dart';
 //   return LessonDetailPageStore(null, ref)..initViewModel(id);
 // });
 
-// final lessonDetailPageStore = StateNotifierProvider<LessonDetailPageModel, LessonRespDto>((ref) {
-//   //return LessonDetailPageModel( ,ref)..initViewModel();
-// });
+final lessonDetailPageStore = StateNotifierProvider.autoDispose<LessonDetailPageModel, List<LessonRespDto>>((ref) {
+  return LessonDetailPageModel([], ref)..initViewModel();
+});
 
-class LessonDetailPageModel extends StateNotifier<LessonRespDto> {
+class LessonDetailPageModel extends StateNotifier<List<LessonRespDto>> {
   Ref _ref;
   LessonDetailPageModel(super.state, this._ref);
 
-  //LoginStateNotifier():super(LoginState.none);
-
-  //LessonDetailPageModel(this._ref) :super(stat);
-
-  //LessonDetailPageModel():super(super.state);
-
-  //http 처음 초기화
   void initViewModel() async {
-    LessonRespDto lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(1);
+    List<LessonRespDto> lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(1);
     state = lessonRespDto;
   }
 
-  void refresh(LessonRespDto lessonRespDto) {
+  void refresh(List<LessonRespDto> lessonRespDto) {
     state = lessonRespDto;
   }
 }
