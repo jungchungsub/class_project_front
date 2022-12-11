@@ -34,25 +34,32 @@ class UserController {
     }
   }
 
-  void join(String username, String password, String email, String phoneNum, String role) async {
+  void join({required String username, required String password, required String email, required String phoneNum, required String role}) async {
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
     ResponseDto respDto = await _ref.read(userHttpRepository).join(joinReqDto);
-    if (respDto.statusCode == 200) {
+    if (respDto.statusCode == 201) {
       Navigator.popAndPushNamed(context, "/login");
     } else {
-      CustomAlertDialog(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("회원가입 실패")),
+      );
     }
+  }
 
-    // // 3. 비지니스 로직 처리
-    // if (respDto.status == 200) {
-    //   User user = User.fromJson(respDto.data);
-    //   print("가입된 유저 이름 : ${user.username}");
-    //   Navigator.popAndPushNamed(context, "/login");
-    //   // 4. 응답된 데이터를 ViewModel에 반영해야 한다면 통신 성공시에 추가하기
-    // } else {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     SnackBar(content: Text("회원가입 실패")),
-    //   );
+  Future<void> login({required String username, required String password}) async {
+    // 1. DTO 변환
+    LoginReqDto loginReqDto = LoginReqDto(username: username, password: password);
+
+    // 2. 통신 요청
+    ResponseDto respDto = await _ref.read(userHttpRepository).login(loginReqDto);
+    //3. 비지니스 로직 처리
+    if (respDto.statusCode > 200 || respDto.statusCode < 300) {
+      Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil("/main", (route) => false);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("로그인 실패")),
+      );
+    }
   }
 }

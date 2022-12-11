@@ -23,7 +23,6 @@ class JoinCustomForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uc = ref.read(userController);
-    final JoinReqDto joinReqDto = JoinReqDto.origin();
 
     return Form(
       key: _formKey, // 해당 키로 Form의 상태를 관리 한다.
@@ -83,7 +82,12 @@ class JoinCustomForm extends ConsumerWidget {
               SizedBox(height: gap_xl),
               ElevatedButton(
                 onPressed: () {
-                  uc.join(_id.text.trim(), _password.text.trim(), _email.text.trim(), _phoneNum.text.trim(), role);
+                  uc.join(
+                      username: _id.text.trim(),
+                      password: _password.text.trim(),
+                      email: _email.text.trim(),
+                      phoneNum: _phoneNum.text.trim(),
+                      role: role);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: gButtonOffColor,
