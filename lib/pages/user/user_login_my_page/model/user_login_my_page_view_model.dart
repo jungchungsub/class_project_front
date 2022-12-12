@@ -12,7 +12,7 @@ import 'package:logger/logger.dart';
 /**autoDispose : 재 로그인 시 유저 정보 업데이트 역할을 해줌. */
 
 final userLoginMyPageViewModel = StateNotifierProvider.autoDispose<UserLoginMyPageViewModel, UserLoginMyPageModel?>((ref) {
-  return UserLoginMyPageViewModel(null)..notifyViewModel();
+  return UserLoginMyPageViewModel(null);
   //..initViewModel()
 });
 
