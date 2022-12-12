@@ -8,29 +8,30 @@ class LessonRespDto {
   int lessonPrice;
   int lessonTime;
   int lessonCount;
-  int curriculum;
+  // int curriculum;
   String lessonPlace;
   String possibleDays;
   String lessonPolicy;
   String masterName;
   String masterImg;
   String masterIntroduction;
-  List<ReviewRespDto> lessonReviewList;
+  // List<ReviewRespDto> lessonReviewList;
 
-  LessonRespDto(
-      {required this.lessonId,
-      required this.lessonName,
-      required this.lessonPrice,
-      required this.lessonTime,
-      required this.lessonCount,
-      required this.lessonPlace,
-      required this.curriculum,
-      required this.possibleDays,
-      required this.lessonPolicy,
-      required this.masterName,
-      required this.masterImg,
-      required this.masterIntroduction,
-      required this.lessonReviewList});
+  LessonRespDto({
+    required this.lessonId,
+    required this.lessonName,
+    required this.lessonPrice,
+    required this.lessonTime,
+    required this.lessonCount,
+    required this.lessonPlace,
+    // required this.curriculum,
+    required this.possibleDays,
+    required this.lessonPolicy,
+    required this.masterName,
+    required this.masterImg,
+    required this.masterIntroduction,
+    // required this.lessonReviewList,
+  });
 
   factory LessonRespDto.fromJson(Map<String, dynamic> json) => LessonRespDto(
         lessonId: json["id"],
@@ -39,13 +40,12 @@ class LessonRespDto {
         lessonTime: json["lessonTime"],
         lessonCount: json["lessonCount"],
         lessonPlace: json["lessonPlace"],
-        curriculum: json["curriculum"],
         possibleDays: json["possibleDays"],
         lessonPolicy: json["lessonPolicy"],
         masterName: json["masterName"],
         masterImg: json["masterImg"],
         masterIntroduction: json["masterIntroduction"],
-        lessonReviewList: (json["lessonReviewList"]).map((e) => e == null ? null : ReviewRespDto.fromJson(e).toJson()),
+        // lessonReviewList: (json["lessonReviewList"]).map((e) => e == null ? null : ReviewRespDto.fromJson(e).toJson()),
       );
   Map<String, dynamic> toJson() => {
         "lessonName": lessonName,
@@ -58,6 +58,6 @@ class LessonRespDto {
         "masterName": masterName,
         "masterImg": masterImg,
         "masterIntroduction": masterIntroduction,
-        "lessonReviewList": lessonReviewList.map((e) => e.toJson()).toList(),
+        // "lessonReviewList": lessonReviewList.map((e) => e.toJson()).toList(),
       };
 }

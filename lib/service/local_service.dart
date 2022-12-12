@@ -25,12 +25,10 @@ class LocalService {
   Future<void> fetchJwtToken() async {
     Logger().d("jwt init");
     // 디바이스에 저장된 토큰 값 가져옴
-    String? diviceJwtToken = await storage.read(key: "jwtToken");
-    final prefs = await SharedPreferences.getInstance();
-    final deviceJwtToken = prefs.getString("jwtToken");
+    String? deviceJwtToken = await storage.read(key: "jwtToken");
 
-    // 디바이스에 저장된 jwt토큰이 있다면 서버에서 토큰값을 통해 유저의 정보 Get 요청
     if (deviceJwtToken != null) {
+      // 디바이스에 저장된 jwt토큰이 있다면 서버에서 토큰값을 통해 유저의 정보 Get 요청
       Response response = await httpConnector.get("/jwtToken");
       ResponseDto respDto = toResponseDto(response);
 
