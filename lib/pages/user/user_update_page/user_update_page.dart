@@ -24,7 +24,11 @@ class UserUpdatePage extends ConsumerWidget {
             _buildDivider(),
             ServiceTextButton(context: context, text: "알람 설정", routePath: "/joinDivision"),
             _buildDivider(),
-            ServiceTextButton(context: context, text: "로그아웃", action: userCT.logout()),
+            ServiceTextButton(
+              context: context,
+              text: "로그아웃",
+              action: userCT.logout(),
+            ),
             _buildDivider(),
             ServiceTextButton(context: context, text: "회원 탈퇴", routePath: "/joinDivision"),
             _buildDivider(),

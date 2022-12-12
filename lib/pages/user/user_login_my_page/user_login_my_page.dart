@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_view_model.dart';
@@ -16,6 +17,8 @@ class UserLoginMyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserLoginMyPageModel? model = ref.watch(userLoginMyPageViewModel);
+    final userCT = ref.read(userController);
+
     return Scaffold(
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(

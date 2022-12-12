@@ -1,4 +1,5 @@
 import 'package:finalproject_front/domain/user_session.dart';
+import 'package:finalproject_front/dto/response/my_page_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
@@ -39,9 +40,8 @@ class UserController {
 
   Future<void> logout() async {
     // 세션 값 삭제
-    Logger().d("여기 실행됌?");
     await UserSession.removeAuthentication();
-    await Navigator.of(gContext).pushNamedAndRemoveUntil("/logoutMyPage", (route) => false);
+    await Navigator.pushNamedAndRemoveUntil(gContext, "/logoutMyPage", (route) => false);
   }
 
   Future<void> joinUser(
@@ -77,7 +77,8 @@ class UserController {
     }
   }
 
-  // Future<void> getMyPage({required int id}) async {
-  //   ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
-  // }
+  Future<void> getMyPage({required int id}) async {
+    ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
+    responseDto.data = MyPageRespDto.fromJson(responseDto.data);
+  }
 }

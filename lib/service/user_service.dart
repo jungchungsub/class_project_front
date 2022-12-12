@@ -35,11 +35,11 @@ class UserService {
   Future<ResponseDto> login(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
     Response response = await httpConnector.post("/login", requestBody);
+
     String jwtToken = response.headers["authorization"].toString();
     Logger().d("토큰 값 확인 : ${jwtToken}");
 
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
-
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("loginDto data확인 : ${responseDto.data}");
 
@@ -47,7 +47,14 @@ class UserService {
     UserRespDto user = UserRespDto.fromJson(responseDto.data);
     UserSession.successAuthentication(user, jwtToken);
     Logger().d("Session Login확인 : ${UserSession.isLogin}");
-
+// Response response = await dio.post('api/user/login', data: param);
+// if (response.statusCode == 200) { // 로그인을 성공하면
+//     String token = response.data['token']; // response의 token키에 담긴 값을 token 변수에 담아서
+// 	Map<String, dynamic> payload = Jwt.parseJwt(token); // 토큰 내부의 값을 Map 구조에 담는다
+//     loginID = payload['user_id'];
+//     var val = jsonEncode(Login('$token', '$loginID')); 토큰 값과 로그인 유지 정보를 va변수에 담는다
+//     await storage.write( key: 'login', value: val ); // login key에 SecureStorage에 담는다
+//     return true;
     return responseDto; // ResponseDto 응답
   }
 
