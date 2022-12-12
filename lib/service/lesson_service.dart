@@ -1,4 +1,6 @@
 import 'package:finalproject_front/core/http_connector.dart';
+import 'package:finalproject_front/domain/lesson.dart';
+import 'package:finalproject_front/dto/response/lesson_latest_list_resp_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/util/response_util.dart';
@@ -21,6 +23,19 @@ class LessonService {
     Logger().d("Response상태코드 출력 : ${responseDto.statusCode}");
     Logger().d("ResponseMsg 출력 : ${responseDto.msg}");
     responseDto.data = LessonRespDto.fromJson(responseDto.data);
+    return responseDto;
+  }
+
+  Future<ResponseDto> homeList() async {
+    Response response = await httpConnector.get("/api/main");
+
+    ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.statusCode > 0 || responseDto.statusCode < 300) {
+      List<dynamic> mapList = responseDto.data;
+      List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
+      responseDto.data = LessonLatestList;
+    }
+
     return responseDto;
   }
 

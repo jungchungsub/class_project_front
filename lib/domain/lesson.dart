@@ -5,6 +5,7 @@ class Lesson {
   int lessonPrice;
   int lessonTime;
   int lessonCount;
+  String curriculum;
   String lessonPlace;
   String possibleDays;
   String lessonPolicy;
@@ -18,6 +19,7 @@ class Lesson {
       required this.lessonPrice,
       required this.lessonTime,
       required this.lessonCount,
+      required this.curriculum,
       required this.lessonPlace,
       required this.possibleDays,
       required this.lessonPolicy,
@@ -30,6 +32,7 @@ class Lesson {
         lessonName: json["lessonName"],
         lessonPrice: json["lessonPrice"],
         lessonTime: json["lessonTime"],
+        curriculum: json["curriculum"],
         lessonCount: json["lessonCount"],
         lessonPlace: json["lessonPlace"],
         possibleDays: json["possibleDays"],
@@ -45,6 +48,7 @@ class Lesson {
         "lessonPrice": lessonPrice,
         "lessonTime": lessonTime,
         "lessonCount": lessonCount,
+        "curriculum": curriculum,
         "lessonPlace": lessonPlace,
         "possibleDays": possibleDays,
         "lessonPolicy": lessonPolicy,

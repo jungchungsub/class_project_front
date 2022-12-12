@@ -1,4 +1,5 @@
 import 'package:finalproject_front/dto/response/respone_dto.dart';
+import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';
 import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/main.dart';
@@ -25,8 +26,7 @@ class LessonController {
     Navigator.popAndPushNamed(context, "/lessonDetail");
   }
 
-  // Future<void> refreshHomePage() async{
-  //   _ref.read()
-  // }
-
+  Future<void> refreshHomePage() async {
+    _ref.read(homePageViewModel.notifier).notifyViewModel();
+  }
 }

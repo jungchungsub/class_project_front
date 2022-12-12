@@ -56,7 +56,7 @@ class LessonDetailPage extends ConsumerWidget {
                                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            //_buildLessonContentBox("커리큘럼", rc.getLessonDetail(id), 120, 2),
+                            _buildLessonContentBox("커리큘럼", "${model?.lessonRespDto.curriculum}", 120, 2),
                             _buildLessonContentBox("레슨시간", "${model?.lessonRespDto.lessonTime}", 55, 1),
                             _buildLessonContentBox("레슨횟수", "${model?.lessonRespDto.lessonCount}", 55, 1),
                             _buildLessonContentBox("장소", "${model?.lessonRespDto.lessonPlace}", 55, 1),
@@ -65,7 +65,27 @@ class LessonDetailPage extends ConsumerWidget {
                             _buildLessonExpertInformation("${model?.lessonRespDto.masterImg}", "전문가정보", "${model?.lessonRespDto.masterName}",
                                 "${model?.lessonRespDto.masterIntroduction}"),
                             _buildLessonEvaluation(4.2, 500),
-                            _buildPurchaseReview(),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: gap_l,
+                                  ),
+                                  _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
+                                      "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
+                                  _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
+                                      "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
+                                  _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
+                                      "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
+                                  // _buildReview(lessonList[0].reviewDtoList[1].username, lessonList[0].reviewDtoList[1].reviewContent),
+                                  // _buildReview(lessonList[0].reviewDtoList[2].username, lessonList[0].reviewDtoList[2].reviewContent),
+                                  SizedBox(
+                                    height: gap_xxl,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         )),
                       ),
@@ -89,25 +109,6 @@ Padding _buildLessonPrice(int lessonPrice) {
     child: Text(
       "${lessonPrice}원",
       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-    ),
-  );
-}
-
-Container _buildPurchaseReview() {
-  return Container(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: gap_l,
-        ),
-        _buildReview(lessonList[0].reviewDtoList[0].username, lessonList[0].reviewDtoList[0].reviewContent),
-        _buildReview(lessonList[0].reviewDtoList[1].username, lessonList[0].reviewDtoList[1].reviewContent),
-        _buildReview(lessonList[0].reviewDtoList[2].username, lessonList[0].reviewDtoList[2].reviewContent),
-        SizedBox(
-          height: gap_xxl,
-        ),
-      ],
     ),
   );
 }
