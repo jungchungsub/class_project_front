@@ -1,3 +1,4 @@
+import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/main.dart';
@@ -20,7 +21,7 @@ class LessonController {
 
   Future<void> getLessonDetail() async {
     Logger().d("컨트롤러 실행 확인.");
-    List<LessonRespDto> lessonRespDto = await LessonService().getLessonDetail(3);
+    ResponseDto responseDto = await LessonService().getLessonDetail(3);
     // await _ref.read(lessonHttprepository).getLessonDetail(); // 가져온 값을 lessonRespDto에 저장
   }
 }

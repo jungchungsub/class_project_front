@@ -43,7 +43,7 @@ class JoinDivisionPage extends ConsumerWidget {
 Widget _buildDivisionButton(BuildContext context, String divisionTitle, String divisionSubTitle, String routePath, String role, UserController rc) {
   return InkWell(
     onTap: () {
-      rc.joinDivisionButton(role);
+      rc.moveJoinPage(role);
       Logger().d("여긴 실행되나? 버튼클릭");
       //Navigator.pushNamed(context, routePath, arguments: JoinPage(role: "USER"));
     },

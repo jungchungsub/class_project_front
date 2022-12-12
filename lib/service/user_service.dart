@@ -4,10 +4,11 @@ import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/dto/response/user_resp_dto.dart';
+import 'package:finalproject_front/service/local_service.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../domain/user_session.dart';
 import '../util/response_util.dart';
 
@@ -33,27 +34,29 @@ class UserService {
   }
 
   Future<ResponseDto> login(LoginReqDto loginReqDto) async {
-    // 1. json 변환
     String requestBody = jsonEncode(loginReqDto.toJson());
-
-    // 2. 통신 시작
     Response response = await httpConnector.post("/login", requestBody);
-
-    // 3. 토큰 받기
     String jwtToken = response.headers["authorization"].toString();
-
-    // 4. 토큰을 디바이스에 저장
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString("jwtToken", jwtToken); // 자동 로그인시 필요
-
     Logger().d("토큰 값 확인 : ${jwtToken}");
-    // 5. ResponseDto에서 User 꺼내기
-    ResponseDto responseDto = toResponseDto(response);
 
-    // 6. AuthProvider에 로긴 정보 저장
+    await storage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
+
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("loginDto data확인 : ${responseDto.data}");
+
     UserRespDto user = UserRespDto.fromJson(responseDto.data);
+
     UserSession.login(user, jwtToken);
+    Logger().d("Session Login확인 : ${UserSession.isLogin}");
 
     return responseDto; // ResponseDto 응답
+  }
+
+// MyPage를 위한 유저 정보
+  Future<ResponseDto> getUserInfoForMyPage(int id) async {
+    Logger().d("MyPage확인 : ${id}");
+    Response response = await httpConnector.get("/api/user/${id}/mypage");
+    ResponseDto responseDto = toResponseDto(response);
+    return responseDto;
   }
 }

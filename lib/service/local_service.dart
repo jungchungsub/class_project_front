@@ -1,5 +1,6 @@
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/domain/user.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,19 +10,22 @@ import '../dto/response/user_resp_dto.dart';
 import '../domain/user_session.dart';
 import '../util/response_util.dart';
 
+// Create storage
+const storage = FlutterSecureStorage();
+
 class LocalService {
   final HttpConnector httpConnector = HttpConnector();
 
-  static final LocalService _instance = LocalService._single(); //싱글톤 패턴 관리
+  static final LocalService _instance = LocalService._single();
   LocalService._single();
   factory LocalService() {
-    Logger().d("LocalRepository 생성자");
     return _instance;
   }
 
-  Future<void> initShardJwtToken() async {
+  Future<void> fetchJwtToken() async {
     Logger().d("jwt init");
     // 디바이스에 저장된 토큰 값 가져옴
+    String? diviceJwtToken = await storage.read(key: "jwtToken");
     final prefs = await SharedPreferences.getInstance();
     final deviceJwtToken = prefs.getString("jwtToken");
 

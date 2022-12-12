@@ -82,7 +82,7 @@ class JoinCustomForm extends ConsumerWidget {
               SizedBox(height: gap_xl),
               ElevatedButton(
                 onPressed: () {
-                  uc.join(
+                  uc.joinUser(
                       username: _id.text.trim(),
                       password: _password.text.trim(),
                       email: _email.text.trim(),

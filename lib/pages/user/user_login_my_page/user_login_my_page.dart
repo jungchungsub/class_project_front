@@ -1,17 +1,21 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_view_model.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/bottom_image_box.dart';
 import '../components/profile_image.dart';
 
-class UserLoginMyPage extends StatelessWidget {
+class UserLoginMyPage extends ConsumerWidget {
   const UserLoginMyPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserLoginMyPageModel? model = ref.watch(userLoginMyPageViewModel);
     return Scaffold(
       appBar: _buildAppBar(context),
       body: SingleChildScrollView(

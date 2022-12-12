@@ -60,7 +60,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               SizedBox(height: gap_l),
               ElevatedButton(
                 onPressed: () {
-                  uc.login(username: widget._id.text.trim(), password: widget._password.text.trim());
+                  uc.loginUser(username: widget._id.text.trim(), password: widget._password.text.trim());
                   Navigator.pushNamed(context, "/main");
                 },
                 style: ElevatedButton.styleFrom(

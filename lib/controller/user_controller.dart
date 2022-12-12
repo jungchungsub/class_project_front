@@ -4,15 +4,18 @@ import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
 
 /**
  * Controller은 비즈니스 로직을 담당
- * Page에서 컨트롤러 사용위한 싱글톤 Provider 사용
- * Page가 Controller만 리스닝함.
  * 기존 Repository -> Service로 로직 변경, Spring과 거의 똑같은 구조라고 생각하면 됌.
+ * 네이밍 규칙 
+ * 페이지 이동 -> move
+ * 화면 갱신 -> refresh
+ * 
  */
 final userController = Provider<UserController>((ref) {
   return UserController(ref);
@@ -24,7 +27,7 @@ class UserController {
   UserController(this._ref);
   final UserService userService = UserService();
 
-  void joinDivisionButton(String role) {
+  void moveJoinPage(String role) {
     if (role == "USER") {
       Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
@@ -33,7 +36,7 @@ class UserController {
     }
   }
 
-  void join({required String username, required String password, required String email, required String phoneNum, required String role}) async {
+  void joinUser({required String username, required String password, required String email, required String phoneNum, required String role}) async {
     // Dto로 변환
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
@@ -48,7 +51,7 @@ class UserController {
     }
   }
 
-  Future<void> login({required String username, required String password}) async {
+  Future<void> loginUser({required String username, required String password}) async {
     // 1. DTO 변환
     LoginReqDto loginReqDto = LoginReqDto(username: username, password: password);
 
@@ -56,7 +59,7 @@ class UserController {
     ResponseDto respDto = await userService.login(loginReqDto);
     //3. 비지니스 로직 처리
     Logger().d("controller status확인 : ${respDto.statusCode}");
-    if (respDto.statusCode > 200 || respDto.statusCode < 300) {
+    if (respDto.statusCode > 0 || respDto.statusCode < 300) {
       Navigator.of(context).pushNamedAndRemoveUntil("/main", (route) => false);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -65,5 +68,7 @@ class UserController {
     }
   }
 
-  Future<void> myPage(int id) async {}
+  // Future<void> getMyPage({required int id}) async {
+  //   ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
+  // }
 }

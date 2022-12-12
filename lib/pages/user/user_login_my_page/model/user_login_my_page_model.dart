@@ -1,5 +1,9 @@
-import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
+import 'package:finalproject_front/dto/response/my_page_resp_dto.dart';
 
 class UserLoginMyPageModel {
-  // ProfileRespDto profile;
+  MyPageRespDto myPageRespDto;
+
+  UserLoginMyPageModel(
+    this.myPageRespDto,
+  );
 }
