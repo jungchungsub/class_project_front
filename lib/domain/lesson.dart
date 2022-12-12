@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import '../dto/response/review_resp_dto.dart';
 
 class Lesson {
   String lessonName;
-  Int lessonPrice;
-  Int lessonTime;
-  Int lessonCount;
+  int lessonPrice;
+  int lessonTime;
+  int lessonCount;
   String lessonPlace;
   String possibleDays;
   String lessonPolicy;

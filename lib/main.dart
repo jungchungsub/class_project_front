@@ -8,7 +8,7 @@ import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
-import 'package:finalproject_front/pages/main/home/home_page.dart';
+import 'package:finalproject_front/pages/main/home/home_page_view_model/home_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_card_page.dart';
