@@ -1,4 +1,4 @@
-import 'package:finalproject_front/domain/lesson/lesson_http_repository.dart';
+import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,8 +17,10 @@ class LessonController {
   LessonController(this._ref);
 
 // 절대 리턴 하지 말기
-  Future<void> getLessonDetail(int id) async {
-    Logger().d("실행됨?");
-    List<LessonRespDto> lessonPS = await _ref.read(lessonHttprepository).getLessonDetail(id); // 가져온 값을 lessonRespDto에 저장
+
+  Future<void> getLessonDetail() async {
+    Logger().d("컨트롤러 실행 확인.");
+    List<LessonRespDto> lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(1);
+    // await _ref.read(lessonHttprepository).getLessonDetail(); // 가져온 값을 lessonRespDto에 저장
   }
 }

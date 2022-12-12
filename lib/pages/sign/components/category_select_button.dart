@@ -1,11 +1,10 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-import '../../../domain/category/category.dart';
+import '../../../domain/category.dart';
 
 class CategorySelectButton extends StatefulWidget {
   const CategorySelectButton({super.key});

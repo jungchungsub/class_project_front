@@ -1,4 +1,4 @@
-import 'package:finalproject_front/domain/user/user_http_repository.dart';
+import 'package:finalproject_front/service/user_service.dart';
 import 'package:finalproject_front/dto/response/user_resp_dto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

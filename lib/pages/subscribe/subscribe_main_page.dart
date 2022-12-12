@@ -1,4 +1,4 @@
-import 'package:finalproject_front/models/subscribe_list_resp_dto.dart';
+import 'package:finalproject_front/dummy_models/subscribe_list_resp_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

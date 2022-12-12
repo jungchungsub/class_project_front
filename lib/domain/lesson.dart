@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import '../../dto/response/review_resp_dto.dart';
+import '../dto/response/review_resp_dto.dart';
 
 class Lesson {
   String lessonName;

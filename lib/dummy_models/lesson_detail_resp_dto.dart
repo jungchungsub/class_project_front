@@ -1,4 +1,4 @@
-import 'package:finalproject_front/models/review.dart';
+import 'package:finalproject_front/dummy_models/review.dart';
 
 class Lesson {
   int id;
