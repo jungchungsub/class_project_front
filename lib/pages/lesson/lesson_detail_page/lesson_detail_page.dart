@@ -56,7 +56,7 @@ class LessonDetailPage extends ConsumerWidget {
                                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            //_buildLessonContentBox("커리큘럼", rc.getLessonDetail(id), 120, 2),
+                            _buildLessonContentBox("커리큘럼", "${model?.lessonRespDto.curriculum}", 120, 2),
                             _buildLessonContentBox("레슨시간", "${model?.lessonRespDto.lessonTime}", 55, 1),
                             _buildLessonContentBox("레슨횟수", "${model?.lessonRespDto.lessonCount}", 55, 1),
                             _buildLessonContentBox("장소", "${model?.lessonRespDto.lessonPlace}", 55, 1),
