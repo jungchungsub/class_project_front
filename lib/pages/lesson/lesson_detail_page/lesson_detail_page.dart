@@ -1,7 +1,8 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page_model.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_model.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/dummy_models/review.dart';
 import 'package:finalproject_front/size.dart';
@@ -11,11 +12,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LessonDetailPage extends ConsumerWidget {
-  const LessonDetailPage({Key? key}) : super(key: key);
+  final int lessonId;
+  const LessonDetailPage({required this.lessonId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rc = ref.read(lessonController);
+    //final rc = ref.read(lessonController);
+    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+    LessonController controllerCT = ref.read(lessonController);
+
     return LayoutBuilder(
       // layoutBuilder안에 넣는 이유는 해당디바이스 사이즈를 알기위해서 넣어준다.
       builder: (context, constrains) {
@@ -52,7 +57,7 @@ class LessonDetailPage extends ConsumerWidget {
                               ),
                             ),
                             //_buildLessonContentBox("커리큘럼", rc.getLessonDetail(id), 120, 2),
-                            _buildLessonContentBox("레슨시간", "${rc.getLessonDetail}", 55, 1),
+                            _buildLessonContentBox("레슨시간", "${model?.lessonRespDto.lessonTime}", 55, 1),
                             _buildLessonContentBox("레슨횟수", "${lessonList[0].lessonCount}", 55, 1),
                             _buildLessonContentBox("장소", lessonList[0].lessonPlace, 55, 1),
                             _buildLessonPossibleDate(lessonList[0].possibleDays),

@@ -3,7 +3,7 @@ import 'package:extended_image/extended_image.dart';
 import 'review_resp_dto.dart';
 
 class LessonRespDto {
-  int? id;
+  int? lessonId;
   String lessonName;
   int lessonPrice;
   int lessonTime;
@@ -18,7 +18,7 @@ class LessonRespDto {
   List<ReviewRespDto> lessonReviewList;
 
   LessonRespDto(
-      {required this.id,
+      {required this.lessonId,
       required this.lessonName,
       required this.lessonPrice,
       required this.lessonTime,
@@ -33,7 +33,7 @@ class LessonRespDto {
       required this.lessonReviewList});
 
   factory LessonRespDto.fromJson(Map<String, dynamic> json) => LessonRespDto(
-        id: json["id"],
+        lessonId: json["id"],
         lessonName: json["lessonName"],
         lessonPrice: json["lessonPrice"],
         lessonTime: json["lessonTime"],
