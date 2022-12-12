@@ -17,7 +17,7 @@ class LessonDetailPageModel extends StateNotifier<List<LessonRespDto>> {
 
   void initViewModel() async {
     Logger().d("실행");
-    List<LessonRespDto> lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(1);
+    List<LessonRespDto> lessonRespDto = await LessonService().getLessonDetail(3);
     Logger().d("lesson확인 : ${lessonRespDto.toString()}");
     state = lessonRespDto;
   }
