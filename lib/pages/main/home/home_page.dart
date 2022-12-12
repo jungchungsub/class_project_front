@@ -48,7 +48,7 @@ class HomePage extends ConsumerWidget {
   InkWell _buildClassList(BuildContext context, String routePath, LessonController lessonCT) {
     return InkWell(
       onTap: () {
-        lessonCT.getLessonDetail();
+        lessonCT.moveDetailPage(1);
         Navigator.pushNamed(context, "${routePath}");
         Logger().d("실행?>");
       },

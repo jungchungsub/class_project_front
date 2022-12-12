@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/orderDetail": (context) => OrderDetailPage(),
-        "/lessonDetail": (context) => LessonDetailPage(),
+        "/lessonDetail": (context) => LessonDetailPage(lessonId: 1),
         "/categoryDetail": (context) => CategoryDetailPage(),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
