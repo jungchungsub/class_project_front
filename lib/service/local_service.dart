@@ -29,7 +29,7 @@ class LocalService {
 
     if (deviceJwtToken != null) {
       // 디바이스에 저장된 jwt토큰이 있다면 서버에서 토큰값을 통해 유저의 정보 Get 요청
-      Response response = await httpConnector.get("/jwtToken");
+      Response response = await httpConnector.getInitSession("/api/user/session", deviceJwtToken);
       ResponseDto respDto = toResponseDto(response);
 
       if (respDto.statusCode == 201) {

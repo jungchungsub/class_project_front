@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
+import 'package:finalproject_front/domain/lesson.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/dto/response/user_resp_dto.dart';
@@ -21,13 +22,10 @@ class LessonService {
     Logger().d("상태코드 출력: ${response.statusCode}");
     ResponseDto responseDto = toResponseDto(response);
     //responseDto.data = UserRespDto.fromJson(jsonDecode(response));
-    responseDto.data = LessonRespDto.fromJson(responseDto.data);
     Logger().d("ResponseData 출력 : ${responseDto.data}");
     Logger().d("Response상태코드 출력 : ${responseDto.statusCode}");
     Logger().d("ResponseMsg 출력 : ${responseDto.msg}");
-    List<dynamic> dataList = responseDto.data;
-    List<LessonRespDto> LessonRespDtoList = dataList.map((lesson) => LessonRespDto.fromJson(lesson)).toList();
-    responseDto.data = LessonRespDtoList;
+    responseDto.data = LessonRespDto.fromJson(responseDto.data);
     return responseDto;
   }
 

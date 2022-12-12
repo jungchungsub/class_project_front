@@ -15,13 +15,14 @@ class LessonController {
   final context = navigatorKey.currentContext!;
   Ref _ref;
   LessonController(this._ref);
+  final LessonService lessonService = LessonService();
 
 // 절대 리턴 하지 말기
   void moveDetailPage(int lessonId) async {
     Logger().d("컨트롤러 실행 확인.");
     //통신요청
-    ResponseDto respDto = await LessonService().getLessonDetail(lessonId); //가져온 값을 RespDto에 저장
-    Navigator.popAndPushNamed(context!, "/lessonDetail");
+    ResponseDto respDto = await lessonService.getLessonDetail(lessonId); //가져온 값을 RespDto에 저장
+    Navigator.popAndPushNamed(context, "/lessonDetail");
     // context!,
     // MaterialPageRoute(
     //   builder: (context) => DetailPage(postId),

@@ -24,7 +24,7 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   Future<void> notifyViewModel() async {
     Logger().d("실행");
     ResponseDto responseDto = await LessonService().getLessonDetail(lessonId);
-    if (responseDto.statusCode == 201) {
+    if (responseDto.statusCode > 0 || responseDto.statusCode < 400) {
       state = LessonDetailPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
