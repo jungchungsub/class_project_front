@@ -8,9 +8,9 @@ class LessonRespDto {
   int lessonPrice;
   int lessonTime;
   int lessonCount;
-  int curriculum;
+  String curriculum;
   String lessonPlace;
-  String possibleDays;
+  List<String> possibleDays;
   String lessonPolicy;
   String masterName;
   String masterImg;
