@@ -1,18 +1,22 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rc = ref.read(lessonController);
     return Scaffold(
-      appBar: _buildAppBar(context, "/searchMain"),
-      body: NestedScrollView(
+        appBar: _buildAppBar(context, "/searchMain"),
+        body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverList(
@@ -33,14 +37,17 @@ class HomePage extends StatelessWidget {
               ]))
             ];
           },
-          body: _buildClassList(context, "/lessonDetail")),
-    );
+          body: // _buildClassList(context, "/lessonDetail")),
+              _buildClassList(context, "/lessonDetail", rc),
+        ));
   }
 
-  InkWell _buildClassList(BuildContext context, String routePath) {
+  InkWell _buildClassList(BuildContext context, String routePath, LessonController lc) {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, "${routePath}");
+        lc.getLessonDetail(3);
+        Logger().d("실행?>");
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
