@@ -16,7 +16,7 @@ class LessonHttpRepository {
   Ref _ref;
   LessonHttpRepository(this._ref);
   Future<List<LessonRespDto>> getLessonDetail(int id) async {
-    Logger().d("id출력:${id}");
+    Logger().d("id출력service:${id}");
     Response response = await _ref.read(httpConnector).get("/api/category/lesson/${id}");
     Logger().d("response출력 : ${response.body}");
     Logger().d("상태코드 출력: ${response.statusCode}");

@@ -17,9 +17,10 @@ class LessonController {
   LessonController(this._ref);
 
 // 절대 리턴 하지 말기
+
   Future<void> getLessonDetail() async {
     Logger().d("컨트롤러 실행 확인.");
-    List<LessonRespDto> lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(1);
+    List<LessonRespDto> lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(3);
     // await _ref.read(lessonHttprepository).getLessonDetail(); // 가져온 값을 lessonRespDto에 저장
   }
 }

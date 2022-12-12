@@ -8,6 +8,7 @@ class LessonRespDto {
   int lessonPrice;
   int lessonTime;
   int lessonCount;
+  int curriculum;
   String lessonPlace;
   String possibleDays;
   String lessonPolicy;
@@ -23,6 +24,7 @@ class LessonRespDto {
       required this.lessonTime,
       required this.lessonCount,
       required this.lessonPlace,
+      required this.curriculum,
       required this.possibleDays,
       required this.lessonPolicy,
       required this.masterName,
@@ -37,6 +39,7 @@ class LessonRespDto {
         lessonTime: json["lessonTime"],
         lessonCount: json["lessonCount"],
         lessonPlace: json["lessonPlace"],
+        curriculum: json["curriculum"],
         possibleDays: json["possibleDays"],
         lessonPolicy: json["lessonPolicy"],
         masterName: json["masterName"],

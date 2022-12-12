@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/models/search_lesson_resp_Dto.dart';
+import 'package:finalproject_front/dummy_models/search_lesson_resp_Dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

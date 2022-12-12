@@ -14,8 +14,11 @@ class HttpConnector {
   final Client _client = Client();
 
   Future<Response> get(String path) async {
+    Logger().d("connecter");
     Uri uri = Uri.parse("${host}${path}");
+    Logger().d("uri 확인 : ${uri}");
     Response response = await _client.get(uri);
+    Logger().d("connecter333");
     return response;
   }
 
