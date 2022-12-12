@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 final lessonController = Provider<LessonController>(((ref) {
-  final LessonHttpRepositoryPS = ref.read(lessonHttprepository); // Controller + HttpRepo
+  // Controller + HttpRepo
   return LessonController(ref);
 }));
 
@@ -20,7 +20,7 @@ class LessonController {
 
   Future<void> getLessonDetail() async {
     Logger().d("컨트롤러 실행 확인.");
-    List<LessonRespDto> lessonRespDto = await _ref.read(lessonHttprepository).getLessonDetail(3);
+    List<LessonRespDto> lessonRespDto = await LessonService().getLessonDetail(3);
     // await _ref.read(lessonHttprepository).getLessonDetail(); // 가져온 값을 lessonRespDto에 저장
   }
 }
