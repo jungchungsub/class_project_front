@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/models/coupon_list_resp_dto.dart';
+import 'package:finalproject_front/dummy_models/coupon_list_resp_dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

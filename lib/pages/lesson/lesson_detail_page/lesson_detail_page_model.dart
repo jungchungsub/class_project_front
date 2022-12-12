@@ -1,4 +1,4 @@
-import 'package:finalproject_front/domain/lesson/lesson_http_repository.dart';
+import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';

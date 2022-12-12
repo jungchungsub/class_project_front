@@ -1,7 +1,7 @@
 import 'package:logger/logger.dart';
 
-import '../../../domain/local_repository.dart';
-import '../../../dto/response/user_resp_dto.dart';
+import '../service/local_service.dart';
+import '../dto/response/user_resp_dto.dart';
 
 // main 시작전에 확인이 필요해서 provider가 아닌 static으로 관리
 class UserSession {
@@ -25,6 +25,7 @@ class UserSession {
   }
 
   static Map<String, String> getTokenHeader(Map<String, String> headers) {
+    // 토큰 값이 null이면 토큰 값 추가, ...header => 깊은 복사
     return UserSession.jwtToken == null ? headers : {...headers, "Authorization": UserSession.jwtToken!};
   }
 }

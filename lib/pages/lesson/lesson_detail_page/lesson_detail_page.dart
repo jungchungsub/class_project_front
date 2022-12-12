@@ -2,8 +2,8 @@ import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page_model.dart';
-import 'package:finalproject_front/models/lesson_detail_resp_dto.dart';
-import 'package:finalproject_front/models/review.dart';
+import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
+import 'package:finalproject_front/dummy_models/review.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';

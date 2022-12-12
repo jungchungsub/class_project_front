@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:finalproject_front/domain/http_connector.dart';
+import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/util/response_util.dart';

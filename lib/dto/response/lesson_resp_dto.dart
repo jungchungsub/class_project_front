@@ -42,7 +42,6 @@ class LessonRespDto {
         masterName: json["masterName"],
         masterImg: json["masterImg"],
         masterIntroduction: json["masterIntroduction"],
-        //Nested Structure이기 때문에 한번에 map처리 null이 아니면 fromjson을 실행.
         lessonReviewList: (json["lessonReviewList"]).map((e) => e == null ? null : ReviewRespDto.fromJson(e).toJson()),
       );
   Map<String, dynamic> toJson() => {
@@ -56,7 +55,6 @@ class LessonRespDto {
         "masterName": masterName,
         "masterImg": masterImg,
         "masterIntroduction": masterIntroduction,
-        //Nested Structure이기 때문에 한번에 map처리
         "lessonReviewList": lessonReviewList.map((e) => e.toJson()).toList(),
       };
 }

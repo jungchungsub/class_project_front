@@ -1,5 +1,5 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
+import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';

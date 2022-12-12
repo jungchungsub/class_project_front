@@ -1,5 +1,5 @@
 import 'package:finalproject_front/controller/user_controller.dart';
-import 'package:finalproject_front/domain/user/user.dart';
+import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';

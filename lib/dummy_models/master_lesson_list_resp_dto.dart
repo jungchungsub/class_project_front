@@ -1,4 +1,4 @@
-import 'package:finalproject_front/models/profile_detail_resp_dto.dart';
+import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
 
 class MasterLessonRespDto {
   int id;

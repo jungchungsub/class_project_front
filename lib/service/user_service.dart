@@ -1,30 +1,31 @@
 import 'dart:convert';
 
-import 'package:finalproject_front/domain/http_connector.dart';
-import 'package:finalproject_front/domain/user/user.dart';
+import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/dto/response/user_resp_dto.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../pages/user/store_model/user_session.dart';
-import '../../util/response_util.dart';
-
-final userHttpRepository = Provider<UserHttpRepository>((ref) {
-  return UserHttpRepository(ref);
-});
+import '../domain/user_session.dart';
+import '../util/response_util.dart';
 
 // 회원 탈퇴, 회원가입 ,로그인, 로그아웃, 회원 정보 수정,내 정보 상세 보기
-class UserHttpRepository {
-  Ref _ref;
-  UserHttpRepository(this._ref);
+class UserService {
+  final HttpConnector httpConnector = HttpConnector();
+
+//싱글톤 관리
+  static final UserService _instance = UserService._single();
+  UserService._single();
+  // factory는 java = ioc컨테이너와 비슷한 역할을함.
+  factory UserService() {
+    return _instance;
+  }
 
   Future<ResponseDto> join(JoinReqDto joinReqDto) async {
     String requestBody = jsonEncode(joinReqDto.toJson());
-    Response response = await _ref.read(httpConnector).post("/api/join", requestBody);
+    Response response = await httpConnector.post("/join", requestBody);
 
     return toResponseDto(response); // ResponseDto 응답
   }
@@ -34,7 +35,8 @@ class UserHttpRepository {
     String requestBody = jsonEncode(loginReqDto.toJson());
 
     // 2. 통신 시작
-    Response response = await _ref.read(httpConnector).post("/login", requestBody);
+
+    Response response = await httpConnector.post("/login", requestBody);
 
     // 3. 토큰 받기
     String jwtToken = response.headers["authorization"].toString();
