@@ -4,8 +4,8 @@ import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/bottom_image_box.dart';
-import 'components/profile_image.dart';
+import '../components/bottom_image_box.dart';
+import '../components/profile_image.dart';
 
 class UserLoginMyPage extends StatelessWidget {
   const UserLoginMyPage({super.key});

@@ -15,7 +15,7 @@ import '../util/response_util.dart';
 class UserService {
   final HttpConnector httpConnector = HttpConnector();
 
-//싱글톤 관리
+  //싱글톤 관리
   static final UserService _instance = UserService._single();
   UserService._single();
   // factory는 java = ioc컨테이너와 비슷한 역할을함.
@@ -24,7 +24,9 @@ class UserService {
   }
 
   Future<ResponseDto> join(JoinReqDto joinReqDto) async {
+    // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
+    // 2. 통신 시작
     Response response = await httpConnector.post("/join", requestBody);
 
     return toResponseDto(response); // ResponseDto 응답
@@ -35,7 +37,6 @@ class UserService {
     String requestBody = jsonEncode(loginReqDto.toJson());
 
     // 2. 통신 시작
-
     Response response = await httpConnector.post("/login", requestBody);
 
     // 3. 토큰 받기

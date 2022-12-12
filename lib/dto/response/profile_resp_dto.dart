@@ -1,3 +1,4 @@
+import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
 
 class ProfileDetailRespDto {
@@ -8,6 +9,7 @@ class ProfileDetailRespDto {
   String certification;
   String careerYear;
   String career;
+  User user;
 
   ProfileDetailRespDto(
       {required this.id,
@@ -16,7 +18,8 @@ class ProfileDetailRespDto {
       required this.region,
       required this.certification,
       required this.careerYear,
-      required this.career});
+      required this.career,
+      required this.user});
 
   factory ProfileDetailRespDto.fromJson(Map<String, dynamic> json) => ProfileDetailRespDto(
         id: json["id"],
@@ -26,6 +29,7 @@ class ProfileDetailRespDto {
         certification: json["certification"],
         careerYear: json["careerYear"],
         career: json["career"],
+        user: json["user"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,5 +40,6 @@ class ProfileDetailRespDto {
         "certification": certification,
         "careerYear": careerYear,
         "career": career,
+        "user": user,
       };
 }
