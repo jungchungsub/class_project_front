@@ -64,4 +64,6 @@ class UserController {
       );
     }
   }
+
+  Future<void> myPage(int id) async {}
 }
