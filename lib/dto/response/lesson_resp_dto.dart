@@ -15,7 +15,7 @@ class LessonRespDto {
   String masterName;
   String masterImg;
   String masterIntroduction;
-  // List<ReviewRespDto> lessonReviewList;
+  List<ReviewRespDto> lessonReviewList;
 
   LessonRespDto({
     required this.lessonId,
@@ -30,7 +30,7 @@ class LessonRespDto {
     required this.masterName,
     required this.masterImg,
     required this.masterIntroduction,
-    // required this.lessonReviewList,
+    required this.lessonReviewList,
   });
 
   factory LessonRespDto.fromJson(Map<String, dynamic> json) => LessonRespDto(
@@ -45,7 +45,7 @@ class LessonRespDto {
         masterName: json["masterName"],
         masterImg: json["masterImg"],
         masterIntroduction: json["masterIntroduction"],
-        // lessonReviewList: (json["lessonReviewList"]).map((e) => e == null ? null : ReviewRespDto.fromJson(e).toJson()),
+        lessonReviewList: (json["lessonReviewList"]).map((e) => e == null ? null : ReviewRespDto.fromJson(e).toJson()),
       );
   Map<String, dynamic> toJson() => {
         "lessonName": lessonName,
@@ -58,6 +58,6 @@ class LessonRespDto {
         "masterName": masterName,
         "masterImg": masterImg,
         "masterIntroduction": masterIntroduction,
-        // "lessonReviewList": lessonReviewList.map((e) => e.toJson()).toList(),
+        "lessonReviewList": lessonReviewList.map((e) => e.toJson()).toList(),
       };
 }

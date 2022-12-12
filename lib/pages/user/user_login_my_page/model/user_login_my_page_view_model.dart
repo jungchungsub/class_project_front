@@ -21,7 +21,7 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
 
   Future<void> initViewModel() async {
     ResponseDto responseDto = await userService.getUserInfoForMyPage(UserSession.user!.id);
-    if (responseDto.statusCode > 0 || responseDto.statusCode < 400) {
+    if (responseDto.statusCode < 400) {
       state = UserLoginMyPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(gContext!).showSnackBar(const SnackBar(content: Text("잘못된 접근입니다.")));

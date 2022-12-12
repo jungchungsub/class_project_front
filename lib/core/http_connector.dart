@@ -16,9 +16,11 @@ class HttpConnector {
   // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.
 
   Future<Response> getInitSession(String path, String? jwtToken) async {
+    Logger().d("initSession실행됌");
     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
     Uri uri = Uri.parse("${host}${path}");
     Response response = await Client().get(uri, headers: requestHeader);
+    Logger().d("initSession Response확인 ${response.body}");
     return response;
   }
 

@@ -1,3 +1,4 @@
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
@@ -22,30 +23,38 @@ final userController = Provider<UserController>((ref) {
 });
 
 class UserController {
-  final context = navigatorKey.currentContext!; // 모든 컨트롤러가 필요 왜? 어떤 페이지인지 알아야하기 때문
+  final gContext = navigatorKey.currentContext!; // 모든 컨트롤러가 필요 왜? 어떤 페이지인지 알아야하기 때문
   final Ref _ref;
   UserController(this._ref);
   final UserService userService = UserService();
 
   void moveJoinPage(String role) {
     if (role == "USER") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+      Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
     if (role == "MASTER") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+      Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
   }
 
-  void joinUser({required String username, required String password, required String email, required String phoneNum, required String role}) async {
+  Future<void> logout() async {
+    // 세션 값 삭제
+    Logger().d("여기 실행됌?");
+    await UserSession.removeAuthentication();
+    await Navigator.of(gContext).pushNamedAndRemoveUntil("/logoutMyPage", (route) => false);
+  }
+
+  Future<void> joinUser(
+      {required String username, required String password, required String email, required String phoneNum, required String role}) async {
     // Dto로 변환
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
     // Repository 호출
     ResponseDto respDto = await userService.join(joinReqDto);
     if (respDto.statusCode == 201) {
-      Navigator.popAndPushNamed(context, "/login");
+      Navigator.popAndPushNamed(gContext, "/login");
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(gContext).showSnackBar(
         SnackBar(content: Text("회원가입 실패")),
       );
     }
@@ -60,9 +69,9 @@ class UserController {
     //3. 비지니스 로직 처리
     Logger().d("controller status확인 : ${respDto.statusCode}");
     if (respDto.statusCode > 0 || respDto.statusCode < 300) {
-      Navigator.of(context).pushNamedAndRemoveUntil("/main", (route) => false);
+      Navigator.of(gContext).pushNamedAndRemoveUntil("/main", (route) => false);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
+      ScaffoldMessenger.of(gContext).showSnackBar(
         const SnackBar(content: Text("로그인 실패")),
       );
     }

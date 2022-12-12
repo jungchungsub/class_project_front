@@ -1,9 +1,3 @@
-import 'dart:convert';
-
-import 'package:get/get_connect/http/src/response/response.dart';
-
-import 'package:get/get_connect/http/src/status/http_status.dart';
-
 class ResponseDto {
   String? msg;
   dynamic data;
