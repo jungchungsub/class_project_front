@@ -23,9 +23,10 @@ class LessonController {
     //통신요청
     ResponseDto respDto = await lessonService.getLessonDetail(lessonId); //가져온 값을 RespDto에 저장
     Navigator.popAndPushNamed(context, "/lessonDetail");
-    // context!,
-    // MaterialPageRoute(
-    //   builder: (context) => DetailPage(postId),
-    // ),
   }
+
+  // Future<void> refreshHomePage() async{
+  //   _ref.read()
+  // }
+
 }

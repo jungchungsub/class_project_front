@@ -39,7 +39,7 @@ class LessonDetailPage extends ConsumerWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Container(
                             child: Column(
-                          children: [_buildLessonTitle("뷰티・운동", lessonList[0].lessonName, lessonList[0].totalReview)],
+                          children: [_buildLessonTitle("뷰티・운동", "${model?.lessonRespDto.lessonName}", lessonList[0].totalReview)],
                         )),
                       ),
                       _buildDivider(),
@@ -52,18 +52,18 @@ class LessonDetailPage extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 16, bottom: 16),
                               child: Text(
-                                "${lessonList[0].lessonPrice}원",
+                                "${model?.lessonRespDto.lessonPrice}원",
                                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
                             //_buildLessonContentBox("커리큘럼", rc.getLessonDetail(id), 120, 2),
                             _buildLessonContentBox("레슨시간", "${model?.lessonRespDto.lessonTime}", 55, 1),
-                            _buildLessonContentBox("레슨횟수", "${lessonList[0].lessonCount}", 55, 1),
-                            _buildLessonContentBox("장소", lessonList[0].lessonPlace, 55, 1),
-                            _buildLessonPossibleDate(lessonList[0].possibleDays),
-                            _buildLessonContentBox("취소 및 환불규정", lessonList[0].lessonPolicy, 200, 6),
-                            _buildLessonExpertInformation(
-                                lessonList[0].profileDto.masterImage, "전문가정보", lessonList[0].masterName, lessonList[0].profileDto.masterIntroduction),
+                            _buildLessonContentBox("레슨횟수", "${model?.lessonRespDto.lessonCount}", 55, 1),
+                            _buildLessonContentBox("장소", "${model?.lessonRespDto.lessonPlace}", 55, 1),
+                            _buildLessonPossibleDate("${model?.lessonRespDto.possibleDays}"),
+                            _buildLessonContentBox("취소 및 환불규정", "${model?.lessonRespDto.lessonPolicy}", 200, 6),
+                            _buildLessonExpertInformation("${model?.lessonRespDto.masterImg}", "전문가정보", "${model?.lessonRespDto.masterName}",
+                                "${model?.lessonRespDto.masterIntroduction}"),
                             _buildLessonEvaluation(4.2, 500),
                             _buildPurchaseReview(),
                           ],
