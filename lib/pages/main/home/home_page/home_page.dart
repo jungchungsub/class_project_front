@@ -9,7 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lessonCT = ref.read(lessonController);
