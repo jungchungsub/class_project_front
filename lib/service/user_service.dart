@@ -46,7 +46,6 @@ class UserService {
 // 로그인 정보 저장
     UserRespDto user = UserRespDto.fromJson(responseDto.data);
     UserSession.successAuthentication(user, jwtToken);
-    Logger().d("Session Login확인 : ${UserSession.isLogin}");
 
     return responseDto; // ResponseDto 응답
   }

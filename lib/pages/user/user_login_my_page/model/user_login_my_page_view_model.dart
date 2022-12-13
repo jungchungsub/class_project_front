@@ -1,10 +1,8 @@
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/response/my_page_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
-import 'package:finalproject_front/dto/response/user_resp_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
-import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,8 +19,10 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
   final gContext = navigatorKey.currentContext;
   final UserService userService = UserService();
   UserLoginMyPageViewModel(super.state);
+
   Future<void> initViewModel() async {
     // MyPage에 토큰 인증 필요.
+    Logger().d("재로그인 시 실행됌?");
     ResponseDto responseDto = await userService.getUserInfoForMyPage(UserSession.user!.id, UserSession.jwtToken);
     // 타입 맞춰주기 위해 fromJson
     MyPageRespDto modelData = MyPageRespDto.fromJson(responseDto.data);
@@ -41,15 +41,3 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
     }
   }
 }
-
-  // Future<void> initViewModel() async {
-  //   Logger().d("뷰모델 확인 : ${UserSession.isLogin}");
-  //   Logger().d("뷰 모델 토큰 확인 :${secureStorage.read(key: "jwtToken").toString()}");
-  //   ResponseDto responseDto = await userService.getUserInfoForMyPage(UserSession.user!.id);
-  //   if (responseDto.statusCode < 400) {
-  //     state = UserLoginMyPageModel(responseDto.data);
-  //   } else {
-  //     ScaffoldMessenger.of(gContext!).showSnackBar(const SnackBar(content: Text("잘못된 접근입니다.")));
-  //   }
-  // }
-

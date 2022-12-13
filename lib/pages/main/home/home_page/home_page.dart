@@ -22,34 +22,39 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lessonCT = ref.read(lessonController);
-    Logger().d("홈페이지 빌드");
-
     return Scaffold(
       key: scaffoldKey,
       // drawer: CustomNavigation(scaffoldKey),
       appBar: _buildAppBar(context, "/searchMain"),
-      body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverList(
-                  delegate: SliverChildListDelegate([
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      children: [
-                        _buildMainImage(),
-                        SizedBox(height: gap_l),
-                        _buildCategory(),
-                      ],
+      body: RefreshIndicator(
+        // 재 로그인 시 Refresh해줘야함
+        key: refreshKey,
+        onRefresh: () async {
+          lessonCT.refreshHomePage();
+        },
+        child: NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverList(
+                    delegate: SliverChildListDelegate([
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        children: [
+                          _buildMainImage(),
+                          SizedBox(height: gap_l),
+                          _buildCategory(),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                _buildDivider()
-              ]))
-            ];
-          },
-          body: _buildClassList(context, "/lessonDetail", lessonCT)),
+                  _buildDivider()
+                ]))
+              ];
+            },
+            body: _buildClassList(context, "/lessonDetail", lessonCT)),
+      ),
     );
   }
 

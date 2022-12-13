@@ -49,7 +49,7 @@ class UserController {
     // Dto로 변환
     JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
 
-    // Repository 호출
+    // Service 호출
     ResponseDto respDto = await userService.join(joinReqDto);
     if (respDto.statusCode == 201) {
       Navigator.popAndPushNamed(gContext, "/login");

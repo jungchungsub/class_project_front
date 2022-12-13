@@ -34,12 +34,12 @@ import 'package:logger/logger.dart';
 import 'domain/user_session.dart';
 import 'service/local_service.dart';
 
-void main() async {
+Future<void> main() async {
   //자동 로그인은 나중에
   //  main메서드에서 비동기 메서드를 사용하기 위함.
   WidgetsFlutterBinding.ensureInitialized();
   await LocalService().fetchJwtToken();
-  Logger().d("main에서 확인 ${UserSession.jwtToken}");
+  Logger().d("main : 실행전 jwt토큰 확인  ${UserSession.jwtToken}");
   runApp(
     ProviderScope(
       child: const MyApp(),
