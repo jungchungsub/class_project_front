@@ -23,8 +23,7 @@ class LessonService {
     Logger().d("상태코드 출력: ${response.statusCode}");
     ResponseDto responseDto = toResponseDto(response);
     //responseDto.data = UserRespDto.fromJson(jsonDecode(response));
-    Logger().d("ResponseData 출력 : ${responseDto.data}");
-    Logger().d("Response상태코드 출력 : ${responseDto.statusCode}");
+
     Logger().d("ResponseMsg 출력 : ${responseDto.msg}");
     responseDto.data = LessonRespDto.fromJson(responseDto.data);
     return responseDto;
@@ -39,7 +38,6 @@ class LessonService {
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
       responseDto.data = LessonLatestList;
     }
-
     return responseDto;
   }
 

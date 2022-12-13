@@ -61,7 +61,8 @@ class HomePage extends ConsumerWidget {
         //   Logger().d("실행?>");
         //   RefreshIndicator(
         //     child: Consumer(
-        //       builder: (context, ref, child) {
+        //       builder: (context, ref, child)
+        //       {
         //         HomePageModel? model = ref.watch(homePageViewModel);
         //         Padding(
         //   padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
