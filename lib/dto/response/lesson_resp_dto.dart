@@ -5,13 +5,12 @@ import 'package:finalproject_front/pages/user/user_login_my_page/model/user_logi
 import 'review_resp_dto.dart';
 
 class LessonRespDto {
-  int? lessonId;
+  int lessonId;
   LessonDto lessonDto;
   ProfileDto profileDto;
   double lessonAvgGrade;
-  bool isSubscribed;
-
   List<ReviewRespDto> lessonReviewList;
+  bool isSubscribed;
 
   LessonRespDto({
     required this.lessonId,
@@ -26,7 +25,7 @@ class LessonRespDto {
     // var possibleFromJson = json['possibleDays'];
     // List<String> possibleList = new List<String>.from(possibleFromJson);
     return LessonRespDto(
-        lessonId: json["id"],
+        lessonId: json['lessonId'],
         lessonDto: LessonDto(
           curriculum: json['curriculum'],
           lessonName: json['lessonName'],
@@ -35,7 +34,7 @@ class LessonRespDto {
           lessonPolicy: json['lessonPolicy'],
           lessonPrice: json['lessonPrice'],
           lessonTime: json['lessonTime'],
-          possibleDays: (json['possibleList']),
+          // possibleDays: (json['possibleList']),
         ),
         profileDto: ProfileDto(
           expertPertPhoto: json['expertPertPhoto'],
@@ -54,7 +53,7 @@ class LessonDto {
   int lessonCount;
   String curriculum;
   String lessonPlace;
-  List<String> possibleDays;
+  //List<String> possibleDays;
   String lessonPolicy;
 
   LessonDto({
@@ -64,7 +63,7 @@ class LessonDto {
     required this.lessonCount,
     required this.curriculum,
     required this.lessonPlace,
-    required this.possibleDays,
+    //required this.possibleDays,
     required this.lessonPolicy,
   });
 }

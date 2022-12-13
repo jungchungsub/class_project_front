@@ -22,11 +22,13 @@ class LessonController {
   void moveDetailPage(int lessonId) async {
     Logger().d("컨트롤러 실행 확인.");
     //통신요청
-    ResponseDto respDto = await lessonService.getLessonDetail(lessonId); //가져온 값을 RespDto에 저장
+    String? jwtToken;
+    ResponseDto respDto = await lessonService.getLessonDetail(lessonId, jwtToken); //가져온 값을 RespDto에 저장
     Navigator.popAndPushNamed(context, "/lessonDetail");
   }
 
   Future<void> refreshHomePage() async {
+    Logger().d("컨트롤러 실행 확인.");
     _ref.read(homePageViewModel.notifier).notifyViewModel();
   }
 }

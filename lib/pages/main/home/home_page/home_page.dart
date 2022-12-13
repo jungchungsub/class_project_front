@@ -1,32 +1,19 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
-
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
-
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
-import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
-import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:logger/logger.dart';
 
 class HomePage extends ConsumerWidget {
-  HomePage({Key? key}) : super(key: key);
-
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final refreshKey = GlobalKey<RefreshIndicatorState>();
-
+  const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lessonCT = ref.read(lessonController);
-    Logger().d("홈페이지 빌드");
-
     return Scaffold(
-      key: scaffoldKey,
-      // drawer: CustomNavigation(scaffoldKey),
       appBar: _buildAppBar(context, "/searchMain"),
       body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -56,34 +43,23 @@ class HomePage extends ConsumerWidget {
   InkWell _buildClassList(BuildContext context, String routePath, LessonController lessonCT) {
     return InkWell(
       onTap: () {
-        //   lessonCT.moveDetailPage(1);
-        //   Navigator.pushNamed(context, "${routePath}");
-        //   Logger().d("실행?>");
-        //   RefreshIndicator(
-        //     child: Consumer(
-        //       builder: (context, ref, child)
-        //       {
-        //         HomePageModel? model = ref.watch(homePageViewModel);
-        //         Padding(
-        //   padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-        //   child: GridView.builder(
-        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //         crossAxisSpacing: 10, //가로 item간의 간격을 지정한다.
-        //         crossAxisCount: 2, //한행에 보여줄 갯수
-        //         mainAxisSpacing: 10, //세로아이템의 간격을 지정한다.
-        //       ),
-        //       itemCount: 10, //총 item의 갯수
-        //       itemBuilder: (context, index) {
-        //         return lessonDetail(itemIndex: index);
-        //       }),
-        // );
-        //       },
-        //     ),
-        //     onRefresh: (() async {
-        //       lessonCT.refreshHomePage();
-        //     }),
-        //   );
+        lessonCT.moveDetailPage(1);
+        Navigator.pushNamed(context, "${routePath}");
+        Logger().d("실행?>");
       },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 10, //가로 item간의 간격을 지정한다.
+              crossAxisCount: 2, //한행에 보여줄 갯수
+              mainAxisSpacing: 10, //세로아이템의 간격을 지정한다.
+            ),
+            itemCount: 10, //총 item의 갯수
+            itemBuilder: (context, index) {
+              return lessonDetail(itemIndex: index);
+            }),
+      ),
     );
   }
 
@@ -173,7 +149,6 @@ class lessonDetail extends StatelessWidget {
     required this.itemIndex,
     Key? key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1,8 +1,8 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_model.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_view_model.dart';
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/dummy_models/review.dart';
 import 'package:finalproject_front/size.dart';
@@ -60,10 +60,10 @@ class LessonDetailPage extends ConsumerWidget {
                             _buildLessonContentBox("레슨시간", "${model?.lessonRespDto.lessonDto.lessonTime}", 55, 1),
                             _buildLessonContentBox("레슨횟수", "${model?.lessonRespDto.lessonDto.lessonCount}", 55, 1),
                             _buildLessonContentBox("장소", "${model?.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
-                            _buildLessonPossibleDate("${model?.lessonRespDto.lessonDto.possibleDays}"),
+                            // _buildLessonPossibleDate("${model?.lessonRespDto.lessonDto?.possibleDays}"),
                             _buildLessonContentBox("취소 및 환불규정", "${model?.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
-                            _buildLessonExpertInformation("${model?.lessonRespDto.profileDto.expertPertPhoto}", "전문가정보",
-                                "${model?.lessonRespDto.profileDto.expertIntroduction}", "${model?.lessonRespDto.profileDto.expertPertPhoto}"),
+                            // _buildLessonExpertInformation("${model?.lessonRespDto.profileDto.expertPertPhoto}", "전문가정보",
+                            // "${model?.lessonRespDto.profileDto.expertIntroduction}", "${model?.lessonRespDto.profileDto.expertPertPhoto}"),
                             _buildLessonEvaluation(4.2, 500),
                             Container(
                               child: Column(
