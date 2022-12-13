@@ -37,7 +37,7 @@ class UserLoginMyPage extends ConsumerWidget {
                     "전문가",
                     "assets/picture.jpg",
                     // "${model?.myPageRespDto.filePath}", //이미지 제대로 등록되면 이거 쓰면됨.
-                    Move.profileDetailPage,
+                    "/profileDetail",
                   ),
                   SizedBox(height: gap_l),
                   Text(
@@ -93,7 +93,7 @@ class UserLoginMyPage extends ConsumerWidget {
           padding: const EdgeInsets.only(top: 15, right: 20),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, Move.userUpdatePage);
+              Navigator.pushNamed(context, "/userUpdate");
             },
             child: Text(
               "계정 설정",
