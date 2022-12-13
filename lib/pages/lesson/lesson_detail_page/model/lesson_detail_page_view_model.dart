@@ -25,21 +25,22 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   Future<void> notifyViewModel() async {
     Logger().d("실행");
     ResponseDto responseDto = await lessonService.getLessonDetail(lessonId, UserSession.jwtToken);
+    Logger().d("데이터 확인111 :${responseDto.data}");
     if (responseDto.statusCode < 300) {
       Logger().d("제대로 실행?");
       state = LessonDetailPageModel(responseDto.data);
-      Logger().d(state);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         const SnackBar(content: Text("잘못된 요청입니다")),
       );
     }
+  }
 
-    void notifyUpdate(LessonRespDto lessonRespDto) {
-      state = LessonDetailPageModel(lessonRespDto);
-    }
+  void notifyUpdate(LessonRespDto lessonRespDto) {
+    state = LessonDetailPageModel(lessonRespDto);
   }
 }
+// }
   // Logger().d("lesson확인 : ${lessonRespDto.toString()}");
   // state = lessonRespDto;
 

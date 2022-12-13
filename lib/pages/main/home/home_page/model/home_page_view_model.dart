@@ -16,8 +16,9 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
   HomePageViewModel(super.state);
 
   Future<void> notifyViewModel() async {
-    ResponseDto responseDto = await lessonService.homeList();
-    if (responseDto.statusCode > 0 || responseDto.statusCode < 300) {
+    String? jwtToken;
+    ResponseDto responseDto = await lessonService.homeList(jwtToken);
+    if (responseDto.statusCode < 300) {
       state = HomePageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
