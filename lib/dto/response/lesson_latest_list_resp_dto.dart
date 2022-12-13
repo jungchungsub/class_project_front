@@ -1,17 +1,25 @@
 class LessonLatestListRespDto {
-  String name;
-  int price;
-  String photo;
+  int totalReview;
+  double avgGrade;
+  String lessonPhoto;
+  String lessonName;
+  int lessonPrice;
+  bool subscribed;
 
   LessonLatestListRespDto({
-    required this.name,
-    required this.price,
-    required this.photo,
+    required this.totalReview,
+    required this.avgGrade,
+    required this.lessonPhoto,
+    required this.lessonName,
+    required this.lessonPrice,
+    required this.subscribed,
   });
 
   factory LessonLatestListRespDto.fromJson(Map<String, dynamic> json) => LessonLatestListRespDto(
-        name: json["name"],
-        price: json["price"],
-        photo: json["photo"],
-      );
+      totalReview: json["totalReview"],
+      avgGrade: json["avgGrade"],
+      lessonPhoto: json["lessonPhoto"],
+      lessonName: json["lessonName"],
+      lessonPrice: json["lessonPrice"],
+      subscribed: json["subscribed"]);
 }

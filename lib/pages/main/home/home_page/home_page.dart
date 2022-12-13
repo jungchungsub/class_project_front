@@ -1,6 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';
@@ -56,6 +57,8 @@ class HomePage extends ConsumerWidget {
               lessonCT.moveDetailPage(1);
               Navigator.pushNamed(context, "${routePath}");
               Logger().d("실행?>");
+
+              // Navigator.push(context, MaterialPageRoute(builder: ((context) => (LessonDetailPage(state)))));
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
@@ -82,18 +85,18 @@ class HomePage extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: gap_m),
-                          Text(
-                            "${model?.lessonLatestList[index].name}",
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          // Text(
+                          //   "${model?.lessonLatestList[index].lessonPhoto}",
+                          //   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                          //   maxLines: 2,
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
                           Row(
                             children: [
                               Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
                               SizedBox(width: gap_m),
                               Text(
-                                "${model?.lessonLatestList[index].name} |  ${model?.lessonLatestList[index].name} 개의 평가",
+                                "${model?.lessonLatestList[index].avgGrade} |  ${model?.lessonLatestList[index].totalReview} 개의 평가",
                                 style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -101,7 +104,7 @@ class HomePage extends ConsumerWidget {
                           Row(
                             children: [
                               Text(
-                                "${model?.lessonLatestList[index].price}원",
+                                "${model?.lessonLatestList[index].lessonPrice}원",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
