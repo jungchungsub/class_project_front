@@ -1,6 +1,3 @@
-import 'package:finalproject_front/domain/user.dart';
-import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
-
 class ProfileDetailRespDto {
   int id;
   String filePath;
@@ -9,7 +6,7 @@ class ProfileDetailRespDto {
   String certification;
   String careerYear;
   String career;
-  User user;
+  UserDto userDto;
 
   ProfileDetailRespDto(
       {required this.id,
@@ -19,7 +16,7 @@ class ProfileDetailRespDto {
       required this.certification,
       required this.careerYear,
       required this.career,
-      required this.user});
+      required this.userDto});
 
   factory ProfileDetailRespDto.fromJson(Map<String, dynamic> json) => ProfileDetailRespDto(
         id: json["id"],
@@ -29,7 +26,7 @@ class ProfileDetailRespDto {
         certification: json["certification"],
         careerYear: json["careerYear"],
         career: json["career"],
-        user: json["user"],
+        userDto: json["userDto"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,6 +37,28 @@ class ProfileDetailRespDto {
         "certification": certification,
         "careerYear": careerYear,
         "career": career,
-        "user": user,
+        "userDto": userDto,
+      };
+}
+
+class UserDto {
+  int id;
+  String username;
+
+  UserDto({
+    required this.id,
+    required this.username,
+  });
+
+// json -> dynamic
+  factory UserDto.fromJson(Map<String, dynamic> json) => UserDto(
+        id: json["id"],
+        username: json["username"],
+      );
+
+// dynamic -> json
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "username": username,
       };
 }
