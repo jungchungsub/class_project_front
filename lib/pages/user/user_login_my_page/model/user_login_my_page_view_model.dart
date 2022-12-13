@@ -3,7 +3,6 @@ import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/dto/response/user_resp_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
-import 'package:finalproject_front/service/local_service.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +22,7 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
 
   Future<void> notifyViewModel() async {
     UserRespDto user = UserSession.user;
-    int id = user.id;
+    int id = user.userId;
     ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
     Logger().d("로거 확인 : ${id}");
 

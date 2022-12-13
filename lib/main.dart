@@ -29,13 +29,17 @@ import 'package:finalproject_front/pages/user/user_update_page/user_update_page.
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
+import 'domain/user_session.dart';
 import 'service/local_service.dart';
 
 void main() async {
   //자동 로그인은 나중에
-  //WidgetsFlutterBinding.ensureInitialized(); -> main메서드에서 비동기 메서드를 사용하기 위함.
-  //await LocalService().fetchJwtToken();
+  //  main메서드에서 비동기 메서드를 사용하기 위함.
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalService().fetchJwtToken();
+  Logger().d("main에서 확인 ${UserSession.jwtToken}");
   runApp(
     ProviderScope(
       child: const MyApp(),

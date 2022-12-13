@@ -1,5 +1,3 @@
-import 'package:extended_image/extended_image.dart';
-
 import 'review_resp_dto.dart';
 
 class LessonRespDto {

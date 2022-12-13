@@ -24,7 +24,7 @@ final userController = Provider<UserController>((ref) {
 });
 
 class UserController {
-  final gContext = navigatorKey.currentContext!; // 모든 컨트롤러가 필요 왜? 어떤 페이지인지 알아야하기 때문
+  final gContext = navigatorKey.currentContext!;
   final Ref _ref;
   UserController(this._ref);
   final UserService userService = UserService();
