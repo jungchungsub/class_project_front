@@ -7,6 +7,7 @@ import 'package:finalproject_front/pages/subscribe/subscribe_main_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("홈페이지 실행됨");
     return Scaffold(
       body: _buildIndexedStack(),
       bottomNavigationBar: _buildBottomNavigationBar(),

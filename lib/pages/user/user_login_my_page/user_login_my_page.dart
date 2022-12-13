@@ -1,6 +1,5 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
-import 'package:finalproject_front/core/util/move.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_view_model.dart';
@@ -8,63 +7,64 @@ import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../components/bottom_image_box.dart';
-import '../components/profile_image.dart';
 
 class UserLoginMyPage extends ConsumerWidget {
   const UserLoginMyPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Logger().d("로그인 내 페이지 실행됨");
     UserLoginMyPageModel? model = ref.watch(userLoginMyPageViewModel);
     final userCT = ref.read(userController);
 
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildUserProfile(
-                    context,
-                    "${model?.myPageRespDto.role}",
-                    "${model?.myPageRespDto.username}",
-                    "전문가",
-                    "assets/picture.jpg",
-                    // "${model?.myPageRespDto.filePath}", //이미지 제대로 등록되면 이거 쓰면됨.
-                    "/profileDetail",
-                  ),
-                  SizedBox(height: gap_l),
-                  Text(
-                    "나의 서비스",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: gap_m),
-                  ServiceText(routePath: "/paymentInstallmentList", serviceText: "결제/취소 내역"),
-                  SizedBox(height: gap_s),
-                  ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
-                  SizedBox(height: gap_s),
-                  ServiceText(routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
-                  SizedBox(height: gap_s),
-                  ServiceText(routePath: "/customerService", serviceText: "고객센터"),
-                  SizedBox(height: gap_s),
-                  ServiceText(routePath: "/lessonInsert", serviceText: "레슨 등록 전문가 "),
-                  SizedBox(height: gap_s),
-                  ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역 전문가"),
-                  SizedBox(height: gap_s),
-                  ServiceText(routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
-                  SizedBox(height: gap_xxl),
-                  BottomImageBox(),
-                ],
-              ),
+      body: _buildBody(context, model, userCT),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, UserLoginMyPageModel? model, UserController userCT) {
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildUserProfile(context, "${model.myPageRespDto.role}", "${model.myPageRespDto.username}", "전문가", "assets/picture.jpg", userCT,
+                    model.myPageRespDto.id),
+                SizedBox(height: gap_l),
+                Text(
+                  "나의 서비스",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: gap_m),
+                ServiceText(routePath: "/paymentInstallmentList", serviceText: "결제/취소 내역"),
+                SizedBox(height: gap_s),
+                ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
+                SizedBox(height: gap_s),
+                ServiceText(routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
+                SizedBox(height: gap_s),
+                ServiceText(routePath: "/customerService", serviceText: "고객센터"),
+                SizedBox(height: gap_s),
+                ServiceText(routePath: "/lessonInsert", serviceText: "레슨 등록 전문가 "),
+                SizedBox(height: gap_s),
+                ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역 전문가"),
+                SizedBox(height: gap_s),
+                ServiceText(routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
+                SizedBox(height: gap_xxl),
+                BottomImageBox(),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -110,10 +110,24 @@ class UserLoginMyPage extends ConsumerWidget {
   }
 }
 
-Widget _buildUserProfile(BuildContext context, String userState, String userId, String changeState, String profileImagePath, String routePath) {
+Widget _buildUserProfile(
+    BuildContext context, String userState, String userId, String changeState, String profileImagePath, UserController userCT, int id) {
   return Row(
     children: [
-      ProfileImage(profileImagePath: profileImagePath, routePath: routePath),
+      InkWell(
+        onTap: () {
+          userCT.moveProfileDetailPage(id);
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(150),
+          child: Image.asset(
+            "${profileImagePath}",
+            width: 80,
+            height: 80,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
       SizedBox(width: 20),
       Container(
         child: Column(

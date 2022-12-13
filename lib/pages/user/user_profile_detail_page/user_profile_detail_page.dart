@@ -1,42 +1,56 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_model.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class UserProfileDetailPage extends StatelessWidget {
-  const UserProfileDetailPage({super.key});
+class UserProfileDetailPage extends ConsumerWidget {
+  final int id;
+  UserProfileDetailPage({required this.id, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    UserProfileDetailPageModel? model = ref.watch(userProfileDetailPageViewModel(id));
+    Logger().d("디테일 페이지 확인 : ${id}");
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              _buildProfileHeader(
-                context,
-                profileList[0].userDto.username,
-                profileList[0].filePath,
-              ),
-              SizedBox(height: 20),
-              _buildProfileIntro(context, profileList[0].introduction),
-              SizedBox(height: 10),
-              _buildProfileContent(context, "지역", profileList[0].region),
-              SizedBox(height: 10),
-              _buildProfileContent(context, "학력전공", profileList[0].carrer),
-              SizedBox(height: 10),
-              _buildProfileContent(context, "보유자격증", profileList[0].certification),
-              SizedBox(height: 10),
-              _buildProfileContent(context, "경력기간", profileList[0].carrerYear),
-              SizedBox(height: 20),
-              CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기")
-            ],
-          ),
+      body: _buildBody(context, model),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, UserProfileDetailPageModel? model) {
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            _buildProfileHeader(
+              context,
+              profileList[0].userDto.username,
+              profileList[0].filePath,
+            ),
+            SizedBox(height: 20),
+            _buildProfileIntro(context, model.profileDetailRespDto.introduction),
+            SizedBox(height: 10),
+            _buildProfileContent(context, "지역", profileList[0].region),
+            SizedBox(height: 10),
+            _buildProfileContent(context, "학력전공", profileList[0].carrer),
+            SizedBox(height: 10),
+            _buildProfileContent(context, "보유자격증", profileList[0].certification),
+            SizedBox(height: 10),
+            _buildProfileContent(context, "경력기간", profileList[0].carrerYear),
+            SizedBox(height: 20),
+            CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기")
+          ],
         ),
       ),
     );

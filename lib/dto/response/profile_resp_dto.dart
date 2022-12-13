@@ -8,15 +8,16 @@ class ProfileDetailRespDto {
   String career;
   UserDto userDto;
 
-  ProfileDetailRespDto(
-      {required this.id,
-      required this.filePath,
-      required this.introduction,
-      required this.region,
-      required this.certification,
-      required this.careerYear,
-      required this.career,
-      required this.userDto});
+  ProfileDetailRespDto({
+    required this.id,
+    required this.filePath,
+    required this.introduction,
+    required this.region,
+    required this.certification,
+    required this.careerYear,
+    required this.career,
+    required this.userDto,
+  });
 
   factory ProfileDetailRespDto.fromJson(Map<String, dynamic> json) => ProfileDetailRespDto(
         id: json["id"],
@@ -26,7 +27,7 @@ class ProfileDetailRespDto {
         certification: json["certification"],
         careerYear: json["careerYear"],
         career: json["career"],
-        userDto: json["userDto"],
+        userDto: (json["userDto"].map((e) => e == null ? null : UserDto.fromJson(e))),
       );
 
   Map<String, dynamic> toJson() => {

@@ -1,12 +1,11 @@
 import 'package:finalproject_front/domain/user_session.dart';
-import 'package:finalproject_front/dto/response/my_page_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail_page/user_profile_detail_page.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
@@ -29,13 +28,17 @@ class UserController {
   UserController(this._ref);
   final UserService userService = UserService();
 
-  void moveJoinPage(String role) {
+  Future<void> moveJoinPage(String role) async {
     if (role == "USER") {
-      Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+      await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
     if (role == "MASTER") {
-      Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+      await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
+  }
+
+  Future<void> moveProfileDetailPage(int id) async {
+    await Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: id)));
   }
 
   Future<void> logout() async {
@@ -77,8 +80,10 @@ class UserController {
     }
   }
 
-  // Future<void> getMyPage({required int id}) async {
-  //   ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
-  //   responseDto.data = MyPageRespDto.fromJson(responseDto.data);
+  // void delete() {
+  //1. 서버에 삭제 요청.
+  //   ResponseDto responseDto = ref.read(서비스).fetchdelete();
+
+  //   Navigator.pop(gContext);
   // }
 }

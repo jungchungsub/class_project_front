@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
+import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/dto/response/user_resp_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
@@ -10,6 +11,7 @@ import 'package:logger/logger.dart';
 
 import '../domain/user_session.dart';
 import '../core/util/response_util.dart';
+import '../dto/response/my_page_resp_dto.dart';
 
 // 회원 탈퇴, 회원가입 ,로그인, 로그아웃, 회원 정보 수정,내 정보 상세 보기
 class UserService {
@@ -54,6 +56,16 @@ class UserService {
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.data != null) {
+      responseDto.data = MyPageRespDto.fromJson(responseDto.data);
+
+      if (responseDto.data.role == "USER") {
+        responseDto.data.role = "의뢰인";
+      }
+      if (responseDto.data.role == "MASTER") {
+        responseDto.data.role = "전문가";
+      }
+    }
     return responseDto;
   }
 
@@ -61,6 +73,13 @@ class UserService {
   Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+
+    if (responseDto.data != null) {
+      dynamic mapList = responseDto.data; // dynamic
+      ProfileDetailRespDto profileDetail = mapList.map((e) => ProfileDetailRespDto.fromJson(e));
+      Logger().d(profileDetail);
+      responseDto.data = profileDetail;
+    }
     Logger().d("service 출력 : ${responseDto.data}");
     return responseDto;
   }

@@ -23,7 +23,6 @@ import 'package:finalproject_front/pages/subscribe/subscribe_main_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
-import 'package:finalproject_front/pages/user/user_profile_detail_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert_page.dart';
 import 'package:finalproject_front/pages/user/user_update_page/user_update_page.dart';
 import 'package:finalproject_front/theme.dart';
@@ -35,11 +34,9 @@ import 'domain/user_session.dart';
 import 'service/local_service.dart';
 
 Future<void> main() async {
-  //자동 로그인은 나중에
   //  main메서드에서 비동기 메서드를 사용하기 위함.
   WidgetsFlutterBinding.ensureInitialized();
   await LocalService().fetchJwtToken();
-  Logger().d("main : 실행전 jwt토큰 확인  ${UserSession.jwtToken}");
   runApp(
     ProviderScope(
       child: const MyApp(),
@@ -51,9 +48,9 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    Logger().d("메인 페이지 실행됌");
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
@@ -64,7 +61,6 @@ class MyApp extends StatelessWidget {
         "/main": (context) => MainPage(),
         "/loginDivision": (context) => LoginDivisionPage(),
         "/login": (context) => LoginPage(),
-        //"/join": (context) => JoinPage(),
         "/home": (context) => HomePage(), //더미 적용
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),
@@ -74,7 +70,6 @@ class MyApp extends StatelessWidget {
         "/categoryDetail": (context) => CategoryDetailPage(),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
-        "/profileDetail": (context) => UserProfileDetailPage(), // 더미 적용
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
         "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
         "/searchPage": (context) => SearchPage(),
