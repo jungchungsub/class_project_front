@@ -52,12 +52,17 @@ class UserService {
   }
 
 // MyPage를 위한 유저 정보
-  Future<ResponseDto> getUserInfoForMyPage(int id, String? jwtToken) async {
-    Logger().d("MyPage확인 : ${id}");
-    Logger().d("userService에서 토큰 확인 : ${jwtToken}");
-    Response response = await httpConnector.get(path: "/api/user/${id}/mypage", jwtToken: jwtToken);
-    Logger().d("MyPage응답 확인 : ${response.body}");
+  Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
+    Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+    return responseDto;
+  }
+
+//프로필 정보
+  Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
+    Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("service 출력 : ${responseDto.data}");
     return responseDto;
   }
 }
