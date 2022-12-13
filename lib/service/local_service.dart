@@ -8,10 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../dto/response/respone_dto.dart';
 import '../dto/response/user_resp_dto.dart';
 import '../domain/user_session.dart';
-import '../util/response_util.dart';
+import '../core/util/response_util.dart';
 
 // Create storage
-const storage = FlutterSecureStorage();
+const secureStorage = FlutterSecureStorage();
 
 class LocalService {
   final HttpConnector httpConnector = HttpConnector();
@@ -25,26 +25,23 @@ class LocalService {
   Future<void> fetchJwtToken() async {
     Logger().d("jwt init");
     // 디바이스에 저장된 토큰 값 가져옴
-    String? deviceJwtToken = await storage.read(key: "jwtToken");
-
+    String? deviceJwtToken = await secureStorage.read(key: "jwtToken");
     if (deviceJwtToken != null) {
       // 디바이스에 저장된 jwt토큰이 있다면 서버에서 토큰값을 통해 유저의 정보 Get 요청
       Response response = await httpConnector.getInitSession("/api/user/session", deviceJwtToken);
       ResponseDto respDto = toResponseDto(response);
-
-      if (respDto.statusCode == 201) {
+      if (respDto.statusCode < 400) {
         UserRespDto user = UserRespDto.fromJson(respDto.data);
-        UserSession.login(user, deviceJwtToken);
+        UserSession.successAuthentication(user, deviceJwtToken);
       } else {
         Logger().d("토큰이 만료됨");
-        UserSession.logout();
+        UserSession.removeAuthentication();
       }
     }
   }
 
-  Future<void> removeShardJwtToken() async {
-    Logger().d("jwt remove");
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove("jwtToken");
+  Future<void> fetchDeleteJwtToken() async {
+    // 스토어에 저장된 토큰 삭제
+    await secureStorage.delete(key: "jwtToken");
   }
 }

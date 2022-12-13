@@ -1,16 +1,19 @@
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
-import 'package:finalproject_front/pages/user/components/update_form.dart';
+import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/pages/user/components/service_text_button.dart';
+import 'package:finalproject_front/pages/user/components/update_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class UserUpdatePage extends StatelessWidget {
+class UserUpdatePage extends ConsumerWidget {
   const UserUpdatePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Size size = MediaQuery.of(context).size;
+    final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
       body: SingleChildScrollView(
@@ -22,11 +25,36 @@ class UserUpdatePage extends StatelessWidget {
             _buildDivider(),
             ServiceTextButton(context: context, text: "알람 설정", routePath: "/joinDivision"),
             _buildDivider(),
-            ServiceTextButton(context: context, text: "로그아웃", routePath: "/logoutMyPage"),
+            ServiceTextButton(
+              context: context,
+              text: "로그아웃",
+              action: userCT.logout(),
+            ),
+            //_buildServiceButton(userCT),
             _buildDivider(),
             ServiceTextButton(context: context, text: "회원 탈퇴", routePath: "/joinDivision"),
             _buildDivider(),
           ],
+        ),
+      ),
+    );
+  }
+
+  Padding _buildServiceButton(UserController userCT) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+      child: Container(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () {
+            userCT.logout();
+          },
+          // ignore: sort_child_properties_last
+          child: Text(
+            "로그아웃",
+            style: TextStyle(color: Color.fromARGB(255, 159, 150, 150)),
+          ),
+          style: TextButton.styleFrom(alignment: Alignment.bottomLeft),
         ),
       ),
     );

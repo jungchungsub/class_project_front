@@ -7,10 +7,9 @@ import 'package:finalproject_front/dto/response/user_resp_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import '../domain/user_session.dart';
-import '../util/response_util.dart';
+import '../core/util/response_util.dart';
 
 // 회원 탈퇴, 회원가입 ,로그인, 로그아웃, 회원 정보 수정,내 정보 상세 보기
 class UserService {
@@ -36,26 +35,28 @@ class UserService {
   Future<ResponseDto> login(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
     Response response = await httpConnector.post("/login", requestBody);
+
     String jwtToken = response.headers["authorization"].toString();
     Logger().d("토큰 값 확인 : ${jwtToken}");
 
-    await storage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
-
+    await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("loginDto data확인 : ${responseDto.data}");
 
+// 로그인 정보 저장
     UserRespDto user = UserRespDto.fromJson(responseDto.data);
-
-    UserSession.login(user, jwtToken);
+    UserSession.successAuthentication(user, jwtToken);
     Logger().d("Session Login확인 : ${UserSession.isLogin}");
 
     return responseDto; // ResponseDto 응답
   }
 
 // MyPage를 위한 유저 정보
-  Future<ResponseDto> getUserInfoForMyPage(int id) async {
+  Future<ResponseDto> getUserInfoForMyPage(int id, String? jwtToken) async {
     Logger().d("MyPage확인 : ${id}");
-    Response response = await httpConnector.get("/api/user/${id}/mypage");
+    Logger().d("userService에서 토큰 확인 : ${jwtToken}");
+    Response response = await httpConnector.get(path: "/api/user/${id}/mypage", jwtToken: jwtToken);
+    Logger().d("MyPage응답 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
     return responseDto;
   }

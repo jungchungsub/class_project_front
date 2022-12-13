@@ -23,8 +23,8 @@ class LessonRespDto {
   });
 
   factory LessonRespDto.fromJson(Map<String, dynamic> json) {
-    var possibleFromJson = json['possibleDays'];
-    List<String> possibleList = new List<String>.from(possibleFromJson);
+    // var possibleFromJson = json['possibleDays'];
+    // List<String> possibleList = new List<String>.from(possibleFromJson);
     return LessonRespDto(
         lessonId: json["id"],
         lessonDto: LessonDto(

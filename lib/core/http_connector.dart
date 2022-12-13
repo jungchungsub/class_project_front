@@ -16,18 +16,27 @@ class HttpConnector {
   // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.
 
   Future<Response> getInitSession(String path, String? jwtToken) async {
+    Logger().d("initSession실행됌");
     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
     Uri uri = Uri.parse("${host}${path}");
-    Response response = await Client().get(uri, headers: requestHeader);
+    Response response = await Client().post(uri, headers: requestHeader);
+    Logger().d("initSession Response확인 ${response.body}");
     return response;
   }
 
-  Future<Response> get(String path) async {
-    Logger().d("connecter");
+  Future<Response> get({required String path, String? jwtToken}) async {
+    if (jwtToken != null) {
+      Logger().d("토큰 있을 경우 실행");
+      Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+      Uri uri = Uri.parse("${host}${path}");
+      Response response = await Client().get(uri, headers: requestHeader);
+      return response;
+    }
+    Logger().d("토큰 없을 경우 실행");
     Uri uri = Uri.parse("${host}${path}");
-    Logger().d("uri 확인 : ${uri}");
+    Logger().d("실행, 경로 확인${uri}");
+
     Response response = await _client.get(uri);
-    Logger().d("connecter333");
     return response;
   }
 
