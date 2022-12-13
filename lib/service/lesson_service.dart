@@ -15,17 +15,20 @@ class LessonService {
     Logger().d("id출력service:${lessonId}");
 
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}", jwtToken: jwtToken);
-    //.get("/api/category/lesson/${id}");
+    Logger().d(response.statusCode);
     Logger().d("확인중 : ${lessonId}");
     ResponseDto responseDto = toResponseDto(response);
-    //responseDto.data = UserRespDto.fromJson(jsonDecode(response));
+    Logger().d("예쁘게 1 : ");
+    Logger().d(responseDto.data);
+    responseDto.data = LessonRespDto.fromJson(responseDto.data);
     Logger().d("레슨 서비스 확인 : ${responseDto.msg}");
     Logger().d("레슨 데이터 확인 : ${responseDto.data}");
+    Logger().d("데이터확인 : ${responseDto.data}");
     return responseDto;
   }
 
-  Future<ResponseDto> homeList() async {
-    Response response = await httpConnector.get(path: "/api/main");
+  Future<ResponseDto> homeList(String? jwtToken) async {
+    Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
 
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.statusCode < 300) {

@@ -1,5 +1,6 @@
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
+import 'package:finalproject_front/dto/response/review_resp_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
 import 'package:finalproject_front/service/lesson_service.dart';
@@ -12,10 +13,31 @@ import 'package:logger/logger.dart';
 //   return LessonDetailPageStore(null, ref)..initViewModel(id);
 // });
 
+//LessonDetailPageModel? 이페이지가 관리하는 상태
+
+class LessonRespDto {
+  String lessonId;
+  LessonDto lessonDto;
+  ProfileDto profileDto;
+  double lessonAvgGrade;
+  bool isSubscribed;
+  List<ReviewRespDto> lessonReviewList;
+
+  LessonRespDto({
+    required this.lessonId,
+    required this.lessonDto,
+    required this.profileDto,
+    required this.isSubscribed,
+    required this.lessonAvgGrade,
+    required this.lessonReviewList,
+  });
+}
+
 final lessonDetailPageViewModel = StateNotifierProvider.family.autoDispose<LessonDetailPageViewModel, LessonDetailPageModel?, int>((ref, lessonId) {
   return LessonDetailPageViewModel(null, lessonId)..notifyViewModel();
 });
 
+//view의 데이터를 가짐
 class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   final LessonService lessonService = LessonService();
   final int lessonId;
@@ -23,25 +45,28 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   LessonDetailPageViewModel(super.state, this.lessonId);
 
   Future<void> notifyViewModel() async {
-    Logger().d("실행");
+    Logger().d("111111111111111111실행");
     ResponseDto responseDto = await lessonService.getLessonDetail(lessonId, UserSession.jwtToken);
+    Logger().d(responseDto.data);
     if (responseDto.statusCode < 300) {
-      Logger().d("제대로 실행?");
-      state = LessonDetailPageModel(responseDto.data);
-      Logger().d(state);
+      Logger().d("333333333333333333333333제대로 실행?");
+      LessonDetailPageModel model = LessonDetailPageModel(responseDto.data);
+      Logger().d(model.lessonRespDto.lessonReviewList[0].reviewContent);
+      state = model;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("잘못된 요청입니다")),
+        const SnackBar(content: Text("4444444444444444444잘못된 요청입니다")),
       );
     }
-
-    void notifyUpdate(LessonRespDto lessonRespDto) {
-      state = LessonDetailPageModel(lessonRespDto);
-    }
   }
+
+  // void notifyUpdate(LessonRespDto lessonRespDto) {
+  //   state = LessonDetailPageModel(lessonRespDto);
+  // }
 }
-  // Logger().d("lesson확인 : ${lessonRespDto.toString()}");
-  // state = lessonRespDto;
+// }
+// Logger().d("lesson확인 : ${lessonRespDto.toString()}");
+// state = lessonRespDto;
 
 //   void refresh(List<LessonRespDto> lessonRespDto) {
 //     state = lessonRespDto;
