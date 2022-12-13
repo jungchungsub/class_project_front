@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../dto/response/respone_dto.dart';
 import '../dto/response/user_resp_dto.dart';
 import '../domain/user_session.dart';
-import '../util/response_util.dart';
+import '../core/util/response_util.dart';
 
 // Create storage
 const secureStorage = FlutterSecureStorage();
@@ -26,15 +26,12 @@ class LocalService {
     Logger().d("jwt init");
     // 디바이스에 저장된 토큰 값 가져옴
     String? deviceJwtToken = await secureStorage.read(key: "jwtToken");
-    Logger().d("디바이스 토큰 확인 : ${deviceJwtToken}");
     if (deviceJwtToken != null) {
       // 디바이스에 저장된 jwt토큰이 있다면 서버에서 토큰값을 통해 유저의 정보 Get 요청
       Response response = await httpConnector.getInitSession("/api/user/session", deviceJwtToken);
       ResponseDto respDto = toResponseDto(response);
-      Logger().d("respDto data확인 :${respDto.data}");
       if (respDto.statusCode < 400) {
         UserRespDto user = UserRespDto.fromJson(respDto.data);
-        Logger().d("jwt init 유저 로그인 값 확인 : ${user.username}");
         UserSession.successAuthentication(user, deviceJwtToken);
       } else {
         Logger().d("토큰이 만료됨");

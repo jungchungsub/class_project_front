@@ -9,7 +9,7 @@ import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
 import '../domain/user_session.dart';
-import '../util/response_util.dart';
+import '../core/util/response_util.dart';
 
 // 회원 탈퇴, 회원가입 ,로그인, 로그아웃, 회원 정보 수정,내 정보 상세 보기
 class UserService {
@@ -47,21 +47,16 @@ class UserService {
     UserRespDto user = UserRespDto.fromJson(responseDto.data);
     UserSession.successAuthentication(user, jwtToken);
     Logger().d("Session Login확인 : ${UserSession.isLogin}");
-// Response response = await dio.post('api/user/login', data: param);
-// if (response.statusCode == 200) { // 로그인을 성공하면
-//     String token = response.data['token']; // response의 token키에 담긴 값을 token 변수에 담아서
-// 	Map<String, dynamic> payload = Jwt.parseJwt(token); // 토큰 내부의 값을 Map 구조에 담는다
-//     loginID = payload['user_id'];
-//     var val = jsonEncode(Login('$token', '$loginID')); 토큰 값과 로그인 유지 정보를 va변수에 담는다
-//     await storage.write( key: 'login', value: val ); // login key에 SecureStorage에 담는다
-//     return true;
+
     return responseDto; // ResponseDto 응답
   }
 
 // MyPage를 위한 유저 정보
-  Future<ResponseDto> getUserInfoForMyPage(int id) async {
+  Future<ResponseDto> getUserInfoForMyPage(int id, String? jwtToken) async {
     Logger().d("MyPage확인 : ${id}");
-    Response response = await httpConnector.get("/api/user/${id}/mypage");
+    Logger().d("userService에서 토큰 확인 : ${jwtToken}");
+    Response response = await httpConnector.get(path: "/api/user/${id}/mypage", jwtToken: jwtToken);
+    Logger().d("MyPage응답 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
     return responseDto;
   }

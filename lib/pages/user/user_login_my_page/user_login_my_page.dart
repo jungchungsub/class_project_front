@@ -1,5 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/core/util/move.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_view_model.dart';
@@ -29,7 +30,15 @@ class UserLoginMyPage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildUserProfile(context, "의뢰인", "green1234", "전문가", "assets/picture.jpg", "/profileDetail"),
+                  _buildUserProfile(
+                    context,
+                    "${model?.myPageRespDto.role}",
+                    "${model?.myPageRespDto.username}",
+                    "전문가",
+                    "assets/picture.jpg",
+                    // "${model?.myPageRespDto.filePath}", //이미지 제대로 등록되면 이거 쓰면됨.
+                    Move.profileDetailPage,
+                  ),
                   SizedBox(height: gap_l),
                   Text(
                     "나의 서비스",
@@ -84,7 +93,7 @@ class UserLoginMyPage extends ConsumerWidget {
           padding: const EdgeInsets.only(top: 15, right: 20),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "/userUpdate");
+              Navigator.pushNamed(context, Move.userUpdatePage);
             },
             child: Text(
               "계정 설정",
@@ -133,7 +142,9 @@ Widget _buildUserProfile(BuildContext context, String userState, String userId, 
             ),
             SizedBox(height: 10),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                // 전문가로 전환, 의뢰인으로전환
+              },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),

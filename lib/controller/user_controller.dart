@@ -77,8 +77,8 @@ class UserController {
     }
   }
 
-  Future<void> getMyPage({required int id}) async {
-    ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
-    responseDto.data = MyPageRespDto.fromJson(responseDto.data);
-  }
+  // Future<void> getMyPage({required int id}) async {
+  //   ResponseDto responseDto = await userService.getUserInfoForMyPage(id);
+  //   responseDto.data = MyPageRespDto.fromJson(responseDto.data);
+  // }
 }

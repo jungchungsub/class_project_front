@@ -1,12 +1,12 @@
 class UserRespDto {
   // 수정 필요
-  int userId;
+  int id;
   String username;
   String role;
   String createdAt;
 
   UserRespDto({
-    required this.userId,
+    required this.id,
     required this.username,
     required this.role,
     required this.createdAt,
@@ -14,7 +14,7 @@ class UserRespDto {
 
   // json -> dynamic
   factory UserRespDto.fromJson(Map<String, dynamic> json) => UserRespDto(
-        userId: json["userId"],
+        id: json["id"],
         username: json["username"],
         role: json["role"],
         createdAt: json["createdAt"],
@@ -22,7 +22,7 @@ class UserRespDto {
 
 // dynamic -> json
   Map<String, dynamic> toJson() => {
-        "userId": userId,
+        "id": id,
         "username": username,
         "role": role,
         "createdAt": createdAt,

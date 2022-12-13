@@ -19,17 +19,24 @@ class HttpConnector {
     Logger().d("initSession실행됌");
     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
     Uri uri = Uri.parse("${host}${path}");
-    Response response = await Client().get(uri, headers: requestHeader);
+    Response response = await Client().post(uri, headers: requestHeader);
     Logger().d("initSession Response확인 ${response.body}");
     return response;
   }
 
-  Future<Response> get(String path) async {
-    Logger().d("connecter");
+  Future<Response> get({required String path, String? jwtToken}) async {
+    if (jwtToken != null) {
+      Logger().d("토큰 있을 경우 실행");
+      Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+      Uri uri = Uri.parse("${host}${path}");
+      Response response = await Client().get(uri, headers: requestHeader);
+      return response;
+    }
+    Logger().d("토큰 없을 경우 실행");
     Uri uri = Uri.parse("${host}${path}");
-    Logger().d("uri 확인 : ${uri}");
+    Logger().d("실행, 경로 확인${uri}");
+
     Response response = await _client.get(uri);
-    Logger().d("connecter333");
     return response;
   }
 
