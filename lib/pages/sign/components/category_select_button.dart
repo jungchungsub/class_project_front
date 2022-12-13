@@ -45,6 +45,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
       //버튼에 사용할 value타입을 Category 오브젝트 타입임을 선언
       items: _items,
       title: Text("관심사"),
+      initialValue: [],
       key: _multiSelectKey,
       itemsTextStyle: TextStyle(color: Colors.black),
       isDismissible: true,

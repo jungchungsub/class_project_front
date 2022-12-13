@@ -1,8 +1,10 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/model/user_login_my_page_view_model.dart';
+import 'package:finalproject_front/pages/user/user_update_page/user_update_page.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ import 'package:logger/logger.dart';
 import '../components/bottom_image_box.dart';
 
 class UserLoginMyPage extends ConsumerWidget {
-  const UserLoginMyPage({super.key});
+  const UserLoginMyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,7 +95,14 @@ class UserLoginMyPage extends ConsumerWidget {
           padding: const EdgeInsets.only(top: 15, right: 20),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, "/userUpdate");
+              // Navigator.pushNamed(context, "/userUpdate");
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserUpdatePage(
+                            userInfo: UserSession.user,
+                          )));
             },
             child: Text(
               "계정 설정",

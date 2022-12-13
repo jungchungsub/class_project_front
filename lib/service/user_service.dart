@@ -11,6 +11,7 @@ import 'package:logger/logger.dart';
 
 import '../domain/user_session.dart';
 import '../core/util/response_util.dart';
+import '../dto/response/user_update_resp_dto.dart';
 import '../dto/response/my_page_resp_dto.dart';
 
 // 회원 탈퇴, 회원가입 ,로그인, 로그아웃, 회원 정보 수정,내 정보 상세 보기
@@ -25,7 +26,7 @@ class UserService {
     return _instance;
   }
 
-  Future<ResponseDto> join(JoinReqDto joinReqDto) async {
+  Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
     // 2. 통신 시작
@@ -34,7 +35,7 @@ class UserService {
     return toResponseDto(response); // ResponseDto 응답
   }
 
-  Future<ResponseDto> login(LoginReqDto loginReqDto) async {
+  Future<ResponseDto> fetchLogin(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
     Response response = await httpConnector.post("/login", requestBody);
 
@@ -56,6 +57,9 @@ class UserService {
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("유저 서비스 : ${responseDto.data}");
+    Logger().d("유저 서비스 : ${responseDto.statusCode}");
+    Logger().d("유저 서비스 : ${responseDto.msg}");
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
 
@@ -73,6 +77,9 @@ class UserService {
   Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("프로필 정보 확인 : ${responseDto.data}");
+    Logger().d("프로필 정보 확인 : ${responseDto.statusCode}");
+    Logger().d("프로필 정보 확인 : ${responseDto.msg}");
 
     if (responseDto.data != null) {
       dynamic mapList = responseDto.data; // dynamic
@@ -81,6 +88,21 @@ class UserService {
       responseDto.data = profileDetail;
     }
     Logger().d("service 출력 : ${responseDto.data}");
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchUpdateUser(int userId, UpdateUserReqDto updateUserReqDto) async {
+    String requestBody = jsonEncode(updateUserReqDto);
+    Response response = await httpConnector.put(path: "/api/user/${userId}", body: requestBody);
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("responseDto 통신 체크 : ${responseDto.statusCode}");
+    Logger().d("responseDto 통신 체크 : ${responseDto.msg}");
+    Logger().d("responseDto 통신 체크 : ${responseDto.data}");
+
+    if (responseDto.data != null) {
+      responseDto.data = UserUpdateResponseDto.fromJson(responseDto.data);
+      //UserSession.successAuthentication(user);
+    }
     return responseDto;
   }
 }

@@ -26,7 +26,7 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
       state = UserLoginMyPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(gContext!).showSnackBar(
-        const SnackBar(content: Text("잘못된 요청입니다.")),
+        const SnackBar(content: Text("[내 정보 보기 페이지] : 잘못된 요청입니다.")),
       );
     }
   }

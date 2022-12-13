@@ -27,6 +27,7 @@ class LocalService {
     Logger().d("jwt init");
     // 디바이스에 저장된 토큰 값 가져옴
     String? deviceJwtToken = await secureStorage.read(key: "jwtToken");
+    Logger().d("디바이스 토큰 확인 : ${deviceJwtToken}");
     if (deviceJwtToken != null) {
       // 디바이스에 저장된 jwt토큰이 있다면 서버에서 토큰값을 통해 유저의 정보 Get 요청
       Response response = await httpConnector.getInitSession("/api/user/session", deviceJwtToken);
@@ -34,6 +35,7 @@ class LocalService {
       if (respDto.statusCode < 400) {
         UserRespDto user = UserRespDto.fromJson(respDto.data);
         UserSession.successAuthentication(user, deviceJwtToken);
+        Logger().d("세션 초기화 완료. ${user.username}");
       } else {
         Logger().d("토큰이 만료됨");
         UserSession.removeAuthentication();

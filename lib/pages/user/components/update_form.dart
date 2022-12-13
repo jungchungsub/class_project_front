@@ -1,17 +1,20 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../size.dart';
 
-class CustomForm extends StatefulWidget {
+class CustomForm extends ConsumerStatefulWidget {
   @override
-  State<CustomForm> createState() => _CustomFormState();
+  ConsumerState<CustomForm> createState() => _CustomFormState();
 }
 
-class _CustomFormState extends State<CustomForm> {
-  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+class _CustomFormState extends ConsumerState<CustomForm> {
+  late ScrollController scrollController;
 
   @override
   void initState() {
@@ -19,28 +22,27 @@ class _CustomFormState extends State<CustomForm> {
     scrollController = new ScrollController();
   }
 
-  // 글로벌 keys
   final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _emailController = TextEditingController(text: "green1234@naver.com");
-  // DB에 저장되어 있는 값을 가져오는 역할.
-  final TextEditingController _phoneNumberController = TextEditingController(text: "01012345678");
-
-  final TextEditingController _passwordController = TextEditingController(text: "비밀번호 자리야 충섭아 뻐큐머겅");
+  final TextEditingController _email = TextEditingController(text: "${UserSession.user.email}");
+  final TextEditingController _phoneNum = TextEditingController(text: "${UserSession.user.phoneNum}");
+  // final TextEditingController _phoneNumberController = TextEditingController(text: "${UserSession.user.phoneNum}");
+  final TextEditingController _password = TextEditingController(text: "비밀번호");
+  // 나중에 관심사 필요함.
 
   @override
   Widget build(BuildContext context) {
+    final userCT = ref.read(userController);
     return Form(
       key: _formKey, // 해당 키로 Form의 상태를 관리 한다.
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _buildTextField("이메일", _emailController, scrollAnimate),
+            _buildTextField("이메일", _email, scrollAnimate, "Email"),
             SizedBox(height: 6),
-            _buildTextField("전화번호", _phoneNumberController, scrollAnimate),
+            _buildTextField("전화번호", _phoneNum, scrollAnimate, "PhoneNumber"),
             SizedBox(height: 6),
-            _buildTextField("비밀번호", _passwordController, scrollAnimate),
+            _buildTextField("비밀번호", _password, scrollAnimate, "Password"),
             SizedBox(height: 6),
             Container(
               child: Column(
@@ -57,16 +59,42 @@ class _CustomFormState extends State<CustomForm> {
                 ],
               ),
             ),
-            //개인 정보 제공 동의 폼 필요 -> API
             SizedBox(height: 50),
-            CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "수정완료")
+            // CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "수정완료")
+
+            ElevatedButton(
+              onPressed: () {
+                userCT.updateUser(
+                  id: UserSession.user.id,
+                  password: _password.text.trim(),
+                  email: _email.text.trim(),
+                  phoneNum: _phoneNum.text.trim(),
+                  categoryIds: [1, 2, 3],
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                primary: gButtonOffColor,
+                minimumSize: Size(getScreenWidth(context), 60),
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "내 정보 수정 완료",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Container _buildTextField(String fieldTitle, TextEditingController fieldController, Function scrollAnimate) {
+  Container _buildTextField(String fieldTitle, TextEditingController fieldController, Function scrollAnimate, String hintText) {
     return Container(
       child: Column(
         children: [
@@ -82,10 +110,12 @@ class _CustomFormState extends State<CustomForm> {
             onTap: (() {
               scrollAnimate;
             }),
+
             //validator: , 유효성 체크 부분
             controller: fieldController,
-            //obscureText: true, // 비밀번호 hide옵션
+            obscureText: hintText == "Password" ? true : false, // 비밀번호 hide옵션
             decoration: InputDecoration(
+              hintText: "${hintText}",
               //3. 기본 textFormfield 디자인 - enabledBorder
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: gClientColor, width: 3.0),

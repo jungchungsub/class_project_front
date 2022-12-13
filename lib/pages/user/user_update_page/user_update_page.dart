@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
+import '../../../dto/response/user_resp_dto.dart';
+
 class UserUpdatePage extends ConsumerWidget {
-  const UserUpdatePage({super.key});
+  final UserRespDto userInfo;
+  const UserUpdatePage({required this.userInfo, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

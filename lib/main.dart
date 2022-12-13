@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
         "/lessonUpdate": (context) => LessonUpdatePage(),
         "/chatList": (context) => ChatListPage(),
         "/subscribePage": (context) => SubscribePage(), // 더미 적용
-        "/userUpdate": (context) => UserUpdatePage(),
+        // "/userUpdate": (context) => UserUpdatePage(),
         "/reviewInsert": (context) => LessonReviewInsertPage(),
         "/searchDetail": (context) => SearchDetailPage(), // 더미 적용
         "/lessonInsert": (context) => LessonInsertPage(),

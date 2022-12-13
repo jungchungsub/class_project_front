@@ -33,7 +33,7 @@ class LessonService {
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.statusCode < 300) {
       List<dynamic> mapList = responseDto.data;
-      Logger().d(mapList);
+      // Logger().d(mapList);
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
       responseDto.data = LessonLatestList;
     }
