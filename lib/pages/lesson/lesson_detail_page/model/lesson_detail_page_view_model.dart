@@ -12,10 +12,13 @@ import 'package:logger/logger.dart';
 //   return LessonDetailPageStore(null, ref)..initViewModel(id);
 // });
 
+//LessonDetailPageModel? 이페이지가 관리하는 상태
+
 final lessonDetailPageViewModel = StateNotifierProvider.family.autoDispose<LessonDetailPageViewModel, LessonDetailPageModel?, int>((ref, lessonId) {
   return LessonDetailPageViewModel(null, lessonId)..notifyViewModel();
 });
 
+//view의 데이터를 가짐
 class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   final LessonService lessonService = LessonService();
   final int lessonId;
@@ -41,8 +44,8 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   }
 }
 // }
-  // Logger().d("lesson확인 : ${lessonRespDto.toString()}");
-  // state = lessonRespDto;
+// Logger().d("lesson확인 : ${lessonRespDto.toString()}");
+// state = lessonRespDto;
 
 //   void refresh(List<LessonRespDto> lessonRespDto) {
 //     state = lessonRespDto;
