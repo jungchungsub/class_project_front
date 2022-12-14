@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
+import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:http/http.dart';
+import 'package:logger/logger.dart';
 
 import '../core/util/response_util.dart';
 import '../dto/response/my_page_resp_dto.dart';
@@ -89,6 +91,18 @@ class UserService {
       responseDto.data = UserUpdateResponseDto.fromJson(responseDto.data);
       //UserSession.successAuthentication(user);
     }
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchInsertProfile(int userId, ProfileInsertReqDto profileInsertReqDto) async {
+    String requestBody = jsonEncode(profileInsertReqDto);
+    Logger().d("요청 바디 확인 : ${requestBody}");
+    Response response = await httpConnector.post("/api/profile", requestBody);
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("응답 값 확인 : ${responseDto.data}");
+    Logger().d("응답 메세지 확인 : ${responseDto.msg}");
+    Logger().d("응답 상태코드 확인 : ${responseDto.statusCode}");
+
     return responseDto;
   }
 }

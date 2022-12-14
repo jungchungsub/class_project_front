@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
 import '../../../constants.dart';
+import '../../../controller/user_controller.dart';
 import '../../../dto/response/profile_resp_dto.dart';
 import '../../../size.dart';
 
@@ -18,7 +19,6 @@ class ProfileInsertForm extends ConsumerStatefulWidget {
   final _region = TextEditingController();
   final _certification = TextEditingController();
   final _career = TextEditingController();
-  final _careerYear = TextEditingController();
   ProfileInsertForm({required this.model, super.key});
 
   @override
@@ -30,6 +30,8 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
   ImagePicker imgpicker = ImagePicker();
   XFile? _imagefile;
   late List<String>? profileImage;
+  final List<String> items = ['신입', '2~3년', '4~7년', '7~10년'];
+  String? selectedValue;
 
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
   late ScrollController scrollController;
@@ -60,9 +62,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
 
   void scrollAnimate() {
     Future.delayed(Duration(milliseconds: 600), () {
-      //0.6초 이후 키보드 올라옴
-      // ViewInsets은 현재 페이지에서 내가 컨트롤 할 수 없는 영역을 뜻함,
-      // bottom은 키보드가 아래에서 올라오기 때문
       scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
           duration: Duration(microseconds: 100), // 0.1초 이후 field가 올라간다.
           curve: Curves.easeIn); //Curves - 올라갈때 애니메이션
@@ -75,6 +74,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
     widget._region.text = widget.model.region;
     widget._certification.text = widget.model.certification;
     widget._career.text = widget.model.career;
+    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -112,7 +112,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                   fieldController: widget._region,
                 ),
                 SizedBox(height: gap_l),
-                ProfileCareerSeleteButton(), // 총 경력 기간
+                _selectedCareerButton(size),
                 SizedBox(height: gap_l),
                 _buildTextField(
                   scrollAnimate,
@@ -122,33 +122,91 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                   fieldController: widget._career,
                 ),
                 SizedBox(height: gap_l),
-                _buildProfileInsertButton(context),
+                (BuildContext context) {
+                  final userCT = ref.read(userController);
+                  return ElevatedButton(
+                    onPressed: () {
+                      userCT.insertProfile(
+                          id: widget.model.user.id,
+                          introduction: widget._introduction.text,
+                          region: widget._region.text,
+                          certification: widget._certification.text,
+                          careerYear: selectedValue,
+                          career: widget._career.text,
+                          filePath: profileImage);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: gButtonOffColor,
+                      minimumSize: Size(getScreenWidth(context), 60),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "프로필 등록 완료",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  );
+                }(context),
               ],
             )),
       ),
     );
   }
 
-  ElevatedButton _buildProfileInsertButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Logger().d("profile 인코딩 :${profileImage}");
-      },
-      style: ElevatedButton.styleFrom(
-        primary: gButtonOffColor,
-        minimumSize: Size(getScreenWidth(context), 60),
-      ),
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          "프로필 등록 완료",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+  Widget _selectedCareerButton(Size size) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              "총 경력 기간을 선택해 주세요.",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
-      ),
+        SizedBox(height: 10),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: gClientColor, width: 3),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          width: size.width,
+          height: 60,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton2(
+              hint: Text(
+                '경력 기간을 선택 주세요.',
+                style: TextStyle(fontSize: 16, color: gSubTextColor, fontWeight: FontWeight.bold),
+              ),
+              items: items
+                  .map(
+                    (item) => DropdownMenuItem<String>(
+                      value: item,
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: gSubTextColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+              value: selectedValue,
+              onChanged: (String? value) {
+                selectedValue = value!;
+                Logger().d("버튼 값 확인 : ${selectedValue}");
+              },
+            ),
+          ),
+        )
+      ],
     );
   }
 

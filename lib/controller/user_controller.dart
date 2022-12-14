@@ -1,4 +1,5 @@
 import 'package:finalproject_front/domain/user_session.dart';
+import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
@@ -102,6 +103,27 @@ class UserController {
         SnackBar(content: Text("게시글 수정 실패 : ${responseDto.msg}")),
       );
     }
+  }
+
+  Future<void> insertProfile(
+      {required int id,
+      required String introduction,
+      required String region,
+      required String certification,
+      String? careerYear,
+      required String career,
+      List<String>? filePath}) async {
+    Logger().d("커리어 확인 :${careerYear}");
+    Logger().d("파일 인코딩 확인 :${filePath}");
+    ProfileInsertReqDto profileInsertReqDto = ProfileInsertReqDto(
+      filePath: filePath,
+      introduction: introduction,
+      region: region,
+      certification: certification,
+      careerYear: careerYear,
+      career: career,
+    );
+    ResponseDto responseDto = await userService.fetchInsertProfile(id, profileInsertReqDto);
   }
 
   // void delete() {
