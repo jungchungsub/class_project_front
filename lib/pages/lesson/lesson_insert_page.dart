@@ -43,31 +43,45 @@ class _LessonInsertPageState extends State<LessonInsertPage> {
             child: Column(
               children: [
                 LessonImage(),
-                CustomTextField(scrollAnimate,
-                    fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate,
-                    fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
+                CustomTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate,
-                    fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate,
-                    fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate,
-                    fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
+                CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
                 CategorySelecter(),
                 SizedBox(height: gap_l),
                 LessonDeadLine(),
                 SizedBox(height: gap_l),
-                CustomMainButton(
-                    buttonRoutePath: "/loginMyPage", buttonText: "프로필 등록"),
-                SizedBox(height: gap_l),
+                _buildLessonButton(context)
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  ElevatedButton _buildLessonButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      style: ElevatedButton.styleFrom(
+        primary: gButtonOffColor,
+        minimumSize: Size(getScreenWidth(context), 60),
+      ),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          "클래스 등록하기",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

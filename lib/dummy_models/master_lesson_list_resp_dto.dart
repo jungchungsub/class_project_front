@@ -31,7 +31,7 @@ List<MasterLessonRespDto> masterLessonList = [
     userDto: UserDto(username: "박지성"),
     price: 10000,
     expiredAt: "2022.12.07",
-    photo: "https://picsum.photos/201",
+    photo: "https://picsum.photos/",
   ),
   MasterLessonRespDto(
     id: 2,

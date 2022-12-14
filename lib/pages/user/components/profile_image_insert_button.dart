@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/size.dart';
