@@ -8,12 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../size.dart';
 
-class CustomForm extends ConsumerStatefulWidget {
+class UserUpdateForm extends ConsumerStatefulWidget {
   @override
-  ConsumerState<CustomForm> createState() => _CustomFormState();
+  ConsumerState<UserUpdateForm> createState() => _CustomFormState();
 }
 
-class _CustomFormState extends ConsumerState<CustomForm> {
+class _CustomFormState extends ConsumerState<UserUpdateForm> {
   late ScrollController scrollController;
 
   @override

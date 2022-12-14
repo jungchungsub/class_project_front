@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
-import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:http/http.dart';
-import 'package:logger/logger.dart';
 
 import '../core/util/response_util.dart';
 import '../dto/response/my_page_resp_dto.dart';
