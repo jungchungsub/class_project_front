@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileImageInsertButton extends StatefulWidget {
@@ -37,6 +39,9 @@ class _ProfileImageInsertButtonState extends State<ProfileImageInsertButton> {
       if (pickedfile != null) {
         imagefile = pickedfile;
         setState(() {});
+        Uint8List data = await imagefile!.readAsBytes();
+        List<String> profileImage = [base64Encode(data)];
+        // menuReqDto.imageFile = menuImage;
       } else {
         print("No image is selected.");
       }

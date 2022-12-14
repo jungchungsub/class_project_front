@@ -1,15 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
-import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
-import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';
-import 'package:finalproject_front/pages/user/components/profile_image_insert_button.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
-class UserProfileInsertPage extends StatefulWidget {
+class UserProfileInsertPage extends ConsumerStatefulWidget {
   final ProfileRespDto model;
   final _profileIntroduction = TextEditingController();
   final _profileRegion = TextEditingController();
@@ -19,12 +23,11 @@ class UserProfileInsertPage extends StatefulWidget {
   UserProfileInsertPage({required this.model, super.key});
 
   @override
-  State<UserProfileInsertPage> createState() => _UserProfileInsertPageState();
+  ConsumerState<UserProfileInsertPage> createState() => _UserProfileInsertPageState();
 }
 
-class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
-  late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
-  // DB에 저장되어 있는 값을 가져오는 역할.
+class _UserProfileInsertPageState extends ConsumerState<UserProfileInsertPage> {
+  late ScrollController scrollController;
 
   @override
   void initState() {
@@ -32,9 +35,30 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
     scrollController = new ScrollController();
   }
 
-  @override
+  XFile? pickedFile;
+  ImagePicker imgpicker = ImagePicker();
+  XFile? _imagefile;
+  late List<String>? profileImage;
+
+  openImages() async {
+    try {
+      var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
+      //you can use ImageCourse.camera for Camera capture
+      if (pickedfile != null) {
+        _imagefile = pickedfile;
+        setState(() {}); // 상태 초기화
+        Uint8List? data = await _imagefile?.readAsBytes();
+        List<String> profileImage = [base64Encode(data!)];
+        return this.profileImage = profileImage;
+      } else {
+        print("No image is selected.");
+      }
+    } catch (e) {
+      print("error while picking file.");
+    }
+  }
+
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     widget._profileIntroduction.text = widget.model.introduction;
     widget._profileRegion.text = widget.model.region;
     widget._profileCertification.text = widget.model.certification;
@@ -48,7 +72,7 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProfileImageInsertButton(),
+              _buildImageUploder(),
               SizedBox(height: gap_l),
               _buildProfileId(context, "green1234"),
               SizedBox(height: gap_l),
@@ -69,11 +93,157 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
               SizedBox(height: gap_l),
               CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1, fieldController: widget._profileCareer),
               SizedBox(height: gap_l),
-              CustomMainButton(buttonRoutePath: "/profileDetail", buttonText: "저장하기")
+              // CustomMainButton(buttonRoutePath: "/profileDetail", buttonText: "저장하기"),
+              _buildProfileSaveButton(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildProfileSaveButton() {
+    return ElevatedButton(
+      onPressed: () {
+        Logger().d("profile 인코딩 :${profileImage}");
+      },
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: gButtonOffColor,
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            "저장하기",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Row _buildImageUploder() {
+    return Row(
+      children: [
+        //open button ----------------
+        _imagefile != null
+            ? Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(150),
+                  child: Image.file(
+                    File(_imagefile!.path),
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
+            : Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  border: Border.all(color: gBorderColor),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+        SizedBox(width: gap_m),
+        Container(
+          height: 90,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "클래스 사진 등록",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 30,
+                width: 140,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Logger().d(openImages());
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: gContentBoxColor,
+                    primary: gPrimaryColor,
+                  ),
+                  child: Text("이미지 선택",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _builderImageUploader() {
+    return Row(
+      children: [
+        //open button ----------------
+
+        _imagefile != null
+            ? Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(150),
+                  child: Image.file(
+                    File(_imagefile!.path),
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
+            : Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  border: Border.all(color: gBorderColor),
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+        SizedBox(width: gap_m),
+        Container(
+          height: 90,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "클래스 사진 등록",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 30,
+                width: 140,
+                child: ElevatedButton(
+                  onPressed: () {
+                    openImages();
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: gContentBoxColor,
+                    primary: gPrimaryColor,
+                  ),
+                  child: Text("이미지 선택",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -107,18 +277,6 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
           curve: Curves.easeIn); //Curves - 올라갈때 애니메이션
     });
   }
-}
-
-Widget _buildProfileImage(BuildContext context, String profileImagePath) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(150),
-    child: Image.asset(
-      profileImagePath,
-      width: 80,
-      height: 80,
-      fit: BoxFit.cover,
-    ),
-  );
 }
 
 Widget _buildProfileId(BuildContext context, String userId) {
