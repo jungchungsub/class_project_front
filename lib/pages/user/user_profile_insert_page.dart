@@ -1,14 +1,22 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/pages/user/components/profile_career_select_button.dart';
+import 'package:finalproject_front/pages/user/components/profile_image_insert_button.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileInsertPage extends StatefulWidget {
-  const UserProfileInsertPage({super.key});
+  final ProfileRespDto model;
+  final _profileIntroduction = TextEditingController();
+  final _profileRegion = TextEditingController();
+  final _profileCertification = TextEditingController();
+  final _profileCareer = TextEditingController();
+  final _profileCareerYear = TextEditingController();
+  UserProfileInsertPage({required this.model, super.key});
 
   @override
   State<UserProfileInsertPage> createState() => _UserProfileInsertPageState();
@@ -16,6 +24,7 @@ class UserProfileInsertPage extends StatefulWidget {
 
 class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
   late ScrollController scrollController; // ScrollerController은 non-null이다, late를 선언해 나중에 초기화.
+  // DB에 저장되어 있는 값을 가져오는 역할.
 
   @override
   void initState() {
@@ -23,17 +32,14 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
     scrollController = new ScrollController();
   }
 
-  final TextEditingController? _profileIntroduction = TextEditingController(text: "${profileList[0].introduction}");
-  // DB에 저장되어 있는 값을 가져오는 역할.
-  final TextEditingController? _profileRegion = TextEditingController(text: "${profileList[0].region}");
-
-  final TextEditingController? _profileCertification = TextEditingController(text: "${profileList[0].certification}");
-
-  final TextEditingController? _profileCareer = TextEditingController(text: "${profileList[0].carrerYear}");
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    widget._profileIntroduction.text = widget.model.introduction;
+    widget._profileRegion.text = widget.model.region;
+    widget._profileCertification.text = widget.model.certification;
+    widget._profileCareer.text = widget.model.career;
+
     return Scaffold(
       appBar: _buildAppbar(context),
       body: SingleChildScrollView(
@@ -42,7 +48,7 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildProfileImage(context, profileList[0].filePath),
+              ProfileImageInsertButton(),
               SizedBox(height: gap_l),
               _buildProfileId(context, "green1234"),
               SizedBox(height: gap_l),
@@ -51,17 +57,17 @@ class _UserProfileInsertPageState extends State<UserProfileInsertPage> {
                 fieldTitle: "자기소개",
                 hint: "간략한 자기소개를 작성해주세요.",
                 lines: 6,
-                fieldController: _profileIntroduction,
+                fieldController: widget._profileIntroduction,
               ),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "지역을 작성해주세요.", hint: "예)부산,서울,경기도", lines: 1, fieldController: _profileRegion),
+              CustomTextField(scrollAnimate, fieldTitle: "지역을 작성해주세요.", hint: "예)부산,서울,경기도", lines: 1, fieldController: widget._profileRegion),
               SizedBox(height: gap_l),
               CustomTextField(scrollAnimate,
-                  fieldTitle: "학력 전공을 작성해주세요", hint: "예)사이버 보안전공", lines: 1, subTitle: "선택사항", fieldController: _profileCertification),
+                  fieldTitle: "학력 전공을 작성해주세요", hint: "예)사이버 보안전공", lines: 1, subTitle: "선택사항", fieldController: widget._profileCertification),
               SizedBox(height: gap_l),
-              ProfileCareerSeleteButton(),
+              ProfileCareerSeleteButton(), // 총 경력 기간
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1, fieldController: _profileCareer),
+              CustomTextField(scrollAnimate, fieldTitle: "경력사항을 작성해주세요.", hint: "예)프리랜서1년", lines: 1, fieldController: widget._profileCareer),
               SizedBox(height: gap_l),
               CustomMainButton(buttonRoutePath: "/profileDetail", buttonText: "저장하기")
             ],
@@ -107,7 +113,7 @@ Widget _buildProfileImage(BuildContext context, String profileImagePath) {
   return ClipRRect(
     borderRadius: BorderRadius.circular(150),
     child: Image.asset(
-      "${profileImagePath}",
+      profileImagePath,
       width: 80,
       height: 80,
       fit: BoxFit.cover,
@@ -130,7 +136,7 @@ Widget _buildProfileId(BuildContext context, String userId) {
         TextFormField(
           readOnly: true,
           decoration: InputDecoration(
-            hintText: "${userId}",
+            hintText: userId,
             hintStyle: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.normal,

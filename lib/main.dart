@@ -74,7 +74,7 @@ class MyApp extends StatelessWidget {
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
-        "/profileInsert": (context) => UserProfileInsertPage(), // 더미 적용
+        // "/profileInsert": (context) => UserProfileInsertPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
         "/lessonUpdate": (context) => LessonUpdatePage(),

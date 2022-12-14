@@ -56,7 +56,7 @@ class UserProfileDetailPage extends ConsumerWidget {
             // CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기"
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileInsertPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileInsertPage(model: model.profileRespDto)));
               },
               style: ElevatedButton.styleFrom(
                 primary: gButtonOffColor,
@@ -65,7 +65,7 @@ class UserProfileDetailPage extends ConsumerWidget {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  "로그인",
+                  "프로필 등록/수정하기",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
