@@ -34,6 +34,9 @@ class LessonRespDto {
 }
 
 final lessonDetailPageViewModel = StateNotifierProvider.family.autoDispose<LessonDetailPageViewModel, LessonDetailPageModel?, int>((ref, lessonId) {
+  ref.onDispose(() {
+    Logger().d("LessonDetailPageViewModel 삭제됨");
+  });
   return LessonDetailPageViewModel(null, lessonId)..notifyViewModel();
 });
 
@@ -46,10 +49,11 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await lessonService.getLessonDetail(lessonId, UserSession.jwtToken);
+
     Logger().d(responseDto.data);
     if (responseDto.statusCode < 300) {
       LessonDetailPageModel model = LessonDetailPageModel(responseDto.data);
-      Logger().d(model.lessonRespDto.lessonReviewList[0].reviewContent);
+
       state = model;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(

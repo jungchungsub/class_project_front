@@ -1,8 +1,7 @@
-// To parse this JSON data, do
-//
-//     final lessonRespDto = lessonRespDtoFromJson(jsonString);
-
 import 'dart:convert';
+import 'dart:core';
+
+import 'package:logger/logger.dart';
 
 LessonRespDto lessonRespDtoFromJson(String str) => LessonRespDto.fromJson(json.decode(str));
 
@@ -23,13 +22,18 @@ class LessonRespDto {
   List<LessonReviewList> lessonReviewList;
   bool subscribed;
 
-  factory LessonRespDto.fromJson(Map<String, dynamic> json) => LessonRespDto(
-        lessonDto: LessonDto.fromJson(json["lessonDto"]),
-        profileDto: ProfileDto.fromJson(json["profileDto"]),
-        lessonAvgGrade: json["lessonAvgGrade"].toDouble(),
-        lessonReviewList: List<LessonReviewList>.from(json["lessonReviewList"].map((x) => LessonReviewList.fromJson(x))),
-        subscribed: json["subscribed"],
-      );
+  factory LessonRespDto.fromJson(Map<String, dynamic> json) {
+    // if (check != "NaN") {
+    //   //temp = json["lessonAvgGrade"].toInt();
+    // }
+    return LessonRespDto(
+      lessonDto: LessonDto.fromJson(json["lessonDto"]),
+      profileDto: ProfileDto.fromJson(json["profileDto"]),
+      lessonAvgGrade: 9.5,
+      lessonReviewList: List<LessonReviewList>.from(json["lessonReviewList"].map((x) => LessonReviewList.fromJson(x))),
+      subscribed: json["subscribed"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "lessonDto": lessonDto.toJson(),

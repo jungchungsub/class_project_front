@@ -15,14 +15,22 @@ class LessonService {
     //Logger().d("id출력service:${lessonId}");
 
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}", jwtToken: jwtToken);
-    Logger().d(response.statusCode);
-    // Logger().d("확인중 : ${lessonId}");
+
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d(responseDto.data);
+
+    Logger().d(response.body);
+
+    final value = responseDto.data["lessonAvgGrade"];
+    Logger().d("value 값 : ${value}");
+    if (value == "NaN") {
+      responseDto.data["lessonAvgGrade"] = 0.0;
+    }
+
+    Logger().d(responseDto.data["lessonAvgGrade"]);
+    Logger().d("~~~~~~~~~~~~~");
+
     responseDto.data = LessonRespDto.fromJson(responseDto.data);
-    // Logger().d("레슨 서비스 확인 : ${responseDto.msg}");
-    // Logger().d("레슨 데이터 확인 : ${responseDto.data}");
-    // Logger().d("데이터확인 : ${responseDto.data}");
+    //Logger().d("데이터확인 : ${responseDto.data}");
     return responseDto;
   }
 
