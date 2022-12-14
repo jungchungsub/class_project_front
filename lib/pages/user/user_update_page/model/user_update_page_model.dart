@@ -1,6 +1,6 @@
-import 'package:finalproject_front/dto/response/user_resp_dto.dart';
+import 'package:finalproject_front/dto/response/user_login_resp_dto.dart';
 
 class UserUpdatePageModel {
-  UserRespDto userRespDto;
+  UserLoginRespDto userRespDto;
   UserUpdatePageModel(this.userRespDto);
 }

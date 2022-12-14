@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    Logger().d("홈페이지 실행됨");
+    Logger().d("mainPage 실행됨");
     return Scaffold(
       body: _buildIndexedStack(),
       bottomNavigationBar: _buildBottomNavigationBar(),

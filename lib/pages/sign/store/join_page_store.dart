@@ -1,5 +1,5 @@
 import 'package:finalproject_front/service/user_service.dart';
-import 'package:finalproject_front/dto/response/user_resp_dto.dart';
+import 'package:finalproject_front/dto/response/user_login_resp_dto.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // 회원가입이 pageStore가 필요한가..?
