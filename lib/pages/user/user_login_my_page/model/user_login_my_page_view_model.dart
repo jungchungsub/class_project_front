@@ -5,6 +5,7 @@ import 'package:finalproject_front/pages/user/user_login_my_page/model/user_logi
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 /**autoDispose : 재 로그인 시 유저 정보 업데이트 역할을 해줌. */
 //  뷰 모델은 전부 StateNotifier로 만들기 -> 상태를 가지고 있고 상태를 변경 할 수있음.
@@ -21,7 +22,10 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
 
   Future<void> notifyinitViewModel() async {
     // MyPage에 토큰 인증 필요.
+    Logger().d("=======여기 실행");
     ResponseDto responseDto = await userService.getUserInfoForMyPage(UserSession.user!.id, UserSession.jwtToken);
+
+    Logger().d("뷰 모델 확인 : ${responseDto.data}");
     if (responseDto.statusCode < 400) {
       state = UserLoginMyPageModel(responseDto.data);
     } else {

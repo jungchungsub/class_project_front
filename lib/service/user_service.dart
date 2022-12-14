@@ -56,11 +56,12 @@ class UserService {
 
 // MyPage를 위한 유저 정보
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
+    Logger().d("여기 실행됨? ${userId}, ==${jwtToken}");
+
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("유저 서비스 : ${responseDto.data}");
-    Logger().d("유저 서비스 : ${responseDto.statusCode}");
-    Logger().d("유저 서비스 : ${responseDto.msg}");
+
+    Logger().d("유저 서비스 msg 출력: ${responseDto.msg}");
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
 
