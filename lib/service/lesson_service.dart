@@ -33,7 +33,6 @@ class LessonService {
     Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
 
     ResponseDto responseDto = toResponseDto(response); //
-    Logger().d("메인페이지 확인 : ${responseDto.data}");
     if (responseDto.statusCode < 300) {
       List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
       // Logger().d(mapList);

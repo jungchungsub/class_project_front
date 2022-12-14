@@ -1,19 +1,16 @@
 import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
-import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
-import 'package:finalproject_front/dto/response/user_login_resp_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
-import '../domain/user_session.dart';
 import '../core/util/response_util.dart';
-import '../dto/response/user_update_resp_dto.dart';
 import '../dto/response/my_page_resp_dto.dart';
+import '../dto/response/user_update_resp_dto.dart';
 
 // 회원 탈퇴, 회원가입 ,로그인, 로그아웃, 회원 정보 수정,내 정보 상세 보기
 class UserService {
@@ -74,14 +71,9 @@ class UserService {
   Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("프로필 정보 확인 : ${responseDto.data}");
-    Logger().d("프로필 정보 확인 : ${responseDto.statusCode}");
-    Logger().d("프로필 정보 확인 : ${responseDto.msg}");
-
     if (responseDto.data != null) {
       responseDto.data = ProfileRespDto.fromJson(responseDto.data);
     }
-    Logger().d("service 출력 : ${responseDto.data}");
     return responseDto;
   }
 
