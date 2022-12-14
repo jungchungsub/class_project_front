@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
-class User {
+class UserRespDto {
+  // 수정 필요
   int id;
   String username;
   String password;
@@ -9,7 +10,7 @@ class User {
   String role;
   DateTime createdAt;
 
-  User({
+  UserRespDto({
     required this.id,
     required this.username,
     required this.password,
@@ -19,8 +20,8 @@ class User {
     required this.createdAt,
   });
 
-// json -> dynamic
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  // json -> dynamic
+  factory UserRespDto.fromJson(Map<String, dynamic> json) => UserRespDto(
         id: json["id"],
         username: json["username"],
         password: json["password"],
@@ -29,4 +30,13 @@ class User {
         role: json["role"],
         createdAt: DateFormat("yyyy-mm-dd").parse(json["createdAt"]),
       );
+
+// // dynamic -> json
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "username": username,
+//         "role": role,
+//         "createdAt": createdAt,
+//         "email": email,
+//       };
 }

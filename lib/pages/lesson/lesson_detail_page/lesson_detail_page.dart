@@ -1,10 +1,9 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_view_model.dart';
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
-import 'package:finalproject_front/dummy_models/review.dart';
+import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -19,94 +18,84 @@ class LessonDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //final rc = ref.read(lessonController);
-    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
-    LessonController controllerCT = ref.read(lessonController);
 
-    return _buildBody(model);
+    return Scaffold(
+      bottomSheet: _buildLessonBar(),
+      body: CustomScrollView(
+        slivers: [
+          _buildSliverAppbar(context),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                _build1(ref),
+                _buildDivider(),
+                _build2(ref),
+                //build5(ref),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
-  Widget _buildBody(LessonDetailPageModel? model) {
+  Widget _build2(WidgetRef ref) {
+    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     return model == null
-        ? CircularProgressIndicator()
-        : LayoutBuilder(
-            // layoutBuilder안에 넣는 이유는 해당디바이스 사이즈를 알기위해서 넣어준다.
-            builder: (context, constrains) {
-              Size _size = MediaQuery.of(context).size; //해당 디바이스의 사이즈를 가지고 온다.
-              return Scaffold(
-                bottomSheet: _buildLessonBar(),
-                body: CustomScrollView(
-                  slivers: [
-                    //child같은 개념이지만 조금 다르다
-                    _buildSliverAppbar(context, _size),
-                    SliverList(
-                      delegate: SliverChildListDelegate([
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
-                              child: Container(
-                                  child: Column(
-                                children: [_buildLessonTitle("뷰티・운동", "${model.lessonRespDto.lessonDto.lessonName}", lessonList[0].totalReview)],
-                              )),
-                            ),
-                            _buildDivider(),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
-                              child: Container(
-                                  child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 16, bottom: 16),
-                                    child: Text(
-                                      "${model.lessonRespDto.lessonDto.lessonPrice}원",
-                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  _buildLessonContentBox("커리큘럼", "${model.lessonRespDto.lessonDto.curriculum}", 120, 2),
-                                  _buildLessonContentBox("레슨시간", "${model.lessonRespDto.lessonDto.lessonTime}", 55, 1),
-                                  _buildLessonContentBox("레슨횟수", "${model.lessonRespDto.lessonDto.lessonCount}", 55, 1),
-                                  _buildLessonContentBox("장소", "${model.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
-                                  _buildLessonPossibleDate("${model.lessonRespDto.lessonDto?.possibleDays}"),
-                                  _buildLessonContentBox("취소 및 환불규정", "${model.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
-                                  _buildLessonExpertInformation("${model.lessonRespDto.profileDto.expertPhoto}", "전문가정보",
-                                      "${model.lessonRespDto.profileDto.expertIntroduction}", "${model.lessonRespDto.profileDto.expertPhoto}"),
-                                  _buildLessonEvaluation(4.2, 500),
-                                  Container(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: gap_l,
-                                        ),
-                                        _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
-                                            "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
-                                        _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
-                                            "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
-                                        _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
-                                            "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
-                                        // _buildReview(lessonList[0].reviewDtoList[1].username, lessonList[0].reviewDtoList[1].reviewContent),
-                                        // _buildReview(lessonList[0].reviewDtoList[2].username, lessonList[0].reviewDtoList[2].reviewContent),
-                                        SizedBox(
-                                          height: gap_xxl,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )),
-                            ),
-                          ],
-                        ),
-                      ]),
-                    ),
-                    //container같은 보통위젯들은 바로 주지 못한다.
-                    //만약사용하고 싶다면 아래와 같이 SliverToBoxAdapter로 감싸준다.
-                  ],
+        ? SizedBox()
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 16),
+                  child: Text(
+                    "${model.lessonRespDto.lessonDto.lessonPrice}원",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              );
-            },
+                _buildLessonContentBox("커리큘럼", "${model.lessonRespDto.lessonDto.curriculum}", 120, 2),
+                _buildLessonContentBox("레슨시간", "${model.lessonRespDto.lessonDto.lessonTime}", 55, 1),
+                _buildLessonContentBox("레슨횟수", "${model.lessonRespDto.lessonDto.lessonCount}", 55, 1),
+                _buildLessonContentBox("장소", "${model.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
+                _buildLessonPossibleDate("${model.lessonRespDto.lessonDto.possibleDays}"),
+                _buildLessonContentBox("취소 및 환불규정", "${model.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
+                _buildLessonExpertInformation("${model.lessonRespDto.profileDto.expertPhoto}", "전문가정보",
+                    "${model.lessonRespDto.profileDto.expertIntroduction}", "${model.lessonRespDto.profileDto.expertPhoto}"),
+                _buildLessonEvaluation(4.2, 500),
+                // Column(
+                //   children: List.generate(
+                //       model.lessonRespDto.lessonReviewList.length,
+                //       (index) => _buildReview(
+                //           model.lessonRespDto.lessonReviewList[index].username, model.lessonRespDto.lessonReviewList[index].reviewContent)),
+                // ),
+                Column(
+                  children: model.lessonRespDto.lessonReviewList.map((e) => _buildReview(e.username, e.reviewContent, e.lessonGrade)).toList(),
+                ),
+                SizedBox(
+                  height: gap_xxl,
+                )
+              ],
+            )),
           );
+  }
+
+  Widget _build1(WidgetRef ref) {
+    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+    return model == null
+        ? SizedBox()
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                _buildLessonTitle(
+                  "${model.lessonRespDto.lessonDto.lessonName}",
+                  lessonList[0].totalReview,
+                ),
+              ],
+            ));
   }
 }
 
@@ -182,51 +171,55 @@ Container _buildLessonEvaluation(double evaluation, int totalReview) {
   );
 }
 
-Container _buildReview(String username, String reviewContent) {
-  return Container(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
-              ),
+Widget _buildReview(String username, String reviewContent, double lessonGrade) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        children: [
+          Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
             ),
-            SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${username}",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${username}",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "${lessonGrade}",
+                style: TextStyle(
+                  fontSize: 16,
                 ),
-                Row(
-                  children: [
-                    _buildStar(CupertinoIcons.star_fill),
-                    SizedBox(width: 5),
-                    _buildStar(CupertinoIcons.star_fill),
-                    SizedBox(width: 5),
-                    _buildStar(CupertinoIcons.star_fill),
-                    SizedBox(width: 5),
-                    _buildStar(CupertinoIcons.star_fill),
-                    SizedBox(width: 5),
-                    _buildStar(CupertinoIcons.star_fill),
-                  ],
-                ),
-              ],
-            )
-          ],
-        ),
-        SizedBox(height: gap_m),
-        Text("${reviewContent}", style: TextStyle(fontSize: 16)),
-        SizedBox(height: gap_xl),
-      ],
-    ),
+              ),
+              // Row(
+              //   children: [
+              //     _buildStar(CupertinoIcons.star_fill),
+              //     SizedBox(width: 5),
+              //     _buildStar(CupertinoIcons.star_fill),
+              //     SizedBox(width: 5),
+              //     _buildStar(CupertinoIcons.star_fill),
+              //     SizedBox(width: 5),
+              //     _buildStar(CupertinoIcons.star_fill),
+              //     SizedBox(width: 5),
+              //     _buildStar(CupertinoIcons.star_fill),
+              //   ],
+              // ),
+            ],
+          )
+        ],
+      ),
+      SizedBox(height: gap_m),
+      Text("${reviewContent}", style: TextStyle(fontSize: 16)),
+      SizedBox(height: gap_xl),
+    ],
   );
 }
 
@@ -411,16 +404,12 @@ Container _buildLessonBox(String title, int content, double heig, int max) {
   );
 }
 
-Container _buildLessonTitle(String lessonCategory, String lessonTitle, int totalReview) {
+Container _buildLessonTitle(String lessonTitle, int totalReview) {
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 30),
-        Text(
-          "${lessonCategory}",
-          style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
-        ),
         Text(
           "${lessonTitle}",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -481,7 +470,8 @@ Divider _buildDivider() {
   );
 }
 
-SliverAppBar _buildSliverAppbar(BuildContext context, Size _size) {
+SliverAppBar _buildSliverAppbar(BuildContext context) {
+  Size _size = MediaQuery.of(context).size;
   return SliverAppBar(
       leading: IconButton(
           icon: Icon(

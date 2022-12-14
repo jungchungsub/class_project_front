@@ -1,5 +1,6 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/pages/user/components/service_text_button.dart';
 import 'package:finalproject_front/pages/user/components/update_form.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +11,7 @@ import 'package:logger/logger.dart';
 import '../../../dto/response/user_login_resp_dto.dart';
 
 class UserUpdatePage extends ConsumerWidget {
-  final UserLoginRespDto userInfo;
+  final User userInfo;
   const UserUpdatePage({required this.userInfo, super.key});
 
   @override

@@ -1,4 +1,5 @@
 class LessonLatestListRespDto {
+  int lessonId;
   int totalReview;
   double avgGrade;
   String lessonPhoto;
@@ -7,6 +8,7 @@ class LessonLatestListRespDto {
   bool subscribed;
 
   LessonLatestListRespDto({
+    required this.lessonId,
     required this.totalReview,
     required this.avgGrade,
     required this.lessonPhoto,
@@ -16,6 +18,7 @@ class LessonLatestListRespDto {
   });
 
   factory LessonLatestListRespDto.fromJson(Map<String, dynamic> json) => LessonLatestListRespDto(
+      lessonId: json["lessonId"],
       totalReview: json["totalReview"],
       avgGrade: json["avgGrade"],
       lessonPhoto: json["lessonPhoto"],

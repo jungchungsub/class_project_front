@@ -18,7 +18,6 @@ class UserLoginMyPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Logger().d("로그인 내 페이지 실행됨");
     UserLoginMyPageModel? model = ref.watch(userLoginMyPageViewModel);
     final userCT = ref.read(userController);
 

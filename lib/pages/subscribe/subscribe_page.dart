@@ -1,55 +1,38 @@
+import 'package:finalproject_front/controller/subscribe_controller.dart';
 import 'package:finalproject_front/dummy_models/subscribe_list_resp_dto.dart';
+import 'package:finalproject_front/pages/subscribe/model/subscribe_page_model.dart';
+import 'package:finalproject_front/pages/subscribe/model/subscribe_page_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class SubscribePage extends StatefulWidget {
-  const SubscribePage({Key? key}) : super(key: key);
+class SubscribePage extends ConsumerWidget {
+  final userId;
+
+  SubscribePage({required this.userId, Key? key}) : super(key: key);
 
   @override
-  State<SubscribePage> createState() => _SubscribePageState();
-}
-
-class _SubscribePageState extends State<SubscribePage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SubscribePageModel? model = ref.watch(subscribePageViewModel(userId));
+    SubscribeController subscribeCT = ref.read(subscribeController);
     return Scaffold(
         appBar: _buildAppbar(),
         body: ListView.builder(
             shrinkWrap: true, //리스트 자식 높이 크기의 합 만큼으로 영역을 고정 시켜준다.
-            itemCount: subscribeListRespDto.length,
+            itemCount: model?.subscribeList.subscribes.length,
             itemBuilder: ((BuildContext context, int index) {
-              return SubscribeLesson(itemIndex: index);
+              return _buildSubscribeLesson(context, ref, index, model, subscribeCT);
             })));
   }
 
-  AppBar _buildAppbar() {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 1.0,
-      title: Text(
-        "찜목록",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      centerTitle: true,
-    );
-  }
-}
-
-class SubscribeLesson extends StatelessWidget {
-  final int itemIndex;
-  const SubscribeLesson({required this.itemIndex, Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Padding _buildSubscribeLesson(BuildContext context, WidgetRef ref, int index, SubscribePageModel? model, SubscribeController subscribeCT) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, "/lessonDetail");
+          subscribeCT.moveDetailPage(lessonId: model!.subscribeList.subscribes[index].lesson.id);
+          Logger().d("좋아요 레슨디테일 이동실행onTop");
         },
         child: Container(
           child: Row(
@@ -64,7 +47,11 @@ class SubscribeLesson extends StatelessWidget {
                     width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(image: NetworkImage("${subscribeListRespDto[itemIndex].lessonDto.photo}"), fit: BoxFit.cover),
+                      image: DecorationImage(
+                          image: NetworkImage(
+                            "https://picsum.photos/201",
+                          ),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -79,7 +66,7 @@ class SubscribeLesson extends StatelessWidget {
                         width: 230,
                         height: 50,
                         child: Text(
-                          "${subscribeListRespDto[itemIndex].lessonDto.name}",
+                          "${model?.subscribeList.subscribes[index].lesson.name}", //이름
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -108,7 +95,7 @@ class SubscribeLesson extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${subscribeListRespDto[itemIndex].lessonDto.price}",
+                            "${model?.subscribeList.subscribes[index].lesson.price}",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -131,4 +118,20 @@ class SubscribeLesson extends StatelessWidget {
       ),
     );
   }
+}
+
+AppBar _buildAppbar() {
+  return AppBar(
+    backgroundColor: Colors.white,
+    elevation: 1.0,
+    title: Text(
+      "찜목록",
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    centerTitle: true,
+  );
 }

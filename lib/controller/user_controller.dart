@@ -74,6 +74,7 @@ class UserController {
     //3. 비지니스 로직 처리
     Logger().d("controller status확인 : ${respDto.statusCode}");
     if (respDto.statusCode > 0 || respDto.statusCode < 300) {
+      await LocalService().fetchJwtToken();
       Navigator.of(gContext).popAndPushNamed("/main");
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(

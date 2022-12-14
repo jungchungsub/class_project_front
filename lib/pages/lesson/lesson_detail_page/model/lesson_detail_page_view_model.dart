@@ -15,25 +15,10 @@ import 'package:logger/logger.dart';
 
 //LessonDetailPageModel? 이페이지가 관리하는 상태
 
-class LessonRespDto {
-  String lessonId;
-  LessonDto lessonDto;
-  ProfileDto profileDto;
-  double lessonAvgGrade;
-  bool isSubscribed;
-  List<ReviewRespDto> lessonReviewList;
-
-  LessonRespDto({
-    required this.lessonId,
-    required this.lessonDto,
-    required this.profileDto,
-    required this.isSubscribed,
-    required this.lessonAvgGrade,
-    required this.lessonReviewList,
-  });
-}
-
 final lessonDetailPageViewModel = StateNotifierProvider.family.autoDispose<LessonDetailPageViewModel, LessonDetailPageModel?, int>((ref, lessonId) {
+  ref.onDispose(() {
+    Logger().d("LessonDetailPageViewModel 삭제됨");
+  });
   return LessonDetailPageViewModel(null, lessonId)..notifyViewModel();
 });
 
@@ -45,17 +30,16 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   LessonDetailPageViewModel(super.state, this.lessonId);
 
   Future<void> notifyViewModel() async {
-    Logger().d("111111111111111111실행");
     ResponseDto responseDto = await lessonService.getLessonDetail(lessonId, UserSession.jwtToken);
+
     Logger().d(responseDto.data);
     if (responseDto.statusCode < 300) {
-      Logger().d("333333333333333333333333제대로 실행?");
       LessonDetailPageModel model = LessonDetailPageModel(responseDto.data);
-      Logger().d(model.lessonRespDto.lessonReviewList[0].reviewContent);
+
       state = model;
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("4444444444444444444잘못된 요청입니다")),
+        const SnackBar(content: Text("잘못된 요청입니다")),
       );
     }
   }
