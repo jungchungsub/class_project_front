@@ -38,7 +38,9 @@ class UserService {
 
   Future<ResponseDto> fetchLogin(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
+    Logger().d("서비스확인 : ${requestBody}");
     Response response = await httpConnector.post("/login", requestBody);
+    Logger().d("서비스 리스폰스 확인 : ${response.body}");
 
     String jwtToken = response.headers["authorization"].toString();
     Logger().d("토큰 값 확인 : ${jwtToken}");
@@ -81,10 +83,7 @@ class UserService {
     Logger().d("프로필 정보 확인 : ${responseDto.msg}");
 
     if (responseDto.data != null) {
-      dynamic mapList = responseDto.data; // dynamic
-      ProfileDetailRespDto profileDetail = mapList.map((e) => ProfileDetailRespDto.fromJson(e));
-      Logger().d(profileDetail);
-      responseDto.data = profileDetail;
+      responseDto.data = ProfileRespDto.fromJson(responseDto.data);
     }
     Logger().d("service 출력 : ${responseDto.data}");
     return responseDto;
@@ -95,9 +94,6 @@ class UserService {
     String requestBody = jsonEncode(updateUserReqDto);
     Response response = await httpConnector.put(path: "/api/user/${userId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("responseDto 통신 체크 : ${responseDto.statusCode}");
-    Logger().d("responseDto 통신 체크 : ${responseDto.msg}");
-    Logger().d("responseDto 통신 체크 : ${responseDto.data}");
 
     if (responseDto.data != null) {
       responseDto.data = UserUpdateResponseDto.fromJson(responseDto.data);

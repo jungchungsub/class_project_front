@@ -13,6 +13,7 @@ class HttpConnector {
   Map<String, String> headers = {"Content-Type": "application/json;charset=utf-8"};
 
   final host = "http://192.168.0.87:8000";
+  final host2 = "http://localhost:8000";
   final Client _client = Client();
 
   // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.
@@ -40,8 +41,9 @@ class HttpConnector {
 
   Future<Response> post(String path, String body) async {
     Uri uri = Uri.parse("${host}${path}");
+    Logger().d("커넥터 주소 확인 : ${uri}");
     Response response = await _client.post(uri, body: body, headers: headers);
-
+    Logger().d("커넥터 response확안 : ${response.body}");
     return response;
   }
 
