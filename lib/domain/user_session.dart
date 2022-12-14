@@ -1,3 +1,4 @@
+import 'package:finalproject_front/domain/user.dart';
 import 'package:logger/logger.dart';
 
 import '../service/local_service.dart';
@@ -5,7 +6,7 @@ import '../dto/response/user_login_resp_dto.dart';
 
 // main 시작전에 확인이 필요해서 provider가 아닌 static으로 관리
 class UserSession {
-  static UserLoginRespDto? _user;
+  static User? _user;
   static String? _jwtToken;
   static bool _isLogin = false;
 
@@ -13,7 +14,7 @@ class UserSession {
   static get jwtToken => _jwtToken;
   static get isLogin => _isLogin;
 
-  static void successAuthentication(UserLoginRespDto userParam, String jwtToken) {
+  static void successAuthentication(User userParam, String jwtToken) {
     _user = userParam;
     _isLogin = true;
     _jwtToken = jwtToken;

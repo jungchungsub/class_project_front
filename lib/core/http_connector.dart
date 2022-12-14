@@ -29,9 +29,7 @@ class HttpConnector {
     if (jwtToken != null) {
       Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
       Uri uri = Uri.parse("${host}${path}");
-      Logger().d("uri확인 : ${uri}");
       Response response = await Client().get(uri, headers: requestHeader);
-      Logger().d("커넥터 확인 : ${response.headers}");
       return response;
     }
     Uri uri = Uri.parse("${host}${path}");

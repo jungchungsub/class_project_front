@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
+import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
@@ -45,23 +46,19 @@ class UserService {
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("loginDto data확인 : ${responseDto.data}");
-
 // 로그인 정보 저장
-    UserLoginRespDto user = UserLoginRespDto.fromJson(responseDto.data);
-    Logger().d("userResp확인 : ${user}");
-    UserSession.successAuthentication(user, jwtToken);
+    // User user = User.fromJson(responseDto.data);
+    // Logger().d("userResp확인 : ${user}");
+    // UserSession.successAuthentication(user, jwtToken);
 
     return responseDto; // ResponseDto 응답
   }
 
 // MyPage를 위한 유저 정보
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
-    Logger().d("여기 실행됨? ${userId}, ==${jwtToken}");
-
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
 
-    Logger().d("유저 서비스 msg 출력: ${responseDto.msg}");
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
 
