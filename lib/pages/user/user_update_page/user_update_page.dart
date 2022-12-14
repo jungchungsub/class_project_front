@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-import '../../../dto/response/user_resp_dto.dart';
+import '../../../dto/response/user_login_resp_dto.dart';
 
 class UserUpdatePage extends ConsumerWidget {
-  final UserRespDto userInfo;
+  final UserLoginRespDto userInfo;
   const UserUpdatePage({required this.userInfo, super.key});
 
   @override

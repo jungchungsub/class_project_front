@@ -24,7 +24,6 @@ import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_insert_page.dart';
-import 'package:finalproject_front/pages/user/user_update_page/user_update_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,7 +49,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Logger().d("메인 페이지 실행됌");
+    Logger().d("main 실행됨");
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,

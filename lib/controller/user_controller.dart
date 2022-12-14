@@ -74,7 +74,7 @@ class UserController {
     //3. 비지니스 로직 처리
     Logger().d("controller status확인 : ${respDto.statusCode}");
     if (respDto.statusCode > 0 || respDto.statusCode < 300) {
-      Navigator.of(gContext).pushNamedAndRemoveUntil("/main", (route) => false);
+      Navigator.of(gContext).popAndPushNamed("/main");
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
         const SnackBar(content: Text("로그인 실패")),

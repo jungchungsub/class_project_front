@@ -4,7 +4,7 @@ import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
-import 'package:finalproject_front/dto/response/user_resp_dto.dart';
+import 'package:finalproject_front/dto/response/user_login_resp_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
@@ -47,7 +47,8 @@ class UserService {
     Logger().d("loginDto data확인 : ${responseDto.data}");
 
 // 로그인 정보 저장
-    UserRespDto user = UserRespDto.fromJson(responseDto.data);
+    UserLoginRespDto user = UserLoginRespDto.fromJson(responseDto.data);
+    Logger().d("userResp확인 : ${user}");
     UserSession.successAuthentication(user, jwtToken);
 
     return responseDto; // ResponseDto 응답
@@ -91,6 +92,7 @@ class UserService {
     return responseDto;
   }
 
+//업데이트
   Future<ResponseDto> fetchUpdateUser(int userId, UpdateUserReqDto updateUserReqDto) async {
     String requestBody = jsonEncode(updateUserReqDto);
     Response response = await httpConnector.put(path: "/api/user/${userId}", body: requestBody);
