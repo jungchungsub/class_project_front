@@ -1,15 +1,13 @@
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/domain/user.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/util/response_util.dart';
+import '../domain/user_session.dart';
 import '../dto/response/respone_dto.dart';
 import '../dto/response/user_login_resp_dto.dart';
-import '../domain/user_session.dart';
-import '../core/util/response_util.dart';
 
 // Create storage
 const secureStorage = FlutterSecureStorage();
@@ -33,9 +31,8 @@ class LocalService {
       Response response = await httpConnector.getInitSession("/api/user/session", deviceJwtToken);
       ResponseDto respDto = toResponseDto(response);
       if (respDto.statusCode < 400) {
-        UserLoginRespDto user = UserLoginRespDto.fromJson(respDto.data);
+        User user = User.fromJson(respDto.data);
         UserSession.successAuthentication(user, deviceJwtToken);
-        Logger().d("세션 초기화 완료. ${user.username}");
       } else {
         Logger().d("토큰이 만료됨");
         UserSession.removeAuthentication();

@@ -26,9 +26,8 @@ class UserProfileDetailPageViewModel extends StateNotifier<UserProfileDetailPage
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await userService.getDetailProfile(userId, UserSession.jwtToken);
     Logger().d("ResponseDto 확인 : ${responseDto.data}");
-    var model = ProfileDetailRespDto.fromJson(responseDto.data);
     if (responseDto.statusCode < 300) {
-      state = UserProfileDetailPageModel(model);
+      state = UserProfileDetailPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
         const SnackBar(content: Text("잘못된 요청입니다.")),

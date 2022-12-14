@@ -22,10 +22,8 @@ class UserLoginMyPageViewModel extends StateNotifier<UserLoginMyPageModel?> {
 
   Future<void> notifyinitViewModel() async {
     // MyPage에 토큰 인증 필요.
-    Logger().d("=======여기 실행");
     ResponseDto responseDto = await userService.getUserInfoForMyPage(UserSession.user!.id, UserSession.jwtToken);
 
-    Logger().d("뷰 모델 확인 : ${responseDto.data}");
     if (responseDto.statusCode < 400) {
       state = UserLoginMyPageModel(responseDto.data);
     } else {

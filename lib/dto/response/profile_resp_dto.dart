@@ -1,14 +1,15 @@
-class ProfileDetailRespDto {
-  int id;
-  String filePath;
-  String introduction;
-  String region;
-  String certification;
-  String careerYear;
-  String career;
-  UserDto userDto;
+// To parse this JSON data, do
+//
+//     final responseDto = responseDtoFromJson(jsonString);
 
-  ProfileDetailRespDto({
+import 'dart:convert';
+
+ProfileRespDto responseDtoFromJson(String str) => ProfileRespDto.fromJson(json.decode(str));
+
+String responseDtoToJson(ProfileRespDto data) => json.encode(data.toJson());
+
+class ProfileRespDto {
+  ProfileRespDto({
     required this.id,
     required this.filePath,
     required this.introduction,
@@ -16,10 +17,19 @@ class ProfileDetailRespDto {
     required this.certification,
     required this.careerYear,
     required this.career,
-    required this.userDto,
+    required this.user,
   });
 
-  factory ProfileDetailRespDto.fromJson(Map<String, dynamic> json) => ProfileDetailRespDto(
+  int id;
+  String filePath;
+  String introduction;
+  String region;
+  String certification;
+  String careerYear;
+  String career;
+  User user;
+
+  factory ProfileRespDto.fromJson(Map<String, dynamic> json) => ProfileRespDto(
         id: json["id"],
         filePath: json["filePath"],
         introduction: json["introduction"],
@@ -27,7 +37,7 @@ class ProfileDetailRespDto {
         certification: json["certification"],
         careerYear: json["careerYear"],
         career: json["career"],
-        userDto: (json["userDto"].map((e) => e == null ? null : UserDto.fromJson(e))),
+        user: User.fromJson(json["user"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,26 +48,24 @@ class ProfileDetailRespDto {
         "certification": certification,
         "careerYear": careerYear,
         "career": career,
-        "userDto": userDto,
+        "user": user.toJson(),
       };
 }
 
-class UserDto {
-  int id;
-  String username;
-
-  UserDto({
+class User {
+  User({
     required this.id,
     required this.username,
   });
 
-// json -> dynamic
-  factory UserDto.fromJson(Map<String, dynamic> json) => UserDto(
+  int id;
+  String username;
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         username: json["username"],
       );
 
-// dynamic -> json
   Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
