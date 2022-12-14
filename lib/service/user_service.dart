@@ -38,16 +38,12 @@ class UserService {
 
   Future<ResponseDto> fetchLogin(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
-    Logger().d("서비스확인 : ${requestBody}");
     Response response = await httpConnector.post("/login", requestBody);
-    Logger().d("서비스 리스폰스 확인 : ${response.body}");
 
     String jwtToken = response.headers["authorization"].toString();
-    Logger().d("토큰 값 확인 : ${jwtToken}");
 
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("loginDto data확인 : ${responseDto.data}");
 // 로그인 정보 저장
     // User user = User.fromJson(responseDto.data);
     // Logger().d("userResp확인 : ${user}");
