@@ -58,7 +58,7 @@ class HomePage extends ConsumerWidget {
               Navigator.pushNamed(context, "${routePath}");
               Logger().d("실행?>");
 
-              // Navigator.push(context, MaterialPageRoute(builder: ((context) => (LessonDetailPage(state)))));
+              //Navigator.push(context, MaterialPageRoute(builder: ((context) => (LessonDetailPage(state)))));
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
@@ -70,9 +70,7 @@ class HomePage extends ConsumerWidget {
                   ),
                   itemCount: 10, //총 item의 갯수
                   itemBuilder: (context, index) {
-                    return //lessonDetail(itemIndex: index);
-
-                        Padding(
+                    return Padding(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: Column(
                         children: [
@@ -81,22 +79,22 @@ class HomePage extends ConsumerWidget {
                             width: 160,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(image: NetworkImage("${model}"), fit: BoxFit.cover),
+                              image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
                             ),
                           ),
                           SizedBox(height: gap_m),
-                          // Text(
-                          //   "${model?.lessonLatestList[index].lessonPhoto}",
-                          //   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                          //   maxLines: 2,
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
+                          Text(
+                            lessonList[index].lessonName,
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           Row(
                             children: [
                               Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
                               SizedBox(width: gap_m),
                               Text(
-                                "${model?.lessonLatestList[index].avgGrade} |  ${model?.lessonLatestList[index].totalReview} 개의 평가",
+                                "${lessonList[index].reviewDtoList[0].lessonGrade} | ${lessonList[index].totalReview} 개의 평가",
                                 style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -104,7 +102,7 @@ class HomePage extends ConsumerWidget {
                           Row(
                             children: [
                               Text(
-                                "${model?.lessonLatestList[index].lessonPrice}원",
+                                "${lessonList[index].lessonPrice}원",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -207,7 +205,6 @@ class HomePage extends ConsumerWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Padding(
-      
 //       padding: const EdgeInsets.only(left: 10, right: 10),
 //       child: Column(
 //         children: [
@@ -216,7 +213,7 @@ class HomePage extends ConsumerWidget {
 //             width: 160,
 //             decoration: BoxDecoration(
 //               borderRadius: BorderRadius.circular(10),
-//               image: DecorationImage(image: NetworkImage("${model}"), fit: BoxFit.cover),
+//               image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
 //             ),
 //           ),
 //           SizedBox(height: gap_m),
@@ -249,3 +246,44 @@ class HomePage extends ConsumerWidget {
 //     );
 //   }
 // }
+
+// Padding(
+//                       padding: const EdgeInsets.only(left: 10, right: 10),
+//                       child: Column(
+//                         children: [
+//                           Container(
+//                             height: 90,
+//                             width: 160,
+//                             decoration: BoxDecoration(
+//                               borderRadius: BorderRadius.circular(10),
+//                               image: DecorationImage(image: NetworkImage("${model}"), fit: BoxFit.cover),
+//                             ),
+//                           ),
+//                           SizedBox(height: gap_m),
+//                           // Text(
+//                           //   "${model?.lessonLatestList[index].lessonPhoto}",
+//                           //   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+//                           //   maxLines: 2,
+//                           //   overflow: TextOverflow.ellipsis,
+//                           // ),
+//                           Row(
+//                             children: [
+//                               Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
+//                               SizedBox(width: gap_m),
+//                               Text(
+//                                 "${model?.lessonLatestList[index].avgGrade} |  ${model?.lessonLatestList[index].totalReview} 개의 평가",
+//                                 style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+//                               ),
+//                             ],
+//                           ),
+//                           Row(
+//                             children: [
+//                               Text(
+//                                 "${model?.lessonLatestList[index].lessonPrice}원",
+//                                 style: TextStyle(fontWeight: FontWeight.bold),
+//                               ),
+//                             ],
+//                           ),
+//                         ],
+//                       ),
+//                     )

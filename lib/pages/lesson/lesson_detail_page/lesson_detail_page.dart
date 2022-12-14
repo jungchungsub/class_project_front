@@ -67,7 +67,7 @@ class LessonDetailPage extends ConsumerWidget {
                                   _buildLessonContentBox("레슨시간", "${model.lessonRespDto.lessonDto.lessonTime}", 55, 1),
                                   _buildLessonContentBox("레슨횟수", "${model.lessonRespDto.lessonDto.lessonCount}", 55, 1),
                                   _buildLessonContentBox("장소", "${model.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
-                                  _buildLessonPossibleDate("${model.lessonRespDto.lessonDto?.possibleDays}"),
+                                  _buildLessonPossibleDate("${model.lessonRespDto.lessonDto.possibleDays}"),
                                   _buildLessonContentBox("취소 및 환불규정", "${model.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
                                   _buildLessonExpertInformation("${model.lessonRespDto.profileDto.expertPhoto}", "전문가정보",
                                       "${model.lessonRespDto.profileDto.expertIntroduction}", "${model.lessonRespDto.profileDto.expertPhoto}"),
@@ -85,8 +85,6 @@ class LessonDetailPage extends ConsumerWidget {
                                             "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
                                         _buildReview("${model?.lessonRespDto.lessonReviewList[lessonId].username}",
                                             "${model?.lessonRespDto.lessonReviewList[lessonId].reviewContent}"),
-                                        // _buildReview(lessonList[0].reviewDtoList[1].username, lessonList[0].reviewDtoList[1].reviewContent),
-                                        // _buildReview(lessonList[0].reviewDtoList[2].username, lessonList[0].reviewDtoList[2].reviewContent),
                                         SizedBox(
                                           height: gap_xxl,
                                         ),

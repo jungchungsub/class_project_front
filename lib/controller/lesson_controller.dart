@@ -1,4 +1,5 @@
 import 'package:finalproject_front/dto/response/respone_dto.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';
 import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
@@ -13,7 +14,7 @@ final lessonController = Provider<LessonController>((ref) {
 });
 
 class LessonController {
-  final context = navigatorKey.currentContext!;
+  final mContext = navigatorKey.currentContext!;
   Ref _ref;
   LessonController(this._ref);
   final LessonService lessonService = LessonService();
@@ -24,7 +25,7 @@ class LessonController {
     //통신요청
     String? jwtToken;
     ResponseDto respDto = await lessonService.getLessonDetail(lessonId, jwtToken); //가져온 값을 RespDto에 저장
-    Navigator.popAndPushNamed(context, "/lessonDetail");
+    Navigator.popAndPushNamed(mContext, "/lessonDetail");
   }
 
   Future<void> refreshHomePage() async {
@@ -32,3 +33,7 @@ class LessonController {
     _ref.read(homePageViewModel.notifier).notifyViewModel();
   }
 }
+
+// void moveDetailPage(int postId) {
+//   Navigator.push(mContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
+// }
