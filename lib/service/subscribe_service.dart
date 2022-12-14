@@ -10,17 +10,17 @@ class SubscribeService {
   final HttpConnector httpConnector = HttpConnector();
 
   Future<ResponseDto> subscribeList(int userId, String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/user${userId}/subscribe", jwtToken: jwtToken);
-    Logger().d("확인중 :${userId} ");
+    Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe", jwtToken: jwtToken);
 
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("좋아요 데이터 확인 : ${responseDto.data}");
+    Logger().d(responseDto.statusCode);
 
     if (responseDto.statusCode < 300) {
-      List<dynamic> mapList = responseDto.data;
-      List<SubscribeListRespDto> SubscribeList = mapList.map((e) => SubscribeListRespDto.fromJson(e)).toList();
-
-      responseDto.data = SubscribeList;
+      // List<dynamic> mapList = responseDto.data;
+      // Logger().d(mapList);
+      // List<SubscribeRespDto> SubscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
+      // Logger().d(SubscribeList);
+      responseDto.data = SubscribeRespDto.fromJson(responseDto.data);
     }
     return responseDto;
   }

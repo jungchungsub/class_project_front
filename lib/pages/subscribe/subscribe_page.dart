@@ -12,18 +12,18 @@ class SubscribePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    SubscribePageModel? model = ref.watch(subscribePageViewModel(userId));
     return Scaffold(
         appBar: _buildAppbar(),
         body: ListView.builder(
             shrinkWrap: true, //리스트 자식 높이 크기의 합 만큼으로 영역을 고정 시켜준다.
-            itemCount: subscribeListRespDto.length,
+            itemCount: model?.subscribeList.subscribes.length,
             itemBuilder: ((BuildContext context, int index) {
-              return _buildSubscribeLesson(context, ref, index);
+              return _buildSubscribeLesson(context, ref, index, model);
             })));
   }
 
-  Padding _buildSubscribeLesson(BuildContext context, WidgetRef ref, int index) {
-    SubscribePageModel? model = ref.watch(subscribePageViewModel(userId));
+  Padding _buildSubscribeLesson(BuildContext context, WidgetRef ref, int index, SubscribePageModel? model) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
@@ -62,7 +62,7 @@ class SubscribePage extends ConsumerWidget {
                         width: 230,
                         height: 50,
                         child: Text(
-                          "${model?.subscribeList[index].lesson.name}", //이름
+                          "${model?.subscribeList.subscribes[index].lesson.name}", //이름
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -91,7 +91,7 @@ class SubscribePage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${model?.subscribeList[index].lesson.price}",
+                            "${model?.subscribeList.subscribes[index].lesson.price}",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(

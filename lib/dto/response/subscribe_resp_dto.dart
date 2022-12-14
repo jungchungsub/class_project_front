@@ -1,17 +1,41 @@
+// To parse this JSON data, do
+//
+//     final lessonRespDto = lessonRespDtoFromJson(jsonString);
+
 import 'dart:convert';
 
-class SubscribeListRespDto {
-  int id;
-  User user;
-  Lesson lesson;
+SubscribeRespDto lessonRespDtoFromJson(String str) => SubscribeRespDto.fromJson(json.decode(str));
 
-  SubscribeListRespDto({
+String lessonRespDtoToJson(SubscribeRespDto data) => json.encode(data.toJson());
+
+class SubscribeRespDto {
+  SubscribeRespDto({
+    required this.subscribes,
+  });
+
+  List<Subscribe> subscribes;
+
+  factory SubscribeRespDto.fromJson(Map<String, dynamic> json) => SubscribeRespDto(
+        subscribes: List<Subscribe>.from(json["subscribes"].map((x) => Subscribe.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "subscribes": List<dynamic>.from(subscribes.map((x) => x.toJson())),
+      };
+}
+
+class Subscribe {
+  Subscribe({
     required this.id,
     required this.user,
     required this.lesson,
   });
 
-  factory SubscribeListRespDto.fromJson(Map<String, dynamic> json) => SubscribeListRespDto(
+  int id;
+  User user;
+  Lesson lesson;
+
+  factory Subscribe.fromJson(Map<String, dynamic> json) => Subscribe(
         id: json["id"],
         user: User.fromJson(json["user"]),
         lesson: Lesson.fromJson(json["lesson"]),
