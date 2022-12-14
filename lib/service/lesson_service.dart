@@ -37,20 +37,26 @@ class LessonService {
   Future<ResponseDto> homeList(String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
 
-    ResponseDto responseDto = toResponseDto(response);
+    ResponseDto responseDto = toResponseDto(response); //
+
     if (responseDto.statusCode < 300) {
-      List<dynamic> mapList = responseDto.data;
+      List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
       // Logger().d(mapList);
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
+      //mapList하나하나를 fromjson하고 tolist로 묶음
+
       responseDto.data = LessonLatestList;
     }
     return responseDto;
   }
 
-  // Future<List<LessonRespDto>> getLatestLesonList() async {
-  //   Response response = await _ref.read(httpConnector).get("/api/lesson/latest");
-  //   LessonRespDto responseDto =
-
-  //   return;
+  // Future<ResponseDto> categoryList(String? jwtToken) async {
+  //   Response response  = await httpConnector.get(path: "/api/category/${categoryId}",jwtToken: jwtToken);
+  //   ResponseDto responseDto = toResponseDto(response);
+  //   if(responseDto.statusCode< 300){
+  //           List<dynamic> mapList = responseDto.data;
+  //           List<>
+  //   }
   // }
+
 }

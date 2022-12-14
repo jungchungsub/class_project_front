@@ -15,24 +15,6 @@ import 'package:logger/logger.dart';
 
 //LessonDetailPageModel? 이페이지가 관리하는 상태
 
-class LessonRespDto {
-  String lessonId;
-  LessonDto lessonDto;
-  ProfileDto profileDto;
-  double lessonAvgGrade;
-  bool isSubscribed;
-  List<ReviewRespDto> lessonReviewList;
-
-  LessonRespDto({
-    required this.lessonId,
-    required this.lessonDto,
-    required this.profileDto,
-    required this.isSubscribed,
-    required this.lessonAvgGrade,
-    required this.lessonReviewList,
-  });
-}
-
 final lessonDetailPageViewModel = StateNotifierProvider.family.autoDispose<LessonDetailPageViewModel, LessonDetailPageModel?, int>((ref, lessonId) {
   ref.onDispose(() {
     Logger().d("LessonDetailPageViewModel 삭제됨");

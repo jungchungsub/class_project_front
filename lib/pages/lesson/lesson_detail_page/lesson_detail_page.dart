@@ -39,17 +39,6 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget build5(WidgetRef ref) {
-    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
-    return model == null
-        ? SizedBox()
-        : Container(
-            child: Text(model.lessonRespDto.lessonDto.lessonName),
-            color: Colors.green,
-            height: 100,
-          );
-  }
-
   Widget _build2(WidgetRef ref) {
     LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     return model == null
