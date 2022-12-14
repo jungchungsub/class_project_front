@@ -83,7 +83,7 @@ class LessonDetailPage extends ConsumerWidget {
                 //           model.lessonRespDto.lessonReviewList[index].username, model.lessonRespDto.lessonReviewList[index].reviewContent)),
                 // ),
                 Column(
-                  children: model.lessonRespDto.lessonReviewList.map((e) => _buildReview(e.username, e.reviewContent)).toList(),
+                  children: model.lessonRespDto.lessonReviewList.map((e) => _buildReview(e.username, e.reviewContent, e.lessonGrade)).toList(),
                 ),
                 SizedBox(
                   height: gap_xxl,
@@ -102,7 +102,6 @@ class LessonDetailPage extends ConsumerWidget {
             child: Column(
               children: [
                 _buildLessonTitle(
-                  "뷰티・운동",
                   "${model.lessonRespDto.lessonDto.lessonName}",
                   lessonList[0].totalReview,
                 ),
@@ -183,7 +182,7 @@ Container _buildLessonEvaluation(double evaluation, int totalReview) {
   );
 }
 
-Widget _buildReview(String username, String reviewContent) {
+Widget _buildReview(String username, String reviewContent, double lessonGrade) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -204,6 +203,12 @@ Widget _buildReview(String username, String reviewContent) {
               Text(
                 "${username}",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "${lessonGrade}",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
               // Row(
               //   children: [
@@ -410,16 +415,12 @@ Container _buildLessonBox(String title, int content, double heig, int max) {
   );
 }
 
-Container _buildLessonTitle(String lessonCategory, String lessonTitle, int totalReview) {
+Container _buildLessonTitle(String lessonTitle, int totalReview) {
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 30),
-        Text(
-          "${lessonCategory}",
-          style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
-        ),
         Text(
           "${lessonTitle}",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
