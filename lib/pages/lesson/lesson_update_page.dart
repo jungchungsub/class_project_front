@@ -53,7 +53,8 @@ class _LessonUpdatePageState extends State<LessonUpdatePage> {
                 CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
                 // CategorySelecter(),  컴포넌트로 뺀거 일단 위젯 밑으로 뺌 - insertPage
                 SizedBox(height: gap_l),
-                LessonDeadLine(),
+                // LessonDeadLine(                fieldController: widget._dateInput,
+                //   lessonInsertReqDto: lessonInsertReqDto),
                 SizedBox(height: gap_l),
                 CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "프로필 등록"),
                 SizedBox(height: gap_l),

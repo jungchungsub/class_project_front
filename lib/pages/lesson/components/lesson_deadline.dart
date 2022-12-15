@@ -1,10 +1,14 @@
-import 'package:finalproject_front/constants.dart';
-import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
+
+import '../../../constants.dart';
+import '../../../size.dart';
 
 class LessonDeadLine extends StatefulWidget {
-  const LessonDeadLine({Key? key}) : super(key: key);
+  late TextEditingController fieldController = TextEditingController();
+  final lessonInsertReqDto;
+  LessonDeadLine({required this.lessonInsertReqDto, required TextEditingController fieldController, Key? key}) : super(key: key);
 
   @override
   State<LessonDeadLine> createState() => _LessonDeadLineState();
@@ -12,6 +16,7 @@ class LessonDeadLine extends StatefulWidget {
 
 class _LessonDeadLineState extends State<LessonDeadLine> {
   TextEditingController dateInput = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,15 +56,11 @@ class _LessonDeadLineState extends State<LessonDeadLine> {
                       lastDate: DateTime(2100));
 
                   if (pickedDate != null) {
-                    print(
-                        pickedDate); //pickDate 출력 형식 => 2021-03-10 00:00:00.000
-                    String formattedDate =
-                        DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(
-                        formattedDate); //intl 패키지를 사용하여 형식화된 날짜 출력 =>  2021-03-16
+                    print(pickedDate); //pickDate 출력 형식 => 2021-03-10 00:00:00.000
+                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                     setState(() {
-                      dateInput.text =
-                          formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
+                      dateInput.text = formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
+                      widget.lessonInsertReqDto.deadline = dateInput.text;
                     });
                   } else {}
                 },

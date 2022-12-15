@@ -20,6 +20,8 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
+import 'lesson_deadline.dart';
+
 class LessonInsertForm extends ConsumerStatefulWidget {
   final _name = TextEditingController();
   final _curriculum = TextEditingController();
@@ -29,6 +31,7 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _dateInput = TextEditingController();
   final _time = TextEditingController();
   final _price = TextEditingController();
+  final _possibleDay = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -132,42 +135,53 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                _buildImageUploader(),
-                _buildTextField(
-                  scrollAnimate,
-                  fieldTitle: "서비스제목",
-                  hint: "서비스 제목자리입니다",
-                  lines: 1,
-                  fieldController: widget._name,
-                  onChanged: (value) {
-                    lessonInsertReqDto.name = value;
-                  },
+                _buildImageUploader(onChanged: (value) {
+                  lessonInsertReqDto.photo = value;
+                }),
+                _buildTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1, fieldController: widget._name, onChanged: (value) {
+                  lessonInsertReqDto.name = value;
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6, fieldController: widget._curriculum, onChanged: (value) {
+                  lessonInsertReqDto.curriculum = value;
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강횟수를 입력하세요", lines: 1, fieldController: widget._count, onChanged: (value) {
+                  lessonInsertReqDto.lessonCount = int.parse(value);
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강시간을 입력하세요", lines: 1, fieldController: widget._time, onChanged: (value) {
+                  lessonInsertReqDto.lessonTime = int.parse(value);
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "수강장소", hint: "수강장소를 입력하세요", lines: 1, fieldController: widget._place, onChanged: (value) {
+                  lessonInsertReqDto.place = value;
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "가격", hint: "가격를 입력하세요", lines: 1, fieldController: widget._price, onChanged: (value) {
+                  lessonInsertReqDto.price = int.parse(value);
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "취소 및 환불 정책", hint: "취소 및 환불 정책 작성", lines: 4, fieldController: widget._policy,
+                    onChanged: (value) {
+                  lessonInsertReqDto.policy = value;
+                }),
+                SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "가능일", hint: "가능일을 입력하세요", lines: 1, fieldController: widget._possibleDay,
+                    onChanged: (value) {
+                  lessonInsertReqDto.possibleDays = value;
+                }),
+                SizedBox(height: gap_l),
+                LessonDeadLine(
+                  fieldController: widget._dateInput,
+                  lessonInsertReqDto: lessonInsertReqDto,
                 ),
-                // SizedBox(height: gap_l),
-                // _buildTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6, fieldController: widget._curriculum),
-                // SizedBox(height: gap_l),
-                // _buildTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1, fieldController: widget._count),
-                // SizedBox(height: gap_l),
-                // _buildTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1, fieldController: widget._time),
-                // SizedBox(height: gap_l),
-                // _buildTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1, fieldController: widget._curriculum),
-                // _selectCarrer(),
-                // SizedBox(height: gap_l),
-                // _buildTextField(scrollAnimate, fieldTitle: "가격", hint: "50000", lines: 1, fieldController: widget._price),
+                SizedBox(height: gap_l),
+
                 ElevatedButton(
                   onPressed: () {
                     lessonCT.lessonInsert(
                       lessonInsertReqDto: lessonInsertReqDto,
-                      // name: widget._name.text,
-                      // photo: profileImage,
-                      // price: int.parse(widget._price.text),
-                      // place: widget._place.text,
-                      // lessonTime: int.parse(widget._time.text),
-                      // lessonCount: int.parse(widget._count.text),
-                      // possibleDays: selectedValue,
-                      // curriculum: widget._curriculum.text,
-                      // policy: widget._policy.text,
-                      // deadline: DateTime.parse(widget._dateInput.text),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -185,10 +199,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: gap_l),
-                LessonDeadLine(fieldController: widget._dateInput),
-                SizedBox(height: gap_l),
+                )
                 // _buildLessonButton(context)
               ],
             ),
@@ -198,7 +209,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     );
   }
 
-  Row _buildImageUploader() {
+  Widget _buildImageUploader({required ValueChanged<String>? onChanged}) {
     return Row(
       children: [
         //open button ----------------
@@ -416,70 +427,6 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
             });
           },
         ),
-      ),
-    );
-  }
-}
-
-class LessonDeadLine extends StatefulWidget {
-  late TextEditingController fieldController;
-  LessonDeadLine({required TextEditingController fieldController, Key? key}) : super(key: key);
-
-  @override
-  State<LessonDeadLine> createState() => _LessonDeadLineState();
-}
-
-class _LessonDeadLineState extends State<LessonDeadLine> {
-  TextEditingController dateInput = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "마감일자",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: gap_m),
-          Container(
-              decoration: BoxDecoration(),
-              child: Center(
-                  child: TextField(
-                decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: gClientColor, width: 3.0),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  //마우스 올리고 난 후 스타일
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: gClientColor, width: 3.0),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                controller: dateInput,
-                //TextField의 편집 컨트롤러
-                readOnly: true,
-                //true로 설정하면 사용자가 텍스트를 편집할 수 없습니다.
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      //DateTime.now() - 오늘 전에는 선택못하게
-                      lastDate: DateTime(2100));
-
-                  if (pickedDate != null) {
-                    print(pickedDate); //pickDate 출력 형식 => 2021-03-10 00:00:00.000
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(formattedDate); //intl 패키지를 사용하여 형식화된 날짜 출력 =>  2021-03-16
-                    setState(() {
-                      dateInput.text = formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
-                    });
-                  } else {}
-                },
-              ))),
-        ],
       ),
     );
   }

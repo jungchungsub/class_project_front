@@ -27,7 +27,7 @@ class LessonInsertReqDto {
   String? possibleDays;
   String? curriculum;
   String? policy;
-  DateTime? deadline;
+  String? deadline;
   LessonInsertReqDto.origin();
 
   // factory LessonInsertReqDto.fromJson(Map<String, dynamic> json) => LessonInsertReqDto(
@@ -52,6 +52,6 @@ class LessonInsertReqDto {
         "possibleDays": possibleDays,
         "curriculum": curriculum,
         "policy": policy,
-        "deadline": deadline?.toIso8601String(),
+        "deadline": deadline,
       };
 }
