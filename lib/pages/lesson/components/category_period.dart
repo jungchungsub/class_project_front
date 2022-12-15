@@ -1,56 +1,17 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:finalproject_front/constants.dart';
-import 'package:flutter/material.dart';
+// import 'package:dropdown_button2/dropdown_button2.dart';
+// import 'package:finalproject_front/constants.dart';
+// import 'package:flutter/material.dart';
 
-class CategoryPeriod extends StatefulWidget {
-  const CategoryPeriod({Key? key}) : super(key: key);
+// class CategoryPeriod extends StatefulWidget {
+//   const CategoryPeriod({Key? key}) : super(key: key);
 
-  @override
-  State<CategoryPeriod> createState() => _CategoryPeriodState();
-}
+//   @override
+//   State<CategoryPeriod> createState() => _CategoryPeriodState();
+// }
 
-class _CategoryPeriodState extends State<CategoryPeriod> {
-  final List<String> items = [
-    '뷰티',
-    '운동',
-    '댄스',
-    '뮤직',
-    '미술',
-    '문학',
-    '공예',
-    '기타',
-  ];
-  String? selectedValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton2(
-          hint: Text(
-            '카테고리를 선택해주세요',
-            style: TextStyle(
-              fontSize: 16,
-              color: gSubTextColor,
-            ),
-          ),
-          items: items
-              .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
-                    ),
-                  ))
-              .toList(),
-          value: selectedValue,
-          onChanged: (value) {
-            setState(() {
-              selectedValue = value as String;
-            });
-          },
-        ),
-      ),
-    );
-  }
-}
+// class _CategoryPeriodState extends State<CategoryPeriod> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return;
+//   }
+// }

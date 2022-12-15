@@ -1,18 +1,10 @@
-class LessonInsertReqDto {
-  String name;
-  String photo;
-  int price;
-  String place;
-  int lessonTime;
-  int lessonCount;
-  String possibleDays;
-  String curriculum;
-  String policy;
-  String deadline;
-  int categoryId;
-  // List<int>? categoryId;
-  //List<int> categoryId = category.map((category) => category.id).toList();
+import 'dart:convert';
 
+LessonInsertReqDto lessonRespDtoFromJson(String str) => LessonInsertReqDto.fromJson(json.decode(str));
+
+String lessonRespDtoToJson(LessonInsertReqDto data) => json.encode(data.toJson());
+
+class LessonInsertReqDto {
   LessonInsertReqDto({
     required this.name,
     required this.photo,
@@ -27,7 +19,31 @@ class LessonInsertReqDto {
     required this.categoryId,
   });
 
-// dynamic -> json
+  String name;
+  String photo;
+  int price;
+  String place;
+  int lessonTime;
+  int lessonCount;
+  String possibleDays;
+  String curriculum;
+  String policy;
+  DateTime deadline;
+  int categoryId;
+
+  factory LessonInsertReqDto.fromJson(Map<String, dynamic> json) => LessonInsertReqDto(
+        name: json["name"],
+        photo: json["photo"],
+        price: json["price"],
+        place: json["place"],
+        lessonTime: json["lessonTime"],
+        lessonCount: json["lessonCount"],
+        possibleDays: json["possibleDays"],
+        curriculum: json["curriculum"],
+        policy: json["policy"],
+        deadline: DateTime.parse(json["deadline"]),
+        categoryId: json["categoryId"],
+      );
   Map<String, dynamic> toJson() => {
         "name": name,
         "photo": photo,
@@ -38,7 +54,7 @@ class LessonInsertReqDto {
         "possibleDays": possibleDays,
         "curriculum": curriculum,
         "policy": policy,
-        "deadline": deadline,
+        "deadline": deadline.toIso8601String(),
         "categoryId": categoryId,
       };
 }

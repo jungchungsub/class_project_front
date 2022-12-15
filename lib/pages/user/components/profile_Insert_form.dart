@@ -16,6 +16,7 @@ import '../../../size.dart';
 
 class ProfileInsertForm extends ConsumerStatefulWidget {
   ProfileRespDto model;
+
   final _introduction = TextEditingController();
   final _region = TextEditingController();
   final _certification = TextEditingController();

@@ -15,8 +15,8 @@ final lessonController = Provider<LessonController>((ref) {
 });
 
 class LessonController {
-  final mContext = navigatorKey.currentContext!;
-  Ref _ref;
+  final gContext = navigatorKey.currentContext!;
+  final Ref _ref;
   LessonController(this._ref);
   final LessonService lessonService = LessonService();
 
@@ -35,11 +35,10 @@ class LessonController {
   }
 
   void moveDetailPage({required int lessonId}) {
-    Navigator.push(mContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
+    Navigator.push(gContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
   }
 
   Future<void> lessonInsert({
-    required int id,
     required String name,
     required String photo,
     required int price,
@@ -49,7 +48,7 @@ class LessonController {
     required String possibleDays,
     required String curriculum,
     required String policy,
-    required String deadline,
+    required DateTime deadline,
     required int categoryId,
   }) async {
     LessonInsertReqDto lessonInsertReqDto = LessonInsertReqDto(
@@ -65,6 +64,6 @@ class LessonController {
         deadline: deadline,
         categoryId: categoryId);
 
-    ResponseDto responseDto = await lessonService.fetchlessonInsert(id, lessonInsertReqDto);
+    ResponseDto responseDto = await lessonService.fetchlessonInsert(lessonInsertReqDto);
   }
 }

@@ -8,9 +8,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LessonInsertPage extends ConsumerWidget {
-  // final LessonInsertRespDto model;
   LessonInsertPage({Key? key}) : super(key: key);
-  // required this.model
+  //
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lessonCT = ref.read(lessonController);

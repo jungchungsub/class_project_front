@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
-import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
-import 'package:finalproject_front/pages/lesson/components/category_select.dart';
+
 import 'package:finalproject_front/pages/lesson/components/lesson_deadline.dart';
 import 'package:finalproject_front/pages/lesson/components/lesson_image.dart';
 
@@ -21,9 +22,16 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class LessonInsertForm extends ConsumerStatefulWidget {
-  // LessonInsertRespDto model;
+  final _name = TextEditingController();
+  final _curriculum = TextEditingController();
+  final _count = TextEditingController();
+  final _place = TextEditingController();
+  final _policy = TextEditingController();
+  final _deadLine = TextEditingController();
+  final _time =  TextEditingController();
+
   LessonInsertForm({Key? key}) : super(key: key);
-  // required this.model,
+
   @override
   ConsumerState<LessonInsertForm> createState() => _LessonInsertFormState();
 }
@@ -32,7 +40,20 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
   XFile? pickedFile;
   ImagePicker imgpicker = ImagePicker();
   XFile? _imagefile;
-  late List<String>? profileImage;
+  late String? profileImage;
+  // ValueChanged<T> select;
+
+  final List<String> items = [
+    '뷰티',
+    '운동',
+    '댄스',
+    '뮤직',
+    '미술',
+    '문학',
+    '공예',
+    '기타',
+  ];
+  String? selectedValue;
 
   final _formKey = GlobalKey<FormState>();
   late ScrollController scrollController;
@@ -74,7 +95,8 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
         Uint8List? data = await _imagefile?.readAsBytes();
-        List<String> profileImage = [base64Encode(data!)];
+        String profileImage = base64Encode(data!);
+
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -97,25 +119,26 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
   @override
   Widget build(BuildContext context) {
-    final lessonCT = ref.read(lessonController);
-    return Scaffold(
-      body: ListView(
+    Size size = MediaQuery.of(context).size;
+    return Form(
+      key: _formKey,
+      child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 LessonImage(),
-                CustomTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1),
+                _buildTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1, fieldController: widget._name),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6),
+                _buildTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6, fieldController: widget._curriculum),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1),
+                _buildTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강 횟수를 입력하세요", lines: 1, fieldController: widget._count),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1),
+                _buildTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강 시간을 입력하세요", lines: 1, fieldController: widget._time),
                 SizedBox(height: gap_l),
-                CustomTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1),
-                CategorySelecter(),
+                _buildTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1, fieldController: widget._curriculum),
+                _selectCarrer(),
                 SizedBox(height: gap_l),
                 LessonDeadLine(),
                 SizedBox(height: gap_l),
@@ -128,9 +151,85 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     );
   }
 
+  Widget _buildTextField(
+    Function scrollAnimate, {
+    required String fieldTitle,
+    required String hint,
+    String? subTitle,
+    required int lines,
+    required TextEditingController fieldController,
+  }) {
+    return Container(
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: "${fieldTitle}",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  if (subTitle != null)
+                    TextSpan(
+                      text: "${subTitle}",
+                      style: TextStyle(color: gSubTextColor, fontSize: 10, fontWeight: FontWeight.bold),
+                    )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: gap_m),
+          TextFormField(
+            onTap: (() {
+              scrollAnimate;
+            }),
+            controller: fieldController,
+            keyboardType: TextInputType.multiline,
+            maxLines: lines,
+            decoration: InputDecoration(
+              hintText: "${hint}",
+              hintStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: gSubTextColor,
+              ),
+              //3. 기본 textFormfield 디자인 - enabledBorder
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: gClientColor, width: 3.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              //마우스 올리고 난 후 스타일
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: gClientColor, width: 3.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   ElevatedButton _buildLessonButton(BuildContext context) {
+    final lessonCT = ref.watch(lessonController);
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        lessonCT.lessonInsert(
+          name: widget._name.text,
+          photo: profileImage,
+          price: widget.,
+          place: widget._place.text,
+          lessonTime: widget. ,
+          lessonCount: ,
+          possibleDays: possibleDays,
+          curriculum: widget._curriculum.text,
+          policy: widget._policy.text,
+          deadline: widget._deadLine,
+          categoryId: categoryId,
+        );
+      },
       style: ElevatedButton.styleFrom(
         primary: gButtonOffColor,
         minimumSize: Size(getScreenWidth(context), 60),
@@ -144,6 +243,68 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _selectCarrer() {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Text(
+                "카테고리 선택",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: gBorderColor, width: 3),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: _selectedCarrerButton(),
+            width: 400,
+            height: 60,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _selectedCarrerButton() {
+    return Container(
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton2(
+          hint: Text(
+            '카테고리를 선택해주세요',
+            style: TextStyle(
+              fontSize: 16,
+              color: gSubTextColor,
+            ),
+          ),
+          items: items
+              .map((item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Text(
+                      item,
+                      style: const TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ))
+              .toList(),
+          value: selectedValue,
+          onChanged: (value) {
+            setState(() {
+              selectedValue = value as String;
+            });
+          },
         ),
       ),
     );
