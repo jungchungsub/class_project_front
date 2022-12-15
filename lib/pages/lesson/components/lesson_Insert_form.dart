@@ -32,6 +32,7 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _time = TextEditingController();
   final _price = TextEditingController();
   final _possibleDay = TextEditingController();
+  final _photo = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -99,15 +100,13 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
         setState(() {}); // 상태 초기화
         Uint8List? data = await _imagefile?.readAsBytes();
         String profileImage = base64Encode(data!);
-        Logger().d("리턴전 : ${profileImage}");
+
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
-        Logger().d("이미지 선택x");
       }
     } catch (e) {
       print("error while picking file.");
-      Logger().d("이미지 오류");
     }
   }
 
@@ -135,7 +134,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                _buildImageUploader(lessonInsertReqDto: lessonInsertReqDto),
+                _buildImageUploader(lessonInsertReqDto),
                 _buildTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1, fieldController: widget._name, onChanged: (value) {
                   lessonInsertReqDto.name = value;
                 }),
@@ -178,6 +177,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
                 ElevatedButton(
                   onPressed: () {
+                    lessonInsertReqDto.photo = profileImage;
                     lessonCT.lessonInsert(
                       lessonInsertReqDto: lessonInsertReqDto,
                     );
@@ -207,29 +207,28 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     );
   }
 
-  Widget _buildImageUploader({required LessonInsertReqDto lessonInsertReqDto}) {
-    // required ValueChanged<String>? onChanged,
+  Widget _buildImageUploader(LessonInsertReqDto lessonInsertReqDto) {
     return Row(
       children: [
         //open button ----------------
         _imagefile != null
             ? Container(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(150),
                   child: Image.file(
                     File(_imagefile!.path),
-                    width: 200,
+                    width: 100,
                     height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),
               )
             : Container(
-                width: 200,
+                width: 100,
                 height: 100,
                 decoration: BoxDecoration(
                   border: Border.all(color: gBorderColor),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(50),
                 ),
               ),
         SizedBox(width: gap_m),
@@ -328,45 +327,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     );
   }
 
-  // ElevatedButton _buildLessonButton(BuildContext context) {
-  //   final lessonCT = ref.watch(lessonController);
-  //   return ElevatedButton(
-  //     onPressed: () {
-  //       Logger().d("버튼실행");
-  //       Logger().d(profileImage);
-  //       Logger().d("장소 잘가져와지니,,? ${widget._place}");
-  //       Logger().d("날짜 잘가져와지니,,,?   ${widget._place}");
-  //       Logger().d("가능날짜 잘가져와지니..? ${selectedValue} ");
-  //       lessonCT.lessonInsert(
-  //         name: widget._name.text,
-  //         photo: profileImage,
-  //         price: int.parse(widget._price.text),
-  //         place: widget._place.text,
-  //         lessonTime: int.parse(widget._time.text),
-  //         lessonCount: int.parse(widget._count.text),
-  //         possibleDays: selectedValue,
-  //         curriculum: widget._curriculum.text,
-  //         policy: widget._policy.text,
-  //         deadline: DateTime.parse(widget._dateInput.text),
-  //       );
-  //     },
-  //     style: ElevatedButton.styleFrom(
-  //       primary: gButtonOffColor,
-  //       minimumSize: Size(getScreenWidth(context), 60),
-  //     ),
-  //     child: Align(
-  //       alignment: Alignment.center,
-  //       child: Text(
-  //         "클래스 등록하기",
-  //         style: TextStyle(
-  //           fontSize: 18,
-  //           fontWeight: FontWeight.bold,
-  //           color: Colors.white,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+//possibleDays: selectedValue,
 
   Widget _selectCarrer() {
     return Container(
