@@ -30,7 +30,7 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   LessonDetailPageViewModel(super.state, this.lessonId);
 
   Future<void> notifyViewModel() async {
-    ResponseDto responseDto = await lessonService.getLessonDetail(lessonId, UserSession.jwtToken);
+    ResponseDto responseDto = await lessonService.fetchLessonDetail(lessonId, UserSession.jwtToken);
 
     Logger().d(responseDto.data);
     if (responseDto.statusCode < 300) {
