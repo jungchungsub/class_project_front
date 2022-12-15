@@ -14,7 +14,7 @@ class ProfileInsertReqDto {
     required this.career,
   });
 
-  List<String>? filePath;
+  String? filePath;
   String introduction;
   String region;
   String certification;
@@ -22,7 +22,7 @@ class ProfileInsertReqDto {
   String career;
 
   factory ProfileInsertReqDto.fromJson(Map<String, dynamic> json) => ProfileInsertReqDto(
-        filePath: List<String>.from(json["filePath"].map((x) => x)),
+        filePath: json["filePath"],
         introduction: json["introduction"],
         region: json["region"],
         certification: json["certification"],
@@ -31,7 +31,7 @@ class ProfileInsertReqDto {
       );
 
   Map<String, dynamic> toJson() => {
-        "filePath": List<dynamic>.from(filePath!.map((x) => x)),
+        "filePath": filePath,
         "introduction": introduction,
         "region": region,
         "certification": certification,

@@ -45,18 +45,15 @@ class LessonService {
     return responseDto;
   }
 
-  Future<ResponseDto> lessonInsert(LessonInsertReqDto lessonReqDto) async {
+  Future<ResponseDto> fetchlessonInsert(int userId, LessonInsertReqDto lessonReqDto) async {
     String requestBody = jsonEncode(lessonReqDto.toJson());
     Logger().d("서비스확인 : ${requestBody}");
     Response response = await httpConnector.post("/api/lesson", requestBody);
     Logger().d("서비스 리스폰스 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
-    String jwtToken = response.headers["authorization"].toString();
-    Logger().d("토큰 값 확인 : ${jwtToken}");
-
-    if (responseDto.statusCode < 300) {
-      responseDto.data = LessonInsertRespDto.fromJson(responseDto.data);
-    }
+    Logger().d("응답 값 확인 : ${responseDto.data}");
+    Logger().d("응답 메세지 확인 : ${responseDto.msg}");
+    Logger().d("응답 상태코드 확인 : ${responseDto.statusCode}");
     return responseDto;
   }
 }

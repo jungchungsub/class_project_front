@@ -30,9 +30,9 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
   XFile? pickedFile;
   ImagePicker imgpicker = ImagePicker();
   XFile? _imagefile;
-  late List<String>? profileImage;
+  late String? profileImage;
   final List<String> items = ['신입', '2~3년', '4~7년', '7~10년'];
-  String? selectedValue;
+  String? selectedValue; // ValueNotifier 변수 선언
 
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
   late ScrollController scrollController;
@@ -51,7 +51,8 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
         Uint8List? data = await _imagefile?.readAsBytes();
-        List<String> profileImage = [base64Encode(data!)];
+        String profileImage = base64Encode(data!);
+
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -201,8 +202,10 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                   .toList(),
               value: selectedValue,
               onChanged: (String? value) {
-                selectedValue = value!;
-                Logger().d("버튼 값 확인 : ${selectedValue}");
+                setState(() {
+                  selectedValue = value!;
+                  Logger().d("버튼 값 확인 : ${selectedValue}");
+                });
               },
             ),
           ),

@@ -39,6 +39,7 @@ class LessonController {
   }
 
   Future<void> lessonInsert({
+    required int id,
     required String name,
     required String photo,
     required int price,
@@ -64,6 +65,6 @@ class LessonController {
         deadline: deadline,
         categoryId: categoryId);
 
-    ResponseDto responseDto = await lessonService.lessonInsert(lessonInsertReqDto);
+    ResponseDto responseDto = await lessonService.fetchlessonInsert(id, lessonInsertReqDto);
   }
 }

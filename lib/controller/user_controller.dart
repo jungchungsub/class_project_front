@@ -112,7 +112,7 @@ class UserController {
       required String certification,
       String? careerYear,
       required String career,
-      List<String>? filePath}) async {
+      String? filePath}) async {
     Logger().d("커리어 확인 :${careerYear}");
     Logger().d("파일 인코딩 확인 :${filePath}");
     ProfileInsertReqDto profileInsertReqDto = ProfileInsertReqDto(

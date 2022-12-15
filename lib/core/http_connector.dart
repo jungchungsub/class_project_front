@@ -44,6 +44,7 @@ class HttpConnector {
     Logger().d("커넥터 주소 확인 : ${uri}");
     Response response = await _client.post(uri, body: body, headers: headers);
     Logger().d("커넥터 response확안 : ${response.body}");
+
     return response;
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
@@ -96,6 +97,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
   @override
   Widget build(BuildContext context) {
+    final lessonCT = ref.read(lessonController);
     return Scaffold(
       body: ListView(
         children: [
