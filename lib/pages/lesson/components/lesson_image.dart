@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/user/components/profile_image.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
 class LessonImage extends StatefulWidget {
   const LessonImage({Key? key}) : super(key: key);
@@ -20,6 +22,7 @@ class _LessonImageState extends State<LessonImage> {
   @override
   Widget build(BuildContext context) {
     final _imageSize = MediaQuery.of(context).size.width / 4;
+    Logger().d("image 위젯들어옴?");
     return Column(
       children: [
         _builderImageUploader(),
@@ -85,6 +88,7 @@ class _LessonImageState extends State<LessonImage> {
                 child: ElevatedButton(
                   onPressed: () {
                     openImages();
+                    Logger().d("리턴 ${ProfileImage}");
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: gContentBoxColor,
