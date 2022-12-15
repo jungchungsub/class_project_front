@@ -1,4 +1,4 @@
-class LessonReqDto {
+class LessonInsertReqDto {
   String name;
   String photo;
   int price;
@@ -13,7 +13,7 @@ class LessonReqDto {
   // List<int>? categoryId;
   //List<int> categoryId = category.map((category) => category.id).toList();
 
-  LessonReqDto({
+  LessonInsertReqDto({
     required this.name,
     required this.photo,
     required this.price,
@@ -40,6 +40,5 @@ class LessonReqDto {
         "policy": policy,
         "deadline": deadline,
         "categoryId": categoryId,
-        // "categoryId": categoryId,
       };
 }
