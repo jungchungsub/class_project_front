@@ -76,6 +76,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
     widget._certification.text = widget.model.certification;
     widget._career.text = widget.model.career;
     Size size = MediaQuery.of(context).size;
+    final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
@@ -123,36 +124,33 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                   fieldController: widget._career,
                 ),
                 SizedBox(height: gap_l),
-                (BuildContext context) {
-                  final userCT = ref.read(userController);
-                  return ElevatedButton(
-                    onPressed: () {
-                      userCT.insertProfile(
-                          id: widget.model.user.id,
-                          introduction: widget._introduction.text,
-                          region: widget._region.text,
-                          certification: widget._certification.text,
-                          careerYear: selectedValue,
-                          career: widget._career.text,
-                          filePath: profileImage);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: gButtonOffColor,
-                      minimumSize: Size(getScreenWidth(context), 60),
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "프로필 등록 완료",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                ElevatedButton(
+                  onPressed: () {
+                    userCT.insertProfile(
+                        id: widget.model.user.id,
+                        introduction: widget._introduction.text,
+                        region: widget._region.text,
+                        certification: widget._certification.text,
+                        careerYear: selectedValue,
+                        career: widget._career.text,
+                        filePath: profileImage);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: gButtonOffColor,
+                    minimumSize: Size(getScreenWidth(context), 60),
+                  ),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "프로필 수정",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                  );
-                }(context),
+                  ),
+                ),
               ],
             )),
       ),
@@ -203,7 +201,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
               onChanged: (String? value) {
                 setState(() {
                   selectedValue = value!;
-                  Logger().d("버튼 값 확인 : ${selectedValue}");
                 });
               },
             ),

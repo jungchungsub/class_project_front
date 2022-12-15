@@ -35,12 +35,13 @@ class UserController {
     if (role == "USER") {
       await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
-    if (role == "MASTER") {
+    if (role == "EXPERT") {
       await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
     }
   }
 
-  Future<void> moveProfileDetailPage(int id) async {
+  Future<void> moveProfileInsertOrDetailPage(int id) async {
+    // 프로필이 있는지 없는지 확인 해야함.
     await Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: id)));
   }
 

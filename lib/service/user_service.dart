@@ -29,7 +29,7 @@ class UserService {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
     // 2. 통신 시작
-    Response response = await httpConnector.post(path: "/join", body: requestBody);
+    Response response = await httpConnector.post(path: "/api/join", body: requestBody);
 
     return toResponseDto(response); // ResponseDto 응답
   }
@@ -50,7 +50,7 @@ class UserService {
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-
+    Logger().d("유저 정보 확인 : ${responseDto.data}");
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
 
@@ -71,12 +71,16 @@ class UserService {
     Logger().d("값 확인 ${responseDto.data}");
     Logger().d("masg 확인 ${responseDto.msg}");
 
+    final profileImage = responseDto.data["filePath"];
     final introduction = responseDto.data["introduction"];
     final region = responseDto.data["region"];
     final certification = responseDto.data["certification"];
     final careerYear = responseDto.data["careerYear"];
     final career = responseDto.data["career"];
 
+    if (introduction == null) {
+      responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
+    }
     if (introduction == null) {
       responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
     }

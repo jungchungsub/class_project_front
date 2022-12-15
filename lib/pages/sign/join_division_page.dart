@@ -31,7 +31,7 @@ class JoinDivisionPage extends ConsumerWidget {
               SizedBox(height: 400),
               _buildDivisionButton(context, "비즈니스 외주,아웃소싱을 원한다면", "의뢰인으로 가입", "/join", "USER", rc),
               SizedBox(height: gap_l),
-              _buildDivisionButton(context, "전문성으로 수익창출을 원한다면", "전문가로 가입", "/join", "MASTER", rc),
+              _buildDivisionButton(context, "전문성으로 수익창출을 원한다면", "전문가로 가입", "/join", "EXPERT", rc),
             ],
           ),
         ),
@@ -44,7 +44,6 @@ Widget _buildDivisionButton(BuildContext context, String divisionTitle, String d
   return InkWell(
     onTap: () {
       rc.moveJoinPage(role);
-      Logger().d("여긴 실행되나? 버튼클릭");
       //Navigator.pushNamed(context, routePath, arguments: JoinPage(role: "USER"));
     },
     child: Row(

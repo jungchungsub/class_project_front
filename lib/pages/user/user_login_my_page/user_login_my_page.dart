@@ -125,83 +125,79 @@ class UserLoginMyPage extends ConsumerWidget {
   }
 }
 
-Widget _buildUserProfile(BuildContext context, String userState, String userId, String changeState, String profileImagePath, UserController userCT,
+Widget _buildUserProfile(BuildContext context, String role, String username, String changeRole, String profileImagePath, UserController userCT,
     int id, String defaultProfile) {
   return Row(
     children: [
       InkWell(
         onTap: () {
-          userCT.moveProfileDetailPage(id);
+          userCT.moveProfileInsertOrDetailPage(id);
         },
-        child: Flexible(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(150),
-            child: Image.asset(
-              profileImagePath,
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
-            ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(150),
+          child: Image.asset(
+            profileImagePath,
+            width: 80,
+            height: 80,
+            fit: BoxFit.cover,
           ),
         ),
       ),
       SizedBox(width: 20),
-      Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 40,
-              height: 15,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 40,
+            height: 15,
+            decoration: BoxDecoration(
+              color: gClientColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(2),
+              child: Text(
+                role,
+                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            username,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          InkWell(
+            onTap: () {
+              // 전문가로 전환, 의뢰인으로전환
+            },
+            child: Container(
               decoration: BoxDecoration(
-                color: gClientColor,
                 borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: gBorderColor),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(2),
-                child: Text(
-                  "${userState}",
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+                padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      CupertinoIcons.person_2,
+                      size: 18,
+                      color: gPrimaryColor,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "${changeRole}로 전환",
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ],
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            Text(
-              "${userId}",
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            InkWell(
-              onTap: () {
-                // 전문가로 전환, 의뢰인으로전환
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: gBorderColor),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 5.0),
-                  child: Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.person_2,
-                        size: 18,
-                        color: gPrimaryColor,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        "${changeState}로 전환",
-                        style: TextStyle(fontSize: 10),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       )
     ],
   );
