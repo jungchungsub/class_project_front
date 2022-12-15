@@ -2,7 +2,7 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user.dart';
 import 'package:finalproject_front/pages/user/components/service_text_button.dart';
-import 'package:finalproject_front/pages/user/components/update_form.dart';
+import 'package:finalproject_front/pages/user/components/user_update_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +23,7 @@ class UserUpdatePage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CustomForm(),
+            UserUpdateForm(),
             _buildDivider(),
             ServiceTextButton(context: context, text: "전문가 정보", routePath: "/loginDivision"),
             _buildDivider(),

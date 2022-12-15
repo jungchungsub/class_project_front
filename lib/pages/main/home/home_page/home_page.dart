@@ -1,9 +1,5 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
-import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_view_model.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';

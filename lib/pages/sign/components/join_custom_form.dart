@@ -80,32 +80,32 @@ class JoinCustomForm extends ConsumerWidget {
               ),
               //개인 정보 제공 동의 폼 필요 -> API
               SizedBox(height: gap_xl),
-              ElevatedButton(
-                onPressed: () {
-                  uc.joinUser(
-                      username: _id.text.trim(),
-                      password: _password.text.trim(),
-                      email: _email.text.trim(),
-                      phoneNum: _phoneNum.text.trim(),
-                      role: role);
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: gButtonOffColor,
-                  minimumSize: Size(getScreenWidth(context), 60),
-                ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "회원가입 완료",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+              _buildJoinButton(uc, context),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _buildJoinButton(UserController uc, BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        uc.joinUser(
+            username: _id.text.trim(), password: _password.text.trim(), email: _email.text.trim(), phoneNum: _phoneNum.text.trim(), role: role);
+      },
+      style: ElevatedButton.styleFrom(
+        primary: gButtonOffColor,
+        minimumSize: Size(getScreenWidth(context), 60),
+      ),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          "회원가입 완료",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
       ),

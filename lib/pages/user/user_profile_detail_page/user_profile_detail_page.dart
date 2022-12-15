@@ -3,7 +3,7 @@ import 'package:finalproject_front/dummy_models/profile_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
-import 'package:finalproject_front/pages/user/user_profile_insert_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert_page/user_profile_insert_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
