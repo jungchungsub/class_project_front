@@ -135,9 +135,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                _buildImageUploader(onChanged: (value) {
-                  lessonInsertReqDto.photo = value;
-                }),
+                _buildImageUploader(lessonInsertReqDto: lessonInsertReqDto),
                 _buildTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1, fieldController: widget._name, onChanged: (value) {
                   lessonInsertReqDto.name = value;
                 }),
@@ -209,7 +207,8 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     );
   }
 
-  Widget _buildImageUploader({required ValueChanged<String>? onChanged}) {
+  Widget _buildImageUploader({required LessonInsertReqDto lessonInsertReqDto}) {
+    // required ValueChanged<String>? onChanged,
     return Row(
       children: [
         //open button ----------------
