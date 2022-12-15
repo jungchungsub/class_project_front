@@ -37,3 +37,5 @@ class LessonController {
     Navigator.push(mContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
   }
 }
+
+Future<void> lessonInsert({required String name, required String photo, required int price, required String place, required int lessonTime, required int lessonCount, required String possibleDays, required String curriculum, required String policy, required String deadline, required int categoryId, }) 

@@ -13,7 +13,7 @@ import 'package:logger/logger.dart';
 class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
-  Future<ResponseDto>fetchtLessonDetail(int lessonId, String? jwtToken) async {
+  Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
     //Logger().d("id출력service:${lessonId}");
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
@@ -30,7 +30,7 @@ class LessonService {
     return responseDto;
   }
 
-  Future<ResponseDto> fetchhomeList(String? jwtToken) async {
+  Future<ResponseDto> fetchHomeList(String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
 
     ResponseDto responseDto = toResponseDto(response); //
@@ -46,21 +46,18 @@ class LessonService {
     return responseDto;
   }
 
-  Future<ResponseDto> fetchLessonInsert(LessonReqDto lessonReqDto) async {
+  Future<ResponseDto> lessonInsert(LessonReqDto lessonReqDto) async {
     String requestBody = jsonEncode(lessonReqDto.toJson());
     Logger().d("서비스확인 : ${requestBody}");
-
     Response response = await httpConnector.post("/api/lesson", requestBody);
     Logger().d("서비스 리스폰스 확인 : ${response.body}");
-
     ResponseDto responseDto = toResponseDto(response);
     String jwtToken = response.headers["authorization"].toString();
-
     Logger().d("토큰 값 확인 : ${jwtToken}");
 
-
     if (responseDto.statusCode < 300) {
-      responseDto.data = 
+      responseDto.data = LessonInsertRespDto.fromJson(responseDto.data);
     }
+    return responseDto;
   }
 }

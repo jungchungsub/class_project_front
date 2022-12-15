@@ -131,3 +131,47 @@ class ProfileDto {
         "expertIntroduction": expertIntroduction,
       };
 }
+
+class LessonInsertRespDto {
+  String name;
+  String photo;
+  int price;
+  String place;
+  int lessonTime;
+  int lessonCount;
+  String possibleDays;
+  String curriculum;
+  String policy;
+  String deadline;
+  int categoryId;
+  // List<int>? categoryId;
+  //List<int> categoryId = category.map((category) => category.id).toList();
+
+  LessonInsertRespDto({
+    required this.name,
+    required this.photo,
+    required this.price,
+    required this.place,
+    required this.lessonTime,
+    required this.lessonCount,
+    required this.possibleDays,
+    required this.curriculum,
+    required this.policy,
+    required this.deadline,
+    required this.categoryId,
+  });
+
+  factory LessonInsertRespDto.fromJson(Map<String, dynamic> json) => LessonInsertRespDto(
+        name: json["name"],
+        photo: json["photo"],
+        price: json["price"],
+        place: json["place"],
+        lessonTime: json["lessonTime"],
+        lessonCount: json["lessonCount"],
+        possibleDays: json["possibleDays"],
+        curriculum: json["curriculum"],
+        policy: json["policy"],
+        deadline: json["deadline"],
+        categoryId: json["categoryId"],
+      );
+}

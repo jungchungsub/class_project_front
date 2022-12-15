@@ -17,7 +17,7 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
 
   Future<void> notifyViewModel() async {
     String? jwtToken;
-    ResponseDto responseDto = await lessonService.homeList(jwtToken);
+    ResponseDto responseDto = await lessonService.fetchHomeList(jwtToken);
     if (responseDto.statusCode < 300) {
       state = HomePageModel(responseDto.data);
     } else {
