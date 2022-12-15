@@ -50,27 +50,31 @@ class UserProfileDetailPage extends ConsumerWidget {
             _buildProfileContent(context, "경력기간", model?.profileRespDto.careerYear),
             SizedBox(height: 20),
             // CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기"
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileInsertPage(model: model!.profileRespDto)));
-              },
-              style: ElevatedButton.styleFrom(
-                primary: gButtonOffColor,
-                minimumSize: Size(getScreenWidth(context), 60),
-              ),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  "프로필 등록/수정하기",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            _buildProfileInsertButton(context, model),
           ],
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton _buildProfileInsertButton(BuildContext context, UserProfileDetailPageModel? model) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileInsertPage(model: model!.profileRespDto)));
+      },
+      style: ElevatedButton.styleFrom(
+        primary: gButtonOffColor,
+        minimumSize: Size(getScreenWidth(context), 60),
+      ),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          "프로필 수정하기",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
       ),
     );

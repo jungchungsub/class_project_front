@@ -26,7 +26,7 @@ AppBar _buildAppbar(BuildContext context) {
     elevation: 1,
     centerTitle: true,
     title: Text(
-      "프로필 등록/수정",
+      "프로필 수정",
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
     ),
     leading: IconButton(

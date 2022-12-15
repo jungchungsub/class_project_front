@@ -48,7 +48,7 @@ class LessonService {
   Future<ResponseDto> fetchlessonInsert(LessonInsertReqDto lessonReqDto) async {
     String requestBody = jsonEncode(lessonReqDto.toJson());
     Logger().d("서비스확인 : ${requestBody}");
-    Response response = await httpConnector.post("/api/lesson", requestBody);
+    Response response = await httpConnector.post(path: "/api/lesson", body: requestBody);
     Logger().d("서비스 리스폰스 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("응답 값 확인 : ${responseDto.data}");

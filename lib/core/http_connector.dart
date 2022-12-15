@@ -30,6 +30,7 @@ class HttpConnector {
     if (jwtToken != null) {
       Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
       Uri uri = Uri.parse("${host}${path}");
+
       Response response = await Client().get(uri, headers: requestHeader);
       return response;
     }
@@ -39,17 +40,17 @@ class HttpConnector {
     return response;
   }
 
-  Future<Response> post(String path, String body) async {
+  Future<Response> post({required String path, required String body}) async {
+    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
     Uri uri = Uri.parse("${host}${path}");
-    Logger().d("커넥터 주소 확인 : ${uri}");
-    Response response = await _client.post(uri, body: body, headers: headers);
-    Logger().d("커넥터 response확안 : ${response.body}");
+    Response response = await Client().post(uri, body: body, headers: requestHeader);
 
     return response;
   }
 
   Future<Response> delete(String path) async {
     Uri uri = Uri.parse("${host}${path}");
+
     Response response = await _client.delete(uri, headers: headers);
     return response;
   }
@@ -57,49 +58,52 @@ class HttpConnector {
   Future<Response> put({required String path, required String body}) async {
     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
     Uri uri = Uri.parse("${host}${path}");
+
     Response response = await Client().put(uri, body: body, headers: requestHeader);
     return response;
   }
 
 //==============================Mac==========================================//
 
-//   Future<Response> getInitSession(String path, String? jwtToken) async {
-//     Logger().d("initSession실행됨");
-//     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
-//     Uri uri = Uri.parse("${host2}${path}");
-//     Response response = await Client().post(uri, headers: requestHeader);
-//     return response;
-//   }
+  // Future<Response> getInitSession(String path, String? jwtToken) async {
+  //   Logger().d("initSession실행됨");
+  //   Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Response response = await Client().post(uri, headers: requestHeader);
+  //   return response;
+  // }
 
-//   Future<Response> get({required String path, String? jwtToken}) async {
-//     if (jwtToken != null) {
-//       Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
-//       Uri uri = Uri.parse("${host2}${path}");
-//       Response response = await Client().get(uri, headers: requestHeader);
-//       return response;
-//     }
-//     Uri uri = Uri.parse("${host2}${path}");
+  // Future<Response> get({required String path, String? jwtToken}) async {
+  //   if (jwtToken != null) {
+  //     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
+  //     Uri uri = Uri.parse("${host2}${path}");
+  //     Response response = await Client().get(uri, headers: requestHeader);
+  //     return response;
+  //   }
+  //   Uri uri = Uri.parse("${host2}${path}");
 
-//     Response response = await _client.get(uri);
-//     return response;
-//   }
+  //   Response response = await _client.get(uri);
+  //   return response;
+  // }
 
-//   Future<Response> post(String path, String body) async {
-//     Uri uri = Uri.parse("${host2}${path}");
-//     Response response = await _client.post(uri, body: body, headers: headers);
-//     return response;
-//   }
+  // Future<Response> post({required String path, required String body}) async {
+  //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Response response = await Client().post(uri, body: body, headers: requestHeader);
 
-//   Future<Response> delete(String path) async {
-//     Uri uri = Uri.parse("${host2}${path}");
-//     Response response = await _client.delete(uri, headers: headers);
-//     return response;
-//   }
+  //   return response;
+  // }
 
-//   Future<Response> put({required String path, required String body}) async {
-//     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-//     Uri uri = Uri.parse("${host2}${path}");
-//     Response response = await Client().put(uri, body: body, headers: requestHeader);
-//     return response;
-//   }
+  // Future<Response> delete(String path) async {
+  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Response response = await _client.delete(uri, headers: headers);
+  //   return response;
+  // }
+
+  // Future<Response> put({required String path, required String body}) async {
+  //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Response response = await Client().put(uri, body: body, headers: requestHeader);
+  //   return response;
+  // }
 }

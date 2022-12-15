@@ -28,7 +28,9 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _place = TextEditingController();
   final _policy = TextEditingController();
   final _deadLine = TextEditingController();
-  final _time =  TextEditingController();
+  final _time = TextEditingController();
+  final _price = TextEditingController();
+  final _possibleDays = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -140,6 +142,8 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                 _buildTextField(scrollAnimate, fieldTitle: "수강장소", hint: "ex) 부산시 진구 그린아카데미", lines: 1, fieldController: widget._curriculum),
                 _selectCarrer(),
                 SizedBox(height: gap_l),
+                _buildTextField(scrollAnimate, fieldTitle: "가격", hint: "ex) 부산시 진구 그린아카데미", lines: 1, fieldController: widget._price),
+                SizedBox(height: gap_l),
                 LessonDeadLine(),
                 SizedBox(height: gap_l),
                 _buildLessonButton(context)
@@ -216,19 +220,19 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     final lessonCT = ref.watch(lessonController);
     return ElevatedButton(
       onPressed: () {
-        lessonCT.lessonInsert(
-          name: widget._name.text,
-          photo: profileImage,
-          price: widget.,
-          place: widget._place.text,
-          lessonTime: widget. ,
-          lessonCount: ,
-          possibleDays: possibleDays,
-          curriculum: widget._curriculum.text,
-          policy: widget._policy.text,
-          deadline: widget._deadLine,
-          categoryId: categoryId,
-        );
+        // lessonCT.lessonInsert(
+        //   // name: widget._name.text,
+        //   // photo: profileImage,
+        //   // price: int.parse(widget._price.text),
+        //   // place: widget._place.text,
+        //   // lessonTime: int.parse(widget._time.text),
+        //   // lessonCount:  int.parse(widget._count.text),
+        //   // possibleDays: ,
+        //   // curriculum: widget._curriculum.text,
+        //   // policy: widget._policy.text,
+        //   // deadline: DateTime.parse(widget),
+        //   // categoryId: categoryId,
+        // );
       },
       style: ElevatedButton.styleFrom(
         primary: gButtonOffColor,

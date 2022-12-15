@@ -29,14 +29,14 @@ class UserService {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
     // 2. 통신 시작
-    Response response = await httpConnector.post("/join", requestBody);
+    Response response = await httpConnector.post(path: "/api/join", body: requestBody);
 
     return toResponseDto(response); // ResponseDto 응답
   }
 
   Future<ResponseDto> fetchLogin(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
-    Response response = await httpConnector.post("/login", requestBody);
+    Response response = await httpConnector.post(path: "/login", body: requestBody);
 
     String jwtToken = response.headers["authorization"].toString();
 
@@ -57,7 +57,7 @@ class UserService {
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-
+    Logger().d("유저 정보 확인 : ${responseDto.data}");
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
 
@@ -75,6 +75,36 @@ class UserService {
   Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("값 확인 ${responseDto.data}");
+    Logger().d("masg 확인 ${responseDto.msg}");
+
+    final profileImage = responseDto.data["filePath"];
+    final introduction = responseDto.data["introduction"];
+    final region = responseDto.data["region"];
+    final certification = responseDto.data["certification"];
+    final careerYear = responseDto.data["careerYear"];
+    final career = responseDto.data["career"];
+
+    if (introduction == null) {
+      responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
+    }
+    if (introduction == null) {
+      responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
+    }
+    if (region == null) {
+      responseDto.data["region"] = "지역을 작성해주세요.";
+    }
+
+    if (certification == null) {
+      responseDto.data["certification"] = "보유 자격증을 작성해주세요.";
+    }
+    if (careerYear == null) {
+      responseDto.data["careerYear"] = "경력 기간을 작성해주세요.";
+    }
+    if (career == null) {
+      responseDto.data["career"] = "학력 및 전공을 작성해주세요.";
+    }
+
     if (responseDto.data != null) {
       responseDto.data = ProfileRespDto.fromJson(responseDto.data);
     }
@@ -97,7 +127,7 @@ class UserService {
   Future<ResponseDto> fetchInsertProfile(int userId, ProfileInsertReqDto profileInsertReqDto) async {
     String requestBody = jsonEncode(profileInsertReqDto);
     Logger().d("요청 바디 확인 : ${requestBody}");
-    Response response = await httpConnector.post("/api/profile", requestBody);
+    Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("응답 값 확인 : ${responseDto.data}");
     Logger().d("응답 메세지 확인 : ${responseDto.msg}");
