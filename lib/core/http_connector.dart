@@ -83,9 +83,10 @@ class HttpConnector {
     return response;
   }
 
-  Future<Response> post(String path, String body) async {
+  Future<Response> post({required String path, required String body}) async {
+    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
     Uri uri = Uri.parse("${host2}${path}");
-    Response response = await _client.post(uri, body: body, headers: headers);
+    Response response = await Client().post(uri, body: body, headers: requestHeader);
     return response;
   }
 

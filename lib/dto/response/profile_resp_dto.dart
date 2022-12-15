@@ -16,12 +16,12 @@ class ProfileRespDto {
     required this.region,
     required this.certification,
     required this.careerYear,
-    required this.career,
+    required this.career, // 학력
     required this.user,
   });
 
   int id;
-  String filePath;
+  String? filePath;
   String introduction;
   String region;
   String certification;
