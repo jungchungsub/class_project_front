@@ -14,18 +14,20 @@ import '../../../controller/user_controller.dart';
 import '../../../dto/response/profile_resp_dto.dart';
 import '../../../size.dart';
 
-class ProfileInsertForm extends ConsumerStatefulWidget {
+class ProfileUpdateForm extends ConsumerStatefulWidget {
+  ProfileRespDto model;
+
   final _introduction = TextEditingController();
   final _region = TextEditingController();
   final _certification = TextEditingController();
   final _career = TextEditingController();
-  ProfileInsertForm({super.key});
+  ProfileUpdateForm({required this.model, super.key});
 
   @override
-  ConsumerState<ProfileInsertForm> createState() => _ProfileInsertFormState();
+  ConsumerState<ProfileUpdateForm> createState() => _ProfileInsertFormState();
 }
 
-class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
+class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
   XFile? pickedFile;
   ImagePicker imgpicker = ImagePicker();
   XFile? _imagefile;
@@ -71,6 +73,10 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
 
   @override
   Widget build(BuildContext context) {
+    widget._introduction.text = widget.model.introduction;
+    widget._region.text = widget.model.region;
+    widget._certification.text = widget.model.certification;
+    widget._career.text = widget.model.career;
     Size size = MediaQuery.of(context).size;
     final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
@@ -83,7 +89,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
               children: [
                 _buildImageUploader(),
                 SizedBox(height: gap_l),
-                // _buildProfileId("${widget.model.user.username}"),
+                _buildProfileId("${widget.model.user.username}"),
                 SizedBox(height: gap_l),
                 _buildTextField(
                   scrollAnimate,
@@ -122,14 +128,14 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                 SizedBox(height: gap_l),
                 ElevatedButton(
                   onPressed: () {
-                    // userCT.insertProfile(
-                    //     // id: widget.model.user.id,
-                    //     introduction: widget._introduction.text,
-                    //     region: widget._region.text,
-                    //     certification: widget._certification.text,
-                    //     careerYear: selectedValue,
-                    //     career: widget._career.text,
-                    //     filePath: profileImage);
+                    userCT.insertProfile(
+                        id: widget.model.user.id,
+                        introduction: widget._introduction.text,
+                        region: widget._region.text,
+                        certification: widget._certification.text,
+                        careerYear: selectedValue,
+                        career: widget._career.text,
+                        filePath: profileImage);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: gButtonOffColor,

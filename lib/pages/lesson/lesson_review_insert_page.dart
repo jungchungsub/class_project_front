@@ -1,4 +1,6 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/dto/request/review_req_dto.dart';
+import 'package:finalproject_front/dummy_models/review.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
@@ -9,8 +11,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class LessonReviewInsertPage extends StatefulWidget {
-  const LessonReviewInsertPage({super.key});
-
+  LessonReviewInsertPage({super.key});
+  ReviewReqDto reviewReqDto = ReviewReqDto.single();
   @override
   State<LessonReviewInsertPage> createState() => _LessonReviewInsertPageState();
 }
@@ -50,7 +52,15 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
               ),
               _buildReviewRatingBar(),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "리뷰작성", hint: "악플은 안대요><", lines: 6),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "리뷰작성",
+                hint: "악플은 안대요><",
+                lines: 6,
+                onChanged: (value) {
+                  widget.reviewReqDto.content = value;
+                },
+              ),
               SizedBox(height: gap_l),
               CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "저장하고 완료")
             ],
@@ -60,7 +70,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
     );
   }
 
-  RatingBar _buildReviewRatingBar() {
+  Widget _buildReviewRatingBar() {
     return RatingBar.builder(
       initialRating: 3,
       minRating: 0,
@@ -73,7 +83,7 @@ class _LessonReviewInsertPageState extends State<LessonReviewInsertPage> {
         color: Colors.amber,
       ),
       onRatingUpdate: (rating) {
-        // save 동작 필요함
+        widget.reviewReqDto.grade = rating;
       },
     );
   }

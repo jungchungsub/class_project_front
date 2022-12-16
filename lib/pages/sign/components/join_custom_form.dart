@@ -11,19 +11,15 @@ import '../../../constants.dart';
 import '../../components/custom_main_button.dart';
 
 class JoinCustomForm extends ConsumerWidget {
-  JoinCustomForm(this.scrollAnimate, {required this.role, super.key});
-  final _id = TextEditingController();
-  final _password = TextEditingController();
-  final _email = TextEditingController();
-  final _phoneNum = TextEditingController();
-  final role;
+  JoinCustomForm(this.scrollAnimate, {required this.role, required this.joinReqDto, super.key});
+  late JoinReqDto joinReqDto;
   final Function scrollAnimate;
+  final role;
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uc = ref.read(userController);
-
     return Form(
       key: _formKey, // 해당 키로 Form의 상태를 관리 한다.
       child: Padding(
@@ -36,7 +32,9 @@ class JoinCustomForm extends ConsumerWidget {
                 fieldTitle: "아이디",
                 hint: "아이디를 입력해주세요",
                 lines: 1,
-                fieldController: _id,
+                onChanged: (value) {
+                  joinReqDto.username = value.trim();
+                },
               ),
               SizedBox(height: gap_m),
               CustomTextField(
@@ -44,7 +42,9 @@ class JoinCustomForm extends ConsumerWidget {
                 fieldTitle: "비밀번호",
                 hint: "비밀번호를 입력해주세요",
                 lines: 1,
-                fieldController: _password,
+                onChanged: (value) {
+                  joinReqDto.password = value.trim();
+                },
               ),
               SizedBox(height: gap_m),
               CustomTextField(
@@ -52,7 +52,9 @@ class JoinCustomForm extends ConsumerWidget {
                 fieldTitle: "이메일",
                 hint: "이메일를 입력해주세요",
                 lines: 1,
-                fieldController: _email,
+                onChanged: (value) {
+                  joinReqDto.email = value.trim();
+                },
               ),
               SizedBox(height: gap_m),
               CustomTextField(
@@ -60,27 +62,27 @@ class JoinCustomForm extends ConsumerWidget {
                 fieldTitle: "휴대폰번호",
                 hint: "휴대폰번호를 입력해주세요",
                 lines: 1,
-                fieldController: _phoneNum,
+                onChanged: (value) {
+                  joinReqDto.phoneNum = value.trim();
+                },
               ),
               SizedBox(height: gap_m),
-              Container(
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "관심사 선택",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "관심사 선택",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: gap_m),
-                    CategorySelectButton()
-                  ],
-                ),
+                  ),
+                  SizedBox(height: gap_m),
+                  CategorySelectButton(joinReqDto),
+                ],
               ),
               //개인 정보 제공 동의 폼 필요 -> API
               SizedBox(height: gap_xl),
-              _buildJoinButton(uc, context),
+              _buildJoinButton(uc, context, joinReqDto),
             ],
           ),
         ),
@@ -88,11 +90,14 @@ class JoinCustomForm extends ConsumerWidget {
     );
   }
 
-  ElevatedButton _buildJoinButton(UserController uc, BuildContext context) {
+  Widget _buildJoinButton(UserController uc, BuildContext context, JoinReqDto joinReqDto) {
     return ElevatedButton(
       onPressed: () {
+        joinReqDto.role = role;
+        Logger().d("횐가입 데이터 확인 : ${joinReqDto.categoryId}");
         uc.joinUser(
-            username: _id.text.trim(), password: _password.text.trim(), email: _email.text.trim(), phoneNum: _phoneNum.text.trim(), role: role);
+          joinReqDto: joinReqDto,
+        );
       },
       style: ElevatedButton.styleFrom(
         primary: gButtonOffColor,

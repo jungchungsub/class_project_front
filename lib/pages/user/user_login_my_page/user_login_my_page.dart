@@ -45,7 +45,7 @@ class UserLoginMyPage extends ConsumerWidget {
                   "전문가",
                   "assets/picture.jpg",
                   userCT,
-                  model.myPageRespDto.id,
+                  model.myPageRespDto.profileDto!.id,
                   defaultProfile,
                 ),
                 SizedBox(height: gap_l),
@@ -126,12 +126,12 @@ class UserLoginMyPage extends ConsumerWidget {
 }
 
 Widget _buildUserProfile(BuildContext context, String role, String username, String changeRole, String profileImagePath, UserController userCT,
-    int id, String defaultProfile) {
+    int? id, String defaultProfile) {
   return Row(
     children: [
       InkWell(
         onTap: () {
-          userCT.moveProfileInsertOrDetailPage(id);
+          userCT.moveProfileInsertOrDetailPage(id!);
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(150),

@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class CustomTextField extends StatelessWidget {
+  final ValueChanged<String> onChanged;
   final TextEditingController? fieldController;
   final Function scrollAnimate;
   final String fieldTitle;
@@ -13,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   final int lines;
 
   const CustomTextField(this.scrollAnimate,
-      {this.subTitle, this.fieldController, required this.fieldTitle, required this.hint, required this.lines, Key? key})
+      {this.subTitle, this.fieldController, required this.fieldTitle, required this.hint, required this.lines, required this.onChanged, Key? key})
       : super(key: key);
 
   @override
@@ -44,9 +45,7 @@ class CustomTextField extends StatelessWidget {
             onTap: (() {
               scrollAnimate;
             }),
-            // onChanged: (value) { 데이터 저장해야함.
-
-            // },
+            onChanged: onChanged,
             controller: fieldController,
             keyboardType: TextInputType.multiline,
             maxLines: lines,

@@ -25,7 +25,6 @@ class UserProfileDetailPageViewModel extends StateNotifier<UserProfileDetailPage
 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await userService.getDetailProfile(userId, UserSession.jwtToken);
-    Logger().d("ResponseDto 확인 : ${responseDto.data}");
     if (responseDto.statusCode < 300) {
       state = UserProfileDetailPageModel(responseDto.data);
     } else {
