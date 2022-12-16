@@ -42,6 +42,13 @@ class UserService {
 
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
+// 로그인 정보 저장
+    // User user = User.fromJson(responseDto.data);
+    // Logger().d("userResp확인 : ${user}");
+    // UserSession.successAuthentication(user, jwtToken);
+    // User user = User.fromJson(responseDto.data);
+    // Logger().d("userResp확인 : ${user}");
+    // UserSession.successAuthentication(user, jwtToken);
 
     return responseDto; // ResponseDto 응답
   }
@@ -120,8 +127,9 @@ class UserService {
   Future<ResponseDto> fetchInsertProfile(int userId, ProfileInsertReqDto profileInsertReqDto) async {
     String requestBody = jsonEncode(profileInsertReqDto);
     Logger().d("요청 바디 확인 : ${requestBody}");
-    Response response = await httpConnector.put(path: "/api/profile", body: requestBody);
+    Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("응답 값 확인 : ${responseDto.data}");
     Logger().d("응답 메세지 확인 : ${responseDto.msg}");
     Logger().d("응답 상태코드 확인 : ${responseDto.statusCode}");
 
