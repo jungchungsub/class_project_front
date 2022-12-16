@@ -1,32 +1,37 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user_session.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
 import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../../../size.dart';
 
 class UserUpdateForm extends ConsumerStatefulWidget {
+  UserUpdateForm({required this.userUpdateReqDto, super.key});
+  late UserUpdateReqDto userUpdateReqDto;
+
   @override
   ConsumerState<UserUpdateForm> createState() => _CustomFormState();
 }
 
 class _CustomFormState extends ConsumerState<UserUpdateForm> {
   late ScrollController scrollController;
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _email = TextEditingController(text: "${UserSession.user.email}");
+  final TextEditingController _phoneNum = TextEditingController(text: "${UserSession.user.phoneNum}");
+  final TextEditingController _password = TextEditingController(text: "비밀번호");
 
   @override
   void initState() {
     super.initState();
-    scrollController = new ScrollController();
+    scrollController = ScrollController();
   }
 
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _email = TextEditingController(text: "${UserSession.user.email}");
-  final TextEditingController _phoneNum = TextEditingController(text: "${UserSession.user.phoneNum}");
   // final TextEditingController _phoneNumberController = TextEditingController(text: "${UserSession.user.phoneNum}");
-  final TextEditingController _password = TextEditingController(text: "비밀번호");
   // 나중에 관심사 필요함.
 
   @override
@@ -38,39 +43,52 @@ class _CustomFormState extends ConsumerState<UserUpdateForm> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            _buildTextField("이메일", _email, scrollAnimate, "Email"),
+            _buildTextField(
+              fieldTitle: "이메일",
+              fieldController: _email,
+              scrollAnimate: scrollAnimate,
+              hintText: "Email",
+              onChanged: (value) {
+                widget.userUpdateReqDto.email = value.trim();
+              },
+            ),
             SizedBox(height: 6),
-            _buildTextField("전화번호", _phoneNum, scrollAnimate, "PhoneNumber"),
+            _buildTextField(
+                fieldTitle: "전화번호",
+                fieldController: _phoneNum,
+                scrollAnimate: scrollAnimate,
+                hintText: "PhoneNumber",
+                onChanged: (value) {
+                  widget.userUpdateReqDto.phoneNum = value.trim();
+                }),
             SizedBox(height: 6),
-            _buildTextField("비밀번호", _password, scrollAnimate, "Password"),
+            _buildTextField(
+                fieldTitle: "비밀번호",
+                fieldController: _password,
+                scrollAnimate: scrollAnimate,
+                hintText: "Password",
+                onChanged: (value) {
+                  widget.userUpdateReqDto.password = value.trim();
+                }),
             SizedBox(height: 6),
-            Container(
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "관심사 선택",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+            Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "관심사 선택",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: gap_m),
-                  // CategorySelectButton()
-                ],
-              ),
+                ),
+                SizedBox(height: gap_m),
+                CategorySelectButton(userUpdateReqDto: widget.userUpdateReqDto),
+              ],
             ),
             SizedBox(height: 50),
-            // CustomMainButton(buttonRoutePath: "/loginMyPage", buttonText: "수정완료")
-
             ElevatedButton(
               onPressed: () {
-                userCT.updateUser(
-                  id: UserSession.user.id,
-                  password: _password.text.trim(),
-                  email: _email.text.trim(),
-                  phoneNum: _phoneNum.text.trim(),
-                  categoryIds: [1, 2, 3],
-                );
+                Logger().d("버튼 값 확인 ${widget.userUpdateReqDto.password}");
+                userCT.updateUser(id: UserSession.user.id, userUpdateReqDto: widget.userUpdateReqDto);
               },
               style: ElevatedButton.styleFrom(
                 primary: gButtonOffColor,
@@ -94,7 +112,13 @@ class _CustomFormState extends ConsumerState<UserUpdateForm> {
     );
   }
 
-  Container _buildTextField(String fieldTitle, TextEditingController fieldController, Function scrollAnimate, String hintText) {
+  Widget _buildTextField({
+    required String fieldTitle,
+    required TextEditingController fieldController,
+    required Function scrollAnimate,
+    String? hintText,
+    required ValueChanged<String> onChanged,
+  }) {
     return Container(
       child: Column(
         children: [
@@ -110,7 +134,7 @@ class _CustomFormState extends ConsumerState<UserUpdateForm> {
             onTap: (() {
               scrollAnimate;
             }),
-
+            onChanged: onChanged,
             //validator: , 유효성 체크 부분
             controller: fieldController,
             obscureText: hintText == "Password" ? true : false, // 비밀번호 hide옵션
@@ -135,9 +159,6 @@ class _CustomFormState extends ConsumerState<UserUpdateForm> {
 
   void scrollAnimate() {
     Future.delayed(Duration(milliseconds: 600), () {
-      //0.6초 이후 키보드 올라옴
-      // ViewInsets은 현재 페이지에서 내가 컨트롤 할 수 없는 영역을 뜻함,
-      // bottom은 키보드가 아래에서 올라오기 때문
       scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
           duration: Duration(microseconds: 100), // 0.1초 이후 field가 올라간다.
           curve: Curves.easeIn); //Curves - 올라갈때 애니메이션

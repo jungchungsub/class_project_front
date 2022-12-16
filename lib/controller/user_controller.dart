@@ -82,20 +82,12 @@ class UserController {
     }
   }
 
-  Future<void> updateUser(
-      {required int id, required String password, required String email, required String phoneNum, required List<int> categoryIds}) async {
-    UpdateUserReqDto updateUserReqDto = UpdateUserReqDto(
-      password: password,
-      email: email,
-      phoneNum: phoneNum,
-      categoryIds: categoryIds,
-    );
-
-    ResponseDto responseDto = await userService.fetchUpdateUser(id, updateUserReqDto);
+  Future<void> updateUser({required int id, required userUpdateReqDto}) async {
+    ResponseDto responseDto = await userService.fetchUpdateUser(id, userUpdateReqDto);
     if (responseDto.statusCode < 400) {
       //userUpdatePage반영
       LocalService().fetchJwtToken();
-      Navigator.pop(gContext!);
+      Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext!).showSnackBar(
         SnackBar(content: Text("게시글 수정 실패 : ${responseDto.msg}")),

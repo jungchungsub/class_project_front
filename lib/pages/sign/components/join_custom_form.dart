@@ -77,7 +77,7 @@ class JoinCustomForm extends ConsumerWidget {
                     ),
                   ),
                   SizedBox(height: gap_m),
-                  CategorySelectButton(joinReqDto),
+                  CategorySelectButton(joinReqDto: joinReqDto),
                 ],
               ),
               //개인 정보 제공 동의 폼 필요 -> API

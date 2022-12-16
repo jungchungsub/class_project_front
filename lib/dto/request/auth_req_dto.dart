@@ -46,15 +46,15 @@ class LoginReqDto {
       };
 }
 
-class UpdateUserReqDto {
-  UpdateUserReqDto.single();
+class UserUpdateReqDto {
+  UserUpdateReqDto.single();
 
   String? password;
   String? email;
   String? phoneNum;
   List<int>? categoryIds;
 
-  UpdateUserReqDto({
+  UserUpdateReqDto({
     this.password,
     this.email,
     this.phoneNum,
