@@ -8,8 +8,9 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../domain/category.dart';
 
 class CategorySelectButton extends StatefulWidget {
-  JoinReqDto joinReqDto;
-  CategorySelectButton(this.joinReqDto, {super.key});
+  JoinReqDto? joinReqDto;
+  UserUpdateReqDto? userUpdateReqDto;
+  CategorySelectButton({this.joinReqDto, this.userUpdateReqDto, super.key});
 
   @override
   State<CategorySelectButton> createState() => _CategorySelectButtonState();
@@ -77,11 +78,10 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
       ),
 
       onConfirm: (results) {
-        setState(() {
-          _selectCategory = results;
-          categoryId = _selectCategory?.map((e) => e.id).toList();
-          widget.joinReqDto.categoryId = categoryId;
-        });
+        _selectCategory = results;
+        categoryId = _selectCategory?.map((e) => e.id).toList();
+        widget.joinReqDto?.categoryId = categoryId;
+        widget.userUpdateReqDto?.categoryIds = categoryId;
       },
     );
   }

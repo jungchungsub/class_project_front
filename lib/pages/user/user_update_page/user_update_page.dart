@@ -1,6 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/user/components/service_text_button.dart';
 import 'package:finalproject_front/pages/user/components/user_update_form.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,19 +12,19 @@ import 'package:logger/logger.dart';
 import '../../../dto/response/user_login_resp_dto.dart';
 
 class UserUpdatePage extends ConsumerWidget {
+  UserUpdatePage({required this.userInfo, super.key});
+  UserUpdateReqDto userUpdateReqDto = UserUpdateReqDto.single();
   final User userInfo;
-  const UserUpdatePage({required this.userInfo, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Size size = MediaQuery.of(context).size;
     final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            UserUpdateForm(),
+            UserUpdateForm(userUpdateReqDto: userUpdateReqDto),
             _buildDivider(),
             ServiceTextButton(context: context, text: "전문가 정보", routePath: "/loginDivision"),
             _buildDivider(),
@@ -44,7 +45,7 @@ class UserUpdatePage extends ConsumerWidget {
     );
   }
 
-  Padding _buildServiceButton(UserController userCT) {
+  Widget _buildServiceButton(UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
       child: Container(
@@ -64,7 +65,7 @@ class UserUpdatePage extends ConsumerWidget {
     );
   }
 
-  Divider _buildDivider() {
+  Widget _buildDivider() {
     return Divider(
       thickness: 1,
       color: gBorderColor,

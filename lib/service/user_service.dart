@@ -104,11 +104,10 @@ class UserService {
   }
 
 //업데이트
-  Future<ResponseDto> fetchUpdateUser(int userId, UpdateUserReqDto updateUserReqDto) async {
+  Future<ResponseDto> fetchUpdateUser(int userId, updateUserReqDto) async {
     String requestBody = jsonEncode(updateUserReqDto);
     Response response = await httpConnector.put(path: "/api/user/${userId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-
     if (responseDto.data != null) {
       responseDto.data = UserUpdateResponseDto.fromJson(responseDto.data);
       //UserSession.successAuthentication(user);
