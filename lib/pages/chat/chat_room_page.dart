@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -17,21 +18,19 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: gPrimaryColor,
+      color: Colors.white,
       child: Scaffold(
-        backgroundColor: gBorderColor,
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          leading: Icon(
+            CupertinoIcons.back,
+            color: Colors.black,
+          ),
           backgroundColor: Colors.transparent,
           title: Text(
             "아이유",
             style: Theme.of(context).textTheme.headline6,
           ),
-          actions: [
-            Icon(CupertinoIcons.search, size: 20),
-            SizedBox(width: 25),
-            Icon(CupertinoIcons.bars, size: 20),
-            SizedBox(width: 25),
-          ],
         ),
         body: Column(
           children: [
@@ -40,25 +39,56 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TimeLine(time: "2022년 12월 16일 금요일"),
-                      OtherChat(
-                        name: "아이유",
-                        text: "현성아 우리 그만 만나자..",
-                        time: "오후 11:00",
+                      Divider(
+                        color: Colors.black,
+                        thickness: 1.0,
+                      ),
+                      SizedBox(height: gap_m),
+                      Container(
+                        width: 300,
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: "크몽을 통하지 않고",
+                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(
+                                text: " 전문가에게 직접 결제하는 경우 서비스 불이행/ 환불 거부/연결두절 ",
+                                style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(
+                                text: "등의 문제가 발생할 수 있습니다.",
+                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: gap_l),
+                      Text(
+                        "직접 결제 피해 안내",
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       MyChat(
-                        text: "미안해 잘못했어.",
-                        time: "오후 11:10",
+                        text: "안녕하세요 문의할 내용이 있어서 연락드립니다 ",
+                        time: "오후 11:40",
                       ),
                       OtherChat(
                         name: "아이유",
-                        text: "꺼져 제발",
+                        text: "안녕하세요 ^^ 문의 감사합니다! 배송형은 실제 제품을 배송하여 해당 제품을 사용하실 후기를 받는 것 방문 체험단은 방문 후 서비스를 제공 받아 본 후 포스팅 하는 것 ",
+                        time: "오후 11:00",
+                      ),
+                      OtherChat(
+                        name: "아이유",
+                        text: "더 궁금하시면 010-6393-7605로 전화주십시오",
                         time: "오후 11:30",
                       ),
                       MyChat(
-                        text: "오케이",
-                        time: "오후 11:40",
+                        text: "문의 내용 감사합니다.",
+                        time: "오후 11:10",
                       ),
                       ...List.generate(chats.length, (index) => chats[index]),
                     ],
@@ -150,18 +180,18 @@ class MyChat extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Text(time, style: TextStyle(fontSize: 12)),
+          Text(time, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: gSubTextColor)),
           SizedBox(width: 5),
           Flexible(
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(13),
-                color: gPrimaryColor,
+                color: Color(0xffF6E58A),
               ),
               child: Text(
                 text,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(),
               ),
             ),
           )
@@ -224,7 +254,7 @@ class OtherChat extends StatelessWidget {
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(13),
-                    color: Colors.white,
+                    color: gClientColor,
                   ),
                 )
               ],
@@ -233,7 +263,7 @@ class OtherChat extends StatelessWidget {
           SizedBox(
             width: 5,
           ),
-          Text(time, style: TextStyle(fontSize: 12))
+          Text(time, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: gSubTextColor))
         ],
       ),
     );
