@@ -56,9 +56,9 @@ class LessonService {
     Logger().d("취소 : ${lessonReqDto.policy}");
     Logger().d("가능일 : ${lessonReqDto.possibleDays}");
     Logger().d("마감일자 : ${lessonReqDto.deadline}");
+    Logger().d("카테고리 : ${lessonReqDto.categoryId}");
     String requestBody = jsonEncode(lessonReqDto);
     Logger().d("서비스확인 : ${requestBody}");
-
     Response response = await httpConnector.post(path: "/api/lesson", body: requestBody);
     Logger().d("서비스 리스폰스 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);

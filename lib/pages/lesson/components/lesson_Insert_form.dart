@@ -6,6 +6,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
+import 'package:finalproject_front/pages/lesson/components/category_period.dart';
 
 import 'package:finalproject_front/size.dart';
 
@@ -33,7 +34,6 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _price = TextEditingController();
   final _possibleDay = TextEditingController();
   final _photo = TextEditingController();
-  final _category = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -47,18 +47,6 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
   XFile? _imagefile;
   late String profileImage;
   // ValueChanged<T> select;
-
-  final List<String> items = [
-    '뷰티',
-    '운동',
-    '댄스',
-    '뮤직',
-    '미술',
-    '문학',
-    '공예',
-    '기타',
-  ];
-  String? selectedValue;
 
   final _formKey = GlobalKey<FormState>();
   late ScrollController scrollController;
@@ -156,7 +144,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                   lessonInsertReqDto.place = value;
                 }),
                 SizedBox(height: gap_l),
-                _buildTextField(scrollAnimate, fieldTitle: "가격", hint: "가격를 입력하세요", lines: 1, fieldController: widget._price, onChanged: (value) {
+                _buildTextField(scrollAnimate, fieldTitle: "가격", hint: "가격을 입력하세요", lines: 1, fieldController: widget._price, onChanged: (value) {
                   lessonInsertReqDto.price = int.parse(value);
                 }),
                 SizedBox(height: gap_l),
@@ -164,7 +152,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                     onChanged: (value) {
                   lessonInsertReqDto.policy = value;
                 }),
-                _selectCarrer(),
+
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "가능일", hint: "가능일을 입력하세요", lines: 1, fieldController: widget._possibleDay,
                     onChanged: (value) {
@@ -176,7 +164,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                   lessonInsertReqDto: lessonInsertReqDto,
                 ),
                 SizedBox(height: gap_l),
-
+                _selectCarrer(lessonInsertReqDto),
                 ElevatedButton(
                   onPressed: () {
                     lessonInsertReqDto.photo = profileImage;
@@ -331,7 +319,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
 //possibleDays: selectedValue,
 
-  Widget _selectCarrer() {
+  Widget _selectCarrer(LessonInsertReqDto lessonInsertReqDto) {
     return Container(
       child: Column(
         children: [
@@ -353,42 +341,13 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
               border: Border.all(color: gBorderColor, width: 3),
               borderRadius: BorderRadius.circular(15),
             ),
-            child: _selectedCarrerButton(),
+            child: selectedCarrerButton(
+              lessonInsertReqDto: lessonInsertReqDto,
+            ),
             width: 400,
             height: 60,
           )
         ],
-      ),
-    );
-  }
-
-  Widget _selectedCarrerButton() {
-    return Container(
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton2(
-          hint: Text(
-            '카테고리를 선택해주세요',
-            style: TextStyle(
-              fontSize: 16,
-              color: gSubTextColor,
-            ),
-          ),
-          items: items
-              .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(fontSize: 14, color: Colors.black),
-                    ),
-                  ))
-              .toList(),
-          value: selectedValue,
-          onChanged: (value) {
-            setState(() {
-              selectedValue = value as String;
-            });
-          },
-        ),
       ),
     );
   }
