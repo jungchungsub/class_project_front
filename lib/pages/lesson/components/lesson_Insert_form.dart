@@ -253,7 +253,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                   child: Image.file(
                     File(_imagefile!.path),
                     width: 200,
-                    height: 200,
+                    height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -20,10 +20,6 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
     ResponseDto responseDto = await lessonService.fetchHomeList(jwtToken);
     if (responseDto.statusCode < 300) {
       state = HomePageModel(responseDto.data);
-    } else {
-      ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("토큰이 만료되었습니다")),
-      );
     }
   }
 }
