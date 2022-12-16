@@ -96,6 +96,10 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 ),
               ),
             ),
+            Divider(
+              color: Colors.black,
+              thickness: 1.0,
+            ),
             Container(
               height: 60,
               color: Colors.white,
