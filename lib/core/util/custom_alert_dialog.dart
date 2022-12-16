@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void CustomAlertDialog(BuildContext context) {
+void CustomAlertDialog(BuildContext context, String Title, String content) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -9,7 +9,7 @@ void CustomAlertDialog(BuildContext context) {
           //Dialog Main Title
           title: Column(
             children: <Widget>[
-              new Text("회원가입 실패"),
+              Text(Title),
             ],
           ),
           content: Column(
@@ -17,7 +17,7 @@ void CustomAlertDialog(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "회원가입을 다시 해주세요.",
+                content,
               ),
             ],
           ),

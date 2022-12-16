@@ -55,7 +55,7 @@ class _CustomFormState extends ConsumerState<UserUpdateForm> {
                     ),
                   ),
                   SizedBox(height: gap_m),
-                  CategorySelectButton(),
+                  // CategorySelectButton()
                 ],
               ),
             ),

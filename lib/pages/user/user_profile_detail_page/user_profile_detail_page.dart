@@ -1,7 +1,7 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
-import 'package:finalproject_front/pages/user/user_profile_insert_page/user_profile_insert_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_update_page/user_profile_update_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -60,7 +60,7 @@ class UserProfileDetailPage extends ConsumerWidget {
   ElevatedButton _buildProfileInsertButton(BuildContext context, UserProfileDetailPageModel? model) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileInsertPage(model: model!.profileRespDto)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileUpdatePage(model: model!.profileRespDto)));
       },
       style: ElevatedButton.styleFrom(
         primary: gButtonOffColor,

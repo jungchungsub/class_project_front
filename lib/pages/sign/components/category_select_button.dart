@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -7,7 +8,8 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../../../domain/category.dart';
 
 class CategorySelectButton extends StatefulWidget {
-  const CategorySelectButton({super.key});
+  JoinReqDto joinReqDto;
+  CategorySelectButton(this.joinReqDto, {super.key});
 
   @override
   State<CategorySelectButton> createState() => _CategorySelectButtonState();
@@ -45,7 +47,6 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
       //버튼에 사용할 value타입을 Category 오브젝트 타입임을 선언
       items: _items,
       title: Text("관심사"),
-      initialValue: [],
       key: _multiSelectKey,
       itemsTextStyle: TextStyle(color: Colors.black),
       isDismissible: true,
@@ -79,9 +80,8 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
         setState(() {
           _selectCategory = results;
           categoryId = _selectCategory?.map((e) => e.id).toList();
+          widget.joinReqDto.categoryId = categoryId;
         });
-        Logger().d(_selectCategory);
-        Logger().d(categoryId);
       },
     );
   }

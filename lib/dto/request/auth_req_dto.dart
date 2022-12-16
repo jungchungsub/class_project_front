@@ -2,22 +2,22 @@ import 'category_req_dto.dart';
 import 'package:get/get.dart';
 
 class JoinReqDto {
-  String username;
-  String password;
-  String email;
-  String phoneNum;
-  String role;
-  // List<int>? categoryId;
-  //List<int> categoryId = category.map((category) => category.id).toList();
+  JoinReqDto.single();
+
+  String? username;
+  String? password;
+  String? email;
+  String? phoneNum;
+  String? role;
+  List<int>? categoryId;
 
   JoinReqDto({
-    required this.username,
-    required this.password,
-    required this.email,
-    required this.phoneNum,
-    required this.role,
+    this.username,
+    this.password,
+    this.email,
+    this.phoneNum,
+    this.role,
   });
-
 // dynamic -> json
   Map<String, dynamic> toJson() => {
         "username": username,
@@ -25,18 +25,21 @@ class JoinReqDto {
         "email": email,
         "phoneNum": phoneNum,
         "role": role,
-        // "categoryId": categoryId,
+        "categoryId": categoryId,
       };
 }
 
 class LoginReqDto {
-  String username;
-  String password;
+  LoginReqDto.single();
+
+  String? username;
+  String? password;
 
   LoginReqDto({
-    required this.username,
-    required this.password,
+    this.username,
+    this.password,
   });
+
   Map<String, dynamic> toJson() => {
         "username": username,
         "password": password,
@@ -44,18 +47,19 @@ class LoginReqDto {
 }
 
 class UpdateUserReqDto {
-  String password;
-  String email;
-  String phoneNum;
-  List<int> categoryIds;
+  UpdateUserReqDto.single();
+
+  String? password;
+  String? email;
+  String? phoneNum;
+  List<int>? categoryIds;
 
   UpdateUserReqDto({
-    required this.password,
-    required this.email,
-    required this.phoneNum,
-    required this.categoryIds,
+    this.password,
+    this.email,
+    this.phoneNum,
+    this.categoryIds,
   });
-
   Map<String, dynamic> toJson() => {
         "password": password,
         "email": email,

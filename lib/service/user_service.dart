@@ -57,17 +57,8 @@ class UserService {
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("유저 정보 확인 : ${responseDto.data}");
     if (responseDto.data != null) {
-      Logger().d("여기 실행? 프로필");
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
-
-      if (responseDto.data.role == "USER") {
-        responseDto.data.role = "의뢰인";
-      }
-      if (responseDto.data.role == "MASTER") {
-        responseDto.data.role = "전문가";
-      }
     }
     return responseDto;
   }

@@ -24,12 +24,11 @@ class MyPageRespDto {
   factory MyPageRespDto.fromJson(Map<String, dynamic> json) => MyPageRespDto(
         id: json["id"],
         username: json["username"],
-        role: json["role"],
+        role: json["role"] == "USER" ? "일반회원" : "전문가",
         profileDto: ProfileDto.fromJson(
           json["profileDto"] ?? {},
         ),
       );
-
   Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
