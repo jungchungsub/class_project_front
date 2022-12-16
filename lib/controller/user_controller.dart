@@ -1,9 +1,11 @@
+import 'package:finalproject_front/core/util/custom_alert_dialog.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/user_profile_detail_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert_page/user_profile_insert_page.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +43,12 @@ class UserController {
   }
 
   Future<void> moveProfileInsertOrDetailPage(int id) async {
-    // 프로필이 있는지 없는지 확인 해야함.
+    // 프로필이 없다면 프로필 등록 페이지로 이동.
+    Logger().d("ID출력 ====== ${id}");
+    if (id == 0) {
+      CustomAlertDialog(gContext, "프로필이 없습니다.", "프로필 등록페이지로 이동");
+      await Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileInsertPage(id: id)));
+    }
     await Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: id)));
   }
 
@@ -51,11 +58,7 @@ class UserController {
     await Navigator.pushNamedAndRemoveUntil(gContext, "/logoutMyPage", (route) => false);
   }
 
-  Future<void> joinUser(
-      {required String username, required String password, required String email, required String phoneNum, required String role}) async {
-    // Dto로 변환
-    JoinReqDto joinReqDto = JoinReqDto(username: username, password: password, email: email, phoneNum: phoneNum, role: role);
-
+  Future<void> joinUser({required JoinReqDto joinReqDto}) async {
     // Service 호출
     ResponseDto responseDto = await userService.fetchJoin(joinReqDto);
     if (responseDto.statusCode < 400) {
@@ -67,15 +70,9 @@ class UserController {
     }
   }
 
-  Future<void> loginUser({required String username, required String password}) async {
-    // 1. DTO 변환
-    LoginReqDto loginReqDto = LoginReqDto(username: username, password: password);
-
-    // 2. 통신 요청
+  Future<void> loginUser({required LoginReqDto loginReqDto}) async {
     ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
-    //3. 비지니스 로직 처리
     if (responseDto.statusCode < 400) {
-      // 로그인 메서드가 끝나기 전 세션 초기화 한번 실행 해줌.
       await LocalService().fetchJwtToken();
       Navigator.of(gContext).popAndPushNamed("/main");
     } else {
@@ -85,20 +82,12 @@ class UserController {
     }
   }
 
-  Future<void> updateUser(
-      {required int id, required String password, required String email, required String phoneNum, required List<int> categoryIds}) async {
-    UpdateUserReqDto updateUserReqDto = UpdateUserReqDto(
-      password: password,
-      email: email,
-      phoneNum: phoneNum,
-      categoryIds: categoryIds,
-    );
-
-    ResponseDto responseDto = await userService.fetchUpdateUser(id, updateUserReqDto);
+  Future<void> updateUser({required int id, required userUpdateReqDto}) async {
+    ResponseDto responseDto = await userService.fetchUpdateUser(id, userUpdateReqDto);
     if (responseDto.statusCode < 400) {
       //userUpdatePage반영
       LocalService().fetchJwtToken();
-      Navigator.pop(gContext!);
+      Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext!).showSnackBar(
         SnackBar(content: Text("게시글 수정 실패 : ${responseDto.msg}")),

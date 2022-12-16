@@ -35,10 +35,9 @@ class LocalService {
       if (responseDto.statusCode < 400) {
         User user = User.fromJson(responseDto.data);
         UserSession.successAuthentication(user, deviceJwtToken);
+        Logger().d("초기화 값 확인 : ${user.username}");
       } else {
-        Logger().d("여기 실행됨? ${responseDto.msg}");
-        Logger().d("토큰이 만료됨");
-        Logger().d("${responseDto.msg}");
+        Logger().d("토큰 만료됨. 토큰 삭제");
         UserSession.removeAuthentication();
       }
     }

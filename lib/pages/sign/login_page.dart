@@ -1,5 +1,6 @@
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user.dart';
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../constants.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
+  LoginReqDto loginReqDto = LoginReqDto.single();
   LoginPage({super.key});
   final _id = TextEditingController();
   final _password = TextEditingController();
@@ -33,11 +35,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final uc = ref.read(userController);
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: _loginForm(context, uc),
+      body: _loginForm(context, uc, widget.loginReqDto),
     );
   }
 
-  Form _loginForm(BuildContext context, UserController uc) {
+  Form _loginForm(BuildContext context, UserController uc, LoginReqDto loginReqDto) {
     return Form(
       key: _formKey,
       child: Padding(
@@ -45,9 +47,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CustomTextField(scrollAnimate, fieldTitle: "아이디", hint: "아이디를 입력해주세요.", lines: 1, fieldController: widget._id),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "아이디",
+                hint: "아이디를 입력해주세요.",
+                lines: 1,
+                onChanged: (value) {
+                  loginReqDto.username = value.trim();
+                },
+              ),
               SizedBox(height: gap_l),
-              CustomTextField(scrollAnimate, fieldTitle: "비밀번호", hint: "비밀번호를 입력해주세요.", lines: 1, fieldController: widget._password),
+              CustomTextField(
+                scrollAnimate,
+                fieldTitle: "비밀번호",
+                hint: "비밀번호를 입력해주세요.",
+                lines: 1,
+                onChanged: (value) {
+                  loginReqDto.password = value.trim();
+                },
+              ),
               SizedBox(height: gap_l),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +78,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               SizedBox(height: gap_l),
               ElevatedButton(
                 onPressed: () async {
-                  await uc.loginUser(username: widget._id.text.trim(), password: widget._password.text.trim());
+                  await uc.loginUser(loginReqDto: loginReqDto);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: gButtonOffColor,

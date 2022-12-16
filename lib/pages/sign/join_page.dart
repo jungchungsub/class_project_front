@@ -1,3 +1,4 @@
+import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/sign/components/join_custom_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +6,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:logger/logger.dart';
 
 class JoinPage extends StatefulWidget {
-  String role;
-
   JoinPage({required this.role, super.key});
 
-  @override
   State<JoinPage> createState() => _JoinPageState();
+
+  JoinReqDto joinReqDto = JoinReqDto.single();
+  String role;
 }
 
 class _JoinPageState extends State<JoinPage> {
@@ -26,7 +27,7 @@ class _JoinPageState extends State<JoinPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: JoinCustomForm(scrollAnimate, role: widget.role),
+      body: JoinCustomForm(scrollAnimate, role: widget.role, joinReqDto: widget.joinReqDto),
     );
   }
 

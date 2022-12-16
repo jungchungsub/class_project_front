@@ -1,21 +1,22 @@
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
-import 'package:finalproject_front/pages/user/components/profile_insert_form.dart';
 import 'package:finalproject_front/pages/user/components/profile_update_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserProfileInsertPage extends ConsumerWidget {
-  int id;
-  UserProfileInsertPage({required this.id, super.key});
+class UserProfileUpdatePage extends ConsumerWidget {
+  final ProfileRespDto model;
+  UserProfileUpdatePage({required this.model, super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: ProfileInsertForm(),
+      body: ProfileUpdateForm(
+        model: model,
+      ),
     );
   }
 }

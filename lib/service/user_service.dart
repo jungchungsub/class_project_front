@@ -42,13 +42,6 @@ class UserService {
 
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
-// 로그인 정보 저장
-    // User user = User.fromJson(responseDto.data);
-    // Logger().d("userResp확인 : ${user}");
-    // UserSession.successAuthentication(user, jwtToken);
-    // User user = User.fromJson(responseDto.data);
-    // Logger().d("userResp확인 : ${user}");
-    // UserSession.successAuthentication(user, jwtToken);
 
     return responseDto; // ResponseDto 응답
   }
@@ -57,16 +50,8 @@ class UserService {
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("유저 정보 확인 : ${responseDto.data}");
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
-
-      if (responseDto.data.role == "USER") {
-        responseDto.data.role = "의뢰인";
-      }
-      if (responseDto.data.role == "MASTER") {
-        responseDto.data.role = "전문가";
-      }
     }
     return responseDto;
   }
@@ -74,36 +59,34 @@ class UserService {
 //프로필 정보
   Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
+    Logger().d("확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("값 확인 ${responseDto.data}");
-    Logger().d("masg 확인 ${responseDto.msg}");
+    Logger().d("응답 데이터 확인 : ${responseDto.data}");
+    // final introduction = responseDto.data["introduction"];
+    // final region = responseDto.data["region"];
+    // final certification = responseDto.data["certification"];
+    // final careerYear = responseDto.data["careerYear"];
+    // final career = responseDto.data["career"];
 
-    final profileImage = responseDto.data["filePath"];
-    final introduction = responseDto.data["introduction"];
-    final region = responseDto.data["region"];
-    final certification = responseDto.data["certification"];
-    final careerYear = responseDto.data["careerYear"];
-    final career = responseDto.data["career"];
+    // if (introduction == null) {
+    //   responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
+    // }
+    // if (introduction == null) {
+    //   responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
+    // }
+    // if (region == null) {
+    //   responseDto.data["region"] = "지역을 작성해주세요.";
+    // }
 
-    if (introduction == null) {
-      responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
-    }
-    if (introduction == null) {
-      responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
-    }
-    if (region == null) {
-      responseDto.data["region"] = "지역을 작성해주세요.";
-    }
-
-    if (certification == null) {
-      responseDto.data["certification"] = "보유 자격증을 작성해주세요.";
-    }
-    if (careerYear == null) {
-      responseDto.data["careerYear"] = "경력 기간을 작성해주세요.";
-    }
-    if (career == null) {
-      responseDto.data["career"] = "학력 및 전공을 작성해주세요.";
-    }
+    // if (certification == null) {
+    //   responseDto.data["certification"] = "보유 자격증을 작성해주세요.";
+    // }
+    // if (careerYear == null) {
+    //   responseDto.data["careerYear"] = "경력 기간을 작성해주세요.";
+    // }
+    // if (career == null) {
+    //   responseDto.data["career"] = "학력 및 전공을 작성해주세요.";
+    // }
 
     if (responseDto.data != null) {
       responseDto.data = ProfileRespDto.fromJson(responseDto.data);
@@ -112,11 +95,10 @@ class UserService {
   }
 
 //업데이트
-  Future<ResponseDto> fetchUpdateUser(int userId, UpdateUserReqDto updateUserReqDto) async {
+  Future<ResponseDto> fetchUpdateUser(int userId, updateUserReqDto) async {
     String requestBody = jsonEncode(updateUserReqDto);
     Response response = await httpConnector.put(path: "/api/user/${userId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-
     if (responseDto.data != null) {
       responseDto.data = UserUpdateResponseDto.fromJson(responseDto.data);
       //UserSession.successAuthentication(user);
