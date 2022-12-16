@@ -15,7 +15,7 @@ class MyPageRespDto {
   int id;
   String username;
   String role;
-  dynamic filePath;
+  String? filePath;
 
   factory MyPageRespDto.fromJson(Map<String, dynamic> json) => MyPageRespDto(
         id: json["id"],

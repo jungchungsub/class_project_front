@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:finalproject_front/core/http_connector.dart';
@@ -12,7 +13,7 @@ import 'package:logger/logger.dart';
 class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
-  Future<ResponseDto> getLessonDetail(int lessonId, String? jwtToken) async {
+  Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
     //Logger().d("id출력service:${lessonId}");
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}", jwtToken: jwtToken);
     ResponseDto responseDto = toResponseDto(response);
@@ -29,11 +30,10 @@ class LessonService {
     return responseDto;
   }
 
-  Future<ResponseDto> homeList(String? jwtToken) async {
+  Future<ResponseDto> fetchHomeList(String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
 
     ResponseDto responseDto = toResponseDto(response); //
-    Logger().d("메인페이지 확인 : ${responseDto.data}");
     if (responseDto.statusCode < 300) {
       List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
       // Logger().d(mapList);
@@ -45,13 +45,26 @@ class LessonService {
     return responseDto;
   }
 
-  // Future<ResponseDto> lessonInsert(LessonReqDto lessonReqDto) async {
-  //   Response response = await httpConnector.post("/api/lesson", lessonReqDto);
-  //   String jwtToken = response.headers["authorization"].toString();
-
-  //   ResponseDto responseDto = toResponseDto(response);
-  //   if (responseDto.statusCode < 300) {
-  //     // responseDto.data =
-  //   }
-  // }
+  Future<ResponseDto> fetchlessonInsert(LessonInsertReqDto lessonReqDto) async {
+    Logger().d("포토확인 : ${lessonReqDto.photo}");
+    Logger().d("제목 : ${lessonReqDto.name}");
+    Logger().d("커리큘럼 : ${lessonReqDto.curriculum}");
+    Logger().d("횟수 : ${lessonReqDto.lessonCount}");
+    Logger().d("시간 : ${lessonReqDto.lessonTime}");
+    Logger().d("장소 : ${lessonReqDto.place}");
+    Logger().d("가격 : ${lessonReqDto.price}");
+    Logger().d("취소 : ${lessonReqDto.policy}");
+    Logger().d("가능일 : ${lessonReqDto.possibleDays}");
+    Logger().d("마감일자 : ${lessonReqDto.deadline}");
+    Logger().d("카테고리 : ${lessonReqDto.categoryId}");
+    String requestBody = jsonEncode(lessonReqDto);
+    Logger().d("서비스확인 : ${requestBody}");
+    Response response = await httpConnector.post(path: "/api/lesson", body: requestBody);
+    Logger().d("서비스 리스폰스 확인 : ${response.body}");
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("응답 값 확인 : ${responseDto.data}");
+    Logger().d("응답 메세지 확인 : ${responseDto.msg}");
+    Logger().d("응답 상태코드 확인 : ${responseDto.statusCode}");
+    return responseDto;
+  }
 }

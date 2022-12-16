@@ -1,3 +1,4 @@
+import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
@@ -23,7 +24,7 @@ import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
-import 'package:finalproject_front/pages/user/user_profile_insert_page.dart';
+import 'package:finalproject_front/pages/user/user_profile_insert_page/user_profile_insert_page.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -26,8 +26,9 @@ class SubscribePageViewModel extends StateNotifier<SubscribePageModel?> {
 
       state = model;
     } else {
+      // 토큰이 만료됨은 로컬 서비스에서 사용하는 코드임 -> 널일 경우 따로 띄워줘야함.
       ScaffoldMessenger.of(mContext!).showSnackBar(
-        const SnackBar(content: Text("토큰이 만료되었습니다")),
+        const SnackBar(content: Text("구독중인 게시글이 없습니다.(충섭아 null일 경우 다른거 띄워주게 로직좀 만들어줘)")),
       );
     }
   }

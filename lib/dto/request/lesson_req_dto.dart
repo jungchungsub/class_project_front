@@ -1,33 +1,49 @@
-class LessonReqDto {
-  String name;
-  String photo;
-  int price;
-  String place;
-  int lessonTime;
-  int lessonCount;
-  String possibleDays;
-  String curriculum;
-  String policy;
-  String deadline;
-  int categoryId;
-  // List<int>? categoryId;
-  //List<int> categoryId = category.map((category) => category.id).toList();
+import 'dart:convert';
 
-  LessonReqDto({
-    required this.name,
-    required this.photo,
-    required this.price,
-    required this.place,
-    required this.lessonTime,
-    required this.lessonCount,
-    required this.possibleDays,
-    required this.curriculum,
-    required this.policy,
-    required this.deadline,
-    required this.categoryId,
+// LessonInsertReqDto lessonRespDtoFromJson(String str) => LessonInsertReqDto.fromJson(json.decode(str));
+
+String lessonRespDtoToJson(LessonInsertReqDto data) => json.encode(data.toJson());
+
+class LessonInsertReqDto {
+  LessonInsertReqDto({
+    this.name,
+    this.photo,
+    this.price,
+    this.place,
+    this.lessonTime,
+    this.lessonCount,
+    this.possibleDays,
+    this.curriculum,
+    this.policy,
+    this.deadline,
+    this.categoryId,
   });
 
-// dynamic -> json
+  String? name;
+  String? photo;
+  int? price;
+  String? place;
+  int? lessonTime;
+  int? lessonCount;
+  String? possibleDays;
+  String? curriculum;
+  String? policy;
+  String? deadline;
+  int? categoryId;
+  LessonInsertReqDto.origin();
+
+  // factory LessonInsertReqDto.fromJson(Map<String, dynamic> json) => LessonInsertReqDto(
+  //       name: json["name"],
+  //       photo: json["photo"],
+  //       price: json["price"],
+  //       place: json["place"],
+  //       lessonTime: json["lessonTime"],
+  //       lessonCount: json["lessonCount"],
+  //       possibleDays: json["possibleDays"],
+  //       curriculum: json["curriculum"],
+  //       policy: json["policy"],
+  //       deadline: DateTime.parse(json["deadline"]),
+  //     );
   Map<String, dynamic> toJson() => {
         "name": name,
         "photo": photo,
@@ -40,6 +56,5 @@ class LessonReqDto {
         "policy": policy,
         "deadline": deadline,
         "categoryId": categoryId,
-        // "categoryId": categoryId,
       };
 }
