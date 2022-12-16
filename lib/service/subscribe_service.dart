@@ -10,7 +10,7 @@ class SubscribeService {
   final HttpConnector httpConnector = HttpConnector();
 
   Future<ResponseDto> subscribeList(int userId, String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe", jwtToken: jwtToken);
+    Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe");
 
     ResponseDto responseDto = toResponseDto(response);
     Logger().d(responseDto.statusCode);

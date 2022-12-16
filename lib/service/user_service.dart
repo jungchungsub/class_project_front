@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:finalproject_front/core/http_connector.dart';
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
+import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
@@ -48,7 +50,7 @@ class UserService {
 
 // MyPage를 위한 유저 정보
   Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/user/${userId}/mypage", jwtToken: jwtToken);
+    Response response = await httpConnector.get(path: "/api/user/${userId}/mypage");
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.data != null) {
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
@@ -57,11 +59,13 @@ class UserService {
   }
 
 //프로필 정보
-  Future<ResponseDto> getDetailProfile(int userId, String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/user/${userId}/profile", jwtToken: jwtToken);
-    Logger().d("확인 : ${response.body}");
+  Future<ResponseDto> getDetailProfile(int userId) async {
+    Logger().d("프로필 아이디 보기 : ${userId}");
+    Logger().d("세션 id확인 : ${UserSession.user.id}");
+    Response response = await httpConnector.get(path: "/api/user/${userId}/profile");
+    Logger().d("프로필 상세보기 응답 바디 - 서비스 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("응답 데이터 확인 : ${responseDto.data}");
+    Logger().d("응답 데이터 확인 - 서비스 : ${responseDto.data}");
     // final introduction = responseDto.data["introduction"];
     // final region = responseDto.data["region"];
     // final certification = responseDto.data["certification"];
@@ -106,15 +110,25 @@ class UserService {
     return responseDto;
   }
 
-  Future<ResponseDto> fetchInsertProfile(int userId, ProfileInsertReqDto profileInsertReqDto) async {
+  Future<ResponseDto> fetchUpdateProfile(int userId, ProfileUpdateReqDto profileUpdateReqDto) async {
+    String requestBody = jsonEncode(profileUpdateReqDto);
+    Logger().d("프로필 업데이트 바디 확인 : ${requestBody}");
+
+    Response response = await httpConnector.put(path: "/api/user/$userId/profile", body: requestBody);
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("프로필 업데이트 확인 : ${responseDto.data}");
+    Logger().d("프로필 업데이트 확인 : ${responseDto.statusCode}");
+
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchInsertProfile(ProfileInsertReqDto profileInsertReqDto) async {
     String requestBody = jsonEncode(profileInsertReqDto);
-    Logger().d("요청 바디 확인 : ${requestBody}");
+    Logger().d("프로필 등록 바디 확인 : ${requestBody}");
     Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("응답 값 확인 : ${responseDto.data}");
-    Logger().d("응답 메세지 확인 : ${responseDto.msg}");
-    Logger().d("응답 상태코드 확인 : ${responseDto.statusCode}");
-
+    Logger().d("프로필 등록 값 확인 : ${responseDto.data}");
+    Logger().d("프로필 등록 값 확인 : ${responseDto.statusCode}");
     return responseDto;
   }
 }

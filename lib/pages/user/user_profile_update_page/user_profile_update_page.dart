@@ -1,4 +1,5 @@
 import 'package:finalproject_front/controller/user_controller.dart';
+import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/pages/user/components/profile_update_form.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,14 +9,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserProfileUpdatePage extends ConsumerWidget {
   final ProfileRespDto model;
+  ProfileUpdateReqDto profileUpdateReqDto = ProfileUpdateReqDto.single();
   UserProfileUpdatePage({required this.model, super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
       body: ProfileUpdateForm(
         model: model,
+        profileUpdateReqDto: profileUpdateReqDto,
       ),
     );
   }

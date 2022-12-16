@@ -1,21 +1,27 @@
 import 'package:finalproject_front/controller/user_controller.dart';
-import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
-import 'package:finalproject_front/pages/user/components/profile_insert_form.dart';
-import 'package:finalproject_front/pages/user/components/profile_update_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../dto/request/profile_insert_req_dto.dart';
+import '../components/profile_Insert_form.dart';
+
 class UserProfileInsertPage extends ConsumerWidget {
-  int id;
-  UserProfileInsertPage({required this.id, super.key});
+  UserProfileInsertPage({required this.username, super.key});
+  ProfileInsertReqDto profileInsertReqDto = ProfileInsertReqDto.single();
+
+  String username;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: ProfileInsertForm(),
+      body: ProfileInsertForm(
+        profileInsertReqDto: profileInsertReqDto,
+        username: username,
+      ),
     );
   }
 }
@@ -25,7 +31,7 @@ AppBar _buildAppbar(BuildContext context) {
     elevation: 1,
     centerTitle: true,
     title: Text(
-      "프로필 수정",
+      "프로필 등록",
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
     ),
     leading: IconButton(

@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:finalproject_front/core/util/custom_alert_dialog.dart';
 import 'package:finalproject_front/domain/user_session.dart';
+import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
@@ -42,14 +45,15 @@ class UserController {
     }
   }
 
-  Future<void> moveProfileInsertOrDetailPage(int id) async {
+  Future<void> moveProfileInsertOrDetailPage({required int id, required String username}) async {
     // 프로필이 없다면 프로필 등록 페이지로 이동.
-    Logger().d("ID출력 ====== ${id}");
+    Logger().d("여기 실행됨? ${id}");
     if (id == 0) {
       CustomAlertDialog(gContext, "프로필이 없습니다.", "프로필 등록페이지로 이동");
-      await Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileInsertPage(id: id)));
+      Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileInsertPage(username: username)));
+    } else {
+      Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id)));
     }
-    await Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: id)));
   }
 
   Future<void> logout() async {
@@ -89,31 +93,29 @@ class UserController {
       LocalService().fetchJwtToken();
       Navigator.pop(gContext);
     } else {
-      ScaffoldMessenger.of(gContext!).showSnackBar(
+      ScaffoldMessenger.of(gContext).showSnackBar(
         SnackBar(content: Text("게시글 수정 실패 : ${responseDto.msg}")),
       );
     }
   }
 
-  Future<void> insertProfile(
-      {required int id,
-      required String introduction,
-      required String region,
-      required String certification,
-      String? careerYear,
-      required String career,
-      String? filePath}) async {
-    Logger().d("커리어 확인 :${careerYear}");
-    Logger().d("파일 인코딩 확인 :${filePath}");
-    ProfileInsertReqDto profileInsertReqDto = ProfileInsertReqDto(
-      filePath: filePath,
-      introduction: introduction,
-      region: region,
-      certification: certification,
-      careerYear: careerYear,
-      career: career,
-    );
-    ResponseDto responseDto = await userService.fetchInsertProfile(id, profileInsertReqDto);
+  Future<void> updateProfile({required int id, required ProfileUpdateReqDto profileUpdateReqDto}) async {
+    ResponseDto responseDto = await userService.fetchUpdateProfile(id, profileUpdateReqDto);
+    if (responseDto.statusCode < 400) {
+      LocalService().fetchJwtToken();
+      Navigator.pop(gContext);
+    }
+  }
+
+  void insertProfile({required ProfileInsertReqDto profileInsertReqDto}) async {
+    ResponseDto responseDto = await userService.fetchInsertProfile(profileInsertReqDto);
+    if (responseDto.statusCode < 400) {
+      Navigator.popAndPushNamed(gContext, "/login");
+    } else {
+      ScaffoldMessenger.of(gContext).showSnackBar(
+        SnackBar(content: Text("회원가입 실패")),
+      );
+    }
   }
 
   // void delete() {

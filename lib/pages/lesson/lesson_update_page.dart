@@ -1,9 +1,4 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
-import 'package:finalproject_front/pages/components/custom_text_field.dart';
-import 'package:finalproject_front/pages/lesson/components/category_select.dart';
-import 'package:finalproject_front/pages/lesson/components/lesson_deadline.dart';
 import 'package:finalproject_front/pages/lesson/components/lesson_image.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 class LessonUpdatePage extends StatefulWidget {
   const LessonUpdatePage({Key? key}) : super(key: key);

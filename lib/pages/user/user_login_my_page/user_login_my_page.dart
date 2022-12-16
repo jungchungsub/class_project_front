@@ -45,14 +45,14 @@ class UserLoginMyPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildUserProfile(
-                  context,
-                  model.myPageRespDto.role,
-                  model.myPageRespDto.username,
-                  "전문가",
-                  model.myPageRespDto.profileDto!.profilePhoto!,
-                  userCT,
-                  model.myPageRespDto.id,
-                  defaultProfile,
+                  context: context,
+                  role: model.myPageRespDto.role,
+                  username: model.myPageRespDto.username,
+                  changeRole: "전문가",
+                  profileImagePath: model.myPageRespDto.profileDto!.profilePhoto!,
+                  userCT: userCT,
+                  id: model.myPageRespDto.profileDto!.id!,
+                  defaultProfile: defaultProfile,
                 ),
                 SizedBox(height: gap_l),
                 Text(
@@ -131,13 +131,23 @@ class UserLoginMyPage extends ConsumerWidget {
   }
 }
 
-Widget _buildUserProfile(BuildContext context, String role, String username, String changeRole, String profileImagePath, UserController userCT,
-    int? id, String defaultProfile) {
+Widget _buildUserProfile(
+    {required BuildContext context,
+    required String role,
+    required String username,
+    required String changeRole,
+    required String profileImagePath,
+    required UserController userCT,
+    required int id,
+    required String defaultProfile}) {
   return Row(
     children: [
       InkWell(
           onTap: () {
-            userCT.moveProfileInsertOrDetailPage(id!);
+            userCT.moveProfileInsertOrDetailPage(
+              id: id,
+              username: username,
+            );
           },
           child: profileImagePath == ''
               ? ClipRRect(

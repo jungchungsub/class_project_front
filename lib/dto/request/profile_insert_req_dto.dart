@@ -1,12 +1,16 @@
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
 import 'dart:convert';
 
-ProfileUpdateReqDto responseDtoFromJson(String str) => ProfileUpdateReqDto.fromJson(json.decode(str));
+ProfileInsertReqDto welcomeFromJson(String str) => ProfileInsertReqDto.fromJson(json.decode(str));
 
-String responseDtoToJson(ProfileUpdateReqDto data) => json.encode(data.toJson());
+String welcomeToJson(ProfileInsertReqDto data) => json.encode(data.toJson());
 
-class ProfileUpdateReqDto {
-  ProfileUpdateReqDto.single();
-  ProfileUpdateReqDto({
+class ProfileInsertReqDto {
+  ProfileInsertReqDto.single();
+  ProfileInsertReqDto({
     this.filePath,
     this.introduction,
     this.region,
@@ -22,7 +26,7 @@ class ProfileUpdateReqDto {
   String? careerYear;
   String? career;
 
-  factory ProfileUpdateReqDto.fromJson(Map<String, dynamic> json) => ProfileUpdateReqDto(
+  factory ProfileInsertReqDto.fromJson(Map<String, dynamic> json) => ProfileInsertReqDto(
         filePath: json["filePath"],
         introduction: json["introduction"],
         region: json["region"],

@@ -15,7 +15,7 @@ class LessonService {
 
   Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
     //Logger().d("id출력service:${lessonId}");
-    Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}", jwtToken: jwtToken);
+    Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
     ResponseDto responseDto = toResponseDto(response);
     Logger().d(response.body);
     final value = responseDto.data["lessonAvgGrade"];
@@ -31,7 +31,7 @@ class LessonService {
   }
 
   Future<ResponseDto> fetchHomeList(String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
+    Response response = await httpConnector.get(path: "/api/main");
 
     ResponseDto responseDto = toResponseDto(response); //
     if (responseDto.statusCode < 300) {

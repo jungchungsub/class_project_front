@@ -1,25 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
-
-import 'package:dropdown_button2/dropdown_button2.dart';
 
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
-import 'package:finalproject_front/pages/lesson/components/category_period.dart';
-
 import 'package:finalproject_front/size.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
-import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 
 import 'lesson_deadline.dart';
 
@@ -33,7 +23,6 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _time = TextEditingController();
   final _price = TextEditingController();
   final _possibleDay = TextEditingController();
-  final _photo = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -54,7 +43,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
   @override
   void initState() {
     super.initState();
-    scrollController = new ScrollController();
+    scrollController = ScrollController();
   }
 
   void _buildShowDatePickerPop() {
@@ -243,15 +232,13 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
       children: [
         //open button ----------------
         _imagefile != null
-            ? Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.file(
-                    File(_imagefile!.path),
-                    width: 200,
-                    height: 200,
-                    fit: BoxFit.cover,
-                  ),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(
+                  File(_imagefile!.path),
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
                 ),
               )
             : Container(
@@ -353,41 +340,6 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-//possibleDays: selectedValue,
-
-  Widget _selectCarrer(LessonInsertReqDto lessonInsertReqDto) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            children: [
-              Text(
-                "카테고리 선택",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: gBorderColor, width: 3),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: selectedCarrerButton(
-              lessonInsertReqDto: lessonInsertReqDto,
-            ),
-            width: 400,
-            height: 60,
-          )
         ],
       ),
     );
