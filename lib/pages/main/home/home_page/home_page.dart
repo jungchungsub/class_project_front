@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/category_controller.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
@@ -18,6 +19,7 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     LessonController lessonCT = ref.read(lessonController);
     HomePageModel? model = ref.watch(homePageViewModel);
+    CategoryController categoryCT = ref.read(categorryController);
 
     Logger().d("homePage 실행");
     return Scaffold(
@@ -34,7 +36,29 @@ class HomePage extends ConsumerWidget {
                       children: [
                         _buildMainImage(),
                         SizedBox(height: gap_l),
-                        _buildCategory(),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _buildCategory11("assets/beauty.png", "뷰티", categoryCT),
+                                _buildCategory11("assets/sports.png", "운동", categoryCT),
+                                _buildCategory11("assets/Headphones.png", "댄스", categoryCT),
+                                _buildCategory11("assets/Microphone.png", "뮤직", categoryCT),
+                              ],
+                            ),
+                            SizedBox(height: gap_l),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _buildCategory11("assets/paint.png", "미술", categoryCT),
+                                _buildCategory11("assets/read.png", "문학", categoryCT),
+                                _buildCategory11("assets/art.png", "공예", categoryCT),
+                                _buildCategory11("assets/Search.png", "기타", categoryCT),
+                              ],
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -44,6 +68,42 @@ class HomePage extends ConsumerWidget {
             ];
           },
           body: _buildClassList(context, "/lessonDetail", lessonCT, model)),
+    );
+  }
+
+  Widget _buildCategory11(String image, String text, CategoryController categoryCT) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            //lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffF9F9F9),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      "${image}",
+                      fit: BoxFit.cover,
+                      height: 40,
+                      width: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+        Text("${text}")
+      ],
     );
   }
 
@@ -122,20 +182,8 @@ class HomePage extends ConsumerWidget {
 
   Divider _buildDivider() {
     return Divider(
-      color: gBorderColor,
+      height: 1,
       thickness: 1.0,
-    );
-  }
-
-  Row _buildCategory() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CategorySelect(image: "assets/sports.png", text: "뷰티・운동", path: "/categoryDetail"),
-        CategorySelect(image: "assets/Headphones.png", text: "댄스・뮤직", path: "/categoryDetail"),
-        CategorySelect(image: "assets/art.png", text: "미술・문학", path: "/categoryDetail"),
-        CategorySelect(image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
-      ],
     );
   }
 

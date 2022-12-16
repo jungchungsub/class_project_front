@@ -38,32 +38,7 @@ class LessonController {
     Navigator.push(gContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
   }
 
-  Future<void> lessonInsert(
-      {
-      // required String name,
-      // String? photo,
-      // required int price,
-      // required String place,
-      // required int lessonTime,
-      // required int lessonCount,
-      // String? possibleDays,
-      // required String curriculum,
-      // required String policy,
-      // required DateTime deadline,
-      required LessonInsertReqDto lessonInsertReqDto}) async {
-    // LessonInsertReqDto lessonInsertReqDto = LessonInsertReqDto(
-    //   name: name,
-    //   photo: photo,
-    //   price: price,
-    //   place: place,
-    //   lessonTime: lessonTime,
-    //   lessonCount: lessonCount,
-    //   possibleDays: possibleDays,
-    //   curriculum: curriculum,
-    //   policy: policy,
-    //   deadline: deadline,
-    // );
-
+  Future<void> lessonInsert({required LessonInsertReqDto lessonInsertReqDto}) async {
     ResponseDto responseDto = await lessonService.fetchlessonInsert(lessonInsertReqDto);
   }
 }
