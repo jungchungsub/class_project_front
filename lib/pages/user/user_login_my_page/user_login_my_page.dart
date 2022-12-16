@@ -20,6 +20,7 @@ class UserLoginMyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserLoginMyPageModel? model = ref.watch(userLoginMyPageViewModel);
+
     final userCT = ref.read(userController);
 
     return Scaffold(

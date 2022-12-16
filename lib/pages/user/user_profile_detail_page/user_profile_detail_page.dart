@@ -19,7 +19,6 @@ class UserProfileDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserProfileDetailPageModel? model = ref.watch(userProfileDetailPageViewModel(id));
-    Logger().d("디테일 페이지 유저 확인 : ${model?.profileRespDto.user.username}");
     return Scaffold(
       appBar: _buildAppbar(context),
       body: _buildBody(context, model),
