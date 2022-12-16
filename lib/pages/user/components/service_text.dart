@@ -22,10 +22,7 @@ class ServiceText extends StatelessWidget {
         children: [
           Text(
             "${serviceText}",
-            style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-                color: gSubTextColor),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: gSubTextColor),
           ),
           Icon(
             CupertinoIcons.right_chevron,

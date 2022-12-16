@@ -30,6 +30,12 @@ class UserLoginMyPage extends ConsumerWidget {
   }
 
   Widget _buildBody(BuildContext context, UserLoginMyPageModel? model, UserController userCT) {
+    // 유저 이미지 가져오는데 잠깐 시간이 필요
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -40,32 +46,32 @@ class UserLoginMyPage extends ConsumerWidget {
               children: [
                 _buildUserProfile(
                   context,
-                  model!.myPageRespDto.role,
+                  model.myPageRespDto.role,
                   model.myPageRespDto.username,
                   "전문가",
-                  "assets/picture.jpg",
+                  model.myPageRespDto.profileDto!.profilePhoto!,
                   userCT,
-                  model.myPageRespDto.profileDto!.id,
+                  model.myPageRespDto.id,
                   defaultProfile,
                 ),
                 SizedBox(height: gap_l),
                 Text(
                   "나의 서비스",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: gap_m),
                 ServiceText(routePath: "/paymentInstallmentList", serviceText: "결제/취소 내역"),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_m),
                 ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_m),
                 ServiceText(routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_m),
                 ServiceText(routePath: "/customerService", serviceText: "고객센터"),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_m),
                 ServiceText(routePath: "/lessonInsert", serviceText: "레슨 등록 전문가 "),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_m),
                 ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역 전문가"),
-                SizedBox(height: gap_s),
+                SizedBox(height: gap_m),
                 ServiceText(routePath: "/lessonExpertList", serviceText: "등록한레슨 전문가"),
                 SizedBox(height: gap_xxl),
                 BottomImageBox(),
@@ -130,19 +136,32 @@ Widget _buildUserProfile(BuildContext context, String role, String username, Str
   return Row(
     children: [
       InkWell(
-        onTap: () {
-          userCT.moveProfileInsertOrDetailPage(id!);
-        },
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(150),
-          child: Image.asset(
-            profileImagePath,
-            width: 80,
-            height: 80,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+          onTap: () {
+            userCT.moveProfileInsertOrDetailPage(id!);
+          },
+          child: profileImagePath == ''
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(150),
+                  child: Flexible(
+                    child: Image.asset(
+                      defaultProfile,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(150),
+                  child: Flexible(
+                    child: Image.asset(
+                      profileImagePath,
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )),
       SizedBox(width: 20),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
