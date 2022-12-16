@@ -16,7 +16,7 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
 
   Future<void> notifyViewModel() async {
     String? jwtToken;
-    ResponseDto responseDto = await categoryService.fetchCategoryList(categoryId, jwtToken);
+    ResponseDto responseDto = await categoryService.fetchCategoryList(categoryId);
 
     if (responseDto.statusCode < 300) {
       state = CategoryPageModel(responseDto.data);
