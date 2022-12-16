@@ -124,6 +124,9 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
             child: Column(
               children: [
                 _buildImageUploader(lessonInsertReqDto),
+                SizedBox(
+                  height: gap_m,
+                ),
                 _buildTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1, fieldController: widget._name, onChanged: (value) {
                   lessonInsertReqDto.name = value;
                 }),
@@ -164,7 +167,49 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                   lessonInsertReqDto: lessonInsertReqDto,
                 ),
                 SizedBox(height: gap_l),
-                _selectCarrer(lessonInsertReqDto),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "카테고리선택",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: gap_m),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: gBorderColor, width: 3),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: DropdownButtonFormField<int?>(
+                        decoration: InputDecoration(
+                          hintText: '카테고리 선택',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          //마우스 올리고 난 후 스타일
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+
+                        // underline: Container(height: 1.4, color: Color(0xffc0c0c0)),
+                        onChanged: (int? newValue) {
+                          lessonInsertReqDto.categoryId = newValue;
+                        },
+                        items: [1, 2, 3, 4, 5, 6, 7, 8].map<DropdownMenuItem<int?>>((int? i) {
+                          return DropdownMenuItem<int?>(
+                            value: i,
+                            child: Text({1: '뷰티', 2: '운동', 3: '댄스', 4: '뮤직', 5: '미술', 6: '문학', 7: '공예', 8: '기타'}[i] ?? '미선택'),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: gap_l),
+
                 ElevatedButton(
                   onPressed: () {
                     lessonInsertReqDto.photo = profileImage;
@@ -204,21 +249,21 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
         _imagefile != null
             ? Container(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(150),
+                  borderRadius: BorderRadius.circular(10),
                   child: Image.file(
                     File(_imagefile!.path),
-                    width: 100,
-                    height: 100,
+                    width: 200,
+                    height: 200,
                     fit: BoxFit.cover,
                   ),
                 ),
               )
             : Container(
-                width: 100,
+                width: 200,
                 height: 100,
                 decoration: BoxDecoration(
                   border: Border.all(color: gBorderColor),
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
         SizedBox(width: gap_m),
