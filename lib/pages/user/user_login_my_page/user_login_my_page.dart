@@ -20,6 +20,7 @@ class UserLoginMyPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserLoginMyPageModel? model = ref.watch(userLoginMyPageViewModel);
+    Logger().d("로그인 페이지 확인 : ${model?.myPageRespDto.username}");
 
     final userCT = ref.read(userController);
 

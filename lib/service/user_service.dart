@@ -59,6 +59,7 @@ class UserService {
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("유저 정보 확인 : ${responseDto.data}");
     if (responseDto.data != null) {
+      Logger().d("여기 실행? 프로필");
       responseDto.data = MyPageRespDto.fromJson(responseDto.data);
 
       if (responseDto.data.role == "USER") {

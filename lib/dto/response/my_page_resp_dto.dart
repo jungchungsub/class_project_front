@@ -1,33 +1,59 @@
+// To parse this JSON data, do
+//
+//     final welcome = welcomeFromJson(jsonString);
+
 import 'dart:convert';
 
-MyPageRespDto responseDtoFromJson(String str) => MyPageRespDto.fromJson(json.decode(str));
+MyPageRespDto welcomeFromJson(String str) => MyPageRespDto.fromJson(json.decode(str));
 
-String responseDtoToJson(MyPageRespDto data) => json.encode(data.toJson());
+String welcomeToJson(MyPageRespDto data) => json.encode(data.toJson());
 
 class MyPageRespDto {
   MyPageRespDto({
     required this.id,
     required this.username,
     required this.role,
-    required this.filePath,
+    this.profileDto,
   });
 
   int id;
   String username;
   String role;
-  String? filePath;
+  ProfileDto? profileDto;
 
   factory MyPageRespDto.fromJson(Map<String, dynamic> json) => MyPageRespDto(
         id: json["id"],
         username: json["username"],
         role: json["role"],
-        filePath: json["filePath"],
+        profileDto: ProfileDto.fromJson(
+          json["profileDto"] ?? {},
+        ),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "username": username,
         "role": role,
-        "filePath": filePath,
+        "profileDto": profileDto?.toJson(),
+      };
+}
+
+class ProfileDto {
+  ProfileDto({
+    this.id,
+    this.profilePhoto,
+  });
+
+  int? id;
+  String? profilePhoto;
+  factory ProfileDto.fromJson(Map<String, dynamic> json) => ProfileDto(
+        // null일 경우 id : 0, Photo : ''리턴
+        id: json["id"] ?? 0,
+        profilePhoto: json["profilePhoto"] ?? '',
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "profilePhoto": profilePhoto,
       };
 }
