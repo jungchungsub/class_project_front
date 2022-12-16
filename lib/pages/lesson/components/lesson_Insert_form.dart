@@ -33,6 +33,7 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _price = TextEditingController();
   final _possibleDay = TextEditingController();
   final _photo = TextEditingController();
+  final _category = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -163,6 +164,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                     onChanged: (value) {
                   lessonInsertReqDto.policy = value;
                 }),
+                _selectCarrer(),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "가능일", hint: "가능일을 입력하세요", lines: 1, fieldController: widget._possibleDay,
                     onChanged: (value) {

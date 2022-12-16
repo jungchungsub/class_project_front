@@ -1,3 +1,4 @@
+import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -60,7 +61,8 @@ class _LessonDeadLineState extends State<LessonDeadLine> {
                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                     setState(() {
                       dateInput.text = formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
-                      widget.lessonInsertReqDto.deadline = dateInput.text;
+                      Logger().d(dateInput.text);
+                      widget.lessonInsertReqDto.deadLine = dateInput.text;
                     });
                   } else {}
                 },
