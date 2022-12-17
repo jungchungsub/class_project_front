@@ -50,7 +50,8 @@ class UserController {
       moveAlertDialog(gContext, "프로필이 없습니다.", "프로필 등록 페이지로 이동", username);
     } else {
       //프로필이 있다면 아래로 이동
-      Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id)));
+      Navigator.push(
+          gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id, username: UserSession.user.username)));
     }
   }
 

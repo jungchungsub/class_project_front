@@ -7,13 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
+import '../../../dto/request/profile_update_info.dart';
 import '../../../size.dart';
 
 class UserProfileDetailPage extends ConsumerWidget {
   final int id;
   final String defaultProfile = "assets/defaultProfile.jpeg";
-  UserProfileDetailPage({required this.id, super.key});
+  final String username;
+
+  UserProfileDetailPage({required this.id, super.key, required this.username});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,17 +54,31 @@ class UserProfileDetailPage extends ConsumerWidget {
             SizedBox(height: 20),
             _buildProfileContent(context, "경력기간", model.profileRespDto.careerYear),
             SizedBox(height: 20),
-            _buildProfileUpdateButton(context, model),
+            _buildProfileUpdateButton(context, model)
           ],
         ),
       ),
     );
   }
 
-  Widget _buildProfileUpdateButton(BuildContext context, UserProfileDetailPageModel? model) {
+  Widget _buildProfileUpdateButton(BuildContext context, UserProfileDetailPageModel model) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileUpdatePage(model: model!.profileRespDto)));
+        Logger().d("디테일 페이지 확인${model.profileRespDto.region} ");
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => UserProfileUpdatePage(
+                        model: ProfileUpdateInfo(
+                      id: id,
+                      username: username,
+                      filePath: model.profileRespDto.filePath!,
+                      introduction: model.profileRespDto.introduction!,
+                      region: model.profileRespDto.region!,
+                      certification: model.profileRespDto.certification!,
+                      careerYear: model.profileRespDto.careerYear!,
+                      career: model.profileRespDto.career!,
+                    ))));
       },
       style: ElevatedButton.styleFrom(
         primary: gButtonOffColor,

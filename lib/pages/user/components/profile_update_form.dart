@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
+import 'package:finalproject_front/dto/request/profile_update_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,11 +13,12 @@ import '../../../dto/response/profile_resp_dto.dart';
 import '../../../size.dart';
 
 class ProfileUpdateForm extends ConsumerStatefulWidget {
-  final _introduction = TextEditingController();
-  final _region = TextEditingController();
-  final _certification = TextEditingController();
-  final _career = TextEditingController();
-  ProfileDetailRespDto model;
+  var _introduction = TextEditingController();
+  var _region = TextEditingController();
+  var _certification = TextEditingController();
+  var _career = TextEditingController();
+
+  ProfileUpdateInfo model;
   late ProfileUpdateReqDto profileUpdateReqDto;
   static const String defaultProfile = "assets/defaultProfile.jpeg";
 
@@ -36,6 +38,11 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
   @override
   void initState() {
+    // 처음 빌드 될때만 초기화 할 값들
+    widget._introduction.text = widget.model.introduction;
+    widget._region.text = widget.model.region;
+    widget._certification.text = widget.model.certification;
+    widget._career.text = widget.model.career;
     super.initState();
     scrollController = ScrollController();
   }
@@ -71,10 +78,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
   @override
   Widget build(BuildContext context) {
-    widget._introduction.text = widget.model.introduction!;
-    widget._region.text = widget.model.region!;
-    widget._certification.text = widget.model.certification!;
-    widget._career.text = widget.model.career!;
     final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
         child: Form(
@@ -84,7 +87,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           _buildImageUploader(),
           SizedBox(height: gap_l),
-          _buildProfileId(widget.model.user.username),
+          _buildProfileId(widget.model.username),
           SizedBox(height: gap_l),
           _buildTextField(
             scrollAnimate,
@@ -175,7 +178,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
                 onPressed: () {
                   widget.profileUpdateReqDto.filePath = profileImage;
                   userCT.updateProfile(
-                    id: widget.model.user.id,
+                    id: widget.model.id,
                     profileUpdateReqDto: widget.profileUpdateReqDto,
                   );
                 },
