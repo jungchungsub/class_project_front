@@ -5,6 +5,7 @@ import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
 
 import 'package:finalproject_front/pages/search/search_main_page.dart';
 import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/master_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,16 +31,32 @@ class _MainPageState extends State<MainPage> {
   }
 
   IndexedStack _buildIndexedStack() {
-    return IndexedStack(
-      index: _selectedIndex, //아이콘클릭시 화면 이동
-      children: [
-        HomePage(),
-        SearchPage(),
-        SubscribePage(userId: UserSession.user.id),
-        ChatListPage(),
-        UserLoginMyPage(),
-      ],
-    );
+    // 전문가 일경우
+    if (UserSession.user.role == '전문가') {
+      return IndexedStack(
+        index: _selectedIndex, //아이콘클릭시 화면 이동
+        children: [
+          HomePage(),
+          SearchPage(),
+          SubscribePage(userId: UserSession.user.id),
+          ChatListPage(),
+          MasterLoginMyPage(),
+        ],
+      );
+    }
+    // 일반 회원일 경우
+    else {
+      return IndexedStack(
+        index: _selectedIndex, //아이콘클릭시 화면 이동
+        children: [
+          HomePage(),
+          SearchPage(),
+          SubscribePage(userId: UserSession.user.id),
+          ChatListPage(),
+          UserLoginMyPage(),
+        ],
+      );
+    }
   }
 
   BottomNavigationBar _buildBottomNavigationBar() {

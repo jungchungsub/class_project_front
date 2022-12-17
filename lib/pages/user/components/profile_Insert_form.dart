@@ -3,13 +3,14 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
 import '../../../constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../dto/request/profile_insert_req_dto.dart';
+import '../../../dto/request/profile_req_dto.dart';
 import '../../../size.dart';
 
 // ignore: must_be_immutable
@@ -23,15 +24,12 @@ class ProfileInsertForm extends ConsumerStatefulWidget {
 }
 
 class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
-  XFile? pickedFile;
   XFile? _imagefile;
   ImagePicker imgpicker = ImagePicker();
   late String? profileImage;
 
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
   late ScrollController scrollController;
-
-  String? selectedValue;
 
   @override
   void initState() {
@@ -41,13 +39,18 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
 
   openImages() async {
     try {
+      dynamic sendImage; // 디바이스 경로
       var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
       //you can use ImageCourse.camera for Camera capture
       if (pickedfile != null) {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
-        Uint8List? data = await _imagefile?.readAsBytes();
-        String profileImage = base64Encode(data!);
+        sendImage = _imagefile?.path;
+        final encodeImage = utf8.encode(sendImage);
+        Logger().d("파일 경로 확인 : $sendImage");
+        List<int> data = encodeImage;
+        String profileImage = base64Encode(data);
+        Logger().d("인코딩 경로 확인 : $profileImage");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -65,7 +68,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
         child: Form(
@@ -160,7 +162,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
               SizedBox(height: gap_l),
               ElevatedButton(
                 onPressed: () {
-                  widget.profileInsertReqDto.careerYear = selectedValue;
+                  widget.profileInsertReqDto.filePath = profileImage;
                   userCT.insertProfile(
                     profileInsertReqDto: widget.profileInsertReqDto,
                   );
@@ -172,7 +174,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "프로필 수정",
+                    "프로필 등록",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -193,15 +195,13 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
       children: [
         //open button ----------------
         _imagefile != null
-            ? Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(150),
-                  child: Image.file(
-                    File(_imagefile!.path),
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.file(
+                  File(_imagefile!.path),
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
                 ),
               )
             : Container(
@@ -213,7 +213,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                 ),
               ),
         SizedBox(width: gap_m),
-        Container(
+        SizedBox(
           height: 90,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,12 +303,12 @@ Widget _buildTextField(
             TextSpan(
               children: [
                 TextSpan(
-                  text: "${fieldTitle}",
+                  text: "$fieldTitle",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 if (subTitle != null)
                   TextSpan(
-                    text: "${subTitle}",
+                    text: "$subTitle",
                     style: TextStyle(color: gSubTextColor, fontSize: 10, fontWeight: FontWeight.bold),
                   )
               ],
@@ -324,7 +324,7 @@ Widget _buildTextField(
           keyboardType: TextInputType.multiline,
           maxLines: lines,
           decoration: InputDecoration(
-            hintText: "${hint}",
+            hintText: "$hint",
             hintStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.normal,

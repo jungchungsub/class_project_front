@@ -1,20 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:finalproject_front/core/util/custom_alert_dialog.dart';
+import 'package:finalproject_front/core/util/move_alert_dialog.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_view_model.dart';
+import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/user_profile_detail_page.dart';
-import 'package:finalproject_front/pages/user/user_profile_insert_page/user_profile_insert_page.dart';
 import 'package:finalproject_front/service/local_service.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart';
-import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
 
@@ -47,11 +46,10 @@ class UserController {
 
   Future<void> moveProfileInsertOrDetailPage({required int id, required String username}) async {
     // 프로필이 없다면 프로필 등록 페이지로 이동.
-    Logger().d("여기 실행됨? ${id}");
     if (id == 0) {
-      CustomAlertDialog(gContext, "프로필이 없습니다.", "프로필 등록페이지로 이동");
-      Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileInsertPage(username: username)));
+      moveAlertDialog(gContext, "프로필이 없습니다.", "프로필 등록 페이지로 이동", username);
     } else {
+      //프로필이 있다면 아래로 이동
       Navigator.push(gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id)));
     }
   }
@@ -78,7 +76,7 @@ class UserController {
     ResponseDto responseDto = await userService.fetchLogin(loginReqDto);
     if (responseDto.statusCode < 400) {
       await LocalService().fetchJwtToken();
-      Navigator.of(gContext).popAndPushNamed("/main");
+      Navigator.of(navigatorKey.currentContext!).pushNamedAndRemoveUntil("/main", (route) => false);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
         const SnackBar(content: Text("로그인 실패")),
@@ -102,15 +100,19 @@ class UserController {
   Future<void> updateProfile({required int id, required ProfileUpdateReqDto profileUpdateReqDto}) async {
     ResponseDto responseDto = await userService.fetchUpdateProfile(id, profileUpdateReqDto);
     if (responseDto.statusCode < 400) {
+      //이전 페이지가 수정된 데이터로 업데이트
+      _ref.read(userProfileDetailPageViewModel(id).notifier).notifyViewModel();
       LocalService().fetchJwtToken();
       Navigator.pop(gContext);
     }
   }
 
-  void insertProfile({required ProfileInsertReqDto profileInsertReqDto}) async {
+  Future<void> insertProfile({required ProfileInsertReqDto profileInsertReqDto}) async {
     ResponseDto responseDto = await userService.fetchInsertProfile(profileInsertReqDto);
     if (responseDto.statusCode < 400) {
-      Navigator.popAndPushNamed(gContext, "/login");
+      // MyPage에서 profile의 여부에 따라 사진이 달라지기때문에 초기화
+      _ref.read(userMyPageViewModel.notifier).initViewModel();
+      Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
         SnackBar(content: Text("회원가입 실패")),

@@ -2,6 +2,8 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/master_model/master_my_page_model.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/master_model/master_my_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_update_page/user_update_page.dart';
@@ -13,13 +15,13 @@ import 'package:logger/logger.dart';
 
 import '../components/bottom_image_box.dart';
 
-class UserLoginMyPage extends ConsumerWidget {
-  const UserLoginMyPage({Key? key}) : super(key: key);
+class MasterLoginMyPage extends ConsumerWidget {
+  const MasterLoginMyPage({Key? key}) : super(key: key);
   static const String defaultProfile = "assets/defaultProfile.jpeg";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    UserMyPageModel? model = ref.watch(userMyPageViewModel);
+    MasterMyPageModel? model = ref.watch(masterMyPageViewModel);
 
     final userCT = ref.read(userController);
 
@@ -29,8 +31,8 @@ class UserLoginMyPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context, UserMyPageModel? model, UserController userCT) {
-    Logger().d("일반회원 진행");
+  Widget _buildBody(BuildContext context, MasterMyPageModel? model, UserController userCT) {
+    Logger().d("전문가 실행");
     // 유저 이미지 가져오는데 잠깐 시간이 필요
     if (model == null) {
       return Center(
@@ -47,12 +49,12 @@ class UserLoginMyPage extends ConsumerWidget {
               children: [
                 _buildUserProfile(
                   context: context,
-                  role: model.userPageRespDto.role,
-                  username: model.userPageRespDto.username,
-                  changeRole: "전문가",
-                  profileImagePath: model.userPageRespDto.profileDto!.profilePhoto!,
+                  role: UserSession.user.role,
+                  username: model.masterPageRespDto.username,
+                  changeRole: "일반회원",
+                  profileImagePath: model.masterPageRespDto.profilePhoto!,
                   userCT: userCT,
-                  id: model.userPageRespDto.profileDto!.id!,
+                  id: UserSession.user.id!,
                   defaultProfile: defaultProfile,
                 ),
                 SizedBox(height: gap_l),
@@ -61,13 +63,13 @@ class UserLoginMyPage extends ConsumerWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: gap_m),
-                ServiceText(routePath: "/paymentInstallmentList", serviceText: "결제/취소 내역"),
-                SizedBox(height: gap_m),
-                ServiceText(routePath: "/userCoupon", serviceText: "쿠폰/프로모션"),
-                SizedBox(height: gap_m),
-                ServiceText(routePath: "/lessonClientList", serviceText: "수강중인 레슨"),
-                SizedBox(height: gap_m),
                 ServiceText(routePath: "/customerService", serviceText: "고객센터"),
+                SizedBox(height: gap_m),
+                ServiceText(routePath: "/lessonInsert", serviceText: "레슨 등록 하기"),
+                SizedBox(height: gap_m),
+                ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역"),
+                SizedBox(height: gap_m),
+                ServiceText(routePath: "/lessonExpertList", serviceText: "등록한 레슨 보기"),
                 SizedBox(height: gap_xxl),
                 BottomImageBox(),
               ],
@@ -209,7 +211,7 @@ Widget _buildUserProfile(
                     ),
                     SizedBox(width: 10),
                     Text(
-                      "$changeRole로 전환",
+                      "$changeRole으로 전환",
                       style: TextStyle(fontSize: 10),
                     ),
                   ],

@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-ProfileRespDto responseDtoFromJson(String str) => ProfileRespDto.fromJson(json.decode(str));
+ProfileDetailRespDto responseDtoFromJson(String str) => ProfileDetailRespDto.fromJson(json.decode(str));
 
-String responseDtoToJson(ProfileRespDto data) => json.encode(data.toJson());
+String responseDtoToJson(ProfileDetailRespDto data) => json.encode(data.toJson());
 
-class ProfileRespDto {
-  ProfileRespDto({
+class ProfileDetailRespDto {
+  ProfileDetailRespDto({
     required this.id,
     required this.filePath,
     required this.introduction,
@@ -22,21 +22,21 @@ class ProfileRespDto {
 
   int id;
   String? filePath;
-  String introduction;
-  String region;
-  String certification;
-  String careerYear;
-  String career;
+  String? introduction;
+  String? region;
+  String? certification;
+  String? careerYear;
+  String? career;
   User user;
 
-  factory ProfileRespDto.fromJson(Map<String, dynamic> json) => ProfileRespDto(
+  factory ProfileDetailRespDto.fromJson(Map<String, dynamic> json) => ProfileDetailRespDto(
         id: json["id"],
-        filePath: json["filePath"],
-        introduction: json["introduction"],
-        region: json["region"],
-        certification: json["certification"],
-        careerYear: json["careerYear"],
-        career: json["career"],
+        filePath: json["filePath"] ?? '',
+        introduction: json["introduction"] ?? '자기소개를 입력해주세요',
+        region: json["region"] ?? '지역을 입력해주세요',
+        certification: json["certification"] ?? '자격증을 입력해주세요',
+        careerYear: json["careerYear"] ?? '경력 기간을 입력해주세요',
+        career: json["career"] ?? '학력 전공을 입력해주세요',
         user: User.fromJson(json["user"]),
       );
 

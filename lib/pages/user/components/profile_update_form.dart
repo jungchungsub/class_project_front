@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-
 import '../../../constants.dart';
 import '../../../controller/user_controller.dart';
 import '../../../dto/response/profile_resp_dto.dart';
@@ -19,8 +16,9 @@ class ProfileUpdateForm extends ConsumerStatefulWidget {
   final _region = TextEditingController();
   final _certification = TextEditingController();
   final _career = TextEditingController();
-  ProfileRespDto model;
-  ProfileUpdateReqDto profileUpdateReqDto;
+  ProfileDetailRespDto model;
+  late ProfileUpdateReqDto profileUpdateReqDto;
+  static const String defaultProfile = "assets/defaultProfile.jpeg";
 
   ProfileUpdateForm({required this.model, super.key, required this.profileUpdateReqDto});
 
@@ -29,15 +27,12 @@ class ProfileUpdateForm extends ConsumerStatefulWidget {
 }
 
 class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
-  XFile? pickedFile;
   XFile? _imagefile;
   ImagePicker imgpicker = ImagePicker();
   late String? profileImage;
 
   final _formKey = GlobalKey<FormState>(); // 글로벌 key
   late ScrollController scrollController;
-
-  final List<String> items = ['신입', '2~3년', '4~7년', '7~10년'];
 
   @override
   void initState() {
@@ -47,13 +42,18 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
   openImages() async {
     try {
+      dynamic sendImage; // 디바이스 경로
       var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
       //you can use ImageCourse.camera for Camera capture
       if (pickedfile != null) {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
-        Uint8List? data = await _imagefile?.readAsBytes();
-        String profileImage = base64Encode(data!);
+        sendImage = _imagefile?.path;
+        final encodeImage = utf8.encode(sendImage);
+        Logger().d("파일 경로 확인 : $sendImage");
+        List<int> data = encodeImage;
+        String profileImage = base64Encode(data);
+        Logger().d("인코딩 경로 확인 : $profileImage");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -71,10 +71,10 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
   @override
   Widget build(BuildContext context) {
-    widget._introduction.text = widget.model.introduction;
-    widget._region.text = widget.model.region;
-    widget._certification.text = widget.model.certification;
-    widget._career.text = widget.model.career;
+    widget._introduction.text = widget.model.introduction!;
+    widget._region.text = widget.model.region!;
+    widget._certification.text = widget.model.certification!;
+    widget._career.text = widget.model.career!;
     final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
         child: Form(
@@ -149,7 +149,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
                   // underline: Container(height: 1.4, color: Color(0xffc0c0c0)),
                   onChanged: (String? newValue) {
-                    Logger().d("value출력 : ${newValue}");
                     widget.profileUpdateReqDto.careerYear = newValue;
                   },
                   items: ['신입', '2~3년', '4~7년', '8~10년'].map<DropdownMenuItem<String?>>((String? i) {
@@ -175,7 +174,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
               ElevatedButton(
                 onPressed: () {
                   widget.profileUpdateReqDto.filePath = profileImage;
-
                   userCT.updateProfile(
                     id: widget.model.user.id,
                     profileUpdateReqDto: widget.profileUpdateReqDto,
@@ -209,27 +207,27 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
       children: [
         //open button ----------------
         _imagefile != null
-            ? Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(150),
-                  child: Image.file(
-                    File(_imagefile!.path),
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                  ),
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.file(
+                  File(_imagefile!.path),
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
                 ),
               )
-            : Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(color: gBorderColor),
-                  borderRadius: BorderRadius.circular(50),
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.asset(
+                  widget.model.filePath!,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
                 ),
               ),
         SizedBox(width: gap_m),
-        Container(
+        SizedBox(
+          // Contanier -> SizedBox
           height: 90,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -249,11 +247,13 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
                     backgroundColor: gContentBoxColor,
                     primary: gPrimaryColor,
                   ),
-                  child: Text("이미지 선택",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      )),
+                  child: Text(
+                    "이미지 선택",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -264,40 +264,38 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
   }
 
   Widget _buildProfileId(String userId) {
-    return Container(
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "아이디",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "아이디",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+        SizedBox(height: 10),
+        TextFormField(
+          readOnly: true,
+          decoration: InputDecoration(
+            hintText: userId,
+            hintStyle: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
+            //3. 기본 textFormfield 디자인 - enabledBorder
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: gClientColor, width: 3.0),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            //마우스 올리고 난 후 스타일
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: gClientColor, width: 3.0),
+              borderRadius: BorderRadius.circular(15),
             ),
           ),
-          SizedBox(height: 10),
-          TextFormField(
-            readOnly: true,
-            decoration: InputDecoration(
-              hintText: userId,
-              hintStyle: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
-              ),
-              //3. 기본 textFormfield 디자인 - enabledBorder
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gClientColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              //마우스 올리고 난 후 스타일
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: gClientColor, width: 3.0),
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

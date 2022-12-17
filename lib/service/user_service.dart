@@ -48,52 +48,33 @@ class UserService {
     return responseDto; // ResponseDto 응답
   }
 
-// MyPage를 위한 유저 정보
-  Future<ResponseDto> getUserInfoForMyPage(int userId, String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/user/${userId}/mypage");
+// user 위한 유저 정보
+  Future<ResponseDto> fetchGetUserDetailMyPage(int userId) async {
+    Response response = await httpConnector.get(path: "/api/user/$userId/mypage");
+    ResponseDto responseDto = toResponseDto(response);
+
+    if (responseDto.data != null) {
+      responseDto.data = UserPageRespDto.fromJson(responseDto.data);
+    }
+    return responseDto;
+  }
+
+// master 위한 유저 정보
+  Future<ResponseDto> fetchGetMasterDetailMyPage(int userId) async {
+    Response response = await httpConnector.get(path: "/api/expert/$userId/mypage");
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.data != null) {
-      responseDto.data = MyPageRespDto.fromJson(responseDto.data);
+      responseDto.data = MasterPageRespDto.fromJson(responseDto.data);
     }
     return responseDto;
   }
 
 //프로필 정보
-  Future<ResponseDto> getDetailProfile(int userId) async {
-    Logger().d("프로필 아이디 보기 : ${userId}");
-    Logger().d("세션 id확인 : ${UserSession.user.id}");
+  Future<ResponseDto> fetchGetDetailProfile(int userId) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/profile");
-    Logger().d("프로필 상세보기 응답 바디 - 서비스 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("응답 데이터 확인 - 서비스 : ${responseDto.data}");
-    // final introduction = responseDto.data["introduction"];
-    // final region = responseDto.data["region"];
-    // final certification = responseDto.data["certification"];
-    // final careerYear = responseDto.data["careerYear"];
-    // final career = responseDto.data["career"];
-
-    // if (introduction == null) {
-    //   responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
-    // }
-    // if (introduction == null) {
-    //   responseDto.data["introduction"] = "자기 소개를 작성해주세요.";
-    // }
-    // if (region == null) {
-    //   responseDto.data["region"] = "지역을 작성해주세요.";
-    // }
-
-    // if (certification == null) {
-    //   responseDto.data["certification"] = "보유 자격증을 작성해주세요.";
-    // }
-    // if (careerYear == null) {
-    //   responseDto.data["careerYear"] = "경력 기간을 작성해주세요.";
-    // }
-    // if (career == null) {
-    //   responseDto.data["career"] = "학력 및 전공을 작성해주세요.";
-    // }
-
     if (responseDto.data != null) {
-      responseDto.data = ProfileRespDto.fromJson(responseDto.data);
+      responseDto.data = ProfileDetailRespDto.fromJson(responseDto.data);
     }
     return responseDto;
   }
