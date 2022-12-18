@@ -41,20 +41,21 @@ class HomePage extends ConsumerWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _buildCategory11("assets/beauty.png", "뷰티", categoryCT),
-                                _buildCategory11("assets/sports.png", "운동", categoryCT),
-                                _buildCategory11("assets/Headphones.png", "댄스", categoryCT),
-                                _buildCategory11("assets/Microphone.png", "뮤직", categoryCT),
+                                _buildCategory11("assets/beauty.png", "뷰티", lessonCT),
+                                _buildCategory11("assets/sports.png", "운동", lessonCT),
+                                _buildCategory11("assets/Headphones.png", "댄스", lessonCT),
+                                _buildCategory11("assets/Microphone.png", "뮤직", lessonCT),
+                                // CategorySelect(image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
                               ],
                             ),
                             SizedBox(height: gap_l),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _buildCategory11("assets/paint.png", "미술", categoryCT),
-                                _buildCategory11("assets/read.png", "문학", categoryCT),
-                                _buildCategory11("assets/art.png", "공예", categoryCT),
-                                _buildCategory11("assets/Search.png", "기타", categoryCT),
+                                _buildCategory11("assets/paint.png", "미술", lessonCT),
+                                _buildCategory11("assets/read.png", "문학", lessonCT),
+                                _buildCategory11("assets/art.png", "공예", lessonCT),
+                                _buildCategory11("assets/Search.png", "기타", lessonCT),
                               ],
                             ),
                           ],
@@ -71,12 +72,14 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategory11(String image, String text, CategoryController categoryCT) {
+  Widget _buildCategory11(String image, String text, LessonController lessonCT) {
     return Column(
       children: [
         InkWell(
           onTap: () {
-            //lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
+            // categoryCT.moveCategoryPage(categoryId: );
+            // lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
+            lessonCT.moveCategoryPage(categoryId: 1);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -339,3 +342,53 @@ class HomePage extends ConsumerWidget {
 //                         ],
 //                       ),
 //                     )
+
+class CategorySelect extends StatelessWidget {
+  final String image;
+  final String text;
+  final String path;
+
+  const CategorySelect({
+    required this.image,
+    required this.text,
+    required this.path,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, "${path}");
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffF9F9F9),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      "${image}",
+                      fit: BoxFit.cover,
+                      height: 40,
+                      width: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+        Text("${text}")
+      ],
+    );
+  }
+}

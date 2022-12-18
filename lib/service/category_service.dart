@@ -9,10 +9,11 @@ class CategoryService {
   final HttpConnector httpConnector = HttpConnector();
 
   Future<ResponseDto> fetchCategoryList(int categoryId) async {
+    Logger().d("통신 전:  ${categoryId}");
     Response response = await httpConnector.get(path: "/api/category/${categoryId}");
-
+    Logger().d("통신 후:  ${categoryId}");
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d(responseDto.statusCode);
+    Logger().d("상태값 확인 ${responseDto.statusCode}");
     if (responseDto.statusCode < 300) {
       responseDto.data = CategoryRespDto.fromJson(responseDto.data);
     }

@@ -1,5 +1,6 @@
 import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
+import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';
 import 'package:finalproject_front/service/lesson_service.dart';
@@ -40,5 +41,9 @@ class LessonController {
 
   Future<void> lessonInsert({required LessonInsertReqDto lessonInsertReqDto}) async {
     ResponseDto responseDto = await lessonService.fetchlessonInsert(lessonInsertReqDto);
+  }
+
+  void moveCategoryPage({required int categoryId}) {
+    Navigator.push(gContext, MaterialPageRoute(builder: ((context) => CategoryDetailPage(categoryId: categoryId))));
   }
 }

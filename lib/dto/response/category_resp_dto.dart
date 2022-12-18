@@ -18,7 +18,7 @@ class CategoryRespDto {
     required this.recommand,
     required this.ranking,
     required this.recent,
-    required this.subscribed,
+    required this.isSubscribed,
   });
 
   int lessonId;
@@ -29,7 +29,7 @@ class CategoryRespDto {
   bool recommand;
   int ranking;
   DateTime recent;
-  bool subscribed;
+  bool isSubscribed;
 
   factory CategoryRespDto.fromJson(Map<String, dynamic> json) => CategoryRespDto(
         lessonId: json["lessonId"],
@@ -40,7 +40,7 @@ class CategoryRespDto {
         recommand: json["recommand"],
         ranking: json["ranking"],
         recent: DateTime.parse(json["recent"]),
-        subscribed: json["subscribed"],
+        isSubscribed: json["isSubscribed"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,6 +52,6 @@ class CategoryRespDto {
         "recommand": recommand,
         "ranking": ranking,
         "recent": recent.toIso8601String(),
-        "subscribed": subscribed,
+        "subscribed": isSubscribed,
       };
 }
