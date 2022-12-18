@@ -1,6 +1,7 @@
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
+import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
@@ -64,8 +65,8 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/orderDetail": (context) => OrderDetailPage(),
-        // "/lessonDetail": (context) => LessonDetailPage(lessonId: 1),
-        "/categoryDetail": (context) => CategoryDetailPage(),
+        //"/lessonDetail": (context) => LessonDetailPage(lessonId: 1),
+        //"/categoryDetail": (context) => CategoryDetailPage(),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
         "/reviewInsert": (context) => LessonReviewInsertPage(),
         "/searchDetail": (context) => SearchDetailPage(), // 더미 적용
         "/lessonInsert": (context) => LessonInsertPage(),
+        "/chatroom": (context) => ChatRoomPage(),
       },
       theme: theme(),
     );

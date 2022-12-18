@@ -15,7 +15,7 @@ class LessonService {
 
   Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
     //Logger().d("id출력service:${lessonId}");
-    Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}", jwtToken: jwtToken);
+    Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
     ResponseDto responseDto = toResponseDto(response);
     Logger().d(response.body);
     final value = responseDto.data["lessonAvgGrade"];
@@ -31,7 +31,7 @@ class LessonService {
   }
 
   Future<ResponseDto> fetchHomeList(String? jwtToken) async {
-    Response response = await httpConnector.get(path: "/api/main", jwtToken: jwtToken);
+    Response response = await httpConnector.get(path: "/api/main");
 
     ResponseDto responseDto = toResponseDto(response); //
     if (responseDto.statusCode < 300) {
@@ -46,25 +46,9 @@ class LessonService {
   }
 
   Future<ResponseDto> fetchlessonInsert(LessonInsertReqDto lessonReqDto) async {
-    Logger().d("포토확인 : ${lessonReqDto.photo}");
-    Logger().d("제목 : ${lessonReqDto.name}");
-    Logger().d("커리큘럼 : ${lessonReqDto.curriculum}");
-    Logger().d("횟수 : ${lessonReqDto.lessonCount}");
-    Logger().d("시간 : ${lessonReqDto.lessonTime}");
-    Logger().d("장소 : ${lessonReqDto.place}");
-    Logger().d("가격 : ${lessonReqDto.price}");
-    Logger().d("취소 : ${lessonReqDto.policy}");
-    Logger().d("가능일 : ${lessonReqDto.possibleDays}");
-    Logger().d("마감일자 : ${lessonReqDto.deadline}");
-    Logger().d("카테고리 : ${lessonReqDto.categoryId}");
     String requestBody = jsonEncode(lessonReqDto);
-    Logger().d("서비스확인 : ${requestBody}");
     Response response = await httpConnector.post(path: "/api/lesson", body: requestBody);
-    Logger().d("서비스 리스폰스 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("응답 값 확인 : ${responseDto.data}");
-    Logger().d("응답 메세지 확인 : ${responseDto.msg}");
-    Logger().d("응답 상태코드 확인 : ${responseDto.statusCode}");
     return responseDto;
   }
 }
