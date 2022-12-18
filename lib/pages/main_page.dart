@@ -9,6 +9,7 @@ import 'package:finalproject_front/pages/user/user_login_my_page/master_login_my
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:logger/logger.dart';
 
 class MainPage extends StatefulWidget {
@@ -26,22 +27,31 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     Logger().d("mainPage 실행됨");
     return Scaffold(
-      body: _buildIndexedStack(),
-      bottomNavigationBar: _buildBottomNavigationBar(),
-    );
+        body: _buildIndexedStack(),
+        // bottomNavigationBar: _buildBottomNavigationBar(),
+        bottomNavigationBar: _buildBottomNavigationBar(onTap: (index) {
+          var pages = loadedPages;
+          if (!pages.contains(index)) {
+            pages.add(index);
+          }
+          setState(() {
+            _selectedIndex = index;
+            loadedPages = pages;
+          });
+        }));
   }
 
-  IndexedStack _buildIndexedStack() {
+  Widget _buildIndexedStack() {
     // 전문가 일경우
     if (UserSession.user.role == '전문가') {
       return IndexedStack(
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
           HomePage(),
-          SearchPage(),
-          SubscribePage(userId: UserSession.user.id),
-          ChatListPage(),
-          MasterLoginMyPage(),
+          loadedPages.contains(1) ? SearchPage() : Container(),
+          loadedPages.contains(2) ? SubscribePage(userId: UserSession.user.id) : Container(),
+          loadedPages.contains(3) ? ChatListPage() : Container(),
+          loadedPages.contains(4) ? MasterLoginMyPage() : Container(),
         ],
       );
     }
@@ -51,16 +61,16 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
           HomePage(),
-          SearchPage(),
-          SubscribePage(userId: UserSession.user.id),
-          ChatListPage(),
-          UserLoginMyPage(),
+          loadedPages.contains(1) ? SearchPage() : Container(),
+          loadedPages.contains(2) ? SubscribePage(userId: UserSession.user.id) : Container(),
+          loadedPages.contains(3) ? ChatListPage() : Container(),
+          loadedPages.contains(4) ? UserLoginMyPage() : Container(),
         ],
       );
     }
   }
 
-  BottomNavigationBar _buildBottomNavigationBar() {
+  BottomNavigationBar _buildBottomNavigationBar({required ValueChanged onTap}) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: _selectedIndex,
@@ -68,11 +78,12 @@ class _MainPageState extends State<MainPage> {
       showUnselectedLabels: false,
       selectedItemColor: gPrimaryColor, //Color(0xff4880ED),
       unselectedItemColor: Colors.black,
-      onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
+      // onTap: (index) {
+      //   setState(() {
+      //     _selectedIndex = index;
+      //   });
+      // },
+      onTap: onTap,
       items: [
         BottomNavigationBarItem(label: "홈", icon: Icon(CupertinoIcons.home)),
         BottomNavigationBarItem(label: "검색", icon: Icon(CupertinoIcons.search)),
