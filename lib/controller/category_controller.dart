@@ -14,8 +14,4 @@ class CategoryController {
   Ref _ref;
   CategoryController(this._ref);
   final CategoryService categoryService = CategoryService();
-
-  void moveCategoryPage({required int categoryId}) {
-    Navigator.push(mContext, MaterialPageRoute(builder: ((context) => CategoryDetailPage(categoryId: categoryId))));
-  }
 }

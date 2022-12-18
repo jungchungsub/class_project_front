@@ -18,6 +18,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     CategoryPageModel? model = ref.watch(categoryPageViewModel(widget.categoryId));
+
     return Scaffold(
         appBar: _buildAppbar(context),
         body: ListView(

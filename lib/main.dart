@@ -65,8 +65,8 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/orderDetail": (context) => OrderDetailPage(),
-        //"/lessonDetail": (context) => LessonDetailPage(lessonId: 1),
-        //"/categoryDetail": (context) => CategoryDetailPage(),
+        //"/lessonDetail": (context) => LessonDetailPage(lessonId: ),
+        "/categoryDetail": (context) => CategoryDetailPage(categoryId: 1),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
