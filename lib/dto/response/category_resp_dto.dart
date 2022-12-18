@@ -24,12 +24,12 @@ class CategoryRespDto {
   int lessonId;
   String lessonName;
   int lessonPrice;
-  int avgGrade;
+  double avgGrade;
   int totalReviews;
-  bool recommand;
+  bool? recommand;
   int ranking;
   DateTime recent;
-  bool isSubscribed;
+  bool? isSubscribed;
 
   factory CategoryRespDto.fromJson(Map<String, dynamic> json) => CategoryRespDto(
         lessonId: json["lessonId"],

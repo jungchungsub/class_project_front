@@ -33,7 +33,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: model?.categoryList.length,
+                itemCount: 5,
                 itemBuilder: ((BuildContext context, int index) {
                   return _buildCateogryList(context, ref, index, model);
                 })),

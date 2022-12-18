@@ -64,7 +64,7 @@ class LessonDetailPage extends ConsumerWidget {
                 _buildLessonContentBox("취소 및 환불규정", "${model.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
                 _buildLessonExpertInformation("${model.lessonRespDto.profileDto.expertPhoto}", "전문가정보",
                     "${model.lessonRespDto.profileDto.expertIntroduction}", "${model.lessonRespDto.profileDto.expertPhoto}"),
-                _buildLessonEvaluation(4.2, 500),
+                _buildLessonEvaluation("${model.lessonRespDto.lessonAvgGrade}", "${model.lessonRespDto.lessonTotalReviewsCount}"),
                 // Column(
                 //   children: List.generate(
                 //       model.lessonRespDto.lessonReviewList.length,
@@ -109,7 +109,7 @@ Padding _buildLessonPrice(int lessonPrice) {
   );
 }
 
-Container _buildLessonEvaluation(double evaluation, int totalReview) {
+Container _buildLessonEvaluation(String evaluation, String totalReview) {
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

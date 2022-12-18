@@ -14,7 +14,7 @@ class HttpConnector {
 
   final host = "http://192.168.0.87:8000";
   final host2 = "http://localhost:8000";
-  final host3 = "http://172.16.29.75:8000";
+  final host3 = "http://192.168.0.4:8000";
   final Client _client = Client();
 
   // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.

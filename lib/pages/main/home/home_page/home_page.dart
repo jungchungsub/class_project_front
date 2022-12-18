@@ -79,7 +79,7 @@ class HomePage extends ConsumerWidget {
           onTap: () {
             // categoryCT.moveCategoryPage(categoryId: );
             // lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
-            lessonCT.moveCategoryPage(categoryId: 1);
+            lessonCT.moveCategoryPage(categoryId: 2);
           },
           child: Container(
             decoration: BoxDecoration(
