@@ -16,7 +16,6 @@ class UserProfileInsertPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
       body: ProfileInsertForm(

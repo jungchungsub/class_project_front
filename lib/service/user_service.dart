@@ -50,6 +50,7 @@ class UserService {
 
 // user 위한 유저 정보
   Future<ResponseDto> fetchGetUserDetailMyPage(int userId) async {
+    Logger().d(" 여기가 실행된거임?");
     Response response = await httpConnector.get(path: "/api/user/$userId/mypage");
     ResponseDto responseDto = toResponseDto(response);
 
@@ -61,7 +62,9 @@ class UserService {
 
 // master 위한 유저 정보
   Future<ResponseDto> fetchGetMasterDetailMyPage(int userId) async {
+    Logger().d(" 여기 실행 됨? 전문가 겟");
     Response response = await httpConnector.get(path: "/api/expert/$userId/mypage");
+    Logger().d("응답 메세지 확인 : ${response.body}");
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.data != null) {
       responseDto.data = MasterPageRespDto.fromJson(responseDto.data);
