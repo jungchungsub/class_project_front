@@ -224,10 +224,12 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
                   fit: BoxFit.cover,
                 ),
               )
+            // 처음에 프로필이 null이면 '' 이렇게 들어옴. -> default로 처리 해야함.
             : ClipRRect(
                 borderRadius: BorderRadius.circular(150),
                 child: Image.asset(
-                  widget.model.filePath!,
+                  // 이미지 파일이 null이면 기본 이미지 띄우기
+                  widget.model.filePath == '' ? ProfileUpdateForm.defaultProfile : widget.model.filePath,
                   width: 100,
                   height: 100,
                   fit: BoxFit.cover,

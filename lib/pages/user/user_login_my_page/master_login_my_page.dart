@@ -4,8 +4,6 @@ import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/pages/user/components/service_text.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/master_model/master_my_page_model.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/master_model/master_my_page_view_model.dart';
-import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_model.dart';
-import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_update_page/user_update_page.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';

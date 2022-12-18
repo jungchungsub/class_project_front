@@ -1,6 +1,4 @@
-import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/dto/request/profile_update_info.dart';
-import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/pages/user/components/profile_update_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +16,6 @@ class UserProfileUpdatePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Logger().d("업데이트 페이지 ${model.career}");
-    final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppbar(context),
       body: ProfileUpdateForm(profileUpdateReqDto: profileUpdateReqDto, model: model),
