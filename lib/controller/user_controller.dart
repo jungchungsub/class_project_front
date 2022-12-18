@@ -130,7 +130,9 @@ class UserController {
     if (responseDto.statusCode < 400) {
       // MyPage에서 profile의 여부에 따라 사진이 달라지기때문에 초기화
       _ref.read(userMyPageViewModel.notifier).initViewModel();
-      Navigator.pop(gContext);
+      // Navigator.popAndPushNamed(gContext);
+      Navigator.pushReplacement(
+          gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id, username: UserSession.user.username)));
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
         SnackBar(content: Text("프로필 등록 실패")),
@@ -141,7 +143,6 @@ class UserController {
   // void delete() {
   //1. 서버에 삭제 요청.
   //   ResponseDto responseDto = ref.read(서비스).fetchdelete();
-
   //   Navigator.pop(gContext);
   // }
 }
