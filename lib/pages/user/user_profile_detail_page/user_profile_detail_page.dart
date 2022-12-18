@@ -64,7 +64,6 @@ class UserProfileDetailPage extends ConsumerWidget {
   Widget _buildProfileUpdateButton(BuildContext context, UserProfileDetailPageModel model) {
     return ElevatedButton(
       onPressed: () {
-        Logger().d("디테일 페이지 확인${model.profileRespDto.region} ");
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -128,8 +127,8 @@ class UserProfileDetailPage extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(150),
                   child: Image.asset(
                     defaultProfile,
-                    width: 80,
-                    height: 80,
+                    width: 100,
+                    height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -139,8 +138,8 @@ class UserProfileDetailPage extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(150),
                   child: Image.asset(
                     profileImagePath!,
-                    width: 80,
-                    height: 80,
+                    width: 100,
+                    height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),

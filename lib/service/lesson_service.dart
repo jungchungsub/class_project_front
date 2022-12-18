@@ -14,7 +14,8 @@ class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
   Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
-    //Logger().d("id출력service:${lessonId}");
+    //Logger().d("id출력ser/vice:${lessonId}");
+    Logger().d("여기 실행됨?");
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
     ResponseDto responseDto = toResponseDto(response);
     Logger().d(response.body);

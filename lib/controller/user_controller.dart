@@ -133,7 +133,7 @@ class UserController {
       Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
-        SnackBar(content: Text("회원가입 실패")),
+        SnackBar(content: Text("프로필 등록 실패")),
       );
     }
   }

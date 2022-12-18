@@ -2,18 +2,17 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
-
 import 'package:finalproject_front/pages/search/search_main_page.dart';
 import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/master_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:logger/logger.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  static String role = UserSession.user.role;
+  MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -43,7 +42,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _buildIndexedStack() {
     // 전문가 일경우
-    if (UserSession.user.role == '전문가') {
+    if (UserSession.isLogin == true && UserSession.user.role == '전문가') {
       return IndexedStack(
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
@@ -56,7 +55,7 @@ class _MainPageState extends State<MainPage> {
       );
     }
     // 일반 회원일 경우
-    else if (UserSession.user.role == "일반회원") {
+    else if (UserSession.isLogin == true && UserSession.user.role == "일반회원") {
       return IndexedStack(
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
@@ -67,19 +66,21 @@ class _MainPageState extends State<MainPage> {
           loadedPages.contains(4) ? UserLoginMyPage() : Container(),
         ],
       );
-    } else {
+    } else if (UserSession.isLogin == false) {
       {
         return IndexedStack(
           index: _selectedIndex, //아이콘클릭시 화면 이동
           children: [
             HomePage(),
             loadedPages.contains(1) ? SearchPage() : Container(),
-            loadedPages.contains(2) ? SubscribePage(userId: UserSession.user.id) : Container(),
-            loadedPages.contains(3) ? ChatListPage() : Container(),
-            loadedPages.contains(4) ? MasterLoginMyPage() : Container(),
+            loadedPages.contains(2) ? Center(child: Text("로그인을 해주세요.")) : Center(child: Text("로그인을 해주세요.")),
+            loadedPages.contains(3) ? Center(child: Text("로그인을 해주세요.")) : Center(child: Text("로그인을 해주세요.")),
+            loadedPages.contains(4) ? Center(child: Text("로그인을 해주세요.")) : Center(child: Text("로그인을 해주세요.")),
           ],
         );
       }
+    } else {
+      return Container();
     }
   }
 
