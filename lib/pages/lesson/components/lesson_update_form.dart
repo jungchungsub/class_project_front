@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
+import 'package:finalproject_front/dto/request/lesson_update_info.dart';
 import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'lesson_deadline.dart';
 
-class LessonInsertForm extends ConsumerStatefulWidget {
+class LessonUpdateForm extends ConsumerStatefulWidget {
   final _name = TextEditingController();
   final _curriculum = TextEditingController();
   final _count = TextEditingController();
@@ -24,13 +25,15 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _price = TextEditingController();
   final _possibleDay = TextEditingController();
 
-  LessonInsertForm({Key? key}) : super(key: key);
+  LesssonUpdateInfo model;
+  late LessonUpdateReqDto lessonUpdateReqDto;
+  LessonUpdateForm({required this.model, required this.lessonUpdateReqDto, Key? key}) : super(key: key);
 
   @override
-  ConsumerState<LessonInsertForm> createState() => _LessonInsertFormState();
+  ConsumerState<LessonUpdateForm> createState() => _LessonInsertFormState();
 }
 
-class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
+class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
   XFile? pickedFile;
   ImagePicker imgpicker = ImagePicker();
   XFile? _imagefile;

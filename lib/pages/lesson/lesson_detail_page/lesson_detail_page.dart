@@ -76,7 +76,7 @@ class LessonDetailPage extends ConsumerWidget {
                 ),
                 SizedBox(
                   height: gap_xxl,
-                )
+                ),
               ],
             )),
           );
