@@ -20,6 +20,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  List loadedPages = [0];
 
   @override
   Widget build(BuildContext context) {

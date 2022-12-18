@@ -13,10 +13,10 @@ import '../../../dto/response/profile_resp_dto.dart';
 import '../../../size.dart';
 
 class ProfileUpdateForm extends ConsumerStatefulWidget {
-  var _introduction = TextEditingController();
-  var _region = TextEditingController();
-  var _certification = TextEditingController();
-  var _career = TextEditingController();
+  final _introduction = TextEditingController();
+  final _region = TextEditingController();
+  final _certification = TextEditingController();
+  final _career = TextEditingController();
 
   ProfileUpdateInfo model;
   late ProfileUpdateReqDto profileUpdateReqDto;
@@ -78,6 +78,11 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
   @override
   Widget build(BuildContext context) {
+    // 이 부분에서 애먹음 업데이트 값이 적어지고 사진클릭 할 때마다 기존 데이터 날라감 -> initState로 넘겨줌
+    //     widget._introduction.text = widget.model.introduction;
+    // widget._region.text = widget.model.region;
+    // widget._certification.text = widget.model.certification;
+    // widget._career.text = widget.model.career;
     final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
         child: Form(
