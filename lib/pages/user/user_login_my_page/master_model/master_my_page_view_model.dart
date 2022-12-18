@@ -2,14 +2,9 @@ import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/master_model/master_my_page_model.dart';
-import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_model.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-
-import '../../../../dto/response/master_login_resp_dto.dart';
-import '../../../../dto/response/my_page_resp_dto.dart';
 
 /**autoDispose : 재 로그인 시 유저 정보 업데이트 역할을 해줌. */
 //  뷰 모델은 전부 StateNotifier로 만들기 -> 상태를 가지고 있고 상태를 변경 할 수있음.

@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
       );
     }
     // 일반 회원일 경우
-    else {
+    else if (UserSession.user.role == "일반회원") {
       return IndexedStack(
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
@@ -67,6 +67,19 @@ class _MainPageState extends State<MainPage> {
           loadedPages.contains(4) ? UserLoginMyPage() : Container(),
         ],
       );
+    } else {
+      {
+        return IndexedStack(
+          index: _selectedIndex, //아이콘클릭시 화면 이동
+          children: [
+            HomePage(),
+            loadedPages.contains(1) ? SearchPage() : Container(),
+            loadedPages.contains(2) ? SubscribePage(userId: UserSession.user.id) : Container(),
+            loadedPages.contains(3) ? ChatListPage() : Container(),
+            loadedPages.contains(4) ? MasterLoginMyPage() : Container(),
+          ],
+        );
+      }
     }
   }
 
@@ -78,11 +91,7 @@ class _MainPageState extends State<MainPage> {
       showUnselectedLabels: false,
       selectedItemColor: gPrimaryColor, //Color(0xff4880ED),
       unselectedItemColor: Colors.black,
-      // onTap: (index) {
-      //   setState(() {
-      //     _selectedIndex = index;
-      //   });
-      // },
+
       onTap: onTap,
       items: [
         BottomNavigationBarItem(label: "홈", icon: Icon(CupertinoIcons.home)),

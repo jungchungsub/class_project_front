@@ -94,7 +94,7 @@ class JoinCustomForm extends ConsumerWidget {
     return ElevatedButton(
       onPressed: () {
         joinReqDto.role = role;
-        Logger().d("횐가입 데이터 확인 : ${joinReqDto.categoryId}");
+        Logger().d("횐가입 데이터 확인 : ${joinReqDto.categoryIds}");
         uc.joinUser(
           joinReqDto: joinReqDto,
         );

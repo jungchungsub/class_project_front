@@ -30,6 +30,7 @@ class UserService {
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
+    Logger().d("회원가입 데이터 확인 : ${requestBody}");
     // 2. 통신 시작
     Response response = await httpConnector.post(path: "/api/join", body: requestBody);
 
@@ -113,6 +114,13 @@ class UserService {
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("프로필 등록 값 확인 : ${responseDto.data}");
     Logger().d("프로필 등록 값 확인 : ${responseDto.statusCode}");
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchDeleteUser(userId) async {
+    Logger().d("회원가입 시작 2. 서비스$userId");
+    Response response = await httpConnector.put(path: "  /api/user/$userId/delete");
+    ResponseDto responseDto = toResponseDto(response);
     return responseDto;
   }
 }
