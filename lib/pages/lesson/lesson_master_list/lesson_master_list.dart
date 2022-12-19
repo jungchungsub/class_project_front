@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/dto/request/lesson_update_info.dart';
 import 'package:finalproject_front/dummy_models/master_lesson_list_resp_dto.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list/model/lesson_master_list_model.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list/model/lesson_master_list_view_model.dart';
@@ -11,19 +12,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LessonMasterListPage extends ConsumerWidget {
   final userId;
-  const LessonMasterListPage({required this.userId, Key? key}) : super(key: key);
+  LessonMasterListPage({required this.userId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     LessonMasterListModel? model = ref.watch(lessonMasterListViewModel(userId));
-
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
         appBar: _buildAppbar(context),
         body: ListView.builder(
             shrinkWrap: true,
             itemCount: 5,
             itemBuilder: ((BuildContext context, int index) {
-              return _buildLessonExpertList(context, index, ref, model);
+              return _buildLessonExpertList(context, index, ref, model!);
             })));
   }
 
@@ -52,7 +57,7 @@ class LessonMasterListPage extends ConsumerWidget {
   }
 }
 
-Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, LessonMasterListModel? model) {
+Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, LessonMasterListModel model) {
   return Container(
     child: Column(
       children: [
@@ -98,21 +103,21 @@ Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, Le
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${model?.sellingList.lessonDtoList[index].lessonName}",
+                                "${model.sellingList.lessonDtoList[index].lessonName}",
                                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                "전문가 : ${model?.sellingList.expertDto.expertName}",
+                                "전문가 : ${model.sellingList.expertDto.expertName}",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "${model?.sellingList.lessonDtoList[index].lessonPrice}원",
+                                "${model.sellingList.lessonDtoList[index].lessonPrice}원",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "마감일자 : ${model?.sellingList.lessonDtoList[index].lessonDeadLine}",
+                                "마감일자 : ${model.sellingList.lessonDtoList[index].lessonDeadLine}",
                                 style: TextStyle(fontSize: 12),
                               )
                             ],
@@ -133,7 +138,7 @@ Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, Le
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: (() {
-                          // Navigator.push(context, MaterialPageRoute(builder: ((context) => LessonUpdatePage(model: model.sellingList.))));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => LessonUpdatePage(model: ))); //아이디 넘겨줘야함
                         }),
                         child: Text(
                           "수정하기",

@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class CategoryDetailPage extends ConsumerStatefulWidget {
   CategoryDetailPage({required this.categoryId, Key? key}) : super(key: key);
   final int categoryId;
-  final cateogoryListname = ["뷰티", "운동,", "댄스", "뮤직", "미술", "문학", "공예", "기타"];
+
   @override
   ConsumerState<CategoryDetailPage> createState() => _CategoryDetailPageState();
 }
@@ -44,7 +44,8 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
               fit: BoxFit.cover,
               height: 120,
             ),
-            _buildCategoryFilter("", model.categoryList.length),
+
+            _buildCategoryFilter("등록순", model.categoryList.length),
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -170,78 +171,12 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                _buildMiddleFilterList("${budget}"),
+                DropdownButtonExample(),
               ],
             ),
           )
         ],
       ),
-    );
-  }
-
-  TextButton _buildMiddleFilterList(String text) {
-    return TextButton(
-      onPressed: () {
-        showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    textColor: gPrimaryColor,
-                    title: Text('1만 원 미만'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('1~5만 원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('5~10만원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('10~15만원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('15~20만원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('20만원 이상'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-              ;
-            });
-      },
-      child: Row(
-        children: [
-          Text(
-            "${text}",
-            style: TextStyle(color: Colors.black, fontSize: 14),
-          ),
-        ],
-      ),
-      style: OutlinedButton.styleFrom(
-          shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      )),
     );
   }
 
@@ -395,6 +330,38 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
   }
 }
 
+List<String> list = <String>['추천순', '인기순', '등록순'];
+
+class DropdownButtonExample extends StatefulWidget {
+  const DropdownButtonExample({super.key});
+
+  @override
+  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+}
+
+class _DropdownButtonExampleState extends State<DropdownButtonExample> {
+  String dropdownValue = list.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      elevation: 16,
+      style: const TextStyle(color: Colors.black),
+      onChanged: (String? value) {
+        setState(() {
+          dropdownValue = value!;
+        });
+      },
+      items: list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
 // class CategoryList extends StatelessWidget {
 //   final int index;
 //   const CategoryList({required this.index, Key? key}) : super(key: key);

@@ -1,8 +1,7 @@
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/dto/request/lesson_update_info.dart';
 import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
-import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
-import 'package:finalproject_front/pages/lesson/components/lesson_Insert_form.dart';
+
 import 'package:finalproject_front/pages/lesson/components/lesson_update_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +39,7 @@ class LessonUpdatePage extends ConsumerWidget {
             Navigator.pop(context);
           }),
       title: Text(
-        "클래스 등록하기",
+        "클래스 수정하기",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,

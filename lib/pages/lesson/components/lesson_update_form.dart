@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:logger/logger.dart';
 
 import 'lesson_deadline.dart';
 
@@ -86,14 +87,18 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
   openImages() async {
     try {
+      dynamic sendImage; // 디바이스 경로
       var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
       //you can use ImageCourse.camera for Camera capture
       if (pickedfile != null) {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
-        Uint8List? data = await _imagefile?.readAsBytes();
-        String profileImage = base64Encode(data!);
-
+        sendImage = _imagefile?.path;
+        final encodeImage = utf8.encode(sendImage);
+        Logger().d("파일 경로 확인 : $sendImage");
+        List<int> data = encodeImage;
+        String profileImage = base64Encode(data);
+        Logger().d("인코딩 경로 확인 : $profileImage");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -212,9 +217,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                 ElevatedButton(
                   onPressed: () {
                     lessonUpdateReqDto.photo = profileImage;
-                    lessonCT.lessonInsert(
-                      lessonInsertReqDto: lessonUpdateReqDto,
-                    );
+                    lessonCT.updateLesson(lessonId: 1, lessonUpdateReqDto: lessonUpdateReqDto);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: gButtonOffColor,

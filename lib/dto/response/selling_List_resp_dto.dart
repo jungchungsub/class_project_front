@@ -2,7 +2,7 @@ import 'dart:convert';
 
 SellingListRespDto SellingListRespDtoFromJson(String str) => SellingListRespDto.fromJson(json.decode(str));
 
-String lessonRespDtoToJson(SellingListRespDto data) => json.encode(data.toJson());
+// String lessonRespDtoToJson(SellingListRespDto data) => json.encode(data.toJson());
 
 class SellingListRespDto {
   SellingListRespDto({
@@ -18,10 +18,10 @@ class SellingListRespDto {
         lessonDtoList: List<LessonDtoList>.from(json["lessonDtoList"].map((x) => LessonDtoList.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
-        "expertDto": expertDto.toJson(),
-        "lessonDtoList": List<dynamic>.from(lessonDtoList.map((x) => x.toJson())),
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "expertDto": expertDto.toJson(),
+  //       "lessonDtoList": List<dynamic>.from(lessonDtoList.map((x) => x.toJson())),
+  //     };
 }
 
 class ExpertDto {
@@ -42,25 +42,31 @@ class ExpertDto {
 
 class LessonDtoList {
   LessonDtoList({
+    required this.lessonId,
+    required this.lessonPhoto,
     required this.lessonName,
     required this.lessonPrice,
     required this.lessonDeadLine,
   });
 
+  String lessonPhoto;
+  int lessonId;
   String lessonName;
   int lessonPrice;
   DateTime lessonDeadLine;
 
   factory LessonDtoList.fromJson(Map<String, dynamic> json) => LessonDtoList(
+        lessonId: json["lessonId"],
+        lessonPhoto: json["lessonPhoto"],
         lessonName: json["lessonName"],
         lessonPrice: json["lessonPrice"],
         lessonDeadLine: DateTime.parse(json["lessonDeadLine"]),
         //DateFormat("yyyy-mm-dd").parse(json["lessonDeadLine"]),
       );
 
-  Map<String, dynamic> toJson() => {
-        "lessonName": lessonName,
-        "lessonPrice": lessonPrice,
-        "lessonDeadLine": lessonDeadLine.toIso8601String(),
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "lessonName": lessonName,
+  //       "lessonPrice": lessonPrice,
+  //       "lessonDeadLine": lessonDeadLine.toIso8601String(),
+  //     };
 }
