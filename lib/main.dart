@@ -1,3 +1,6 @@
+import 'package:finalproject_front/dto/request/lesson_update_info.dart';
+import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
+import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
@@ -72,7 +75,20 @@ class MyApp extends StatelessWidget {
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
-        "/lessonUpdate": (context) => LessonUpdatePage(),
+        // "/lessonUpdate": (context) => LessonUpdatePage(
+        //         model: LesssonUpdateInfo(
+        //       id: id,
+        //       name: name,
+        //       photo: ,
+        //       price: price,
+        //       place: place,
+        //       lessonTime: lessonTime,
+        //       lessonCount: lessonCount,
+        //       possibleDays: possibleDays,
+        //       policy: policy,
+        //       deadline: deadline,
+        //       categoryId: categoryId,
+        //     )),
         "/chatList": (context) => ChatListPage(),
         "/subscribePage": (context) => SubscribePage(userId: UserSession.user.id), //더미 적용
         "/reviewInsert": (context) => LessonReviewInsertPage(),

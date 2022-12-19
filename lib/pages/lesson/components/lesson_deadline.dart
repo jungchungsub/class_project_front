@@ -1,4 +1,4 @@
-import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
+import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -8,7 +8,7 @@ import '../../../size.dart';
 
 class LessonDeadLine extends StatefulWidget {
   late TextEditingController fieldController = TextEditingController();
-  final LessonInsertReqDto lessonInsertReqDto;
+  final LessonUpdateReqDto lessonInsertReqDto;
   LessonDeadLine({required this.lessonInsertReqDto, required TextEditingController fieldController, Key? key}) : super(key: key);
 
   @override
