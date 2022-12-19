@@ -119,12 +119,15 @@ class ProfileDto {
   ProfileDto({
     required this.expertPhoto,
     required this.expertIntroduction,
+    required this.expertName,
   });
 
+  String expertName;
   String expertPhoto;
   String expertIntroduction;
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) => ProfileDto(
+        expertName: json["expertName"],
         expertPhoto: json["expertPhoto"],
         expertIntroduction: json["expertIntroduction"],
       );

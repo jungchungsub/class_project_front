@@ -26,7 +26,7 @@ class LessonService {
     Logger().d(responseDto.data["lessonAvgGrade"]);
     Logger().d("~~~~~~~~~~~~~");
     responseDto.data = LessonRespDto.fromJson(responseDto.data);
-    //Logger().d("데이터확인 : ${responseDto.data}");
+    Logger().d("데이터확인 : ${responseDto.data}");
     return responseDto;
   }
 

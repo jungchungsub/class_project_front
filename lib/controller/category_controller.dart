@@ -1,5 +1,6 @@
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
 import 'package:finalproject_front/service/category_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,4 +15,8 @@ class CategoryController {
   Ref _ref;
   CategoryController(this._ref);
   final CategoryService categoryService = CategoryService();
+
+  void moveDetailPage({required int lessonId}) {
+    Navigator.push(mContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
+  }
 }
