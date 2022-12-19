@@ -57,10 +57,8 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
         setState(() {}); // 상태 초기화
         sendImage = _imagefile?.path;
         final encodeImage = utf8.encode(sendImage);
-        Logger().d("파일 경로 확인 : $sendImage");
         List<int> data = encodeImage;
         String profileImage = base64Encode(data);
-        Logger().d("인코딩 경로 확인 : $profileImage");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");

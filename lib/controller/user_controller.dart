@@ -122,6 +122,7 @@ class UserController {
 
   Future<void> updateUser({required int id, required userUpdateReqDto}) async {
     ResponseDto responseDto = await userService.fetchUpdateUser(id, userUpdateReqDto);
+    Logger().d("데이터 확인 :${responseDto.msg}");
     if (responseDto.statusCode < 400) {
       //userUpdatePage반영
       LocalService().fetchJwtToken();
@@ -138,19 +139,19 @@ class UserController {
     if (responseDto.statusCode < 400) {
       //이전 페이지가 수정된 데이터로 업데이트
       _ref.read(userProfileDetailPageViewModel(id).notifier).notifyViewModel();
+      _ref.read(userMyPageViewModel.notifier).initViewModel();
       LocalService().fetchJwtToken();
       Navigator.pop(gContext);
     }
   }
 
-  Future<void> insertProfile({required ProfileInsertReqDto profileInsertReqDto}) async {
+  Future<void> insertProfile({required int userId, required ProfileInsertReqDto profileInsertReqDto}) async {
     ResponseDto responseDto = await userService.fetchInsertProfile(profileInsertReqDto);
     if (responseDto.statusCode < 400) {
       // MyPage에서 profile의 여부에 따라 사진이 달라지기때문에 초기화
       _ref.read(userMyPageViewModel.notifier).initViewModel();
-      // Navigator.popAndPushNamed(gContext);
-      Navigator.pushReplacement(
-          gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id, username: UserSession.user.username)));
+      _ref.read(userProfileDetailPageViewModel(userId).notifier).notifyViewModel();
+      Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
         SnackBar(content: Text("프로필 등록 실패")),

@@ -33,8 +33,4 @@ class UserProfileDetailPageViewModel extends StateNotifier<UserProfileDetailPage
       );
     }
   }
-
-  // void notifyUpdate(Post post) {
-  //   state = DetailPageModel(post);
-  // }
 }
