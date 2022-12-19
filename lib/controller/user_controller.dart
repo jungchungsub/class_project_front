@@ -1,12 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:finalproject_front/core/util/move_alert_dialog.dart';
+import 'package:finalproject_front/core/util/move_profile_insert_dialog.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
-import 'package:finalproject_front/pages/sign/join_page.dart';
+import 'package:finalproject_front/pages/auth/join_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/user_profile_detail_page.dart';
@@ -36,14 +36,34 @@ class UserController {
   UserController(this._ref);
   final UserService userService = UserService();
 
+  Future<void> moveLoginPage() async {
+    await Navigator.pushNamed(gContext, "/login");
+  }
+
+  Future<void> beforeLoginMainPage() async {
+    if (UserSession.isLogin == false) {
+      await Navigator.pushNamed(gContext, "/main");
+    } else {
+      ScaffoldMessenger.of(gContext).showSnackBar(
+        SnackBar(content: Text("잘못된 요청 입니다.")),
+      );
+    }
+  }
+
+  Future<void> moveJoginDivisionPage() async {
+    await Navigator.pushNamed(gContext, "/joinDivision");
+  }
+
+  Future<void> moveLoginDivisionPage() async {
+    await Navigator.pushNamed(gContext, "/loginDivision");
+  }
+
   Future<void> moveJoinPage(String role) async {
     if (role == "USER") {
       await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
-      Logger().d("롤값 확인 : ${role}");
     }
     if (role == "EXPERT") {
       await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
-      Logger().d("롤값 확인 : ${role}");
     }
   }
 
@@ -65,15 +85,13 @@ class UserController {
   }
 
   Future<void> deleteUser({required int userId}) async {
-    Logger().d("회원 탈퇴 시작 1. 컨트롤러");
     ResponseDto responseDto = await userService.fetchDeleteUser(userId);
     if (responseDto.statusCode < 400) {
-      Logger().d("회원 탈퇴 성공 ${responseDto.msg}");
       await UserSession.removeAuthentication();
-      Navigator.pushNamedAndRemoveUntil(gContext, "/main", (route) => false);
+      Navigator.popAndPushNamed(gContext, "/main");
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
-        SnackBar(content: Text("회원가입 탈퇴 실패 ")),
+        SnackBar(content: Text("회원 탈퇴 실패")),
       );
     }
   }
@@ -104,6 +122,7 @@ class UserController {
 
   Future<void> updateUser({required int id, required userUpdateReqDto}) async {
     ResponseDto responseDto = await userService.fetchUpdateUser(id, userUpdateReqDto);
+    Logger().d("데이터 확인 :${responseDto.msg}");
     if (responseDto.statusCode < 400) {
       //userUpdatePage반영
       LocalService().fetchJwtToken();
@@ -120,16 +139,18 @@ class UserController {
     if (responseDto.statusCode < 400) {
       //이전 페이지가 수정된 데이터로 업데이트
       _ref.read(userProfileDetailPageViewModel(id).notifier).notifyViewModel();
+      _ref.read(userMyPageViewModel.notifier).initViewModel();
       LocalService().fetchJwtToken();
       Navigator.pop(gContext);
     }
   }
 
-  Future<void> insertProfile({required ProfileInsertReqDto profileInsertReqDto}) async {
+  Future<void> insertProfile({required int userId, required ProfileInsertReqDto profileInsertReqDto}) async {
     ResponseDto responseDto = await userService.fetchInsertProfile(profileInsertReqDto);
     if (responseDto.statusCode < 400) {
       // MyPage에서 profile의 여부에 따라 사진이 달라지기때문에 초기화
       _ref.read(userMyPageViewModel.notifier).initViewModel();
+      _ref.read(userProfileDetailPageViewModel(userId).notifier).notifyViewModel();
       Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
@@ -137,11 +158,4 @@ class UserController {
       );
     }
   }
-
-  // void delete() {
-  //1. 서버에 삭제 요청.
-  //   ResponseDto responseDto = ref.read(서비스).fetchdelete();
-
-  //   Navigator.pop(gContext);
-  // }
 }

@@ -20,6 +20,7 @@ class HomePage extends ConsumerWidget {
     LessonController lessonCT = ref.read(lessonController);
     HomePageModel? model = ref.watch(homePageViewModel);
     CategoryController categoryCT = ref.read(categorryController);
+    final cateogryList = [1, 2, 3, 4, 5, 6, 7, 8];
 
     Logger().d("homePage 실행");
     return Scaffold(
@@ -41,10 +42,10 @@ class HomePage extends ConsumerWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _buildCategory11("assets/beauty.png", "뷰티", lessonCT),
-                                _buildCategory11("assets/sports.png", "운동", lessonCT),
-                                _buildCategory11("assets/Headphones.png", "댄스", lessonCT),
-                                _buildCategory11("assets/Microphone.png", "뮤직", lessonCT),
+                                _buildCategory(image: "assets/beauty.png", text: "뷰티", lessonCT: lessonCT, cateogryList: cateogryList[0]),
+                                _buildCategory(image: "assets/sports.png", text: "운동", lessonCT: lessonCT, cateogryList: cateogryList[1]),
+                                _buildCategory(image: "assets/Headphones.png", text: "댄스", lessonCT: lessonCT, cateogryList: cateogryList[2]),
+                                _buildCategory(image: "assets/Microphone.png", text: "뮤직", lessonCT: lessonCT, cateogryList: cateogryList[3]),
                                 // CategorySelect(image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
                               ],
                             ),
@@ -52,10 +53,10 @@ class HomePage extends ConsumerWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _buildCategory11("assets/paint.png", "미술", lessonCT),
-                                _buildCategory11("assets/read.png", "문학", lessonCT),
-                                _buildCategory11("assets/art.png", "공예", lessonCT),
-                                _buildCategory11("assets/Search.png", "기타", lessonCT),
+                                _buildCategory(image: "assets/paint.png", text: "미술", lessonCT: lessonCT, cateogryList: cateogryList[4]),
+                                _buildCategory(image: "assets/read.png", text: "문학", lessonCT: lessonCT, cateogryList: cateogryList[5]),
+                                _buildCategory(image: "assets/art.png", text: "공예", lessonCT: lessonCT, cateogryList: cateogryList[6]),
+                                _buildCategory(image: "assets/Search.png", text: "기타", lessonCT: lessonCT, cateogryList: cateogryList[7]),
                               ],
                             ),
                           ],
@@ -72,14 +73,14 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  Widget _buildCategory11(String image, String text, LessonController lessonCT) {
+  Widget _buildCategory({required String image, required String text, required LessonController lessonCT, required int cateogryList}) {
     return Column(
       children: [
         InkWell(
           onTap: () {
             // categoryCT.moveCategoryPage(categoryId: );
             // lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
-            lessonCT.moveCategoryPage(categoryId: 1);
+            lessonCT.moveCategoryPage(categoryId: cateogryList);
           },
           child: Container(
             decoration: BoxDecoration(

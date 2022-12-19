@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
+import '../../../controller/user_controller.dart';
 import '../../../dto/request/profile_update_info.dart';
 import '../../../size.dart';
 
@@ -23,7 +23,9 @@ class UserProfileDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     UserProfileDetailPageModel? model = ref.watch(userProfileDetailPageViewModel(id));
     return Scaffold(
-      appBar: _buildAppbar(context),
+      appBar: _buildAppbar(
+        context,
+      ),
       body: _buildBody(context, model),
     );
   }
@@ -163,6 +165,7 @@ class UserProfileDetailPage extends ConsumerWidget {
             size: 30,
           ),
           onPressed: () {
+            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserLoginMyPage()));
             Navigator.pop(context);
           }),
     );

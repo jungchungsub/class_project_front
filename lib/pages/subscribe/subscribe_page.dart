@@ -86,7 +86,7 @@ class SubscribePage extends ConsumerWidget {
                             width: 8,
                           ),
                           Text(
-                            "|  55개의 평가",
+                            "|  4개의 평가",
                             style: TextStyle(fontSize: 14),
                           ),
                         ],

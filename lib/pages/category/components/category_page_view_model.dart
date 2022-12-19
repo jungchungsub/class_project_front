@@ -20,6 +20,12 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
     Logger().d("viewModel잘들어오는지?");
     Logger().d("${categoryId}는 viewModel  Id");
     ResponseDto responseDto = await categoryService.fetchCategoryList(categoryId);
+    // if (responseDto.data == null) {
+    //   state =
+    // }
+    Logger().d("상태메시지 : ${responseDto.msg}");
+    Logger().d("상태데이터 : ${responseDto.data}");
+    Logger().d("상태코드 : ${responseDto.statusCode}");
 
     Logger().d("상태메시지 : ${responseDto.msg}");
     Logger().d("상태데이터 : ${responseDto.data}");

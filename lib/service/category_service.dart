@@ -14,8 +14,22 @@ class CategoryService {
     Logger().d("통신 후:  ${categoryId}");
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("상태값 확인 ${responseDto.statusCode}");
+
+    // List<dynamic> mapList = responseDto.data;
+    // Logger().d(mapList);
+    // List<SubscribeRespDto> SubscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
+    // Logger().d(SubscribeList);
+    // responseDto.data = SubscribeRespDto.fromJson(responseDto.data);
     if (responseDto.statusCode < 300) {
-      responseDto.data = CategoryRespDto.fromJson(responseDto.data);
+      // responseDto.data = CategoryRespDto.fromJson(responseDto.data);
+      List<dynamic> mapList = responseDto.data;
+      Logger().d("mapList :${mapList}");
+
+      List<CategoryRespDto> CategoryList = mapList.map((e) => CategoryRespDto.fromJson(e)).toList();
+      Logger().d("categoryList : ${CategoryList}");
+
+      responseDto.data = CategoryList;
+      Logger().d("responseDto.data : ${responseDto.data}");
     }
     return responseDto;
   }

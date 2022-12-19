@@ -57,10 +57,8 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
         setState(() {}); // 상태 초기화
         sendImage = _imagefile?.path;
         final encodeImage = utf8.encode(sendImage);
-        Logger().d("파일 경로 확인 : $sendImage");
         List<int> data = encodeImage;
         String profileImage = base64Encode(data);
-        Logger().d("인코딩 경로 확인 : $profileImage");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -78,11 +76,6 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
 
   @override
   Widget build(BuildContext context) {
-    // 이 부분에서 애먹음 업데이트 값이 적어지고 사진클릭 할 때마다 기존 데이터 날라감 -> initState로 넘겨줌
-    //     widget._introduction.text = widget.model.introduction;
-    // widget._region.text = widget.model.region;
-    // widget._certification.text = widget.model.certification;
-    // widget._career.text = widget.model.career;
     final UserController userCT = ref.read(userController);
     return SingleChildScrollView(
         child: Form(
@@ -243,7 +236,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileUpdateForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "클래스 사진 등록",
+                "프로필 사진 수정",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(
