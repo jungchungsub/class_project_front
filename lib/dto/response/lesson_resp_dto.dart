@@ -12,6 +12,7 @@ class LessonRespDto {
     required this.lessonDto,
     required this.profileDto,
     required this.lessonAvgGrade,
+    required this.lessonTotalReviewsCount,
     required this.lessonReviewList,
     required this.subscribed,
   });
@@ -19,6 +20,7 @@ class LessonRespDto {
   LessonDto lessonDto;
   ProfileDto profileDto;
   double lessonAvgGrade;
+  int lessonTotalReviewsCount;
   List<LessonReviewList> lessonReviewList;
   bool subscribed;
 
@@ -29,7 +31,8 @@ class LessonRespDto {
     return LessonRespDto(
       lessonDto: LessonDto.fromJson(json["lessonDto"]),
       profileDto: ProfileDto.fromJson(json["profileDto"]),
-      lessonAvgGrade: 9.5,
+      lessonTotalReviewsCount: json["lessonTotalReviewsCount"],
+      lessonAvgGrade: json["lessonAvgGrade"],
       lessonReviewList: List<LessonReviewList>.from(json["lessonReviewList"].map((x) => LessonReviewList.fromJson(x))),
       subscribed: json["subscribed"],
     );
@@ -116,12 +119,15 @@ class ProfileDto {
   ProfileDto({
     required this.expertPhoto,
     required this.expertIntroduction,
+    required this.expertName,
   });
 
+  String expertName;
   String expertPhoto;
   String expertIntroduction;
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) => ProfileDto(
+        expertName: json["expertName"],
         expertPhoto: json["expertPhoto"],
         expertIntroduction: json["expertIntroduction"],
       );

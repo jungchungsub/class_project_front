@@ -5,6 +5,7 @@ import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
 import 'package:finalproject_front/size.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +28,9 @@ class LessonDetailPage extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                _build1(ref),
+                _buildHeader(ref),
                 _buildDivider(),
-                _build2(ref),
+                _buildBody(ref),
                 //build5(ref),
               ],
             ),
@@ -39,7 +40,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget _build2(WidgetRef ref) {
+  Widget _buildBody(WidgetRef ref) {
     LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     return model == null
         ? SizedBox()
@@ -63,8 +64,9 @@ class LessonDetailPage extends ConsumerWidget {
                 _buildLessonPossibleDate("${model.lessonRespDto.lessonDto.possibleDays}"),
                 _buildLessonContentBox("취소 및 환불규정", "${model.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
                 _buildLessonExpertInformation("${model.lessonRespDto.profileDto.expertPhoto}", "전문가정보",
-                    "${model.lessonRespDto.profileDto.expertIntroduction}", "${model.lessonRespDto.profileDto.expertPhoto}"),
-                _buildLessonEvaluation(4.2, 500),
+                    "${model.lessonRespDto.profileDto.expertName}", "${model.lessonRespDto.profileDto.expertIntroduction}"),
+                _buildLessonEvaluation(
+                    "${model.lessonRespDto.lessonAvgGrade}", model.lessonRespDto.lessonAvgGrade, "${model.lessonRespDto.lessonTotalReviewsCount}"),
                 // Column(
                 //   children: List.generate(
                 //       model.lessonRespDto.lessonReviewList.length,
@@ -76,13 +78,13 @@ class LessonDetailPage extends ConsumerWidget {
                 ),
                 SizedBox(
                   height: gap_xxl,
-                )
+                ),
               ],
             )),
           );
   }
 
-  Widget _build1(WidgetRef ref) {
+  Widget _buildHeader(WidgetRef ref) {
     LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     return model == null
         ? SizedBox()
@@ -90,10 +92,8 @@ class LessonDetailPage extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                _buildLessonTitle(
-                  "${model.lessonRespDto.lessonDto.lessonName}",
-                  lessonList[0].totalReview,
-                ),
+                _buildLessonTitle("${model.lessonRespDto.lessonDto.lessonName}", "${model.lessonRespDto.lessonTotalReviewsCount}",
+                    model.lessonRespDto.lessonAvgGrade),
               ],
             ));
   }
@@ -109,7 +109,7 @@ Padding _buildLessonPrice(int lessonPrice) {
   );
 }
 
-Container _buildLessonEvaluation(double evaluation, int totalReview) {
+Container _buildLessonEvaluation(String evaluation, double star, String totalReview) {
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,18 +137,15 @@ Container _buildLessonEvaluation(double evaluation, int totalReview) {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        _buildStar(CupertinoIcons.star_fill),
-                        SizedBox(width: 5),
-                        _buildStar(CupertinoIcons.star_fill),
-                        SizedBox(width: 5),
-                        _buildStar(CupertinoIcons.star_fill),
-                        SizedBox(width: 5),
-                        _buildStar(CupertinoIcons.star_fill),
-                        SizedBox(width: 5),
-                        _buildStar(CupertinoIcons.star_fill),
-                      ],
+                    RatingBarIndicator(
+                      rating: star,
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      itemCount: 5,
+                      itemSize: 18.0,
+                      direction: Axis.horizontal,
                     ),
                     SizedBox(
                       height: 10,
@@ -157,6 +154,24 @@ Container _buildLessonEvaluation(double evaluation, int totalReview) {
                       "${totalReview}개의 평가",
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: gSubTextColor),
                     )
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Row(
+                    //   children: [
+                    //     _buildStar(CupertinoIcons.star_fill),
+                    //     SizedBox(width: 5),
+                    //     _buildStar(CupertinoIcons.star_fill),
+                    //     SizedBox(width: 5),
+                    //     _buildStar(CupertinoIcons.star_fill),
+                    //     SizedBox(width: 5),
+                    //     _buildStar(CupertinoIcons.star_fill),
+                    //     SizedBox(width: 5),
+                    //     _buildStar(CupertinoIcons.star_fill),
+                    //   ],
+                    // ),
                   ],
                 )
               ],
@@ -193,11 +208,15 @@ Widget _buildReview(String username, String reviewContent, double lessonGrade) {
                 "${username}",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Text(
-                "${lessonGrade}",
-                style: TextStyle(
-                  fontSize: 16,
+              RatingBarIndicator(
+                rating: lessonGrade,
+                itemBuilder: (context, index) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
                 ),
+                itemCount: 5,
+                itemSize: 14.0,
+                direction: Axis.horizontal,
               ),
               // Row(
               //   children: [
@@ -258,7 +277,11 @@ Container _buildLessonExpertInformation(String image, String title, String name,
                       width: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        image: DecorationImage(image: NetworkImage("${image}"), fit: BoxFit.cover),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              "https://picsum.photos/251",
+                            ),
+                            fit: BoxFit.cover),
                       ),
                     ),
                     SizedBox(width: 10),
@@ -298,6 +321,8 @@ Container _buildLessonExpertInformation(String image, String title, String name,
 }
 
 Container _buildLessonPossibleDate(String possibleDays) {
+  String possibleDays1 = "${possibleDays}";
+  String result = possibleDays1.substring(1, possibleDays1.indexOf(']'));
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,7 +341,7 @@ Container _buildLessonPossibleDate(String possibleDays) {
           child: Padding(
               padding: const EdgeInsets.all(14.0),
               child: Text(
-                "${possibleDays}",
+                "${result}",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -404,7 +429,7 @@ Container _buildLessonBox(String title, int content, double heig, int max) {
   );
 }
 
-Container _buildLessonTitle(String lessonTitle, int totalReview) {
+Container _buildLessonTitle(String lessonTitle, String totalReview, double lessonGrade) {
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -418,42 +443,18 @@ Container _buildLessonTitle(String lessonTitle, int totalReview) {
           padding: const EdgeInsets.only(top: 15, bottom: 15),
           child: Row(
             children: [
-              Container(
-                child: Row(
-                  children: [
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.yellow,
-                      size: 18,
-                    ),
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.yellow,
-                      size: 18,
-                    ),
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.yellow,
-                      size: 18,
-                    ),
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.yellow,
-                      size: 18,
-                    ),
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.yellow,
-                      size: 18,
-                    ),
-                  ],
+              RatingBarIndicator(
+                rating: lessonGrade,
+                itemBuilder: (context, index) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
                 ),
+                itemCount: 5,
+                itemSize: 20.0,
+                direction: Axis.horizontal,
               ),
               SizedBox(width: gap_s),
-              Text(
-                "평가 ${totalReview}개",
-                style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14),
-              )
+              Text("평가 ${totalReview}개", style: TextStyle(color: gSubTextColor, fontWeight: FontWeight.bold, fontSize: 14))
             ],
           ),
         ),
@@ -506,7 +507,7 @@ class _buildLessonBar extends StatefulWidget {
 }
 
 class _buildLessonBarState extends State<_buildLessonBar> {
-  bool subcribeCheck = false;
+  bool click = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -516,7 +517,7 @@ class _buildLessonBarState extends State<_buildLessonBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ConstrainedBox(
-              constraints: BoxConstraints.tightFor(height: 50, width: 300),
+              constraints: BoxConstraints.tightFor(height: 50, width: 270),
               child: TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: Color(0xff4880ED),
@@ -534,28 +535,43 @@ class _buildLessonBarState extends State<_buildLessonBar> {
             Container(
               height: 50,
               decoration: BoxDecoration(
-                border: Border.all(color: gSubButtonColor, width: 2),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: (subcribeCheck == true)
-                      ? Center(
-                          child: Icon(
-                          CupertinoIcons.heart,
-                        ))
-                      : Center(
-                          child: Icon(
-                          CupertinoIcons.heart_fill,
-                          color: Colors.red,
-                        ))
-
-                  // child: Center(
-                  //     child: Icon(
-                  //   CupertinoIcons.heart,
-                  // )),
-
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 2,
+                  )),
+              child: Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {
+                    setState(() {
+                      click = !click;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 6, bottom: 12),
+                    child: Icon(
+                      (click == false) ? CupertinoIcons.heart : CupertinoIcons.heart_fill,
+                      color: Colors.red,
+                      size: 40,
+                    ),
                   ),
+                ),
+              ),
+              // child: Padding(
+              //     padding: const EdgeInsets.all(8.0),
+              //     child: (subcribeCheck == true)
+              //         ? Center(
+              //             child: Icon(
+              //             CupertinoIcons.heart,
+              //           ))
+              //         : Center(
+              //             child: Icon(
+              //             CupertinoIcons.heart_fill,
+              //             color: Colors.red,
+              //           ))
+
+              //     ),
             )
           ],
         ),

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:finalproject_front/core/http_connector.dart';
-import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
+import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_latest_list_resp_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
@@ -13,43 +13,44 @@ import 'package:logger/logger.dart';
 class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
-  Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
-    //Logger().d("id출력ser/vice:${lessonId}");
-    Logger().d("여기 실행됨?");
+  Future<ResponseDto> fetchLessonDetail(int lessonId) async {
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
-    ResponseDto responseDto = toResponseDto(response);
     Logger().d(response.body);
+    ResponseDto responseDto = toResponseDto(response);
     final value = responseDto.data["lessonAvgGrade"];
-    Logger().d("value 값 : ${value}");
     if (value == "NaN") {
       responseDto.data["lessonAvgGrade"] = 0.0;
     }
-    Logger().d(responseDto.data["lessonAvgGrade"]);
-    Logger().d("~~~~~~~~~~~~~");
     responseDto.data = LessonRespDto.fromJson(responseDto.data);
-    //Logger().d("데이터확인 : ${responseDto.data}");
     return responseDto;
   }
 
-  Future<ResponseDto> fetchHomeList(String? jwtToken) async {
+  Future<ResponseDto> fetchHomeList() async {
     Response response = await httpConnector.get(path: "/api/main");
-
-    ResponseDto responseDto = toResponseDto(response); //
-    if (responseDto.statusCode < 300) {
+    ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.statusCode < 400) {
       List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
-      // Logger().d(mapList);
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
-      //mapList하나하나를 fromjson하고 tolist로 묶음
 
       responseDto.data = LessonLatestList;
     }
     return responseDto;
   }
 
-  Future<ResponseDto> fetchlessonInsert(LessonInsertReqDto lessonReqDto) async {
+  Future<ResponseDto> fetchlessonInsert(LessonUpdateReqDto lessonReqDto) async {
     String requestBody = jsonEncode(lessonReqDto);
     Response response = await httpConnector.post(path: "/api/lesson", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchUpdateLesson(int lessonId, LessonUpdateReqDto lessonUpdateReqDto) async {
+    String requestBody = jsonEncode(lessonUpdateReqDto);
+    Response response = await httpConnector.put(path: "/api/lesson/${lessonId}", body: requestBody);
+    ResponseDto responseDto = toResponseDto(response);
+    if (responseDto.data != null) {
+      // responseDto.data = 레슨리스폰스디티오생성
+    }
     return responseDto;
   }
 }

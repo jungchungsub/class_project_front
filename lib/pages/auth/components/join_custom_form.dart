@@ -1,6 +1,6 @@
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
-import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
+import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
