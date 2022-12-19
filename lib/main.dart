@@ -15,9 +15,9 @@ import 'package:finalproject_front/pages/payment/payment_installment_list_page.d
 import 'package:finalproject_front/pages/payment/payment_sales_detail_pages.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main_page.dart';
-import 'package:finalproject_front/pages/sign/join_division_page.dart';
-import 'package:finalproject_front/pages/sign/login_division_page.dart';
-import 'package:finalproject_front/pages/sign/login_page.dart';
+import 'package:finalproject_front/pages/auth/join_division_page.dart';
+import 'package:finalproject_front/pages/auth/login_division_page.dart';
+import 'package:finalproject_front/pages/auth/login_page.dart';
 import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';

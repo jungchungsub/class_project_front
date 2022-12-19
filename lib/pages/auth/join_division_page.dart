@@ -2,7 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
-import 'package:finalproject_front/pages/sign/join_page.dart';
+import 'package:finalproject_front/pages/auth/join_page.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
