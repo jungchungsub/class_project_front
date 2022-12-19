@@ -45,6 +45,8 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
   @override
   void initState() {
+    widget._name.text = widget.model.name;
+    //widget._count = widget.model.lessonCount;
     super.initState();
     scrollController = ScrollController();
   }
