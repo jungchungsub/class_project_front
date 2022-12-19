@@ -1,9 +1,11 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user.dart';
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/user/components/service_text_button.dart';
 import 'package:finalproject_front/pages/user/components/user_update_form.dart';
+import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,20 +37,21 @@ class UserUpdatePage extends ConsumerWidget {
             //   text: "로그아웃",
             //   action: userCT.logout(),
             // ),
-            _buildServiceButton(userCT),
+            _buildlogOutButton(userCT),
             _buildDivider(),
-            ServiceTextButton(context: context, text: "회원 탈퇴", routePath: "/joinDivision"),
+            _buildDeleteUserButton(userCT),
             _buildDivider(),
+            SizedBox(height: gap_xxl),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildServiceButton(UserController userCT) {
+  Widget _buildlogOutButton(UserController userCT) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: TextButton(
           onPressed: () {
@@ -57,7 +60,27 @@ class UserUpdatePage extends ConsumerWidget {
           // ignore: sort_child_properties_last
           child: Text(
             "로그아웃",
-            style: TextStyle(color: Color.fromARGB(255, 159, 150, 150)),
+            style: TextStyle(color: gSubTextColor),
+          ),
+          style: TextButton.styleFrom(alignment: Alignment.bottomLeft),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeleteUserButton(UserController userCT) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+      child: SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () {
+            userCT.deleteUser(userId: UserSession.user.id);
+          },
+          // ignore: sort_child_properties_last
+          child: Text(
+            "회원탈퇴",
+            style: TextStyle(color: gSubTextColor),
           ),
           style: TextButton.styleFrom(alignment: Alignment.bottomLeft),
         ),

@@ -28,7 +28,9 @@ class LessonDetailPageViewModel extends StateNotifier<LessonDetailPageModel?> {
   LessonDetailPageViewModel(super.state, this.lessonId);
 
   Future<void> notifyViewModel() async {
-    ResponseDto responseDto = await lessonService.fetchLessonDetail(lessonId, UserSession.jwtToken);
+    ResponseDto responseDto = await lessonService.fetchLessonDetail(lessonId);
+    Logger().d("로그 확인 : ${responseDto.data}");
+    Logger().d("로그 확인 : ${responseDto.msg}");
 
     Logger().d(responseDto.data);
     if (responseDto.statusCode < 300) {

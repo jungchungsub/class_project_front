@@ -6,6 +6,7 @@ import 'package:finalproject_front/pages/subscribe/model/subscribe_page_model.da
 import 'package:finalproject_front/service/subscribe_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 final subscribePageViewModel = StateNotifierProvider.family.autoDispose<SubscribePageViewModel, SubscribePageModel?, int>((ref, userId) {
   return SubscribePageViewModel(null, userId)..notifyViewModel();
@@ -22,9 +23,10 @@ class SubscribePageViewModel extends StateNotifier<SubscribePageModel?> {
     String? jwtToken;
     ResponseDto responseDto = await subscribeService.subscribeList(userId, UserSession.jwtToken);
     if (responseDto.statusCode < 300) {
-      SubscribePageModel model = SubscribePageModel(responseDto.data);
-
-      state = model;
+      Logger().d("로그 확인 : ${responseDto.data}");
+      // SubscribePageModel model = responseDto.data;
+      state = SubscribePageModel(responseDto.data);
+      // state = model;
     } else {
       // 토큰이 만료됨은 로컬 서비스에서 사용하는 코드임 -> 널일 경우 따로 띄워줘야함.
       ScaffoldMessenger.of(mContext!).showSnackBar(

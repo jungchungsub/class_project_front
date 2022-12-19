@@ -1,3 +1,4 @@
+import 'package:finalproject_front/dto/request/lesson_update_info.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
@@ -5,7 +6,7 @@ import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
+import 'package:finalproject_front/pages/lesson/lesson_master_list/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
@@ -17,9 +18,9 @@ import 'package:finalproject_front/pages/payment/payment_installment_list_page.d
 import 'package:finalproject_front/pages/payment/payment_sales_detail_pages.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main_page.dart';
-import 'package:finalproject_front/pages/sign/join_division_page.dart';
-import 'package:finalproject_front/pages/sign/login_division_page.dart';
-import 'package:finalproject_front/pages/sign/login_page.dart';
+import 'package:finalproject_front/pages/auth/join_division_page.dart';
+import 'package:finalproject_front/pages/auth/login_division_page.dart';
+import 'package:finalproject_front/pages/auth/login_page.dart';
 import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: UserSession.isLogin == true ? "/main" : "/login",
+      initialRoute: "/main",
       routes: {
         // 라우팅 주소의 가장 앞에는 동사,명사
 
@@ -65,22 +66,19 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/orderDetail": (context) => OrderDetailPage(),
-        //"/lessonDetail": (context) => LessonDetailPage(lessonId: ),
-        "/categoryDetail": (context) => CategoryDetailPage(categoryId: 1),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
-        "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
+
+        // "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
+
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
-        // "/profileInsert": (context) => UserProfileInsertPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
-        //"/lessonUpdate": (context) => LessonUpdatePage(),
         "/chatList": (context) => ChatListPage(),
-        "/subscribePage": (context) => SubscribePage(userId: 1), //더미 적용
-        // "/userUpdate": (context) => UserUpdatePage(),
+        "/subscribePage": (context) => SubscribePage(userId: UserSession.user.id), //더미 적용
         "/reviewInsert": (context) => LessonReviewInsertPage(),
         "/searchDetail": (context) => SearchDetailPage(), // 더미 적용
         "/lessonInsert": (context) => LessonInsertPage(),

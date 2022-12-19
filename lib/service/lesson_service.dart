@@ -13,32 +13,25 @@ import 'package:logger/logger.dart';
 class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
-  Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
-    //Logger().d("id출력service:${lessonId}");
+  Future<ResponseDto> fetchLessonDetail(int lessonId) async {
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
-    ResponseDto responseDto = toResponseDto(response);
     Logger().d(response.body);
+    ResponseDto responseDto = toResponseDto(response);
     final value = responseDto.data["lessonAvgGrade"];
-    Logger().d("value 값 : ${value}");
     if (value == "NaN") {
       responseDto.data["lessonAvgGrade"] = 0.0;
     }
-    Logger().d(responseDto.data["lessonAvgGrade"]);
-    Logger().d("~~~~~~~~~~~~~");
     responseDto.data = LessonRespDto.fromJson(responseDto.data);
-    //Logger().d("데이터확인 : ${responseDto.data}");
     return responseDto;
   }
 
-  Future<ResponseDto> fetchHomeList(String? jwtToken) async {
+  Future<ResponseDto> fetchHomeList() async {
     Response response = await httpConnector.get(path: "/api/main");
-
-    ResponseDto responseDto = toResponseDto(response); //
-    if (responseDto.statusCode < 300) {
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d(responseDto.data);
+    if (responseDto.statusCode < 400) {
       List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
-      // Logger().d(mapList);
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
-      //mapList하나하나를 fromjson하고 tolist로 묶음
 
       responseDto.data = LessonLatestList;
     }
@@ -56,9 +49,9 @@ class LessonService {
     String requestBody = jsonEncode(lessonUpdateReqDto);
     Response response = await httpConnector.put(path: "/api/lesson/${lessonId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-    if (responseDto.data != null) {
-      // responseDto.data = 레슨리스폰스디티오생성
-    }
+    // if (responseDto.data != null) {
+    //   // responseDto.data = 레슨리스폰스디티오생성
+    // }
     return responseDto;
   }
 }

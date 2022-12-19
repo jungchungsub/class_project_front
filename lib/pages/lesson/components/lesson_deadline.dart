@@ -62,7 +62,7 @@ class _LessonDeadLineState extends State<LessonDeadLine> {
                     setState(() {
                       dateInput.text = formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
                       Logger().d(dateInput.text);
-                      widget.lessonInsertReqDto.deadline = dateInput.text;
+                      widget.lessonInsertReqDto.deadline = dateInput.text as DateTime;
                     });
                   } else {}
                 },

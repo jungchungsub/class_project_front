@@ -15,9 +15,6 @@ class CategoryRespDto {
     required this.lessonPrice,
     required this.avgGrade,
     required this.totalReviews,
-    required this.recommand,
-    required this.ranking,
-    required this.recent,
     required this.isSubscribed,
   });
 
@@ -26,9 +23,6 @@ class CategoryRespDto {
   int lessonPrice;
   double avgGrade;
   int totalReviews;
-  bool? recommand;
-  int ranking;
-  DateTime recent;
   bool? isSubscribed;
 
   factory CategoryRespDto.fromJson(Map<String, dynamic> json) => CategoryRespDto(
@@ -37,9 +31,6 @@ class CategoryRespDto {
         lessonPrice: json["lessonPrice"],
         avgGrade: json["avgGrade"],
         totalReviews: json["totalReviews"],
-        recommand: json["recommand"],
-        ranking: json["ranking"],
-        recent: DateTime.parse(json["recent"]),
         isSubscribed: json["isSubscribed"],
       );
 
@@ -49,9 +40,6 @@ class CategoryRespDto {
         "lessonPrice": lessonPrice,
         "avgGrade": avgGrade,
         "totalReviews": totalReviews,
-        "recommand": recommand,
-        "ranking": ranking,
-        "recent": recent.toIso8601String(),
         "subscribed": isSubscribed,
       };
 }

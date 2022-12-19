@@ -5,6 +5,7 @@ import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
+import 'package:finalproject_front/dto/response/selling_List_resp_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
@@ -30,6 +31,7 @@ class UserService {
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
+    Logger().d("회원가입 데이터 확인 : ${requestBody}");
     // 2. 통신 시작
     Response response = await httpConnector.post(path: "/api/join", body: requestBody);
 
@@ -53,6 +55,8 @@ class UserService {
     Logger().d(" 여기가 실행된거임?");
     Response response = await httpConnector.get(path: "/api/user/$userId/mypage");
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("responeDto 메세지 확인 : ${responseDto.data}");
+    Logger().d("responeDto 메세지 확인 : ${responseDto.msg}");
 
     if (responseDto.data != null) {
       responseDto.data = UserPageRespDto.fromJson(responseDto.data);
@@ -82,6 +86,26 @@ class UserService {
     return responseDto;
   }
 
+  //마스터 판매자 리스트
+  Future<ResponseDto> fetchSellingList(int userId, String? jwtToken) async {
+    Response response = await httpConnector.get(path: "/api/expert/${userId}/sellingList");
+    Logger().d("reseponse  ${response}");
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("데이터 잘들어옴? :: ${responseDto.data}");
+    Logger().d("메세지 들어옴? :: ${responseDto.msg}");
+    Logger().d("상태코드 들어옴? :: ${responseDto.statusCode}");
+    if (responseDto.data != null) {
+      responseDto.data = SellingListRespDto.fromJson(responseDto.data);
+      Logger().d(responseDto.data);
+      // List<dynamic> mapList = responseDto.data;
+      // Logger().d("mapList ${mapList}");
+      // List<SellingListRespDto> SellingList = mapList.map((e) => SellingListRespDto.fromJson(e)).toList();
+      // Logger().d("SellingList :  ${SellingList}");
+      // responseDto.data = SellingListRespDto.fromJson(responseDto.data);
+    }
+    return responseDto;
+  }
+
 //업데이트
   Future<ResponseDto> fetchUpdateUser(int userId, updateUserReqDto) async {
     String requestBody = jsonEncode(updateUserReqDto);
@@ -96,23 +120,24 @@ class UserService {
 
   Future<ResponseDto> fetchUpdateProfile(int userId, ProfileUpdateReqDto profileUpdateReqDto) async {
     String requestBody = jsonEncode(profileUpdateReqDto);
-    Logger().d("프로필 업데이트 바디 확인 : ${requestBody}");
-
     Response response = await httpConnector.put(path: "/api/user/$userId/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("프로필 업데이트 확인 : ${responseDto.data}");
-    Logger().d("프로필 업데이트 확인 : ${responseDto.statusCode}");
 
     return responseDto;
   }
 
   Future<ResponseDto> fetchInsertProfile(ProfileInsertReqDto profileInsertReqDto) async {
     String requestBody = jsonEncode(profileInsertReqDto);
-    Logger().d("프로필 등록 바디 확인 : ${requestBody}");
     Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("프로필 등록 값 확인 : ${responseDto.data}");
-    Logger().d("프로필 등록 값 확인 : ${responseDto.statusCode}");
+
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchDeleteUser(userId) async {
+    Logger().d("회원탈퇴 2. 서비스$userId");
+    Response response = await httpConnector.put(path: "/api/user/$userId/delete");
+    ResponseDto responseDto = toResponseDto(response);
     return responseDto;
   }
 }
