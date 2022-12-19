@@ -11,7 +11,6 @@ final httpConnector = Provider<HttpConnector>((ref) {
 class HttpConnector {
 // header에 content 타입 필요
   Map<String, String> headers = {"Content-Type": "application/json;charset=utf-8"};
-
   final host = "http://192.168.0.87:8000";
   final host2 = "http://localhost:8000";
   final host3 = "http://172.16.29.75:8000";

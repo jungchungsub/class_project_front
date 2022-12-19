@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/payment/iamport/payment/payment_test.dart';
 
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           _buildPaymentPurpose(),
           _buildMiddleDivider(),
           _buildAgree(),
-          _buildPaymentButton(context, "/paymentCard")
+          // _buildPaymentButton(context, "/paymentCard")
+          _buildPaymentButton(context),
         ],
       ),
     );
@@ -276,7 +278,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  Container _buildPaymentButton(BuildContext context, String routePath) {
+//, String routePath
+  Container _buildPaymentButton(BuildContext context) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -285,8 +288,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           child: TextButton(
             style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
             onPressed: () {
-              Navigator.pushNamed(context, routePath);
+              // Navigator.pushNamed(context, routePath);
               //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentTest()));
             },
             child: Text(
               "${totalPrice}원 결제하기",
