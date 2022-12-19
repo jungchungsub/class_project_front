@@ -125,7 +125,6 @@ class _IamportWebViewState extends State<IamportWebView> {
                   iamportUrl.launchApp();
                   return NavigationDecision.prevent;
                 }
-
                 return NavigationDecision.navigate;
               },
             ),

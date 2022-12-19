@@ -9,6 +9,7 @@ import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
 import 'package:finalproject_front/pages/order/order_detail_page.dart';
+import 'package:finalproject_front/pages/payment/iamport/payment/payment.dart';
 import 'package:finalproject_front/pages/payment/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_installment_list_page.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
         "/searchDetail": (context) => SearchDetailPage(), // 더미 적용
         "/lessonInsert": (context) => LessonInsertPage(),
         "/chatroom": (context) => ChatRoomPage(),
+        "/payment": (context) => Payment()
       },
       theme: theme(),
     );
