@@ -6,6 +6,7 @@ import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
+import 'package:finalproject_front/pages/lesson/lesson_master_list/lesson_master_list.dart';
 import 'package:finalproject_front/pages/sign/join_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
@@ -53,6 +54,10 @@ class UserController {
       Navigator.push(
           gContext, MaterialPageRoute(builder: (context) => UserProfileDetailPage(id: UserSession.user.id, username: UserSession.user.username)));
     }
+  }
+
+  void moveSellingPage({required int userId}) {
+    Navigator.push(gContext, MaterialPageRoute(builder: ((context) => LessonMasterListPage(userId: userId))));
   }
 
   Future<void> logout() async {

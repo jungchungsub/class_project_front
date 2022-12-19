@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-LessonRespDto lessonRespDtoFromJson(String str) => LessonRespDto.fromJson(json.decode(str));
+SellingListRespDto SellingListRespDtoFromJson(String str) => SellingListRespDto.fromJson(json.decode(str));
 
-String lessonRespDtoToJson(LessonRespDto data) => json.encode(data.toJson());
+String lessonRespDtoToJson(SellingListRespDto data) => json.encode(data.toJson());
 
-class LessonRespDto {
-  LessonRespDto({
+class SellingListRespDto {
+  SellingListRespDto({
     required this.expertDto,
     required this.lessonDtoList,
   });
@@ -13,7 +13,7 @@ class LessonRespDto {
   ExpertDto expertDto;
   List<LessonDtoList> lessonDtoList;
 
-  factory LessonRespDto.fromJson(Map<String, dynamic> json) => LessonRespDto(
+  factory SellingListRespDto.fromJson(Map<String, dynamic> json) => SellingListRespDto(
         expertDto: ExpertDto.fromJson(json["expertDto"]),
         lessonDtoList: List<LessonDtoList>.from(json["lessonDtoList"].map((x) => LessonDtoList.fromJson(x))),
       );

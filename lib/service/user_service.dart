@@ -5,6 +5,7 @@ import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
+import 'package:finalproject_front/dto/response/selling_List_resp_dto.dart';
 import 'package:finalproject_front/dto/response/profile_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/service/local_service.dart';
@@ -78,6 +79,39 @@ class UserService {
     ResponseDto responseDto = toResponseDto(response);
     if (responseDto.data != null) {
       responseDto.data = ProfileDetailRespDto.fromJson(responseDto.data);
+    }
+    return responseDto;
+  }
+
+  // Future<ResponseDto> subscribeList(int userId, String? jwtToken) async {
+  //   Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe");
+
+  //   ResponseDto responseDto = toResponseDto(response);
+  //   Logger().d(responseDto.statusCode);
+
+  //   if (responseDto.statusCode < 300) {
+  //     // List<dynamic> mapList = responseDto.data;
+  //     // Logger().d(mapList);
+  //     // List<SubscribeRespDto> SubscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
+  //     // Logger().d(SubscribeList);
+  //     responseDto.data = SubscribeRespDto.fromJson(responseDto.data);
+  //   }
+  //   return responseDto;
+  // }
+
+  //마스터 판매자 리스트
+  Future<ResponseDto> fetchSellingList(int userId, String? jwtToken) async {
+    Response response = await httpConnector.get(path: "/api/expert/${userId}/sellingList");
+    Logger().d("reseponse  ${response}");
+    ResponseDto responseDto = toResponseDto(response);
+    Logger().d("responseDto :: ${responseDto}");
+    if (responseDto.data != null) {
+      responseDto.data = SellingListRespDto.fromJson(responseDto.data);
+
+      List<dynamic> mapList = responseDto.data;
+      Logger().d("mapList ${mapList}");
+      List<SellingListRespDto> SellingList = mapList.map((e) => SellingListRespDto.fromJson(e)).toList();
+      responseDto.data = SellingListRespDto.fromJson(responseDto.data);
     }
     return responseDto;
   }
