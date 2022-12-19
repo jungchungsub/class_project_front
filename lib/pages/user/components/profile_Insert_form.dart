@@ -160,6 +160,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
               ElevatedButton(
                 onPressed: () {
                   widget.profileInsertReqDto.filePath = profileImage;
+                  Logger().d("인코딩 이미지 확인 ${widget.profileInsertReqDto.filePath}");
                   userCT.insertProfile(
                     profileInsertReqDto: widget.profileInsertReqDto,
                   );
