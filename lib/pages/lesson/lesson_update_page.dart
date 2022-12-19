@@ -12,18 +12,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class LessonUpdatePage extends ConsumerWidget {
+  LessonUpdateInfo model;
+  LessonUpdateReqDto lessonUpdateReqDto = LessonUpdateReqDto.single();
   LessonUpdatePage({required this.model, Key? key}) : super(key: key);
-  LesssonUpdateInfo model;
-  LessonUpdateReqDto lessonUpdateReqDto = LessonUpdateReqDto.origin();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lessonCT = ref.read(lessonController);
-    Logger().d("업데이트 페이지 ${model.name}");
 
     return Scaffold(
       appBar: _buildAppbar(context),
-      // body: LessonUpdateForm(),
+      body: LessonUpdateForm(model: model, lessonUpdateReqDto: lessonUpdateReqDto),
     );
   }
 

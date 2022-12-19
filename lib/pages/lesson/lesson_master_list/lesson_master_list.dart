@@ -2,6 +2,7 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/dummy_models/master_lesson_list_resp_dto.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list/model/lesson_master_list_model.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list/model/lesson_master_list_view_model.dart';
+import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -97,21 +98,21 @@ Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, Le
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${model?.sellingList[index].lessonDtoList[index].lessonName}",
+                                "${model?.sellingList.lessonDtoList[index].lessonName}",
                                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               Text(
-                                "전문가 : ${model?.sellingList[index].expertDto.expertName}",
+                                "전문가 : ${model?.sellingList.expertDto.expertName}",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "${model?.sellingList[index].lessonDtoList[index].lessonPrice}원",
+                                "${model?.sellingList.lessonDtoList[index].lessonPrice}원",
                                 style: TextStyle(fontSize: 12),
                               ),
                               Text(
-                                "마감일자 : ${model?.sellingList[index].lessonDtoList[index].lessonDeadLine}",
+                                "마감일자 : ${model?.sellingList.lessonDtoList[index].lessonDeadLine}",
                                 style: TextStyle(fontSize: 12),
                               )
                             ],
@@ -132,7 +133,7 @@ Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, Le
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: (() {
-                          Navigator.pushNamed(context, "/lessonUpdate");
+                          // Navigator.push(context, MaterialPageRoute(builder: ((context) => LessonUpdatePage(model: model.sellingList.))));
                         }),
                         child: Text(
                           "수정하기",

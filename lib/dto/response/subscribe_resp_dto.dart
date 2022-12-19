@@ -1,93 +1,68 @@
-// To parse this JSON data, do
-//
-//     final lessonRespDto = lessonRespDtoFromJson(jsonString);
+// import 'dart:convert';
 
-import 'dart:convert';
+// List<SubscribeRespDto> lessonRespDtoFromJson(String str) => List<SubscribeRespDto>.from(json.decode(str).map((x) => SubscribeRespDto.fromJson(x)));
 
-SubscribeRespDto lessonRespDtoFromJson(String str) => SubscribeRespDto.fromJson(json.decode(str));
+// String lessonRespDtoToJson(List<SubscribeRespDto> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-String lessonRespDtoToJson(SubscribeRespDto data) => json.encode(data.toJson());
+// class SubscribeRespDto {
+//   SubscribeRespDto({
+//     required this.lessonId,
+//     required this.lessonName,
+//     required this.lessonPrice,
+//     required this.avgGrade,
+//     required this.totalReviews,
+//     required this.subscribed,
+//   });
+
+//   int lessonId;
+//   String lessonName;
+//   int lessonPrice;
+//   int avgGrade;
+//   int totalReviews;
+//   bool subscribed;
+
+//   factory SubscribeRespDto.fromJson(Map<String, dynamic> json) => SubscribeRespDto(
+//         lessonId: json["lessonId"],
+//         lessonName: json["lessonName"],
+//         lessonPrice: json["lessonPrice"],
+//         avgGrade: json["avgGrade"],
+//         totalReviews: json["totalReviews"],
+//         subscribed: json["subscribed"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "lessonId": lessonId,
+//         "lessonName": lessonName,
+//         "lessonPrice": lessonPrice,
+//         "avgGrade": avgGrade,
+//         "totalReviews": totalReviews,
+//         "subscribed": subscribed,
+//       };
+// }
 
 class SubscribeRespDto {
-  SubscribeRespDto({
-    required this.subscribes,
-  });
+  int lessonId;
+  String lessonName;
+  int lessonPrice;
+  double avgGrade;
+  int totalReviews;
+  bool subscribed;
 
-  List<Subscribe> subscribes;
+  SubscribeRespDto({
+    required this.lessonId,
+    required this.lessonName,
+    required this.lessonPrice,
+    required this.avgGrade,
+    required this.totalReviews,
+    required this.subscribed,
+  });
 
   factory SubscribeRespDto.fromJson(Map<String, dynamic> json) => SubscribeRespDto(
-        subscribes: List<Subscribe>.from(json["subscribes"].map((x) => Subscribe.fromJson(x))),
+        lessonId: json["lessonId"],
+        lessonName: json["lessonName"],
+        lessonPrice: json["lessonPrice"],
+        avgGrade: json["avgGrade"],
+        totalReviews: json["totalReviews"],
+        subscribed: json["subscribed"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "subscribes": List<dynamic>.from(subscribes.map((x) => x.toJson())),
-      };
-}
-
-class Subscribe {
-  Subscribe({
-    required this.id,
-    required this.user,
-    required this.lesson,
-  });
-
-  int id;
-  User user;
-  Lesson lesson;
-
-  factory Subscribe.fromJson(Map<String, dynamic> json) => Subscribe(
-        id: json["id"],
-        user: User.fromJson(json["user"]),
-        lesson: Lesson.fromJson(json["lesson"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "user": user.toJson(),
-        "lesson": lesson.toJson(),
-      };
-}
-
-class Lesson {
-  Lesson({
-    required this.id,
-    required this.name,
-    required this.photo,
-    required this.price,
-  });
-
-  int id;
-  String name;
-  String photo;
-  int price;
-
-  factory Lesson.fromJson(Map<String, dynamic> json) => Lesson(
-        id: json["id"],
-        name: json["name"],
-        photo: json["photo"],
-        price: json["price"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "photo": photo,
-        "price": price,
-      };
-}
-
-class User {
-  User({
-    required this.username,
-  });
-
-  String username;
-
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        username: json["username"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "username": username,
-      };
 }

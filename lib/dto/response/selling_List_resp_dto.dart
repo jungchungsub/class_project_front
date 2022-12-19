@@ -55,6 +55,7 @@ class LessonDtoList {
         lessonName: json["lessonName"],
         lessonPrice: json["lessonPrice"],
         lessonDeadLine: DateTime.parse(json["lessonDeadLine"]),
+        //DateFormat("yyyy-mm-dd").parse(json["lessonDeadLine"]),
       );
 
   Map<String, dynamic> toJson() => {

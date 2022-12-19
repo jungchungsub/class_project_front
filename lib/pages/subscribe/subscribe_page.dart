@@ -15,12 +15,13 @@ class SubscribePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SubscribePageModel? model = ref.watch(subscribePageViewModel(userId));
+    Logger().d("model : ${model}");
     SubscribeController subscribeCT = ref.read(subscribeController);
     return Scaffold(
         appBar: _buildAppbar(),
         body: ListView.builder(
             shrinkWrap: true, //리스트 자식 높이 크기의 합 만큼으로 영역을 고정 시켜준다.
-            itemCount: model?.subscribeList.subscribes.length,
+            itemCount: model?.subscribeList.length,
             itemBuilder: ((BuildContext context, int index) {
               return _buildSubscribeLesson(context, ref, index, model, subscribeCT);
             })));
@@ -31,7 +32,7 @@ class SubscribePage extends ConsumerWidget {
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
         onTap: () {
-          subscribeCT.moveDetailPage(lessonId: model!.subscribeList.subscribes[index].lesson.id);
+          subscribeCT.moveDetailPage(lessonId: model!.subscribeList[index].lessonId);
           Logger().d("좋아요 레슨디테일 이동실행onTop");
         },
         child: Container(
@@ -66,7 +67,8 @@ class SubscribePage extends ConsumerWidget {
                         width: 230,
                         height: 50,
                         child: Text(
-                          "${model?.subscribeList.subscribes[index].lesson.name}", //이름
+                          // "${model?.subscribeList.subscribes[index].lesson.name}", //이름
+                          "${model?.subscribeList[index].lessonName}", //이름
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -95,7 +97,7 @@ class SubscribePage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${model?.subscribeList.subscribes[index].lesson.price}",
+                            "${model?.subscribeList[index].lessonPrice}",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
