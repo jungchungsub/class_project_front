@@ -16,6 +16,7 @@ class ProfileInsertForm extends ConsumerStatefulWidget {
   ProfileInsertForm({super.key, required this.username, required this.profileInsertReqDto});
   late ProfileInsertReqDto profileInsertReqDto;
   String username;
+  static const String defaultProfile = "assets/defaultProfile.jpeg";
 
   @override
   ConsumerState<ProfileInsertForm> createState() => _ProfileInsertFormState();
@@ -45,10 +46,8 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
         setState(() {}); // 상태 초기화
         sendImage = _imagefile?.path;
         final encodeImage = utf8.encode(sendImage);
-        Logger().d("파일 경로 확인 : $sendImage");
         List<int> data = encodeImage;
         String profileImage = base64Encode(data);
-        Logger().d("인코딩 경로 확인 : $profileImage");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -202,12 +201,14 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                   fit: BoxFit.cover,
                 ),
               )
-            : Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                  border: Border.all(color: gBorderColor),
-                  borderRadius: BorderRadius.circular(50),
+            : ClipRRect(
+                borderRadius: BorderRadius.circular(150),
+                child: Image.asset(
+                  // 이미지 파일이 null이면 기본 이미지 띄우기
+                  ProfileInsertForm.defaultProfile,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
                 ),
               ),
         SizedBox(width: gap_m),

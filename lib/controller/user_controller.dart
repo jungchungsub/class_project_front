@@ -14,6 +14,7 @@ import 'package:finalproject_front/service/local_service.dart';
 import 'package:finalproject_front/service/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 import '../dto/request/auth_req_dto.dart';
 
@@ -38,9 +39,11 @@ class UserController {
   Future<void> moveJoinPage(String role) async {
     if (role == "USER") {
       await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+      Logger().d("롤값 확인 : ${role}");
     }
     if (role == "EXPERT") {
       await Navigator.push(gContext, MaterialPageRoute(builder: (context) => JoinPage(role: role)));
+      Logger().d("롤값 확인 : ${role}");
     }
   }
 
@@ -59,6 +62,20 @@ class UserController {
     // 세션 값 삭제
     await UserSession.removeAuthentication();
     await Navigator.pushNamedAndRemoveUntil(gContext, "/logoutMyPage", (route) => false);
+  }
+
+  Future<void> deleteUser({required int userId}) async {
+    Logger().d("회원 탈퇴 시작 1. 컨트롤러");
+    ResponseDto responseDto = await userService.fetchDeleteUser(userId);
+    if (responseDto.statusCode < 400) {
+      Logger().d("회원 탈퇴 성공 ${responseDto.msg}");
+      await UserSession.removeAuthentication();
+      Navigator.pushNamedAndRemoveUntil(gContext, "/main", (route) => false);
+    } else {
+      ScaffoldMessenger.of(gContext).showSnackBar(
+        SnackBar(content: Text("회원가입 탈퇴 실패 ")),
+      );
+    }
   }
 
   Future<void> joinUser({required JoinReqDto joinReqDto}) async {
@@ -116,7 +133,7 @@ class UserController {
       Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
-        SnackBar(content: Text("회원가입 실패")),
+        SnackBar(content: Text("프로필 등록 실패")),
       );
     }
   }

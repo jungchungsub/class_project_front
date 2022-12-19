@@ -80,7 +80,7 @@ class _CategorySelectButtonState extends State<CategorySelectButton> {
       onConfirm: (results) {
         _selectCategory = results;
         categoryId = _selectCategory?.map((e) => e.id).toList();
-        widget.joinReqDto?.categoryId = categoryId;
+        widget.joinReqDto?.categoryIds = categoryId;
         widget.userUpdateReqDto?.categoryIds = categoryId;
       },
     );

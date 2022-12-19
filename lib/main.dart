@@ -1,5 +1,3 @@
-import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
-import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
@@ -65,8 +63,6 @@ class MyApp extends StatelessWidget {
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
         "/orderDetail": (context) => OrderDetailPage(),
-        //"/lessonDetail": (context) => LessonDetailPage(lessonId: ),
-        "/categoryDetail": (context) => CategoryDetailPage(categoryId: 1),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
@@ -74,13 +70,11 @@ class MyApp extends StatelessWidget {
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
-        // "/profileInsert": (context) => UserProfileInsertPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
         "/lessonUpdate": (context) => LessonUpdatePage(),
         "/chatList": (context) => ChatListPage(),
-        "/subscribePage": (context) => SubscribePage(userId: 1), //더미 적용
-        // "/userUpdate": (context) => UserUpdatePage(),
+        "/subscribePage": (context) => SubscribePage(userId: UserSession.user.id), //더미 적용
         "/reviewInsert": (context) => LessonReviewInsertPage(),
         "/searchDetail": (context) => SearchDetailPage(), // 더미 적용
         "/lessonInsert": (context) => LessonInsertPage(),

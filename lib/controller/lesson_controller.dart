@@ -35,8 +35,10 @@ class LessonController {
     _ref.read(homePageViewModel.notifier).notifyViewModel();
   }
 
-  void moveDetailPage({required int lessonId}) {
-    Navigator.push(gContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
+  Future<void> moveDetailPage({required int lessonId}) async {
+    Logger().d("디테일 : ${lessonId}");
+
+    await Navigator.push(gContext, MaterialPageRoute(builder: ((context) => LessonDetailPage(lessonId: lessonId))));
   }
 
   Future<void> lessonInsert({required LessonInsertReqDto lessonInsertReqDto}) async {

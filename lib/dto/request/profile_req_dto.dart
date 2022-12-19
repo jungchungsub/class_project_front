@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-ProfileUpdateReqDto responseDtoFromJson(String str) => ProfileUpdateReqDto.fromJson(json.decode(str));
+ProfileUpdateReqDto profileUpdateDtoFromJson(String str) => ProfileUpdateReqDto.fromJson(json.decode(str));
 
-String responseDtoToJson(ProfileUpdateReqDto data) => json.encode(data.toJson());
+String profileUpdateDtoToJson(ProfileUpdateReqDto data) => json.encode(data.toJson());
 
 class ProfileUpdateReqDto {
   ProfileUpdateReqDto.single();
@@ -41,9 +41,9 @@ class ProfileUpdateReqDto {
       };
 }
 
-ProfileInsertReqDto welcomeFromJson(String str) => ProfileInsertReqDto.fromJson(json.decode(str));
+ProfileInsertReqDto profileInsertFromJson(String str) => ProfileInsertReqDto.fromJson(json.decode(str));
 
-String welcomeToJson(ProfileInsertReqDto data) => json.encode(data.toJson());
+String profileInsertToJson(ProfileInsertReqDto data) => json.encode(data.toJson());
 
 class ProfileInsertReqDto {
   ProfileInsertReqDto.single();
