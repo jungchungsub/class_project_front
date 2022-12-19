@@ -35,7 +35,7 @@ class JoinDivisionPage extends ConsumerWidget {
               SizedBox(height: gap_xl),
               TextButton(
                 onPressed: () {
-                  userCT.moveLoginPage(); // 로그인 하러 이동
+                  userCT.moveLoginDivisionPage(); // 로그인 하러 이동
                 },
                 child: const Text(
                   "이미 회원인가요? 로그인 페이지로 이동",
@@ -63,7 +63,7 @@ Widget _buildDivisionButton(BuildContext context, String divisionTitle, String d
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${divisionSubTitle}",
+              divisionSubTitle,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
@@ -72,7 +72,7 @@ Widget _buildDivisionButton(BuildContext context, String divisionTitle, String d
             ),
             SizedBox(height: gap_m),
             Text(
-              "${divisionTitle}",
+              divisionTitle,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],
@@ -87,10 +87,10 @@ Widget _buildHeaderIntro(BuildContext context, String introTitle, String introSu
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text("${introTitle}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      Text(introTitle, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       SizedBox(height: 10),
       Text(
-        "${introSubtitle}",
+        introSubtitle,
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,

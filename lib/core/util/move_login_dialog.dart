@@ -25,7 +25,7 @@ class MoveLoginDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "로그인 페이지로 이동",
+            "회원가입 또는 로그인을 진행해 주세요.",
           ),
         ],
       ),
@@ -52,7 +52,7 @@ class MoveLoginDialog extends StatelessWidget {
               ),
               onPressed: () {
                 //현재 페이지를 스택에서 제거 후 이동 , 그냥 이동하면 alert창이 띄워져있음
-                Navigator.pushNamed(context, "/login");
+                Navigator.pushNamed(context, "/loginDivision");
               },
             ),
           ],

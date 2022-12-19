@@ -40,8 +40,22 @@ class UserController {
     await Navigator.pushNamed(gContext, "/login");
   }
 
+  Future<void> beforeLoginMainPage() async {
+    if (UserSession.isLogin == false) {
+      await Navigator.pushNamed(gContext, "/main");
+    } else {
+      ScaffoldMessenger.of(gContext).showSnackBar(
+        SnackBar(content: Text("잘못된 요청 입니다.")),
+      );
+    }
+  }
+
   Future<void> moveJoginDivisionPage() async {
     await Navigator.pushNamed(gContext, "/joinDivision");
+  }
+
+  Future<void> moveLoginDivisionPage() async {
+    await Navigator.pushNamed(gContext, "/loginDivision");
   }
 
   Future<void> moveJoinPage(String role) async {

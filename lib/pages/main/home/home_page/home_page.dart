@@ -19,7 +19,6 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     LessonController lessonCT = ref.read(lessonController);
     HomePageModel? model = ref.watch(homePageViewModel);
-    CategoryController categoryCT = ref.read(categorryController);
 
     Logger().d("homePage 실행");
     return Scaffold(

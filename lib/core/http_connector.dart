@@ -71,16 +71,17 @@ class HttpConnector {
   }
 
   Future<Response> get({required String path}) async {
-    Logger().d("여기 실행함?");
-    String jwtToken = UserSession.jwtToken;
-    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
-    Uri uri = Uri.parse("${host2}${path}");
-    Logger().d("uri확인 : ${uri}");
-    Response response = await Client().get(uri, headers: requestHeader);
-    Logger().d("response body확인 : ${response.body}");
-    Logger().d("response body확인 : ${response.statusCode}");
-    Logger().d("커넥터 확인 : ${response.body}");
-    return response;
+    if (UserSession.isLogin == true) {
+      String jwtToken = UserSession.jwtToken;
+      Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
+      Uri uri = Uri.parse("${host2}${path}");
+      Response response = await Client().get(uri, headers: requestHeader);
+      return response;
+    } else {
+      Uri uri = Uri.parse("${host2}${path}");
+      Response response = await Client().get(uri);
+      return response;
+    }
   }
 
   Future<Response> post({required String path, required String body}) async {
