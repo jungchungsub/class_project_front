@@ -13,12 +13,12 @@ import 'package:logger/logger.dart';
 class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
-  Future<ResponseDto> fetchLessonDetail(int lessonId, String? jwtToken) async {
+  Future<ResponseDto> fetchLessonDetail(int lessonId) async {
     //Logger().d("id출력ser/vice:${lessonId}");
     Logger().d("여기 실행됨?");
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
-    ResponseDto responseDto = toResponseDto(response);
     Logger().d(response.body);
+    ResponseDto responseDto = toResponseDto(response);
     final value = responseDto.data["lessonAvgGrade"];
     Logger().d("value 값 : ${value}");
     if (value == "NaN") {
@@ -31,7 +31,7 @@ class LessonService {
     return responseDto;
   }
 
-  Future<ResponseDto> fetchHomeList(String? jwtToken) async {
+  Future<ResponseDto> fetchHomeList() async {
     Response response = await httpConnector.get(path: "/api/main");
 
     ResponseDto responseDto = toResponseDto(response); //

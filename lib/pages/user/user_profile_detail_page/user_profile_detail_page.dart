@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_update_page/user_profile_update_page.dart';
@@ -163,7 +164,7 @@ class UserProfileDetailPage extends ConsumerWidget {
             size: 30,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserLoginMyPage()));
           }),
     );
   }

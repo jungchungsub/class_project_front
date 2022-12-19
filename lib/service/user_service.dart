@@ -121,7 +121,7 @@ class UserService {
 
   Future<ResponseDto> fetchDeleteUser(userId) async {
     Logger().d("회원탈퇴 2. 서비스$userId");
-    Response response = await httpConnector.put(path: "  /api/user/$userId/delete");
+    Response response = await httpConnector.put(path: "/api/user/$userId/delete");
     ResponseDto responseDto = toResponseDto(response);
     return responseDto;
   }

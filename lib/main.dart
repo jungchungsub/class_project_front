@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: UserSession.isLogin == true ? "/main" : "/login",
+      initialRoute: "/main",
       routes: {
         // 라우팅 주소의 가장 앞에는 동사,명사
 

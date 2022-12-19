@@ -10,6 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
+import '../core/util/move_login_dialog.dart';
+
 class MainPage extends StatefulWidget {
   static String role = UserSession.user.role;
   MainPage({Key? key}) : super(key: key);
@@ -67,15 +69,17 @@ class _MainPageState extends State<MainPage> {
         ],
       );
     } else if (UserSession.isLogin == false) {
+      // 비 로그인시
+
       {
         return IndexedStack(
           index: _selectedIndex, //아이콘클릭시 화면 이동
           children: [
             HomePage(),
-            loadedPages.contains(1) ? SearchPage() : Container(),
-            loadedPages.contains(2) ? Center(child: Text("로그인을 해주세요.")) : Center(child: Text("로그인을 해주세요.")),
-            loadedPages.contains(3) ? Center(child: Text("로그인을 해주세요.")) : Center(child: Text("로그인을 해주세요.")),
-            loadedPages.contains(4) ? Center(child: Text("로그인을 해주세요.")) : Center(child: Text("로그인을 해주세요.")),
+            loadedPages.contains(1) ? MoveLoginDialog() : Center(child: Text("잘못된 요청입니다.")),
+            loadedPages.contains(2) ? MoveLoginDialog() : Center(child: Text("잘못된 요청입니다.")),
+            loadedPages.contains(3) ? MoveLoginDialog() : Center(child: Text("잘못된 요청입니다.")),
+            loadedPages.contains(4) ? MoveLoginDialog() : Center(child: Text("잘못된 요청입니다.")),
           ],
         );
       }

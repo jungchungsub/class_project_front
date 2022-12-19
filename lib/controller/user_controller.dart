@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:finalproject_front/core/util/move_alert_dialog.dart';
+import 'package:finalproject_front/core/util/move_profile_insert_dialog.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
@@ -70,7 +70,7 @@ class UserController {
     if (responseDto.statusCode < 400) {
       Logger().d("회원 탈퇴 성공 ${responseDto.msg}");
       await UserSession.removeAuthentication();
-      Navigator.pushNamedAndRemoveUntil(gContext, "/main", (route) => false);
+      Navigator.popAndPushNamed(gContext, "/main");
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
         SnackBar(content: Text("회원가입 탈퇴 실패 ")),

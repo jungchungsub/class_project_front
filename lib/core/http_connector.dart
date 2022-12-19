@@ -17,55 +17,12 @@ class HttpConnector {
   final host3 = "http://172.16.29.75:8000";
   final Client _client = Client();
 
-  // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.
-
-  Future<Response> getInitSession(String path, String? jwtToken) async {
-    Logger().d("initSession실행됨");
-    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
-    Uri uri = Uri.parse("${host3}${path}");
-    Response response = await Client().post(uri, headers: requestHeader);
-    return response;
-  }
-
-  Future<Response> get({required String path}) async {
-    String jwtToken = UserSession.jwtToken;
-    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
-    Logger().d("http통신 잘되었는가? ");
-    Uri uri = Uri.parse("${host3}${path}");
-    Logger().d("uri 오류${uri}");
-    Response response = await Client().get(uri, headers: requestHeader);
-    Logger().d("httpConnector  : ${response}");
-    return response;
-  }
-
-  Future<Response> post({required String path, required String body}) async {
-    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-    Uri uri = Uri.parse("${host3}${path}");
-    Response response = await Client().post(uri, body: body, headers: requestHeader);
-
-    return response;
-  }
-
-  Future<Response> delete(String path) async {
-    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-    Uri uri = Uri.parse("${host3}${path}");
-    Response response = await _client.delete(uri, headers: requestHeader);
-    return response;
-  }
-
-  Future<Response> put({required String path, String? body}) async {
-    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-    Uri uri = Uri.parse("${host3}${path}");
-    Response response = await Client().put(uri, body: body, headers: requestHeader);
-    return response;
-  }
-
-//==============================Mac==========================================//
+  // // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.
 
   // Future<Response> getInitSession(String path, String? jwtToken) async {
   //   Logger().d("initSession실행됨");
   //   Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
-  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Uri uri = Uri.parse("${host3}${path}");
   //   Response response = await Client().post(uri, headers: requestHeader);
   //   return response;
   // }
@@ -73,14 +30,17 @@ class HttpConnector {
   // Future<Response> get({required String path}) async {
   //   String jwtToken = UserSession.jwtToken;
   //   Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
-  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Logger().d("http통신 잘되었는가? ");
+  //   Uri uri = Uri.parse("${host3}${path}");
+  //   Logger().d("uri 오류${uri}");
   //   Response response = await Client().get(uri, headers: requestHeader);
+  //   Logger().d("httpConnector  : ${response}");
   //   return response;
   // }
 
   // Future<Response> post({required String path, required String body}) async {
   //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Uri uri = Uri.parse("${host3}${path}");
   //   Response response = await Client().post(uri, body: body, headers: requestHeader);
 
   //   return response;
@@ -88,17 +48,62 @@ class HttpConnector {
 
   // Future<Response> delete(String path) async {
   //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Uri uri = Uri.parse("${host3}${path}");
   //   Response response = await _client.delete(uri, headers: requestHeader);
   //   return response;
   // }
 
-  // Future<Response> put({required String path, required String body}) async {
+  // Future<Response> put({required String path, String? body}) async {
   //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-  //   Uri uri = Uri.parse("${host2}${path}");
+  //   Uri uri = Uri.parse("${host3}${path}");
   //   Response response = await Client().put(uri, body: body, headers: requestHeader);
   //   return response;
   // }
+
+//==============================Mac==========================================//
+
+  Future<Response> getInitSession(String path, String? jwtToken) async {
+    Logger().d("initSession실행됨");
+    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+    Uri uri = Uri.parse("${host2}${path}");
+    Response response = await Client().post(uri, headers: requestHeader);
+    return response;
+  }
+
+  Future<Response> get({required String path}) async {
+    Logger().d("여기 실행함?");
+    String jwtToken = UserSession.jwtToken;
+    Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
+    Uri uri = Uri.parse("${host2}${path}");
+    Logger().d("uri확인 : ${uri}");
+    Response response = await Client().get(uri, headers: requestHeader);
+    Logger().d("response body확인 : ${response.body}");
+    Logger().d("response body확인 : ${response.statusCode}");
+    Logger().d("커넥터 확인 : ${response.body}");
+    return response;
+  }
+
+  Future<Response> post({required String path, required String body}) async {
+    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+    Uri uri = Uri.parse("${host2}${path}");
+    Response response = await Client().post(uri, body: body, headers: requestHeader);
+
+    return response;
+  }
+
+  Future<Response> delete(String path) async {
+    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+    Uri uri = Uri.parse("${host2}${path}");
+    Response response = await _client.delete(uri, headers: requestHeader);
+    return response;
+  }
+
+  Future<Response> put({required String path, String? body}) async {
+    Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+    Uri uri = Uri.parse("${host2}${path}");
+    Response response = await Client().put(uri, body: body, headers: requestHeader);
+    return response;
+  }
 
 //==============================Mac==========================================//
 }
