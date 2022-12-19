@@ -221,7 +221,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "클래스 사진 등록",
+                "프로필 사진 등록",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(
