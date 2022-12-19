@@ -5,6 +5,7 @@ import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 final homePageViewModel = StateNotifierProvider.autoDispose<HomePageViewModel, HomePageModel?>(((ref) {
   return HomePageViewModel(null)..notifyViewModel();
@@ -16,8 +17,7 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
   HomePageViewModel(super.state);
 
   Future<void> notifyViewModel() async {
-    String? jwtToken;
-    ResponseDto responseDto = await lessonService.fetchHomeList(jwtToken);
+    ResponseDto responseDto = await lessonService.fetchHomeList();
     if (responseDto.statusCode < 300) {
       state = HomePageModel(responseDto.data);
     }

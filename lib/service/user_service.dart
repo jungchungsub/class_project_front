@@ -31,6 +31,7 @@ class UserService {
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
+    Logger().d("회원가입 데이터 확인 : ${requestBody}");
     // 2. 통신 시작
     Response response = await httpConnector.post(path: "/api/join", body: requestBody);
 
@@ -54,6 +55,8 @@ class UserService {
     Logger().d(" 여기가 실행된거임?");
     Response response = await httpConnector.get(path: "/api/user/$userId/mypage");
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("responeDto 메세지 확인 : ${responseDto.data}");
+    Logger().d("responeDto 메세지 확인 : ${responseDto.msg}");
 
     if (responseDto.data != null) {
       responseDto.data = UserPageRespDto.fromJson(responseDto.data);
@@ -146,7 +149,14 @@ class UserService {
     Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("프로필 등록 값 확인 : ${responseDto.data}");
-    Logger().d("프로필 등록 값 확인 : ${responseDto.statusCode}");
+    Logger().d("프로필 등록 메세지 확인 : ${response.body}");
+    return responseDto;
+  }
+
+  Future<ResponseDto> fetchDeleteUser(userId) async {
+    Logger().d("회원탈퇴 2. 서비스$userId");
+    Response response = await httpConnector.put(path: "/api/user/$userId/delete");
+    ResponseDto responseDto = toResponseDto(response);
     return responseDto;
   }
 }

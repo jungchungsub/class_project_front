@@ -27,19 +27,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   void initState() {
     super.initState();
-    scrollController = new ScrollController();
+    scrollController = ScrollController();
   }
 
   @override
   Widget build(BuildContext context) {
-    final uc = ref.read(userController);
+    final userCT = ref.read(userController);
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: _loginForm(context, uc, widget.loginReqDto),
+      body: _loginForm(context, userCT, widget.loginReqDto),
     );
   }
 
-  Form _loginForm(BuildContext context, UserController uc, LoginReqDto loginReqDto) {
+  Form _loginForm(BuildContext context, UserController userCT, LoginReqDto loginReqDto) {
     return Form(
       key: _formKey,
       child: Padding(
@@ -78,7 +78,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               SizedBox(height: gap_l),
               ElevatedButton(
                 onPressed: () async {
-                  await uc.loginUser(loginReqDto: loginReqDto);
+                  await userCT.loginUser(loginReqDto: loginReqDto);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: gButtonOffColor,
@@ -96,6 +96,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ),
                 ),
               ),
+              SizedBox(height: gap_l),
+              TextButton(
+                onPressed: () {
+                  userCT.moveJoginDivisionPage(); // 추가
+                },
+                child: const Text(
+                  "회원가입 하러 이동",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
             ],
           ),
         ),
@@ -107,7 +117,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     return ClipRRect(
       // ignore: sort_child_properties_last
       child: Image.asset(
-        "${imagePath}",
+        imagePath,
         width: 60,
         height: 60,
       ),

@@ -9,7 +9,7 @@ class JoinReqDto {
   String? email;
   String? phoneNum;
   String? role;
-  List<int>? categoryId;
+  List<int>? categoryIds;
 
   JoinReqDto({
     this.username,
@@ -17,6 +17,7 @@ class JoinReqDto {
     this.email,
     this.phoneNum,
     this.role,
+    this.categoryIds,
   });
 // dynamic -> json
   Map<String, dynamic> toJson() => {
@@ -25,7 +26,7 @@ class JoinReqDto {
         "email": email,
         "phoneNum": phoneNum,
         "role": role,
-        "categoryId": categoryId,
+        "categoryIds": categoryIds,
       };
 }
 

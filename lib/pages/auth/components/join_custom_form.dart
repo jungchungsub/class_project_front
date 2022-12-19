@@ -1,6 +1,6 @@
 import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
-import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
+import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
 import 'package:finalproject_front/pages/components/custom_text_field.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +94,7 @@ class JoinCustomForm extends ConsumerWidget {
     return ElevatedButton(
       onPressed: () {
         joinReqDto.role = role;
-        Logger().d("횐가입 데이터 확인 : ${joinReqDto.categoryId}");
+        Logger().d("횐가입 데이터 확인 : ${joinReqDto.categoryIds}");
         uc.joinUser(
           joinReqDto: joinReqDto,
         );
