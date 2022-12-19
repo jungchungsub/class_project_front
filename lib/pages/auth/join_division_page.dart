@@ -15,7 +15,7 @@ class JoinDivisionPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rc = ref.read(userController);
+    final userCT = ref.read(userController);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -29,9 +29,19 @@ class JoinDivisionPage extends ConsumerWidget {
                 child: _buildHeaderIntro(context, "어떤 서비스를 이용하고 싶으신가요?", "원하는 회원가입 유형을 선택하세요.\n의뢰인으로 가입 후에도 전문가 등록이 가능합니다."),
               ),
               SizedBox(height: 400),
-              _buildDivisionButton(context, "비즈니스 외주,아웃소싱을 원한다면", "의뢰인으로 가입", "/join", "USER", rc),
+              _buildDivisionButton(context, "비즈니스 외주,아웃소싱을 원한다면", "의뢰인으로 가입", "/join", "USER", userCT),
               SizedBox(height: gap_l),
-              _buildDivisionButton(context, "전문성으로 수익창출을 원한다면", "전문가로 가입", "/join", "EXPERT", rc),
+              _buildDivisionButton(context, "전문성으로 수익창출을 원한다면", "전문가로 가입", "/join", "EXPERT", userCT),
+              SizedBox(height: gap_xl),
+              TextButton(
+                onPressed: () {
+                  userCT.moveLoginPage(); // 로그인 하러 이동
+                },
+                child: const Text(
+                  "이미 회원인가요? 로그인 페이지로 이동",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
             ],
           ),
         ),
