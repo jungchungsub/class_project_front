@@ -4,12 +4,16 @@
 
 import 'dart:convert';
 
-MyPageRespDto welcomeFromJson(String str) => MyPageRespDto.fromJson(json.decode(str));
+UserPageRespDto userFromJson(String str) => UserPageRespDto.fromJson(json.decode(str));
 
-String welcomeToJson(MyPageRespDto data) => json.encode(data.toJson());
+String userToJson(UserPageRespDto data) => json.encode(data.toJson());
 
-class MyPageRespDto {
-  MyPageRespDto({
+MasterPageRespDto masterFromJson(String str) => MasterPageRespDto.fromJson(json.decode(str));
+
+String masterToJson(MasterPageRespDto data) => json.encode(data.toJson());
+
+class UserPageRespDto {
+  UserPageRespDto({
     required this.id,
     required this.username,
     required this.role,
@@ -21,7 +25,7 @@ class MyPageRespDto {
   String role;
   ProfileDto? profileDto;
 
-  factory MyPageRespDto.fromJson(Map<String, dynamic> json) => MyPageRespDto(
+  factory UserPageRespDto.fromJson(Map<String, dynamic> json) => UserPageRespDto(
         id: json["id"],
         username: json["username"],
         role: json["role"] == "USER" ? "일반회원" : "전문가",
@@ -54,5 +58,37 @@ class ProfileDto {
   Map<String, dynamic> toJson() => {
         "id": id,
         "profilePhoto": profilePhoto,
+      };
+}
+
+class MasterPageRespDto {
+  MasterPageRespDto({
+    this.profilePhoto,
+    required this.username,
+    required this.satisfaction,
+    required this.totalLesson,
+    // required this.isApproval,
+  });
+
+  String? profilePhoto;
+  String username;
+  int satisfaction;
+  int totalLesson;
+  // bool isApproval;
+
+  factory MasterPageRespDto.fromJson(Map<String, dynamic> json) => MasterPageRespDto(
+        profilePhoto: json["profilePhoto"] ?? '',
+        username: json["username"],
+        satisfaction: json["satisfaction"],
+        totalLesson: json["totalLesson"],
+        // isApproval: json["isApproval"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "profilePhoto": profilePhoto,
+        "username": username,
+        "satisfaction": satisfaction,
+        "totalLesson": totalLesson,
+        // "isApproval": isApproval,
       };
 }

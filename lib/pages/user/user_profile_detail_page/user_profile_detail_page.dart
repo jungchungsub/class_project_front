@@ -7,25 +7,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
+import '../../../controller/user_controller.dart';
+import '../../../dto/request/profile_update_info.dart';
 import '../../../size.dart';
 
 class UserProfileDetailPage extends ConsumerWidget {
   final int id;
   final String defaultProfile = "assets/defaultProfile.jpeg";
-  UserProfileDetailPage({required this.id, super.key});
+  final String username;
+
+  UserProfileDetailPage({required this.id, super.key, required this.username});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserProfileDetailPageModel? model = ref.watch(userProfileDetailPageViewModel(id));
     return Scaffold(
-      appBar: _buildAppbar(context),
+      appBar: _buildAppbar(
+        context,
+      ),
       body: _buildBody(context, model),
     );
   }
 
   Widget _buildBody(BuildContext context, UserProfileDetailPageModel? model) {
+    if (model == null) {
+      return Center(child: CircularProgressIndicator());
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -33,33 +41,45 @@ class UserProfileDetailPage extends ConsumerWidget {
           children: [
             _buildProfileHeader(
               context,
-              model?.profileRespDto.user.username,
-              model?.profileRespDto.filePath, // 나중에 사진 추가 시 해야함.
+              model.profileRespDto.user.username,
+              model.profileRespDto.filePath,
               //profileList[0].filePath,
             ),
             SizedBox(height: 20),
-            _buildProfileIntro(context, model?.profileRespDto.introduction),
-            SizedBox(height: 10),
-            _buildProfileContent(context, "지역", model?.profileRespDto.region),
-            SizedBox(height: 10),
-            _buildProfileContent(context, "학력전공", model?.profileRespDto.career),
-            SizedBox(height: 10),
-            _buildProfileContent(context, "보유자격증", model?.profileRespDto.certification),
-            SizedBox(height: 10),
-            _buildProfileContent(context, "경력기간", model?.profileRespDto.careerYear),
+            _buildProfileIntro(context, model.profileRespDto.introduction),
             SizedBox(height: 20),
-            // CustomMainButton(buttonRoutePath: "/profileInsert", buttonText: "프로필 등록/수정하기"
-            _buildProfileInsertButton(context, model),
+            _buildProfileContent(context, "지역", model.profileRespDto.region),
+            SizedBox(height: 20),
+            _buildProfileContent(context, "학력전공", model.profileRespDto.career),
+            SizedBox(height: 20),
+            _buildProfileContent(context, "보유자격증", model.profileRespDto.certification),
+            SizedBox(height: 20),
+            _buildProfileContent(context, "경력기간", model.profileRespDto.careerYear),
+            SizedBox(height: 20),
+            _buildProfileUpdateButton(context, model)
           ],
         ),
       ),
     );
   }
 
-  ElevatedButton _buildProfileInsertButton(BuildContext context, UserProfileDetailPageModel? model) {
+  Widget _buildProfileUpdateButton(BuildContext context, UserProfileDetailPageModel model) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileUpdatePage(model: model!.profileRespDto)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => UserProfileUpdatePage(
+                        model: ProfileUpdateInfo(
+                      id: id,
+                      username: username,
+                      filePath: model.profileRespDto.filePath!,
+                      introduction: model.profileRespDto.introduction!,
+                      region: model.profileRespDto.region!,
+                      certification: model.profileRespDto.certification!,
+                      careerYear: model.profileRespDto.careerYear!,
+                      career: model.profileRespDto.career!,
+                    ))));
       },
       style: ElevatedButton.styleFrom(
         primary: gButtonOffColor,
@@ -70,7 +90,7 @@ class UserProfileDetailPage extends ConsumerWidget {
         child: Text(
           "프로필 수정하기",
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -103,17 +123,29 @@ class UserProfileDetailPage extends ConsumerWidget {
             ),
           ],
         ),
-        Flexible(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(150),
-            child: Image.asset(
-              profileImagePath ?? defaultProfile,
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
-            ),
-          ),
-        )
+        profileImagePath == ''
+            ? Flexible(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(150),
+                  child: Image.asset(
+                    defaultProfile,
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
+            : Flexible(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(150),
+                  child: Image.asset(
+                    profileImagePath!,
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              )
       ],
     );
   }
@@ -133,6 +165,7 @@ class UserProfileDetailPage extends ConsumerWidget {
             size: 30,
           ),
           onPressed: () {
+            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserLoginMyPage()));
             Navigator.pop(context);
           }),
     );

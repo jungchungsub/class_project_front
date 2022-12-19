@@ -1,15 +1,18 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginDivisionPage extends StatelessWidget {
+class LoginDivisionPage extends ConsumerWidget {
   const LoginDivisionPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var mSize = MediaQuery.of(context).size;
+    final userCT = ref.read(userController);
     return Scaffold(
       body: SafeArea(
           child: Stack(
@@ -41,7 +44,7 @@ class LoginDivisionPage extends StatelessWidget {
                     SizedBox(height: gap_m),
                     _buildOtherButton(context, "/login", "다른 방법으로 시작"),
                     SizedBox(height: gap_m),
-                    _buildBeforeButton(context, "/login", "로그인 전 둘러보기")
+                    _buildBeforeButton(context, "/login", "로그인 전 둘러보기", userCT),
                   ],
                 ),
               ),
@@ -78,7 +81,7 @@ class LoginDivisionPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Text(
-            "${buttonText}",
+            buttonText,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
@@ -87,17 +90,17 @@ class LoginDivisionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBeforeButton(BuildContext context, String routePath, String buttonText) {
+  Widget _buildBeforeButton(BuildContext context, String routePath, String buttonText, UserController userCT) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, routePath);
+        userCT.beforeLoginMainPage();
       },
       child: Container(
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            "${buttonText}",
+            buttonText,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 12,

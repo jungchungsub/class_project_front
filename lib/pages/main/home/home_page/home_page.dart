@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/category_controller.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
 import 'package:finalproject_front/pages/main/home/components/category_select.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
@@ -18,6 +19,8 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     LessonController lessonCT = ref.read(lessonController);
     HomePageModel? model = ref.watch(homePageViewModel);
+    CategoryController categoryCT = ref.read(categorryController);
+    final cateogryList = [1, 2, 3, 4, 5, 6, 7, 8];
 
     Logger().d("homePage 실행");
     return Scaffold(
@@ -34,7 +37,30 @@ class HomePage extends ConsumerWidget {
                       children: [
                         _buildMainImage(),
                         SizedBox(height: gap_l),
-                        _buildCategory(),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _buildCategory(image: "assets/beauty.png", text: "뷰티", lessonCT: lessonCT, cateogryList: cateogryList[0]),
+                                _buildCategory(image: "assets/sports.png", text: "운동", lessonCT: lessonCT, cateogryList: cateogryList[1]),
+                                _buildCategory(image: "assets/Headphones.png", text: "댄스", lessonCT: lessonCT, cateogryList: cateogryList[2]),
+                                _buildCategory(image: "assets/Microphone.png", text: "뮤직", lessonCT: lessonCT, cateogryList: cateogryList[3]),
+                                // CategorySelect(image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
+                              ],
+                            ),
+                            SizedBox(height: gap_l),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _buildCategory(image: "assets/paint.png", text: "미술", lessonCT: lessonCT, cateogryList: cateogryList[4]),
+                                _buildCategory(image: "assets/read.png", text: "문학", lessonCT: lessonCT, cateogryList: cateogryList[5]),
+                                _buildCategory(image: "assets/art.png", text: "공예", lessonCT: lessonCT, cateogryList: cateogryList[6]),
+                                _buildCategory(image: "assets/Search.png", text: "기타", lessonCT: lessonCT, cateogryList: cateogryList[7]),
+                              ],
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -44,6 +70,44 @@ class HomePage extends ConsumerWidget {
             ];
           },
           body: _buildClassList(context, "/lessonDetail", lessonCT, model)),
+    );
+  }
+
+  Widget _buildCategory({required String image, required String text, required LessonController lessonCT, required int cateogryList}) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            // categoryCT.moveCategoryPage(categoryId: );
+            // lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
+            lessonCT.moveCategoryPage(categoryId: cateogryList);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffF9F9F9),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      "${image}",
+                      fit: BoxFit.cover,
+                      height: 40,
+                      width: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+        Text("${text}")
+      ],
     );
   }
 
@@ -122,20 +186,8 @@ class HomePage extends ConsumerWidget {
 
   Divider _buildDivider() {
     return Divider(
-      color: gBorderColor,
+      height: 1,
       thickness: 1.0,
-    );
-  }
-
-  Row _buildCategory() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CategorySelect(image: "assets/sports.png", text: "뷰티・운동", path: "/categoryDetail"),
-        CategorySelect(image: "assets/Headphones.png", text: "댄스・뮤직", path: "/categoryDetail"),
-        CategorySelect(image: "assets/art.png", text: "미술・문학", path: "/categoryDetail"),
-        CategorySelect(image: "assets/Search.png", text: "공예・기타", path: "/categoryDetail"),
-      ],
     );
   }
 
@@ -291,3 +343,53 @@ class HomePage extends ConsumerWidget {
 //                         ],
 //                       ),
 //                     )
+
+class CategorySelect extends StatelessWidget {
+  final String image;
+  final String text;
+  final String path;
+
+  const CategorySelect({
+    required this.image,
+    required this.text,
+    required this.path,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, "${path}");
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffF9F9F9),
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.asset(
+                      "${image}",
+                      fit: BoxFit.cover,
+                      height: 40,
+                      width: 40,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+        Text("${text}")
+      ],
+    );
+  }
+}

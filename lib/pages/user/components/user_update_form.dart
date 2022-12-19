@@ -3,7 +3,7 @@ import 'package:finalproject_front/controller/user_controller.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
 import 'package:finalproject_front/pages/components/custom_main_button.dart';
-import 'package:finalproject_front/pages/sign/components/category_select_button.dart';
+import 'package:finalproject_front/pages/auth/components/category_select_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';

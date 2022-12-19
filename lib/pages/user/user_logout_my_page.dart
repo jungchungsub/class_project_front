@@ -70,14 +70,14 @@ class UserLogoutMyPage extends StatelessWidget {
 Widget _buildServiceText(BuildContext context, String routePath, String text) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-    child: Container(
+    child: SizedBox(
       width: double.infinity,
       child: TextButton(
         onPressed: () {
           Navigator.pushNamed(context, routePath);
         },
         child: Text(
-          "${text}",
+          text,
           style: TextStyle(color: Colors.black),
         ),
         style: TextButton.styleFrom(alignment: Alignment.bottomLeft),

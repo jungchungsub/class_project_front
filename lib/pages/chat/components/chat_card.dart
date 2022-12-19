@@ -1,3 +1,4 @@
+import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:flutter/material.dart';
 
 class ChatCard extends StatelessWidget {
@@ -14,7 +15,9 @@ class ChatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChatRoomPage()));
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
         child: Row(

@@ -1,40 +1,153 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/controller/category_controller.dart';
 import 'package:finalproject_front/dummy_models/lesson_category_list_resp_dto.dart';
+import 'package:finalproject_front/pages/category/components/category_page_model.dart';
+import 'package:finalproject_front/pages/category/components/category_page_view_model.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CategoryDetailPage extends StatefulWidget {
+class CategoryDetailPage extends ConsumerStatefulWidget {
+  CategoryDetailPage({required this.categoryId, Key? key}) : super(key: key);
+  final int categoryId;
+  final cateogoryListname = ["뷰티", "운동,", "댄스", "뮤직", "미술", "문학", "공예", "기타"];
   @override
-  State<CategoryDetailPage> createState() => _CategoryDetailPageState();
+  ConsumerState<CategoryDetailPage> createState() => _CategoryDetailPageState();
 }
 
-class _CategoryDetailPageState extends State<CategoryDetailPage> {
+class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
   @override
   Widget build(BuildContext context) {
+    CategoryPageModel? model = ref.watch(categoryPageViewModel(widget.categoryId));
+    CategoryController categoryCT = ref.read(categorryController);
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
-        appBar: _buildAppbar(context),
+        appBar: _buildAppbar(context, ref, model),
         body: ListView(
           children: [
-            _buildHeaderCategory(),
+            // _buildHeaderCategory("전체", "뷰티", "운동", "댄스", "뮤직", "미술", "문학", "공예", "기타"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                  child: Text(
+                "크몽에 오신것을 환영합니다!",
+                style: TextStyle(fontSize: 16),
+              )),
+            ),
             Image.asset(
               "assets/home1.jpg",
               fit: BoxFit.cover,
               height: 120,
             ),
-            _buildCategoryFilter("초기화", "예산", 100, "인기순"),
+            _buildCategoryFilter("", model.categoryList.length),
             ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: lessonCategoryList.length,
+                itemCount: model.categoryList.length,
                 itemBuilder: ((BuildContext context, int index) {
-                  return CategoryList(itemIndex: index);
+                  return _buildCateogryList(context, ref, index, model, categoryCT);
                 })),
           ],
         ));
   }
 
-  Container _buildCategoryFilter(String reset, String budget, int total, String filterText) {
+  Padding _buildCateogryList(BuildContext context, WidgetRef ref, int index, CategoryPageModel? model, CategoryController categoryCT) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
+      child: InkWell(
+        onTap: () {
+          categoryCT.moveDetailPage(lessonId: model!.categoryList[index].lessonId);
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Container(
+                  height: 90,
+                  width: 110,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(image: NetworkImage(lessonCategoryList[index].lessonDto.lessonImage), fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 220,
+                      height: 50,
+                      child: Text(
+                        "${model?.categoryList[index].lessonName}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${model?.categoryList[index].avgGrade}",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                        SizedBox(width: gap_s),
+                        Icon(
+                          CupertinoIcons.star_fill,
+                          color: Colors.yellow,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: gap_s,
+                        ),
+                        Text(
+                          "| ${model?.categoryList[index].totalReviews}개의 평가",
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      width: 230,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${model?.categoryList[index].lessonPrice}원",
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Icon(
+                            CupertinoIcons.heart_fill,
+                            color: Colors.red,
+                            size: 14,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _buildCategoryFilter(String budget, int total) {
     return Container(
       child: Column(
         children: [
@@ -42,31 +155,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
             padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
             child: Row(
               children: [
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.arrow_2_circlepath,
-                        color: Colors.black,
-                        size: 16,
-                      ),
-                      SizedBox(
-                        width: gap_s,
-                      ),
-                      Text(
-                        "${reset}",
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  style: OutlinedButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                  )),
-                ),
                 SizedBox(width: gap_l),
-                _buildMiddleFilterList("${budget}"),
               ],
             ),
           ),
@@ -77,26 +166,11 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               children: [
                 Container(
                   child: Text(
-                    "총 ${total}건",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    "총 ${total} 건",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.arrow_up_arrow_down,
-                        color: Colors.black,
-                        size: 14,
-                      ),
-                      Text(
-                        "${filterText}",
-                        style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
+                _buildMiddleFilterList("${budget}"),
               ],
             ),
           )
@@ -105,8 +179,8 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     );
   }
 
-  OutlinedButton _buildMiddleFilterList(String text) {
-    return OutlinedButton(
+  TextButton _buildMiddleFilterList(String text) {
+    return TextButton(
       onPressed: () {
         showModalBottomSheet(
             context: context,
@@ -171,38 +245,131 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     );
   }
 
-  Padding _buildHeaderCategory() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "전체",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+  Widget _buildHeaderCategory(
+      String total, String beauty, String sports, String dance, String music, String read, String literature, String art, String etc) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${total}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${beauty}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${sports}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${dance}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${music}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${read}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${literature}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${art}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: gap_m),
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      "${etc}",
+                      style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text(
-            "뷰티・운동",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
-          ),
-          Text(
-            "댄스・뮤직",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
-          ),
-          Text(
-            "미술・문학",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
-          ),
-          Text(
-            "공예・기타",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: gSubButtonColor),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  AppBar _buildAppbar(BuildContext context) {
+  AppBar _buildAppbar(BuildContext context, WidgetRef ref, CategoryPageModel? model) {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 1.0,
@@ -216,7 +383,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
             Navigator.pop(context);
           }),
       title: Text(
-        "뷰티 운동",
+        "운동",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,
@@ -228,91 +395,15 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   }
 }
 
-class CategoryList extends StatelessWidget {
-  final int itemIndex;
-  const CategoryList({required this.itemIndex, Key? key}) : super(key: key);
+// class CategoryList extends StatelessWidget {
+//   final int index;
+//   const CategoryList({required this.index, Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8, top: 4),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Container(
-                height: 90,
-                width: 110,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: NetworkImage(lessonCategoryList[itemIndex].lessonDto.lessonImage), fit: BoxFit.cover),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 220,
-                    height: 50,
-                    child: Text(
-                      "${lessonCategoryList[itemIndex].lessonDto.lessonName}",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "${lessonCategoryList[itemIndex].lessonDto.lessonAvgGrade}",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(width: gap_s),
-                      Icon(
-                        CupertinoIcons.star_fill,
-                        color: Colors.yellow,
-                        size: 16,
-                      ),
-                      SizedBox(
-                        width: gap_s,
-                      ),
-                      Text(
-                        "| ${lessonCategoryList[itemIndex].lessonDto.lessonReviewsCount}개의 평가",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "${lessonCategoryList[itemIndex].lessonDto.lessonPrice}",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Icon(
-                        CupertinoIcons.heart_fill,
-                        color: Colors.red,
-                        size: 14,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(
+//     BuildContext context,
+//     CategoryPageModel? model,
+//   ) {
+//     return;
+//   }
+// }
