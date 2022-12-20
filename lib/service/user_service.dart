@@ -31,19 +31,15 @@ class UserService {
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
-    Logger().d("회원가입 데이터 확인 : ${requestBody}");
     // 2. 통신 시작
     Response response = await httpConnector.post(path: "/api/join", body: requestBody);
-
     return toResponseDto(response); // ResponseDto 응답
   }
 
   Future<ResponseDto> fetchLogin(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
     Response response = await httpConnector.post(path: "/login", body: requestBody);
-
     String jwtToken = response.headers["authorization"].toString();
-
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
 
@@ -64,7 +60,6 @@ class UserService {
   Future<ResponseDto> fetchGetMasterDetailMyPage(int userId) async {
     Response response = await httpConnector.get(path: "/api/expert/$userId/mypage");
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d("마스터 로그인 확인 :${responseDto.data}");
     if (responseDto.data != null) {
       responseDto.data = MasterPageRespDto.fromJson(responseDto.data);
     }
@@ -126,6 +121,7 @@ class UserService {
 
     Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
+
     return responseDto;
   }
 

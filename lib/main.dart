@@ -1,11 +1,15 @@
 import 'package:finalproject_front/pages/auth/join_division_page.dart';
 import 'package:finalproject_front/pages/auth/login_division_page.dart';
 import 'package:finalproject_front/pages/auth/login_page.dart';
+
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_client_page/lesson_client_page.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_master_list/lesson_master_list.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
@@ -65,13 +69,18 @@ class MyApp extends StatelessWidget {
         "/orderDetail": (context) => OrderDetailPage(),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
-        "/lessonClientList": (context) => LessonClientListPage(),
+
+        "/lessonClientList": (context) => LessonClientListPage(userId: UserSession.user.id), //더미 적용
+
+        // "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
+
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(),
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
         "/searchList": (context) => SearchListPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
+
         "/chatList": (context) => ChatListPage(),
         "/subscribePage": (context) => SubscribePage(userId: UserSession.user.id),
         "/reviewInsert": (context) => LessonReviewInsertPage(),

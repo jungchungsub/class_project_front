@@ -38,23 +38,20 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
   }
 
   openImages() async {
-    try {
-      dynamic sendImage; // 디바이스 경로
-      var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
-      //you can use ImageCourse.camera for Camera capture
-      if (pickedfile != null) {
-        _imagefile = pickedfile;
-        setState(() {}); // 상태 초기화
-        sendImage = _imagefile?.path;
-        final encodeImage = utf8.encode(sendImage);
-        List<int> data = encodeImage;
-        String profileImage = base64Encode(data);
-        return this.profileImage = profileImage;
-      } else {
-        print("No image is selected.");
-      }
-    } catch (e) {
-      print("error while picking file.");
+    dynamic sendImage;
+    var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
+
+    if (pickedfile != null) {
+      _imagefile = pickedfile;
+      setState(() {});
+
+      // 이미지의 디바이스 경로
+      sendImage = _imagefile?.path;
+      final encodeImage = utf8.encode(sendImage);
+      List<int> data = encodeImage;
+      String profileImage = base64Encode(data);
+
+      return this.profileImage = profileImage;
     }
   }
 
