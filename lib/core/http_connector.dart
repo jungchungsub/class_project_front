@@ -119,6 +119,7 @@ class HttpConnector {
   //   Logger().d("initSession실행됨");
   //   Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
   //   Uri uri = Uri.parse("${host2}${path}");
+
   //   Response response = await Client().post(uri, headers: requestHeader);
   //   return response;
   // }
@@ -127,11 +128,13 @@ class HttpConnector {
   //   if (UserSession.isLogin == true) {
   //     String jwtToken = UserSession.jwtToken;
   //     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
+
   //     Uri uri = Uri.parse("${host2}${path}");
   //     Response response = await Client().get(uri, headers: requestHeader);
   //     return response;
   //   } else {
   //     Uri uri = Uri.parse("${host2}${path}");
+
   //     Response response = await Client().get(uri);
   //     return response;
   //   }
@@ -147,14 +150,61 @@ class HttpConnector {
 
   // Future<Response> delete(String path) async {
   //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+
   //   Uri uri = Uri.parse("${host2}${path}");
+
   //   Response response = await _client.delete(uri, headers: requestHeader);
   //   return response;
   // }
 
   // Future<Response> put({required String path, String? body}) async {
   //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+
   //   Uri uri = Uri.parse("${host2}${path}");
+
+  //   Response response = await Client().put(uri, body: body, headers: requestHeader);
+  //   return response;
+  // }
+
+//==============================Mac==========================================//
+
+  // Future<Response> getInitSession(String path, String? jwtToken) async {
+  //   Logger().d("initSession실행됨");
+  //   Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
+  //   Uri uri = Uri.parse("${host3}${path}");
+  //   Response response = await Client().post(uri, headers: requestHeader);
+  //   return response;
+  // }
+
+  // Future<Response> get({required String path}) async {
+  //   String jwtToken = UserSession.jwtToken;
+  //   Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
+  //   Logger().d("http통신 잘되었는가? ");
+  //   Uri uri = Uri.parse("${host3}${path}");
+  //   Logger().d("uri 오류${uri}");
+  //   Response response = await Client().get(uri, headers: requestHeader);
+  //   Logger().d("httpConnector  : ${response}");
+  //   return response;
+  // }
+
+  // Future<Response> post({required String path, required String body}) async {
+  //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+  //   Uri uri = Uri.parse("${host3}${path}");
+  //   Response response = await Client().post(uri, body: body, headers: requestHeader);
+
+  //   return response;
+  // }
+
+  // Future<Response> delete(String path) async {
+  //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+  //   Uri uri = Uri.parse("${host3}${path}");
+  //   Response response = await _client.delete(uri, headers: requestHeader);
+  //   return response;
+  // }
+
+  // Future<Response> put({required String path, String? body}) async {
+  //   Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
+  //   Uri uri = Uri.parse("${host3}${path}");
   //   Response response = await Client().put(uri, body: body, headers: requestHeader);
   //   return response;
   // }

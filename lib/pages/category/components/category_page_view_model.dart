@@ -18,7 +18,6 @@ class CategoryPageViewModel extends StateNotifier<CategoryPageModel> {
 
   Future<void> notifyViewModel(String dropdownValue) async {
     String? jwtToken;
-    Logger().d("viewModel잘들어오는지?");
 
     ResponseDto responseDto = await categoryService.fetchCategoryList(categoryId, drowdownValue: dropdownValue);
 

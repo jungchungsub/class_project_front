@@ -122,6 +122,7 @@ class UserService {
       // List<SellingListRespDto> SellingList = mapList.map((e) => SellingListRespDto.fromJson(e)).toList();
       // Logger().d("SellingList :  ${SellingList}");
       // responseDto.data = SellingListRespDto.fromJson(responseDto.data);
+
     }
     return responseDto;
   }
@@ -140,6 +141,7 @@ class UserService {
 
   Future<ResponseDto> fetchUpdateProfile(int userId, ProfileUpdateReqDto profileUpdateReqDto) async {
     String requestBody = jsonEncode(profileUpdateReqDto);
+
     Response response = await httpConnector.put(path: "/api/user/$userId/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
 
@@ -148,6 +150,7 @@ class UserService {
 
   Future<ResponseDto> fetchInsertProfile(ProfileInsertReqDto profileInsertReqDto) async {
     String requestBody = jsonEncode(profileInsertReqDto);
+
     Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
 
