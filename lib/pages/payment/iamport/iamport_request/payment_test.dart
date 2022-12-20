@@ -172,7 +172,7 @@ class _PaymentTestState extends State<PaymentTest> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    foregroundColor: gButtonOffColor,
+                    // foregroundColor: gButtonOffColor,
                     elevation: 0,
                     shadowColor: Colors.transparent,
                   ),

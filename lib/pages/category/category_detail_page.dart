@@ -364,6 +364,8 @@ class _DropdownButtonExampleState extends ConsumerState<DropdownButtonExample> {
       onChanged: (String? value) {
         setState(() {
           dropdownValue = value!;
+          Logger().d("드롭다운 버튼 변경됨 : $dropdownValue");
+
           ref.read(categoryPageViewModel(widget.categoryId).notifier).notifyViewModel(dropdownValue);
         });
       },

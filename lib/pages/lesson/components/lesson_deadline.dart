@@ -1,4 +1,4 @@
-import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
+import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -8,7 +8,7 @@ import '../../../size.dart';
 
 class LessonDeadLine extends StatefulWidget {
   late TextEditingController fieldController = TextEditingController();
-  final LessonUpdateReqDto lessonInsertReqDto;
+  final LessonInsertReqDto lessonInsertReqDto;
   LessonDeadLine({required this.lessonInsertReqDto, required TextEditingController fieldController, Key? key}) : super(key: key);
 
   @override
@@ -62,7 +62,8 @@ class _LessonDeadLineState extends State<LessonDeadLine> {
                     setState(() {
                       dateInput.text = formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
                       Logger().d(dateInput.text);
-                      widget.lessonInsertReqDto.deadline = dateInput.text as DateTime;
+
+                      widget.lessonInsertReqDto.deadline = formattedDate;
                     });
                   } else {}
                 },

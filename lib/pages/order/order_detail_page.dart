@@ -551,6 +551,7 @@ class _buildAgree extends StatefulWidget {
 
 class __buildAgreeState extends State<_buildAgree> {
   bool? _ischecked = true;
+  bool? _checked = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -565,6 +566,7 @@ class __buildAgreeState extends State<_buildAgree> {
                   onChanged: (bool? value) {
                     setState(() {
                       this._ischecked = value;
+                      this._checked = value;
                     });
                   }),
               SizedBox(width: gap_m),
