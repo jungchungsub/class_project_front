@@ -9,10 +9,16 @@ import 'package:logger/logger.dart';
 class SubscribeService {
   final HttpConnector httpConnector = HttpConnector();
 
+  static final SubscribeService _instance = SubscribeService._single();
+  SubscribeService._single();
+  factory SubscribeService() {
+    return _instance;
+  }
   Future<ResponseDto> subscribeList(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe");
 
     ResponseDto responseDto = toResponseDto(response);
+<<<<<<< HEAD
 
     Logger().d("메시지 : ${responseDto.msg}");
     Logger().d("데이터 : ${responseDto.data}");
@@ -30,6 +36,11 @@ class SubscribeService {
       List<SubscribeRespDto> subscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
       Logger().d(subscribeList);
 
+=======
+    if (responseDto.statusCode < 300) {
+      List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
+      List<SubscribeRespDto> subscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
+>>>>>>> d5556137c857de36204b35ed96ae3ed0ccb91e5e
       responseDto.data = subscribeList; // ListSubscribeRespDto
     }
 

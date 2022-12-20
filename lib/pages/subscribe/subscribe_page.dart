@@ -26,13 +26,17 @@ class SubscribePage extends ConsumerWidget {
         appBar: _buildAppbar(),
         body: ListView.builder(
             shrinkWrap: true, //리스트 자식 높이 크기의 합 만큼으로 영역을 고정 시켜준다.
+<<<<<<< HEAD
             itemCount: model?.subscribeList.length,
+=======
+            itemCount: model.subscribeList.length,
+>>>>>>> d5556137c857de36204b35ed96ae3ed0ccb91e5e
             itemBuilder: ((BuildContext context, int index) {
               return _buildSubscribeLesson(context, ref, index, model, subscribeCT);
             })));
   }
 
-  Padding _buildSubscribeLesson(BuildContext context, WidgetRef ref, int index, SubscribePageModel? model, SubscribeController subscribeCT) {
+  Widget _buildSubscribeLesson(BuildContext context, WidgetRef ref, int index, SubscribePageModel? model, SubscribeController subscribeCT) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(

@@ -22,9 +22,14 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: Icon(
-            CupertinoIcons.back,
-            color: Colors.black,
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              CupertinoIcons.back,
+              color: Colors.black,
+            ),
           ),
           backgroundColor: Colors.transparent,
           title: Text(

@@ -24,14 +24,7 @@ class LessonController {
   LessonController(this._ref);
   final LessonService lessonService = LessonService();
 
-// 절대 리턴 하지 말기
-  // void moveDetailPage(int lessonId) async {
-  //   Logger().d("컨트롤러 실행 확인.");
-  //   //통신요청
-  //   String? jwtToken;
-  //   ResponseDto respDto = await lessonService.getLessonDetail(lessonId, jwtToken); //가져온 값을 RespDto에 저장
-  //   Navigator.popAndPushNamed(mContext, "/lessonDetail");
-  // }
+
   Future<void> refreshHomePage() async {
     Logger().d("컨트롤러 실행 확인.");
     _ref.read(homePageViewModel.notifier).notifyViewModel();
