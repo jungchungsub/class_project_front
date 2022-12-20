@@ -84,7 +84,7 @@ class UserService {
   //마스터 판매자 리스트
   Future<ResponseDto> fetchSellingList(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/expert/${userId}/sellingList");
-<<<<<<< HEAD
+
     Logger().d("reseponse  ${response}");
     ResponseDto responseDto = toResponseDto(response);
     Logger().d("데이터 잘들어옴? :: ${responseDto.data}");
@@ -98,11 +98,13 @@ class UserService {
       // List<SellingListRespDto> SellingList = mapList.map((e) => SellingListRespDto.fromJson(e)).toList();
       // Logger().d("SellingList :  ${SellingList}");
       // responseDto.data = SellingListRespDto.fromJson(responseDto.data);
-=======
-    ResponseDto responseDto = toResponseDto(response);
-    if (responseDto.data != null) {
-      responseDto.data = SellingListRespDto.fromJson(responseDto.data);
->>>>>>> d5556137c857de36204b35ed96ae3ed0ccb91e5e
+
+/////////////////////////////////
+
+      // ResponseDto responseDto = toResponseDto(response);
+      // if (responseDto.data != null) {
+      //   responseDto.data = SellingListRespDto.fromJson(responseDto.data);
+
     }
     return responseDto;
   }
@@ -111,23 +113,22 @@ class UserService {
   Future<ResponseDto> fetchBuyingList(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/buyingList");
     ResponseDto responseDto = toResponseDto(response);
-<<<<<<< HEAD
-    Logger().d("데이터 잘들어옴? :: ${responseDto.data}");
-    Logger().d("메세지 들어옴? :: ${responseDto.msg}");
-    Logger().d("상태코드 들어옴? :: ${responseDto.statusCode}");
-    if (responseDto.data != null) {
-      responseDto.data = buyingListRespDto.fromJson(responseDto.data);
-      Logger().d(responseDto.data);
-      // List<dynamic> mapList = responseDto.data;
-      // Logger().d("mapList ${mapList}");
-      // List<SellingListRespDto> SellingList = mapList.map((e) => SellingListRespDto.fromJson(e)).toList();
-      // Logger().d("SellingList :  ${SellingList}");
-      // responseDto.data = SellingListRespDto.fromJson(responseDto.data);
 
-=======
+    // Logger().d("데이터 잘들어옴? :: ${responseDto.data}");
+    // Logger().d("메세지 들어옴? :: ${responseDto.msg}");
+    // Logger().d("상태코드 들어옴? :: ${responseDto.statusCode}");
+    // if (responseDto.data != null) {
+    //   responseDto.data = buyingListRespDto.fromJson(responseDto.data);
+    //   Logger().d(responseDto.data);
+    //   // List<dynamic> mapList = responseDto.data;
+    //   // Logger().d("mapList ${mapList}");
+    //   // List<SellingListRespDto> SellingList = mapList.map((e) => SellingListRespDto.fromJson(e)).toList();
+    //   // Logger().d("SellingList :  ${SellingList}");
+    //   // responseDto.data = SellingListRespDto.fromJson(responseDto.data);
+
+/////////////////////////////////////////////////////
     if (responseDto.data != null) {
       responseDto.data = buyingListRespDto.fromJson(responseDto.data);
->>>>>>> d5556137c857de36204b35ed96ae3ed0ccb91e5e
     }
     return responseDto;
   }
@@ -157,10 +158,7 @@ class UserService {
 
     Response response = await httpConnector.post(path: "/api/profile", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-<<<<<<< HEAD
 
-=======
->>>>>>> d5556137c857de36204b35ed96ae3ed0ccb91e5e
     return responseDto;
   }
 
