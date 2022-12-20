@@ -52,7 +52,7 @@ class MasterLoginMyPage extends ConsumerWidget {
                   changeRole: "일반회원",
                   profileImagePath: model.masterPageRespDto.profilePhoto!,
                   userCT: userCT,
-                  id: UserSession.user.id!,
+                  id: model.masterPageRespDto.profileId!,
                   defaultProfile: defaultProfile,
                 ),
                 SizedBox(height: gap_l),

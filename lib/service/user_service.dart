@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
-import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/buying_list_resp_dto.dart';
 import 'package:finalproject_front/dto/response/selling_List_resp_dto.dart';
