@@ -1,20 +1,31 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/dummy_models/lesson_client_list_resp_dto.dart';
+import 'package:finalproject_front/pages/lesson/lesson_client_page/model/lesson_client_model.dart';
+import 'package:finalproject_front/pages/lesson/lesson_client_page/model/lesson_client_view_model.dart';
 import 'package:finalproject_front/size.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LessonClientListPage extends StatelessWidget {
-  const LessonClientListPage({Key? key}) : super(key: key);
+class LessonClientListPage extends ConsumerWidget {
+  final userId;
+  const LessonClientListPage({required this.userId, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    LessonClientListModel? model = ref.watch(lessonClientListViewModel(userId));
+
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       appBar: _buildAppbar(context),
       body: ListView.builder(
-        itemCount: LessonClientList.length,
-        itemBuilder: ((context, index) {
+        itemCount: 5,
+        itemBuilder: ((BuildContext context, int index) {
           return BuyList(itemIndex: index);
         }),
       ),

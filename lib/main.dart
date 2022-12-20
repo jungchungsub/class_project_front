@@ -1,10 +1,8 @@
-import 'package:finalproject_front/dto/request/lesson_update_info.dart';
-import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
-import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_client_page/lesson_client_page.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
@@ -69,7 +67,7 @@ class MyApp extends StatelessWidget {
         "/orderDetail": (context) => OrderDetailPage(),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
-        "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
+        "/lessonClientList": (context) => LessonClientListPage(userId: UserSession.user.id), //더미 적용
 
         // "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
 
