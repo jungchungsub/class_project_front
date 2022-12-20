@@ -166,7 +166,7 @@ class UserProfileDetailPage extends ConsumerWidget {
             size: 30,
           ),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserLoginMyPage()));
+            Navigator.pop(context);
           }),
     );
   }

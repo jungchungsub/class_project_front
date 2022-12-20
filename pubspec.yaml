@@ -33,6 +33,11 @@ dependencies:
   logger: ^1.1.0
   get: ^4.6.5
   flutter_secure_storage: ^7.0.0 #토큰 저장 및 자동 로그인 
+  iamport_webview_flutter: 3.0.4
+  url_launcher: ^6.0.4
+  uni_links: ^0.5.1
+  json_annotation: ^4.7.0
+
 
 
 

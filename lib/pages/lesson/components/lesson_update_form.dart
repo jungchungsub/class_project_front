@@ -100,10 +100,8 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
         sendImage = _imagefile?.path;
         final encodeImage = utf8.encode(sendImage);
-        Logger().d("파일 경로 확인 : $sendImage");
         List<int> data = encodeImage;
         String profileImage = base64Encode(data);
-        Logger().d("인코딩 경로 확인 : $profileImage");
 
         return this.profileImage = profileImage;
       } else {
@@ -136,7 +134,6 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
             child: Column(
               children: [
                 _buildImageUploader(widget.lessonUpdateReqDto),
-
                 SizedBox(
                   height: gap_m,
                 ),
@@ -168,7 +165,6 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                     onChanged: (value) {
                   widget.lessonUpdateReqDto.policy = value;
                 }),
-
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "가능일", hint: "가능일을 입력하세요", lines: 1, fieldController: widget._possibleDay,
                     onChanged: (value) {
@@ -222,7 +218,6 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                   ],
                 ),
                 SizedBox(height: gap_l),
-
                 ElevatedButton(
                   onPressed: () {
                     lessonUpdateReqDto.photo = profileImage;
@@ -244,7 +239,6 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                     ),
                   ),
                 )
-                // _buildLessonButton(context)
               ],
             ),
           ),
