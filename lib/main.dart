@@ -25,6 +25,7 @@ import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
 import 'package:finalproject_front/pages/user/user_logout_my_page.dart';
+import 'package:finalproject_front/test.dart';
 import 'package:finalproject_front/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
+        "/searchList": (context) => SearchListPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
         "/chatList": (context) => ChatListPage(),
         "/subscribePage": (context) => SubscribePage(userId: UserSession.user.id), //더미 적용

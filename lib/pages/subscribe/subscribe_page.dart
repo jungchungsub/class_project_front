@@ -17,6 +17,11 @@ class SubscribePage extends ConsumerWidget {
     SubscribePageModel? model = ref.watch(subscribePageViewModel(userId));
     Logger().d("model : ${model}");
     SubscribeController subscribeCT = ref.read(subscribeController);
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
         appBar: _buildAppbar(),
         body: ListView.builder(
@@ -50,7 +55,7 @@ class SubscribePage extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                           image: NetworkImage(
-                            "https://picsum.photos/201",
+                            "https://picsum.photos/198",
                           ),
                           fit: BoxFit.cover),
                     ),
