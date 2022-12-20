@@ -67,12 +67,33 @@ class MasterLoginMyPage extends ConsumerWidget {
                 SizedBox(height: gap_m),
                 ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역"),
                 SizedBox(height: gap_m),
-                ServiceText(routePath: "/lessonExpertList", serviceText: "등록한 레슨 보기"),
-                SizedBox(height: gap_xxl),
+                _buildSellingList("등록한 레슨 보기", userCT),
                 BottomImageBox(),
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSellingList(String sellingText, UserController userCT) {
+    return InkWell(
+      onTap: () {
+        userCT.moveSellingPage(userId: UserSession.user.id);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "${sellingText}",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: gSubTextColor),
+          ),
+          Icon(
+            CupertinoIcons.right_chevron,
+            size: 14,
+            color: gSubTextColor,
+          )
         ],
       ),
     );

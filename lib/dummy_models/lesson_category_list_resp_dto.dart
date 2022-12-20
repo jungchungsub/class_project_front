@@ -96,5 +96,65 @@ List<LessonCategoryListRespDto> lessonCategoryList = [
       lessonAvgGrade: 3.5,
       isSubscribed: false,
     ),
+  ),
+  LessonCategoryListRespDto(
+    categoryDto: CategoryDto(CategoryName: "뷰티"),
+    lessonDto: LessonDto(
+      lessonId: 6,
+      lessonName: "깔끔하고 아름다운 디자인을 해드립니다",
+      lessonPrice: "50000",
+      lessonImage: "https://picsum.photos/206",
+      lessonReviewsCount: 5,
+      lessonAvgGrade: 3.5,
+      isSubscribed: false,
+    ),
+  ),
+  LessonCategoryListRespDto(
+    categoryDto: CategoryDto(CategoryName: "뷰티"),
+    lessonDto: LessonDto(
+      lessonId: 7,
+      lessonName: "깔끔하고 아름다운 디자인을 해드립니다",
+      lessonPrice: "50000",
+      lessonImage: "https://picsum.photos/207",
+      lessonReviewsCount: 5,
+      lessonAvgGrade: 3.5,
+      isSubscribed: false,
+    ),
+  ),
+  LessonCategoryListRespDto(
+    categoryDto: CategoryDto(CategoryName: "뷰티"),
+    lessonDto: LessonDto(
+      lessonId: 8,
+      lessonName: "깔끔하고 아름다운 디자인을 해드립니다",
+      lessonPrice: "50000",
+      lessonImage: "https://picsum.photos/208",
+      lessonReviewsCount: 5,
+      lessonAvgGrade: 3.5,
+      isSubscribed: false,
+    ),
+  ),
+  LessonCategoryListRespDto(
+    categoryDto: CategoryDto(CategoryName: "뷰티"),
+    lessonDto: LessonDto(
+      lessonId: 9,
+      lessonName: "깔끔하고 아름다운 디자인을 해드립니다",
+      lessonPrice: "50000",
+      lessonImage: "https://picsum.photos/209",
+      lessonReviewsCount: 5,
+      lessonAvgGrade: 3.5,
+      isSubscribed: false,
+    ),
+  ),
+  LessonCategoryListRespDto(
+    categoryDto: CategoryDto(CategoryName: "뷰티"),
+    lessonDto: LessonDto(
+      lessonId: 10,
+      lessonName: "깔끔하고 아름다운 디자인을 해드립니다",
+      lessonPrice: "50000",
+      lessonImage: "https://picsum.photos/210",
+      lessonReviewsCount: 5,
+      lessonAvgGrade: 3.5,
+      isSubscribed: false,
+    ),
   )
 ];

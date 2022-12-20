@@ -5,21 +5,22 @@ import 'package:finalproject_front/service/category_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-final categoryPageViewModel = StateNotifierProvider.family.autoDispose<CategoryPageViewModel, CategoryPageModel?, int>((ref, cateogryId) {
-  return CategoryPageViewModel(null, cateogryId)..notifyViewModel();
+final categoryPageViewModel = StateNotifierProvider.family.autoDispose<CategoryPageViewModel, CategoryPageModel, int>((ref, cateogryId) {
+  return CategoryPageViewModel(CategoryPageModel(null), cateogryId)..notifyViewModel("등록순");
 });
 
-class CategoryPageViewModel extends StateNotifier<CategoryPageModel?> {
+class CategoryPageViewModel extends StateNotifier<CategoryPageModel> {
   final CategoryService categoryService = CategoryService();
   final mContext = navigatorKey.currentContext;
   final int categoryId;
+
   CategoryPageViewModel(super.state, this.categoryId);
 
-  Future<void> notifyViewModel() async {
+  Future<void> notifyViewModel(String dropdownValue) async {
     String? jwtToken;
-    Logger().d("viewModel잘들어오는지?");
-    Logger().d("${categoryId}는 viewModel  Id");
-    ResponseDto responseDto = await categoryService.fetchCategoryList(categoryId);
+
+    ResponseDto responseDto = await categoryService.fetchCategoryList(categoryId, drowdownValue: dropdownValue);
+
     // if (responseDto.data == null) {
     //   state =
     // }
