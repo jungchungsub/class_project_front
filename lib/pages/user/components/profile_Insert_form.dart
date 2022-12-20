@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -162,6 +163,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
                   widget.profileInsertReqDto.filePath = profileImage;
                   Logger().d("인코딩 이미지 확인 ${widget.profileInsertReqDto.filePath}");
                   userCT.insertProfile(
+                    userId: UserSession.user.id,
                     profileInsertReqDto: widget.profileInsertReqDto,
                   );
                 },
@@ -219,7 +221,7 @@ class _ProfileInsertFormState extends ConsumerState<ProfileInsertForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "클래스 사진 등록",
+                "프로필 사진 등록",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               SizedBox(

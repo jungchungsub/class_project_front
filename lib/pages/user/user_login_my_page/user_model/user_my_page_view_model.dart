@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../dto/response/my_page_resp_dto.dart';
+
 /**autoDispose : 재 로그인 시 유저 정보 업데이트 역할을 해줌. */
 //  뷰 모델은 전부 StateNotifier로 만들기 -> 상태를 가지고 있고 상태를 변경 할 수있음.
 // <ViewModel,Model> ViewModel ->데이터 관리자, Model -> 데이터
@@ -31,6 +33,19 @@ class UserMyPageViewModel extends StateNotifier<UserMyPageModel?> {
       );
     }
   }
+
+  void pageReFresh(UserMyPageModel userMyPageModel) {
+    state = userMyPageModel; // 상태에 새로운 product를 넣어준다.
+  }
+  //   void updateProduct(UserMyPageModel userMyPageModel) {
+  //   state = state.map((product) {
+  //     if (userMyPageModel == userMyPageModel) {
+  //       return productRespDto;
+  //     } else {
+  //       return product;
+  //     }
+  //   }).toList();
+  // }
 
   //1 배열 다시 생성 --> 삭제 , 2. 뷰모델에서 ref.read실행
   // void notifyDelete(int postId) async { 배열에서 id만 지워서 다시 만들어줌.

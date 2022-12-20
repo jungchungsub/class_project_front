@@ -6,6 +6,7 @@ String lessonReqDtoToJson(LessonUpdateReqDto data) => json.encode(data.toJson())
 
 class LessonUpdateReqDto {
   LessonUpdateReqDto.single();
+
   LessonUpdateReqDto({
     this.name,
     this.photo,
@@ -29,6 +30,7 @@ class LessonUpdateReqDto {
   String? possibleDays;
   String? curriculum;
   String? policy;
+
   DateTime? deadline;
   int? categoryId;
 

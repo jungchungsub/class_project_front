@@ -2,9 +2,9 @@ import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/lesson_detail_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
+
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_view_model.dart';
-import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
+
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_view_model.dart';
 import 'package:finalproject_front/service/lesson_service.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
@@ -52,8 +52,4 @@ class LessonController {
       Navigator.pop(gContext);
     }
   }
-
-  // void moveLessonUpdatePage({required int userId}) {
-
-  // }
 }

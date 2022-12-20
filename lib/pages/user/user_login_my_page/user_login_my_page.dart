@@ -82,7 +82,9 @@ class UserLoginMyPage extends ConsumerWidget {
     return AppBar(
       elevation: 1.0,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
         icon: Icon(
           CupertinoIcons.bell,
           color: Colors.black,
@@ -103,7 +105,6 @@ class UserLoginMyPage extends ConsumerWidget {
           child: InkWell(
             onTap: () {
               // Navigator.pushNamed(context, "/userUpdate");
-
               Navigator.push(
                   context,
                   MaterialPageRoute(

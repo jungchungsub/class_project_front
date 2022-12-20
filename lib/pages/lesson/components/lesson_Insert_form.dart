@@ -99,6 +99,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
   @override
   Widget build(BuildContext context) {
     LessonUpdateReqDto lessonInsertReqDto = LessonUpdateReqDto.single();
+
     final lessonCT = ref.read(lessonController);
     return Form(
       key: _formKey,

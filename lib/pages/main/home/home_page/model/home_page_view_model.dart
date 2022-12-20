@@ -18,7 +18,7 @@ class HomePageViewModel extends StateNotifier<HomePageModel?> {
 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await lessonService.fetchHomeList();
-    Logger().d("메인 모델 확인 :${responseDto.data}");
+
     if (responseDto.statusCode < 300) {
       state = HomePageModel(responseDto.data);
     }

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
+
 import 'package:logger/logger.dart';
 
 import 'lesson_deadline.dart';
@@ -18,6 +19,7 @@ import 'lesson_deadline.dart';
 class LessonUpdateForm extends ConsumerStatefulWidget {
   final _name = TextEditingController();
   final _curriculum = TextEditingController();
+
   final _place = TextEditingController();
   final _policy = TextEditingController();
 
@@ -28,6 +30,7 @@ class LessonUpdateForm extends ConsumerStatefulWidget {
   late final _price;
 
   LessonUpdateInfo model;
+
   late LessonUpdateReqDto lessonUpdateReqDto;
   LessonUpdateForm({required this.model, required this.lessonUpdateReqDto, Key? key}) : super(key: key);
 
@@ -88,17 +91,20 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
   openImages() async {
     try {
       dynamic sendImage; // 디바이스 경로
+
       var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
       //you can use ImageCourse.camera for Camera capture
       if (pickedfile != null) {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
+
         sendImage = _imagefile?.path;
         final encodeImage = utf8.encode(sendImage);
         Logger().d("파일 경로 확인 : $sendImage");
         List<int> data = encodeImage;
         String profileImage = base64Encode(data);
         Logger().d("인코딩 경로 확인 : $profileImage");
+
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -119,6 +125,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
   @override
   Widget build(BuildContext context) {
     LessonUpdateReqDto lessonUpdateReqDto = LessonUpdateReqDto.single();
+
     final lessonCT = ref.read(lessonController);
     return Form(
       key: _formKey,
@@ -129,6 +136,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
             child: Column(
               children: [
                 _buildImageUploader(widget.lessonUpdateReqDto),
+
                 SizedBox(
                   height: gap_m,
                 ),
@@ -214,6 +222,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                   ],
                 ),
                 SizedBox(height: gap_l),
+
                 ElevatedButton(
                   onPressed: () {
                     lessonUpdateReqDto.photo = profileImage;

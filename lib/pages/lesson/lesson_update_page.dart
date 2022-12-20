@@ -11,17 +11,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class LessonUpdatePage extends ConsumerWidget {
+  LessonUpdatePage({required this.model, Key? key}) : super(key: key);
   LessonUpdateInfo model;
   LessonUpdateReqDto lessonUpdateReqDto = LessonUpdateReqDto.single();
-  LessonUpdatePage({required this.model, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lessonCT = ref.read(lessonController);
 
+    Logger().d("업데이트 페이지 ${model.name}");
+
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: LessonUpdateForm(model: model, lessonUpdateReqDto: lessonUpdateReqDto),
+      // body: LessonUpdateForm(),
     );
   }
 
@@ -39,7 +41,7 @@ class LessonUpdatePage extends ConsumerWidget {
             Navigator.pop(context);
           }),
       title: Text(
-        "클래스 수정하기",
+        "클래스 등록하기",
         style: TextStyle(
           color: Colors.black,
           fontSize: 20,
