@@ -136,7 +136,7 @@ class UserController {
       Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
-        SnackBar(content: Text("게시글 수정 실패 : ${responseDto.msg}")),
+        SnackBar(content: Text("회원정보 수정 실패 : ${responseDto.msg}")),
       );
     }
   }

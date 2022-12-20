@@ -65,6 +65,7 @@ class UserService {
   Future<ResponseDto> fetchGetMasterDetailMyPage(int userId) async {
     Response response = await httpConnector.get(path: "/api/expert/$userId/mypage");
     ResponseDto responseDto = toResponseDto(response);
+    Logger().d("마스터 로그인 확인 :${responseDto.data}");
     if (responseDto.data != null) {
       responseDto.data = MasterPageRespDto.fromJson(responseDto.data);
     }

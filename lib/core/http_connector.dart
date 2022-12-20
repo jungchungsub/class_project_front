@@ -57,6 +57,7 @@ class HttpConnector {
     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
     Uri uri = Uri.parse("${host}${path}");
     Logger().d("여기 실행?");
+    Logger().d("로그 확인 ${body}");
     Response response = await Client().put(uri, body: body, headers: requestHeader);
     Logger().d("여기 실행? ${response.body}");
     return response;
