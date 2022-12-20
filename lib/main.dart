@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
 
-        "/lessonClientList": (context) => LessonClientListPage(userId: UserSession.user.id), //더미 적용
+        "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
 
         // "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
 
