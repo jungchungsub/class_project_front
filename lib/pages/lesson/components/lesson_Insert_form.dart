@@ -1,15 +1,25 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
+
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/lesson_controller.dart';
-import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
+import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
+import 'package:finalproject_front/pages/lesson/components/category_period.dart';
+
 import 'package:finalproject_front/size.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+
+import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 import 'lesson_deadline.dart';
 
@@ -23,6 +33,7 @@ class LessonInsertForm extends ConsumerStatefulWidget {
   final _time = TextEditingController();
   final _price = TextEditingController();
   final _possibleDay = TextEditingController();
+  final _photo = TextEditingController();
 
   LessonInsertForm({Key? key}) : super(key: key);
 
@@ -43,7 +54,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
+    scrollController = new ScrollController();
   }
 
   void _buildShowDatePickerPop() {
@@ -71,14 +82,17 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
   openImages() async {
     try {
+      dynamic sendImage; // 디바이스 경로
       var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
       //you can use ImageCourse.camera for Camera capture
       if (pickedfile != null) {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
-        Uint8List? data = await _imagefile?.readAsBytes();
-        String profileImage = base64Encode(data!);
-
+        sendImage = _imagefile?.path;
+        final encodeImage = utf8.encode(sendImage);
+        List<int> data = encodeImage;
+        String profileImage = base64Encode(data);
+        Logger().d("레슨 이미지 : ${profileImage}");
         return this.profileImage = profileImage;
       } else {
         print("No image is selected.");
@@ -90,6 +104,9 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
   void scrollAnimate() {
     Future.delayed(Duration(milliseconds: 600), () {
+      //0.6초 이후 키보드 올라옴
+      // ViewInsets은 현재 페이지에서 내가 컨트롤 할 수 없는 영역을 뜻함,
+      // bottom은 키보드가 아래에서 올라오기 때문
       scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
           duration: Duration(microseconds: 100), // 0.1초 이후 field가 올라간다.
           curve: Curves.easeIn); //Curves - 올라갈때 애니메이션
@@ -98,9 +115,9 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
   @override
   Widget build(BuildContext context) {
-    LessonUpdateReqDto lessonInsertReqDto = LessonUpdateReqDto.single();
-
+    LessonInsertReqDto lessonInsertReqDto = LessonInsertReqDto.origin();
     final lessonCT = ref.read(lessonController);
+    Size size = MediaQuery.of(context).size;
     return Form(
       key: _formKey,
       child: ListView(
@@ -182,7 +199,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
                         // underline: Container(height: 1.4, color: Color(0xffc0c0c0)),
                         onChanged: (int? newValue) {
-                          lessonInsertReqDto.categoryId = newValue!;
+                          lessonInsertReqDto.categoryId = newValue;
                         },
                         items: [1, 2, 3, 4, 5, 6, 7, 8].map<DropdownMenuItem<int?>>((int? i) {
                           return DropdownMenuItem<int?>(
@@ -198,10 +215,11 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
                 ElevatedButton(
                   onPressed: () {
+                    Logger().d("레슨 이미지 확인 : ${profileImage}");
                     lessonInsertReqDto.photo = profileImage;
-                    lessonCT.lessonInsert(
-                      lessonInsertReqDto: lessonInsertReqDto,
-                    );
+                    Logger().d("레슨 이미지 확인 : ${lessonInsertReqDto.photo}");
+
+                    lessonCT.lessonInsert(lessonInsertReqDto: lessonInsertReqDto);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: gButtonOffColor,
@@ -228,18 +246,20 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
     );
   }
 
-  Widget _buildImageUploader(LessonUpdateReqDto lessonInsertReqDto) {
+  Widget _buildImageUploader(LessonInsertReqDto lessonInsertReqDto) {
     return Row(
       children: [
         //open button ----------------
         _imagefile != null
-            ? ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.file(
-                  File(_imagefile!.path),
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.cover,
+            ? Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.file(
+                    File(_imagefile!.path),
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               )
             : Container(
@@ -341,6 +361,41 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+//possibleDays: selectedValue,
+
+  Widget _selectCarrer(LessonInsertReqDto lessonInsertReqDto) {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Text(
+                "카테고리 선택",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: gBorderColor, width: 3),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: selectedCarrerButton(
+              lessonInsertReqDto: lessonInsertReqDto,
+            ),
+            width: 400,
+            height: 60,
+          )
         ],
       ),
     );
