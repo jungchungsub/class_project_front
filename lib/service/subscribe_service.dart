@@ -13,15 +13,26 @@ class SubscribeService {
     Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe");
 
     ResponseDto responseDto = toResponseDto(response);
-    Logger().d(responseDto.statusCode);
+
+    Logger().d("메시지 : ${responseDto.msg}");
+    Logger().d("데이터 : ${responseDto.data}");
+    Logger().d("상태코드 : ${responseDto.statusCode}");
+
+    // List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
+    // List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
+
+    // responseDto.data = LessonLatestList;
 
     if (responseDto.statusCode < 300) {
-      // List<dynamic> mapList = responseDto.data;
-      // Logger().d(mapList);
-      // List<SubscribeRespDto> SubscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
-      // Logger().d(SubscribeList);
-      responseDto.data = SubscribeRespDto.fromJson(responseDto.data);
+      Logger().d("1");
+      List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
+      Logger().d("2");
+      List<SubscribeRespDto> subscribeList = mapList.map((e) => SubscribeRespDto.fromJson(e)).toList();
+      Logger().d(subscribeList);
+
+      responseDto.data = subscribeList; // ListSubscribeRespDto
     }
+
     return responseDto;
   }
 }

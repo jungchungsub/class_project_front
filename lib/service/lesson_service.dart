@@ -28,6 +28,7 @@ class LessonService {
   Future<ResponseDto> fetchHomeList() async {
     Response response = await httpConnector.get(path: "/api/main");
     ResponseDto responseDto = toResponseDto(response);
+
     if (responseDto.statusCode < 400) {
       List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
@@ -48,9 +49,7 @@ class LessonService {
     String requestBody = jsonEncode(lessonUpdateReqDto);
     Response response = await httpConnector.put(path: "/api/lesson/${lessonId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-    if (responseDto.data != null) {
-      // responseDto.data = 레슨리스폰스디티오생성
-    }
+
     return responseDto;
   }
 }

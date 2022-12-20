@@ -1,7 +1,8 @@
-class LesssonUpdateInfo {
-  LesssonUpdateInfo(
+class LessonUpdateInfo {
+  LessonUpdateInfo(
       {required this.id,
       required this.name,
+      required this.curriculum,
       required this.photo,
       required this.price,
       required this.place,
@@ -15,6 +16,7 @@ class LesssonUpdateInfo {
   int id;
   String name;
   String photo;
+  String curriculum;
   int price;
   String place;
   int lessonTime;

@@ -1,5 +1,9 @@
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/controller/category_controller.dart';
+
+import 'package:finalproject_front/domain/category.dart';
+import 'package:finalproject_front/dto/response/category_resp_dto.dart';
+
 import 'package:finalproject_front/dummy_models/lesson_category_list_resp_dto.dart';
 import 'package:finalproject_front/pages/category/components/category_page_model.dart';
 import 'package:finalproject_front/pages/category/components/category_page_view_model.dart';
@@ -7,11 +11,12 @@ import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class CategoryDetailPage extends ConsumerStatefulWidget {
   CategoryDetailPage({required this.categoryId, Key? key}) : super(key: key);
   final int categoryId;
-  final cateogoryListname = ["뷰티", "운동,", "댄스", "뮤직", "미술", "문학", "공예", "기타"];
+
   @override
   ConsumerState<CategoryDetailPage> createState() => _CategoryDetailPageState();
 }
@@ -25,43 +30,52 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
       return Center(
         child: CircularProgressIndicator(),
       );
+    } else {
+      List<CategoryRespDto>? categoryList = model.categoryList;
+      if (categoryList == null) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } else {
+        return Scaffold(
+            appBar: _buildAppbar(context, ref, model),
+            body: ListView(
+              children: [
+                // _buildHeaderCategory("전체", "뷰티", "운동", "댄스", "뮤직", "미술", "문학", "공예", "기타"),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                      child: Text(
+                    "크몽에 오신것을 환영합니다!",
+                    style: TextStyle(fontSize: 16),
+                  )),
+                ),
+                Image.asset(
+                  "assets/home1.jpg",
+                  fit: BoxFit.cover,
+                  height: 120,
+                ),
+
+                _buildCategoryFilter("등록순", categoryList.length, widget.categoryId, ref),
+                ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: categoryList.length,
+                    itemBuilder: ((BuildContext context, int index) {
+                      return _buildCateogryList(context, ref, index, categoryList, categoryCT);
+                    })),
+              ],
+            ));
+      }
     }
-    return Scaffold(
-        appBar: _buildAppbar(context, ref, model),
-        body: ListView(
-          children: [
-            // _buildHeaderCategory("전체", "뷰티", "운동", "댄스", "뮤직", "미술", "문학", "공예", "기타"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(
-                  child: Text(
-                "크몽에 오신것을 환영합니다!",
-                style: TextStyle(fontSize: 16),
-              )),
-            ),
-            Image.asset(
-              "assets/home1.jpg",
-              fit: BoxFit.cover,
-              height: 120,
-            ),
-            _buildCategoryFilter("", model.categoryList.length),
-            ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: model.categoryList.length,
-                itemBuilder: ((BuildContext context, int index) {
-                  return _buildCateogryList(context, ref, index, model, categoryCT);
-                })),
-          ],
-        ));
   }
 
-  Padding _buildCateogryList(BuildContext context, WidgetRef ref, int index, CategoryPageModel? model, CategoryController categoryCT) {
+  Padding _buildCateogryList(BuildContext context, WidgetRef ref, int index, List<CategoryRespDto> categoryList, CategoryController categoryCT) {
     return Padding(
       padding: const EdgeInsets.only(top: 16, right: 10, bottom: 8, left: 10),
       child: InkWell(
         onTap: () {
-          categoryCT.moveDetailPage(lessonId: model!.categoryList[index].lessonId);
+          categoryCT.moveDetailPage(lessonId: categoryList[index].lessonId);
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +104,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                       width: 220,
                       height: 50,
                       child: Text(
-                        "${model?.categoryList[index].lessonName}",
+                        "${categoryList[index].lessonName}",
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -102,7 +116,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                     Row(
                       children: [
                         Text(
-                          "${model?.categoryList[index].avgGrade}",
+                          "${categoryList[index].avgGrade}",
                           style: TextStyle(fontSize: 14),
                         ),
                         SizedBox(width: gap_s),
@@ -115,7 +129,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                           width: gap_s,
                         ),
                         Text(
-                          "| ${model?.categoryList[index].totalReviews}개의 평가",
+                          "| ${categoryList[index].totalReviews}개의 평가",
                           style: TextStyle(fontSize: 14),
                         ),
                       ],
@@ -126,7 +140,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "${model?.categoryList[index].lessonPrice}원",
+                            "${categoryList[index].lessonPrice}원",
                             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Icon(
@@ -147,7 +161,7 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
     );
   }
 
-  Container _buildCategoryFilter(String budget, int total) {
+  Container _buildCategoryFilter(String budget, int total, int categoryId, WidgetRef ref) {
     return Container(
       child: Column(
         children: [
@@ -170,78 +184,12 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                _buildMiddleFilterList("${budget}"),
+                DropdownButtonExample(categoryId: categoryId)
               ],
             ),
           )
         ],
       ),
-    );
-  }
-
-  TextButton _buildMiddleFilterList(String text) {
-    return TextButton(
-      onPressed: () {
-        showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    textColor: gPrimaryColor,
-                    title: Text('1만 원 미만'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('1~5만 원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('5~10만원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('10~15만원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('15~20만원 이하'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: Text('20만원 이상'),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              );
-              ;
-            });
-      },
-      child: Row(
-        children: [
-          Text(
-            "${text}",
-            style: TextStyle(color: Colors.black, fontSize: 14),
-          ),
-        ],
-      ),
-      style: OutlinedButton.styleFrom(
-          shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      )),
     );
   }
 
@@ -395,15 +343,38 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
   }
 }
 
-// class CategoryList extends StatelessWidget {
-//   final int index;
-//   const CategoryList({required this.index, Key? key}) : super(key: key);
+List<String> list = <String>['등록순', '인기순', '추천순'];
 
-//   @override
-//   Widget build(
-//     BuildContext context,
-//     CategoryPageModel? model,
-//   ) {
-//     return;
-//   }
-// }
+class DropdownButtonExample extends ConsumerStatefulWidget {
+  final int categoryId;
+  const DropdownButtonExample({required this.categoryId, super.key});
+
+  @override
+  ConsumerState<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+}
+
+class _DropdownButtonExampleState extends ConsumerState<DropdownButtonExample> {
+  String dropdownValue = list.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      elevation: 16,
+      style: const TextStyle(color: Colors.black),
+      onChanged: (String? value) {
+        setState(() {
+          dropdownValue = value!;
+          Logger().d("드롭다운 버튼 변경됨 : $dropdownValue");
+          ref.read(categoryPageViewModel(widget.categoryId).notifier).notifyViewModel(dropdownValue);
+        });
+      },
+      items: list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}

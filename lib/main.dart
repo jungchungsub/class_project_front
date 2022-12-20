@@ -4,9 +4,9 @@ import 'package:finalproject_front/pages/category/category_detail_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
+import 'package:finalproject_front/pages/lesson/lesson_client_page/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
+import 'package:finalproject_front/pages/lesson/lesson_master_list/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
@@ -16,6 +16,7 @@ import 'package:finalproject_front/pages/payment/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_installment_list_page.dart';
 import 'package:finalproject_front/pages/payment/payment_sales_detail_pages.dart';
+import 'package:finalproject_front/pages/search/searchList.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main_page.dart';
 import 'package:finalproject_front/pages/auth/join_division_page.dart';
@@ -69,26 +70,15 @@ class MyApp extends StatelessWidget {
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용
-        "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
+
+        // "/lessonExpertList": (context) => LessonMasterListPage(), //더미적용
+
         "/searchPage": (context) => SearchPage(),
         "/customerService": (context) => CustomerServicePage(),
         "/userCoupon": (context) => UserCouponPage(), // 더미 적용
         "/paymentSalesDetail": (context) => PaymentSalesDetailPage(),
+        "/searchList": (context) => SearchListPage(),
         "/paymentInstallmentList": (context) => PaymentInstallmentListPage(),
-        // "/lessonUpdate": (context) => LessonUpdatePage(
-        //         model: LesssonUpdateInfo(
-        //       id: id,
-        //       name: name,
-        //       photo: ,
-        //       price: price,
-        //       place: place,
-        //       lessonTime: lessonTime,
-        //       lessonCount: lessonCount,
-        //       possibleDays: possibleDays,
-        //       policy: policy,
-        //       deadline: deadline,
-        //       categoryId: categoryId,
-        //     )),
         "/chatList": (context) => ChatListPage(),
         "/subscribePage": (context) => SubscribePage(userId: UserSession.user.id), //더미 적용
         "/reviewInsert": (context) => LessonReviewInsertPage(),
