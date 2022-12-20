@@ -50,7 +50,6 @@ class LessonService {
     String requestBody = jsonEncode(lessonUpdateReqDto);
     Response response = await httpConnector.put(path: "/api/lesson/${lessonId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);
-
     return responseDto;
   }
 }

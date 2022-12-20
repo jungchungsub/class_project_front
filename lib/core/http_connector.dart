@@ -24,7 +24,7 @@ class HttpConnector {
   Future<Response> getInitSession(String path, String? jwtToken) async {
     Logger().d("initSession실행됨");
     Map<String, String> requestHeader = {...headers, "Authorization": jwtToken!};
-    Uri uri = Uri.parse("${host}${path}");
+    Uri uri = Uri.parse("${host3}${path}");
     Response response = await Client().post(uri, headers: requestHeader);
     return response;
   }
@@ -34,11 +34,11 @@ class HttpConnector {
       String jwtToken = UserSession.jwtToken;
       Map<String, String> requestHeader = {...headers, "Authorization": jwtToken};
 
-      Uri uri = Uri.parse("${host}${path}");
+      Uri uri = Uri.parse("${host3}${path}");
       Response response = await Client().get(uri, headers: requestHeader);
       return response;
     } else {
-      Uri uri = Uri.parse("${host}${path}");
+      Uri uri = Uri.parse("${host3}${path}");
 
       Response response = await Client().get(uri);
       return response;
@@ -47,7 +47,7 @@ class HttpConnector {
 
   Future<Response> post({required String path, required String body}) async {
     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-    Uri uri = Uri.parse("${host}${path}");
+    Uri uri = Uri.parse("${host3}${path}");
     Response response = await Client().post(uri, body: body, headers: requestHeader);
 
     return response;
@@ -55,7 +55,7 @@ class HttpConnector {
 
   Future<Response> delete(String path) async {
     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
-    Uri uri = Uri.parse("${host}${path}");
+    Uri uri = Uri.parse("${host3}${path}");
     Response response = await _client.delete(uri, headers: requestHeader);
     return response;
   }
@@ -63,7 +63,7 @@ class HttpConnector {
   Future<Response> put({required String path, String? body}) async {
     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
 
-    Uri uri = Uri.parse("${host}${path}");
+    Uri uri = Uri.parse("${host3}${path}");
 
     Response response = await Client().put(uri, body: body, headers: requestHeader);
     Logger().d("여기 실행? ${response.body}");
