@@ -1,7 +1,9 @@
-import 'package:finalproject_front/core/iamport/util/userCode.dart';
+import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/pages/payment/iamport/model/payment_data.dart';
+import 'package:finalproject_front/pages/payment/iamport/util/userCode.dart';
 import 'package:flutter/material.dart';
-import '../../../../dto/request/payment_data.dart';
-import 'iamport_payment.dart';
+import 'package:logger/logger.dart';
+import '../iamport_payment.dart';
 import 'payment_test.dart';
 
 class Payment extends StatelessWidget {
@@ -11,12 +13,13 @@ class Payment extends StatelessWidget {
 
     return IamportPayment(
       appBar: AppBar(
-        title: Text('아임포트 결제'),
+        backgroundColor: gPrimaryColor,
+        title: Text('결제'),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentTest()));
+            Navigator.popAndPushNamed(context, "/main");
           },
         ),
       ),
@@ -25,7 +28,6 @@ class Payment extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/iamport-logo.png'),
               Padding(padding: EdgeInsets.symmetric(vertical: 15)),
               Text('잠시만 기다려주세요...', style: TextStyle(fontSize: 20.0)),
             ],
@@ -35,6 +37,8 @@ class Payment extends StatelessWidget {
       userCode: UserCode.getUserCodeByPg(data.pg),
       data: data,
       callback: (Map<String, String> result) {
+        Logger().d("여기실행? 페이먼트");
+        Logger().d("결제 확인 ${result}");
         Navigator.pushReplacementNamed(context, '/result', arguments: result);
       },
     );

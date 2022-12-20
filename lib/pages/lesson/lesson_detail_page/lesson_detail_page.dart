@@ -4,6 +4,7 @@ import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_view_model.dart';
 import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
 import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
+import 'package:finalproject_front/pages/order/order_detail_page.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -19,18 +20,18 @@ class LessonDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //final rc = ref.read(lessonController);
-
+    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     return Scaffold(
-      bottomSheet: _buildLessonBar(),
+      bottomSheet: _buildLessonBar(model: model),
       body: CustomScrollView(
         slivers: [
           _buildSliverAppbar(context),
           SliverToBoxAdapter(
             child: Column(
               children: [
-                _buildHeader(ref),
+                _buildHeader(model!),
                 _buildDivider(),
-                _buildBody(ref),
+                _buildBody(model),
                 //build5(ref),
               ],
             ),
@@ -40,8 +41,7 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildBody(WidgetRef ref) {
-    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+  Widget _buildBody(LessonDetailPageModel model) {
     return model == null
         ? SizedBox()
         : Padding(
@@ -84,8 +84,7 @@ class LessonDetailPage extends ConsumerWidget {
           );
   }
 
-  Widget _buildHeader(WidgetRef ref) {
-    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+  Widget _buildHeader(LessonDetailPageModel model) {
     return model == null
         ? SizedBox()
         : Padding(
@@ -500,7 +499,8 @@ SliverAppBar _buildSliverAppbar(BuildContext context) {
 }
 
 class _buildLessonBar extends StatefulWidget {
-  const _buildLessonBar({Key? key}) : super(key: key);
+  final LessonDetailPageModel? model;
+  _buildLessonBar({Key? key, required this.model}) : super(key: key);
 
   @override
   State<_buildLessonBar> createState() => _buildLessonBarState();
@@ -523,7 +523,7 @@ class _buildLessonBarState extends State<_buildLessonBar> {
                   backgroundColor: Color(0xff4880ED),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/orderDetail");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailPage(model: widget.model)));
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                 },
                 child: Text(

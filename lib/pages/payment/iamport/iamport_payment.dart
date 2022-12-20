@@ -1,137 +1,129 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:finalproject_front/pages/payment/iamport/util/iamport_error.dart';
+import 'package:finalproject_front/pages/payment/iamport/util/iamport_validation.dart';
+import 'package:finalproject_front/pages/payment/iamport/widget/iamport_payment_web_view.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
 import 'package:iamport_webview_flutter/iamport_webview_flutter.dart';
-import 'package:logger/logger.dart';
+import 'package:uni_links/uni_links.dart';
 
-import '../../../core/iamport/model/iamport_url.dart';
+import 'model/payment_data.dart';
+import 'model/url_data.dart';
 
-enum ActionType { auth, payment }
-
-class IamportWebView extends StatefulWidget {
-  static final Color primaryColor = Color(0xff344e81);
-  // ignore: prefer_const_declarations
-  static final String html = '''
-    <html>
-      <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-        <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js" ></script>
-        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-      </head>
-      <body></body>
-    </html>
-  ''';
-
-  final ActionType type;
+class IamportPayment extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? initialChild;
-  final ValueSetter<WebViewController> executeJS;
-  final ValueSetter<Map<String, String>> useQueryData;
-  final Function isPaymentOver;
-  final Function customPGAction;
+  final String userCode;
+  final PaymentData data;
+  final callback;
   final Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers;
 
-  IamportWebView({
-    required this.type,
+  IamportPayment({
+    Key? key,
     this.appBar,
     this.initialChild,
-    required this.executeJS,
-    required this.useQueryData,
-    required this.isPaymentOver,
-    required this.customPGAction,
+    required this.userCode,
+    required this.data,
+    required this.callback,
     this.gestureRecognizers,
-  });
-
-  @override
-  _IamportWebViewState createState() => _IamportWebViewState();
-}
-
-class _IamportWebViewState extends State<IamportWebView> {
-  late WebViewController _webViewController;
-  StreamSubscription? _sub;
-  late int _isWebviewLoaded;
-  late int _isImpLoaded;
-
-  @override
-  void initState() {
-    super.initState();
-    _isWebviewLoaded = 0;
-    _isImpLoaded = 0;
-    if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
-    }
-    if (widget.initialChild != null) {
-      _isWebviewLoaded++;
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    if (_sub != null) _sub!.cancel();
-  }
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Logger().d("iamport_webview 실행됨 ");
-    return Scaffold(
-      appBar: widget.appBar,
-      body: SafeArea(
-        child: IndexedStack(
-          index: _isWebviewLoaded,
-          children: [
-            WebView(
-              initialUrl: Uri.dataFromString(IamportWebView.html, mimeType: 'text/html').toString(),
-              javascriptMode: JavascriptMode.unrestricted,
-              gestureRecognizers: widget.gestureRecognizers,
-              onWebViewCreated: (controller) {
-                this._webViewController = controller;
-                if (widget.type == ActionType.payment) {
-                  // 스마일페이, 나이스 실시간 계좌이체
-                  _sub = widget.customPGAction(this._webViewController);
-                }
-              },
-              onPageFinished: (String url) {
-                // 웹뷰 로딩 완료시에 화면 전환
-                if (_isWebviewLoaded == 1) {
-                  setState(() {
-                    _isWebviewLoaded = 0;
-                  });
-                }
-                // 페이지 로딩 완료시 IMP 코드 실행
-                if (_isImpLoaded == 0) {
-                  widget.executeJS(this._webViewController);
-                  _isImpLoaded++;
-                }
-              },
-              navigationDelegate: (request) async {
-                // print("url: " + request.url);
-                if (widget.isPaymentOver(request.url)) {
-                  String decodedUrl = Uri.decodeComponent(request.url);
-                  widget.useQueryData(Uri.parse(decodedUrl).queryParameters);
+    IamportValidation validation = IamportValidation(this.userCode, this.data, this.callback);
 
-                  return NavigationDecision.prevent;
-                }
+    if (validation.getIsValid()) {
+      String mRedirectUrl = UrlData.redirectUrl;
+      var redirectUrl = UrlData.redirectUrl;
+      if (mRedirectUrl != null && mRedirectUrl.isNotEmpty) {
+        redirectUrl = mRedirectUrl;
+      }
 
-                final iamportUrl = IamportUrl(request.url);
-                Logger().d("appLink: " + iamportUrl.appUrl!);
-                if (iamportUrl.isAppLink()) {
-                  // 앱 실행 로직을 iamport_url 모듈로 이동
-                  iamportUrl.launchApp();
-                  return NavigationDecision.prevent;
+      return IamportWebView(
+        type: ActionType.payment,
+        appBar: this.appBar,
+        initialChild: this.initialChild,
+        gestureRecognizers: this.gestureRecognizers,
+        executeJS: (WebViewController controller) {
+          controller.evaluateJavascript('''
+            IMP.init("${this.userCode}");
+            IMP.request_pay(${jsonEncode(this.data.toJson())}, function(response) {
+              const query = [];
+              Object.keys(response).forEach(function(key) {
+                query.push(key + "=" + response[key]);
+              });
+              location.href = "$redirectUrl" + "?" + query.join("&");
+            });
+          ''');
+        },
+        customPGAction: (WebViewController controller) {
+          if (this.data.pg == 'smilepay') {
+            // webview_flutter에서 iOS는 쿠키가 기본적으로 허용되어있는 것으로 추정
+            if (Platform.isAndroid) {
+              controller.setAcceptThirdPartyCookies(true);
+            }
+          }
+          /* [v0.9.6] niceMobileV2: true 대비 코드 작성 */
+          if (this.data.pg == 'nice' && this.data.payMethod == 'trans') {
+            try {
+              StreamSubscription sub = linkStream.listen((String? link) async {
+                if (link != null) {
+                  String decodedUrl = Uri.decodeComponent(link);
+                  Uri parsedUrl = Uri.parse(decodedUrl);
+                  String scheme = parsedUrl.scheme;
+                  if (scheme == data.appScheme.toLowerCase()) {
+                    String queryToString = parsedUrl.query;
+                    String? niceTransRedirectionUrl;
+                    parsedUrl.queryParameters.forEach((key, value) {
+                      if (key == 'callbackparam1') {
+                        niceTransRedirectionUrl = value;
+                      }
+                    });
+                    await controller.evaluateJavascript('''
+                    location.href = "$niceTransRedirectionUrl?$queryToString";
+                  ''');
+                  }
                 }
-                return NavigationDecision.navigate;
-              },
-            ),
-            if (_isWebviewLoaded == 1) widget.initialChild!,
-          ],
-        ),
-      ),
-    );
+              });
+              return sub;
+            } on FormatException {}
+          }
+          return null;
+        },
+        useQueryData: (Map<String, String> data) {
+          this.callback(data);
+        },
+        isPaymentOver: (String url) {
+          if (url.startsWith(redirectUrl)) {
+            return true;
+          }
+
+          if (this.data.payMethod == 'trans') {
+            /* [IOS] imp_uid와 merchant_uid값만 전달되기 때문에 결제 성공 또는 실패 구분할 수 없음 */
+            String decodedUrl = Uri.decodeComponent(url);
+            Uri parsedUrl = Uri.parse(decodedUrl);
+            String scheme = parsedUrl.scheme;
+            if (this.data.pg == 'html5_inicis') {
+              Map<String, String> query = parsedUrl.queryParameters;
+              if (query['m_redirect_url'] != null && scheme == this.data.appScheme.toLowerCase()) {
+                if (query['m_redirect_url']!.contains(redirectUrl)) {
+                  return true;
+                }
+              }
+            }
+          }
+
+          return false;
+        },
+      );
+    } else {
+      return IamportError(ActionType.payment, validation.getErrorMessage());
+    }
   }
 }

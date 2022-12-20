@@ -1,6 +1,6 @@
 // main 시작전에 확인이 필요해서 provider가 아닌 static으로 관리
 
-import 'package:finalproject_front/service/payment_local_service.dart';
+import 'package:finalproject_front/pages/payment/iamport/service/payment_local_service.dart';
 
 class IamportToken {
   static String? _accessToken;

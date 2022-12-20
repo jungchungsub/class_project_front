@@ -1,6 +1,6 @@
-import 'package:finalproject_front/dto/request/lesson_update_info.dart';
-import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
-import 'package:finalproject_front/pages/category/category_detail_page.dart';
+import 'package:finalproject_front/pages/auth/join_division_page.dart';
+import 'package:finalproject_front/pages/auth/login_division_page.dart';
+import 'package:finalproject_front/pages/auth/login_page.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/chat/chat_room_page.dart';
 import 'package:finalproject_front/pages/customer/customer_service_page.dart';
@@ -8,20 +8,15 @@ import 'package:finalproject_front/pages/lesson/lesson_client_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_insert_page.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list.dart';
 import 'package:finalproject_front/pages/lesson/lesson_review_insert_page.dart';
-import 'package:finalproject_front/pages/lesson/lesson_update_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
 import 'package:finalproject_front/pages/main_page.dart';
-import 'package:finalproject_front/pages/order/order_detail_page.dart';
-import 'package:finalproject_front/pages/payment/iamport/payment/payment.dart';
+import 'package:finalproject_front/pages/payment/iamport/iamport_request/payment.dart';
 import 'package:finalproject_front/pages/payment/payment_card_page.dart';
 import 'package:finalproject_front/pages/payment/payment_detail_page.dart';
 import 'package:finalproject_front/pages/payment/payment_installment_list_page.dart';
 import 'package:finalproject_front/pages/payment/payment_sales_detail_pages.dart';
 import 'package:finalproject_front/pages/search/search_detail_page.dart';
 import 'package:finalproject_front/pages/search/search_main_page.dart';
-import 'package:finalproject_front/pages/auth/join_division_page.dart';
-import 'package:finalproject_front/pages/auth/login_division_page.dart';
-import 'package:finalproject_front/pages/auth/login_page.dart';
 import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_coupon_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/user_login_my_page.dart';
@@ -66,7 +61,7 @@ class MyApp extends StatelessWidget {
         "/joinDivision": (context) => JoinDivisionPage(),
         "/paymentDetail": (context) => PaymentDetailPage(),
         "/paymentCard": (context) => PaymentCardPage(),
-        "/orderDetail": (context) => OrderDetailPage(),
+        // "/orderDetail": (context) => OrderDetailPage(),
         "/loginMyPage": (context) => UserLoginMyPage(),
         "/logoutMyPage": (context) => UserLogoutMyPage(),
         "/lessonClientList": (context) => LessonClientListPage(), //더미 적용

@@ -1,8 +1,8 @@
+import 'package:finalproject_front/pages/payment/iamport/controller/payment_cancle_controller.dart';
+import 'package:finalproject_front/pages/payment/iamport/iamport_request/payment_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../controller/payment_cancle_controller.dart';
-import 'payment/payment_test.dart';
 
 class IamportTest extends ConsumerStatefulWidget {
   const IamportTest({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _ImportTestState extends ConsumerState<IamportTest> {
       statusBarColor: Colors.transparent,
     ));
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    PaymentCancelController paymentCCT = ref.read(paymentCancelController);
+    // PaymentCancelController paymentCCT = ref.read(paymentCancelController);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(color: Color(0xff344e81)),
@@ -113,7 +113,7 @@ class _ImportTestState extends ConsumerState<IamportTest> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentTest()));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentTest()));
                         },
                       ),
                     ),
@@ -144,7 +144,7 @@ class _ImportTestState extends ConsumerState<IamportTest> {
                           ),
                         ),
                         onPressed: () {
-                          paymentCCT.login();
+                          // paymentCCT.login();
                         },
                       ),
                     ),

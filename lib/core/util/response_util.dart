@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:finalproject_front/dto/response/payment_resp_dto.dart';
+import 'package:finalproject_front/pages/payment/iamport/dto/response/payment_resp_dto.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 

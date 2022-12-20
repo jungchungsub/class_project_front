@@ -2,7 +2,7 @@ class PaymentData {
   String pg; // PG사
   String payMethod; // 결제수단
   String name; // 주문명
-  num amount; // 결제금액
+  int amount; // 결제금액
   String merchantUid; // 주문번호
   String buyerName; // 구매자 이름
   String buyerTel;

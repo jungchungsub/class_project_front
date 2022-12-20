@@ -1,4 +1,4 @@
-import '../../../dto/request/payment_data.dart';
+import 'package:finalproject_front/pages/payment/iamport/model/payment_data.dart';
 
 class IamportValidation {
   bool isValid = true;
