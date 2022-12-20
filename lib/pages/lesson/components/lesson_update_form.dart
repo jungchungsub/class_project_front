@@ -12,20 +12,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:logger/logger.dart';
+
 import 'lesson_deadline.dart';
 
 class LessonUpdateForm extends ConsumerStatefulWidget {
   final _name = TextEditingController();
   final _curriculum = TextEditingController();
-  final _count = TextEditingController();
+
   final _place = TextEditingController();
   final _policy = TextEditingController();
-  final _dateInput = TextEditingController();
-  final _time = TextEditingController();
-  final _price = TextEditingController();
-  final _possibleDay = TextEditingController();
 
-  LesssonUpdateInfo model;
+  final _possibleDay = TextEditingController();
+  late final _count;
+  late final _dateInput;
+  late final _time;
+  late final _price;
+
+  LessonUpdateInfo model;
+
   late LessonUpdateReqDto lessonUpdateReqDto;
   LessonUpdateForm({required this.model, required this.lessonUpdateReqDto, Key? key}) : super(key: key);
 
@@ -45,6 +50,17 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
   @override
   void initState() {
+    widget._name.text = widget.model.name;
+
+    widget._curriculum.text = widget.model.curriculum;
+    widget._count = widget.model.lessonCount;
+    widget._place.text = widget.model.place;
+    widget._policy.text = widget.model.policy;
+    widget._dateInput = widget.model.deadline;
+    widget._time = widget.model.lessonTime;
+    widget._price = widget.model.price;
+    widget._possibleDay.text = widget.model.possibleDays;
+
     super.initState();
     scrollController = ScrollController();
   }
@@ -74,13 +90,18 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
   openImages() async {
     try {
+      dynamic sendImage; // 디바이스 경로
+
       var pickedfile = await imgpicker.pickImage(source: ImageSource.gallery);
       //you can use ImageCourse.camera for Camera capture
       if (pickedfile != null) {
         _imagefile = pickedfile;
         setState(() {}); // 상태 초기화
-        Uint8List? data = await _imagefile?.readAsBytes();
-        String profileImage = base64Encode(data!);
+
+        sendImage = _imagefile?.path;
+        final encodeImage = utf8.encode(sendImage);
+        List<int> data = encodeImage;
+        String profileImage = base64Encode(data);
 
         return this.profileImage = profileImage;
       } else {
@@ -101,7 +122,8 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
   @override
   Widget build(BuildContext context) {
-    LessonUpdateReqDto lessonInsertReqDto = LessonUpdateReqDto.origin();
+    LessonUpdateReqDto lessonUpdateReqDto = LessonUpdateReqDto.single();
+
     final lessonCT = ref.read(lessonController);
     return Form(
       key: _formKey,
@@ -111,48 +133,47 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                _buildImageUploader(lessonInsertReqDto),
+                _buildImageUploader(widget.lessonUpdateReqDto),
                 SizedBox(
                   height: gap_m,
                 ),
                 _buildTextField(scrollAnimate, fieldTitle: "서비스제목", hint: "서비스 제목자리입니다", lines: 1, fieldController: widget._name, onChanged: (value) {
-                  lessonInsertReqDto.name = value;
+                  widget.lessonUpdateReqDto.name = value;
                 }),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "커리큘럼", hint: "상세설명", lines: 6, fieldController: widget._curriculum, onChanged: (value) {
-                  lessonInsertReqDto.curriculum = value;
+                  widget.lessonUpdateReqDto.curriculum = value;
                 }),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "수강횟수", hint: "수강횟수를 입력하세요", lines: 1, fieldController: widget._count, onChanged: (value) {
-                  lessonInsertReqDto.lessonCount = int.parse(value);
+                  widget.lessonUpdateReqDto.lessonCount = int.parse(value);
                 }),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "수강시간", hint: "수강시간을 입력하세요", lines: 1, fieldController: widget._time, onChanged: (value) {
-                  lessonInsertReqDto.lessonTime = int.parse(value);
+                  widget.lessonUpdateReqDto.lessonTime = int.parse(value);
                 }),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "수강장소", hint: "수강장소를 입력하세요", lines: 1, fieldController: widget._place, onChanged: (value) {
-                  lessonInsertReqDto.place = value;
+                  widget.lessonUpdateReqDto.place = value;
                 }),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "가격", hint: "가격을 입력하세요", lines: 1, fieldController: widget._price, onChanged: (value) {
-                  lessonInsertReqDto.price = int.parse(value);
+                  widget.lessonUpdateReqDto.price = int.parse(value);
                 }),
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "취소 및 환불 정책", hint: "취소 및 환불 정책 작성", lines: 4, fieldController: widget._policy,
                     onChanged: (value) {
-                  lessonInsertReqDto.policy = value;
+                  widget.lessonUpdateReqDto.policy = value;
                 }),
-
                 SizedBox(height: gap_l),
                 _buildTextField(scrollAnimate, fieldTitle: "가능일", hint: "가능일을 입력하세요", lines: 1, fieldController: widget._possibleDay,
                     onChanged: (value) {
-                  lessonInsertReqDto.possibleDays = value;
+                  widget.lessonUpdateReqDto.possibleDays = value;
                 }),
                 SizedBox(height: gap_l),
                 LessonDeadLine(
                   fieldController: widget._dateInput,
-                  lessonInsertReqDto: lessonInsertReqDto,
+                  lessonInsertReqDto: lessonUpdateReqDto,
                 ),
                 SizedBox(height: gap_l),
                 Column(
@@ -184,7 +205,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
 
                         // underline: Container(height: 1.4, color: Color(0xffc0c0c0)),
                         onChanged: (int? newValue) {
-                          lessonInsertReqDto.categoryId = newValue;
+                          lessonUpdateReqDto.categoryId = newValue!;
                         },
                         items: [1, 2, 3, 4, 5, 6, 7, 8].map<DropdownMenuItem<int?>>((int? i) {
                           return DropdownMenuItem<int?>(
@@ -197,13 +218,10 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                   ],
                 ),
                 SizedBox(height: gap_l),
-
                 ElevatedButton(
                   onPressed: () {
-                    lessonInsertReqDto.photo = profileImage;
-                    lessonCT.lessonInsert(
-                      lessonInsertReqDto: lessonInsertReqDto,
-                    );
+                    lessonUpdateReqDto.photo = profileImage;
+                    lessonCT.updateLesson(lessonId: 1, lessonUpdateReqDto: lessonUpdateReqDto);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: gButtonOffColor,
@@ -212,7 +230,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "클래스 등록하기",
+                      "클래스 수정하기",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -221,7 +239,6 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
                     ),
                   ),
                 )
-                // _buildLessonButton(context)
               ],
             ),
           ),
@@ -230,7 +247,7 @@ class _LessonInsertFormState extends ConsumerState<LessonUpdateForm> {
     );
   }
 
-  Widget _buildImageUploader(LessonUpdateReqDto lessonInsertReqDto) {
+  Widget _buildImageUploader(LessonUpdateReqDto lessonUpdateReqDto) {
     return Row(
       children: [
         //open button ----------------

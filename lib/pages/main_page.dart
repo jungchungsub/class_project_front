@@ -2,6 +2,9 @@ import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/pages/chat/chat_list_page.dart';
 import 'package:finalproject_front/pages/main/home/home_page/home_page.dart';
+
+import 'package:finalproject_front/pages/search/searchList.dart';
+
 import 'package:finalproject_front/pages/search/search_main_page.dart';
 import 'package:finalproject_front/pages/subscribe/subscribe_page.dart';
 import 'package:finalproject_front/pages/user/user_login_my_page/master_login_my_page.dart';
@@ -49,7 +52,7 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
           HomePage(),
-          loadedPages.contains(1) ? SearchPage() : Container(),
+          loadedPages.contains(1) ? SearchListPage() : Container(),
           loadedPages.contains(2) ? SubscribePage(userId: UserSession.user.id) : Container(),
           loadedPages.contains(3) ? ChatListPage() : Container(),
           loadedPages.contains(4) ? MasterLoginMyPage() : Container(),
@@ -62,7 +65,7 @@ class _MainPageState extends State<MainPage> {
         index: _selectedIndex, //아이콘클릭시 화면 이동
         children: [
           HomePage(),
-          loadedPages.contains(1) ? SearchPage() : Container(),
+          loadedPages.contains(1) ? SearchListPage() : Container(),
           loadedPages.contains(2) ? SubscribePage(userId: UserSession.user.id) : Container(),
           loadedPages.contains(3) ? ChatListPage() : Container(),
           loadedPages.contains(4) ? UserLoginMyPage() : Container(),

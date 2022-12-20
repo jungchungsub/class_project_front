@@ -49,7 +49,7 @@ class SearchPage extends StatelessWidget {
             child: TextFormField(
               decoration: InputDecoration(
                 prefixIcon: Icon(CupertinoIcons.search),
-                hintText: "닉네임과 메모로 검색하세요.",
+                hintText: "검색어를 입력해주세요.",
                 hintStyle: TextStyle(fontWeight: FontWeight.bold),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
