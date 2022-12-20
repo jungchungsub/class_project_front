@@ -16,7 +16,9 @@ class LessonUpdateInfo {
   int id;
   String name;
   String photo;
+
   String curriculum;
+
   int price;
   String place;
   int lessonTime;

@@ -12,6 +12,7 @@ import 'package:logger/logger.dart';
 
 class LessonUpdatePage extends ConsumerWidget {
   LessonUpdatePage({required this.model, Key? key}) : super(key: key);
+
   LessonUpdateInfo model;
   LessonUpdateReqDto lessonUpdateReqDto = LessonUpdateReqDto.single();
 

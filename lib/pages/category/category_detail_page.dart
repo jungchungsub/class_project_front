@@ -11,6 +11,7 @@ import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:logger/logger.dart';
 
 class CategoryDetailPage extends ConsumerStatefulWidget {
