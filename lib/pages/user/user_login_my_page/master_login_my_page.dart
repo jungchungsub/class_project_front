@@ -68,6 +68,7 @@ class MasterLoginMyPage extends ConsumerWidget {
                 ServiceText(routePath: "/paymentSalesDetail", serviceText: "판매내역"),
                 SizedBox(height: gap_m),
                 _buildSellingList("등록한 레슨 보기", userCT),
+                SizedBox(height: gap_m),
                 BottomImageBox(),
               ],
             ),

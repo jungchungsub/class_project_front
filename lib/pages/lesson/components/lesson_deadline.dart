@@ -8,8 +8,14 @@ import '../../../size.dart';
 
 class LessonDeadLine extends StatefulWidget {
   late TextEditingController fieldController = TextEditingController();
-  final LessonInsertReqDto lessonInsertReqDto;
-  LessonDeadLine({required this.lessonInsertReqDto, required TextEditingController fieldController, Key? key}) : super(key: key);
+  final LessonInsertReqDto? lessonInsertReqDto;
+  final LessonUpdateReqDto? lessonUpdateReqDto;
+  LessonDeadLine({
+    this.lessonInsertReqDto,
+    this.lessonUpdateReqDto,
+    required TextEditingController fieldController,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<LessonDeadLine> createState() => _LessonDeadLineState();
@@ -61,11 +67,14 @@ class _LessonDeadLineState extends State<LessonDeadLine> {
                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                     setState(() {
                       dateInput.text = formattedDate; //출력 날짜를 TextField 값으로 설정합니다.
-                      Logger().d(dateInput.text);
 
-                      widget.lessonInsertReqDto.deadline = formattedDate;
+                      if (widget.lessonInsertReqDto?.deadline == null) {
+                        widget.lessonUpdateReqDto?.deadline = formattedDate;
+                      } else if (widget.lessonUpdateReqDto?.deadline == null) {
+                        widget.lessonInsertReqDto?.deadline = formattedDate;
+                      }
                     });
-                  } else {}
+                  }
                 },
               ))),
         ],

@@ -552,7 +552,6 @@ class _buildAgree extends StatefulWidget {
 class __buildAgreeState extends State<_buildAgree> {
   bool? _ischecked = false;
   bool? _checked = false;
-
   @override
   Widget build(BuildContext context) {
     return Padding(

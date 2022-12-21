@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/core/util/response_util.dart';
 import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
-import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_latest_list_resp_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
@@ -48,7 +46,7 @@ class LessonService {
     return responseDto;
   }
 
-  Future<ResponseDto> fetchUpdateLesson(int lessonId, LessonInsertReqDto lessonUpdateReqDto) async {
+  Future<ResponseDto> fetchUpdateLesson(int lessonId, LessonUpdateReqDto lessonUpdateReqDto) async {
     String requestBody = jsonEncode(lessonUpdateReqDto);
     Response response = await httpConnector.put(path: "/api/lesson/${lessonId}", body: requestBody);
     ResponseDto responseDto = toResponseDto(response);

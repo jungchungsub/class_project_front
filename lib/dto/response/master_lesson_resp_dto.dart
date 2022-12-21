@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
+
 LessonRespDto lessonRespDtoFromJson(String str) => LessonRespDto.fromJson(json.decode(str));
 
 String lessonRespDtoToJson(LessonRespDto data) => json.encode(data.toJson());
@@ -54,7 +57,7 @@ class LessonDtoList {
   factory LessonDtoList.fromJson(Map<String, dynamic> json) => LessonDtoList(
         lessonName: json["lessonName"],
         lessonPrice: json["lessonPrice"],
-        lessonDeadLine: DateTime.parse(json["lessonDeadLine"]),
+        lessonDeadLine: DateFormat("yyyy-mm-dd").parse(json["lessonDeadLine"]),
       );
 
   Map<String, dynamic> toJson() => {
