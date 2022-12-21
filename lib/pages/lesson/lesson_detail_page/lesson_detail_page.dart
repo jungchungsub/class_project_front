@@ -42,7 +42,7 @@ class LessonDetailPage extends ConsumerWidget {
 
   Widget _buildBody(WidgetRef ref) {
     LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
-    return model == null
+    return (model == null
         ? SizedBox()
         : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -81,7 +81,7 @@ class LessonDetailPage extends ConsumerWidget {
                 ),
               ],
             )),
-          );
+          ));
   }
 
   Widget _buildHeader(WidgetRef ref) {
