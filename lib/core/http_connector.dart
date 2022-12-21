@@ -12,15 +12,11 @@ class HttpConnector {
 // header에 content 타입 필요
   Map<String, String> headers = {"Content-Type": "application/json;charset=utf-8"};
 
-<<<<<<< HEAD
   final host = "http://192.168.0.87:8000";
   final host2 = "http://localhost:8000";
 
   final host3 = "http://192.168.0.4:8000";
 
-=======
-  final host = "http://localhost:8000";
->>>>>>> c0fd5f433141e47a0e4338cf74f5e14cf0778824
   final Client _client = Client();
   // 최초 자동 로그인시에 세션이 없기 때문에 jwtToken을 storage에서 가져와서 세션 초기화함.
 
@@ -73,10 +69,7 @@ class HttpConnector {
     Map<String, String> requestHeader = UserSession.getTokenHeader(headers);
 
     Uri uri = Uri.parse("${host}${path}");
-<<<<<<< HEAD
 
-=======
->>>>>>> c0fd5f433141e47a0e4338cf74f5e14cf0778824
     Response response = await Client().put(uri, body: body, headers: requestHeader);
     return response;
   }
