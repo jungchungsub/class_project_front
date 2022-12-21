@@ -78,8 +78,6 @@ class HomePage extends ConsumerWidget {
       children: [
         InkWell(
           onTap: () {
-            // categoryCT.moveCategoryPage(categoryId: );
-            // lessonCT.moveDetailPage(lessonId: model.lessonLatestList[index].lessonId);
             lessonCT.moveCategoryPage(categoryId: cateogryList);
           },
           child: Container(
@@ -143,16 +141,24 @@ class HomePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
+                        // child: AssetImage(
+                        //   'assets/main/main$index.png',
+                        //   fit: BoxFit.cover
+                        // ),
+                        child: Image.asset(
+                          ("assets/main${index}.png"),
+                          fit: BoxFit.cover,
+                        ),
                         height: 90,
                         width: 160,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
+                          // image: Image( Image.asset("assets/images"), fit: BoxFit.cover),
                         ),
                       ),
                       SizedBox(height: gap_m),
                       Text(
-                        "${model?.lessonLatestList[index].lessonName}",
+                        "${model.lessonLatestList[index].lessonName}",
                         style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -162,7 +168,7 @@ class HomePage extends ConsumerWidget {
                           Icon(CupertinoIcons.heart_fill, color: Colors.red, size: 15),
                           SizedBox(width: gap_m),
                           Text(
-                            "${model?.lessonLatestList[index].avgGrade} | ${model?.lessonLatestList[index].totalReview} 개의 평가",
+                            "${model?.lessonLatestList[index].avgGrade} | ${model.lessonLatestList[index].totalReview} 개의 평가",
                             style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
                           ),
                         ],
