@@ -18,6 +18,11 @@ class LessonDetailPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //final rc = ref.read(lessonController);
     LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
     return Scaffold(
       bottomSheet: _buildLessonBar(model: model),
       body: CustomScrollView(
