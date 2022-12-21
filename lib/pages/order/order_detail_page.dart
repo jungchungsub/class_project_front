@@ -346,7 +346,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     return Divider(
       thickness: 1,
       height: 0,
-      color: const Color(0xff929AAB),
+      color: gDivider,
     );
   }
 
@@ -354,7 +354,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     return Divider(
       thickness: 14,
       height: 0,
-      color: const Color(0xffF0F0F0),
+      color: gDivider,
     );
   }
 
@@ -550,8 +550,8 @@ class _buildAgree extends StatefulWidget {
 }
 
 class __buildAgreeState extends State<_buildAgree> {
-  bool? _ischecked = true;
-  bool? _checked = true;
+  bool? _ischecked = false;
+  bool? _checked = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
