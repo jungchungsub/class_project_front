@@ -1,47 +1,88 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:finalproject_front/constants.dart';
-
+import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
+import 'package:finalproject_front/pages/payment/iamport/iamport_request/payment_test.dart';
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:logger/logger.dart';
+
+class MyOrderRespDto {
+  MyOrderRespDto.single();
+  String? lessonName;
+  int? lessonCount;
+  int? totalPrice;
+  String? payMethod;
+  String? pg;
+
+  MyOrderRespDto({
+    required this.lessonName,
+    required this.lessonCount,
+    required this.totalPrice,
+    required this.payMethod,
+    required this.pg,
+  });
+}
 
 class OrderDetailPage extends StatefulWidget {
-  const OrderDetailPage({Key? key}) : super(key: key);
+  LessonDetailPageModel? model;
+  OrderDetailPage({required this.model, super.key});
 
   @override
   State<OrderDetailPage> createState() => _OrderDetailPageState();
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
-  int counter = 1;
-  int totalPrice = 5000;
+  //기본 설정 값
+  int count = 1;
+  late int totalPrice = widget.model!.lessonRespDto.lessonDto.lessonPrice;
+
+  void setPlus(int lessonPrice) {
+    setState(() {
+      count++;
+      totalPrice += lessonPrice;
+    });
+  }
+
+  void setMinus(int lessonPrice) {
+    if (count > 0) {
+      setState(() {
+        count--;
+        totalPrice -= lessonPrice;
+      });
+    } else if (count < 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("1개 미만은 구입 불가능합니다.")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    MyOrderRespDto orderRespDto = MyOrderRespDto.single();
+
     return Scaffold(
       appBar: _buildAppbar(),
       body: ListView(
         children: [
-          _buildClassName(),
+          _buildClassName(), //완
           _buildDivider(),
-          _buildTime(),
+          _buildTime(totalPrice: totalPrice, counter: count),
           _buildMiddleDivider(),
-          _buildMoney(),
+          _buildMoney(totalPrice: totalPrice),
           _buildMiddleDivider(),
-          _buildPaymentPurpose(),
+          _buildPaymentPurpose(orderRespDto: orderRespDto),
           _buildMiddleDivider(),
           _buildAgree(),
-          _buildPaymentButton(context, "/paymentCard")
+          // _buildPaymentButton(context, "/paymentCard")
+          _buildPaymentButton(context: context, count: count, totalPrice: totalPrice, orderRespDto: orderRespDto),
         ],
       ),
     );
   }
 
-  Container _buildMoney() {
+  Container _buildMoney({required int totalPrice}) {
     return Container(
       child: Column(
         children: [
@@ -65,11 +106,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: [
                     Text(
                       "총 서비스 금액",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: gSubTextColor),
                     ),
                     Text(
-                      "${totalPrice}원",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      "$totalPrice원",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: gSubTextColor),
                     ),
                   ],
                 ),
@@ -79,11 +120,11 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   children: [
                     Text(
                       "쿠폰 할인",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: gSubTextColor),
                     ),
                     Text(
                       "0원",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xff787272)),
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: gSubTextColor),
                     ),
                   ],
                 ),
@@ -104,8 +145,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "${totalPrice}원",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xff4880ED)),
+                        "$totalPrice원",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: gPrimaryColor),
                       ),
                     ],
                   ),
@@ -118,7 +159,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  Container _buildTime() {
+  Container _buildTime({required int totalPrice, required int counter}) {
     return Container(
       child: Column(
         children: [
@@ -156,7 +197,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "105분",
+                              "${widget.model!.lessonRespDto.lessonDto.lessonTime}",
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
@@ -175,7 +216,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "10회",
+                              "${widget.model!.lessonRespDto.lessonDto.lessonCount}",
                               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ],
@@ -198,25 +239,21 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             InkWell(
                               onTap: () {
                                 setState(() {
-                                  counter--;
-                                  totalPrice -= 5000;
+                                  setMinus(widget.model!.lessonRespDto.lessonDto.lessonPrice);
                                 });
                               },
                               child: Container(
-                                color: Color(0xffF3F3F3),
+                                color: gContentBoxColor,
                                 child: Icon(CupertinoIcons.minus),
                               ),
                             ),
-                            Text("${counter}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            Text("$counter", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                             InkWell(
                               onTap: () {
-                                setState(() {
-                                  counter++;
-                                  totalPrice += 5000;
-                                });
+                                setPlus(widget.model!.lessonRespDto.lessonDto.lessonPrice);
                               },
                               child: Container(
-                                color: Color(0xffF3F3F3),
+                                color: gContentBoxColor,
                                 child: Icon(CupertinoIcons.add),
                               ),
                             ),
@@ -234,7 +271,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  Padding _buildClassName() {
+  Widget _buildClassName() {
     return Padding(
       padding: const EdgeInsets.only(top: 20, right: 10, bottom: 20, left: 10),
       child: Column(
@@ -249,7 +286,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   Container(
                     width: 250,
                     child: Text(
-                      "유튜브로 홈트하기 - 전세계의 운동 영상을",
+                      "${widget.model?.lessonRespDto.lessonDto.lessonName}",
                       style: TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -257,7 +294,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child: Text("드록바쌤", style: TextStyle(fontSize: 14, color: const Color(0xff787272), fontWeight: FontWeight.bold)),
+                    child: Text("${widget.model!.lessonRespDto.profileDto.expertName}",
+                        style: TextStyle(fontSize: 14, color: gSubTextColor, fontWeight: FontWeight.bold)),
                   )
                 ],
               ),
@@ -267,6 +305,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(image: NetworkImage("https://picsum.photos/200"), fit: BoxFit.cover),
+                  // image: DecorationImage(image: Image.asset(widget.model.lessonRespDto.lessonDto.filePath), fit: BoxFit.cover),
                 ),
               ),
             ],
@@ -276,7 +315,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  Container _buildPaymentButton(BuildContext context, String routePath) {
+//, String routePath
+  Container _buildPaymentButton({required BuildContext context, required int totalPrice, required MyOrderRespDto orderRespDto, required int count}) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
@@ -285,8 +325,12 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           child: TextButton(
             style: TextButton.styleFrom(backgroundColor: Color(0xff4880ED), minimumSize: Size(340, 50)),
             onPressed: () {
-              Navigator.pushNamed(context, routePath);
-              //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
+              orderRespDto.lessonCount = count;
+              orderRespDto.totalPrice = totalPrice;
+              orderRespDto.lessonName = widget.model!.lessonRespDto.lessonDto.lessonName;
+              orderRespDto.pg = "html5_inicis";
+              Logger().d(" 버튼 누르기 전 확인 :${orderRespDto}");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentTest(orderRespDto: orderRespDto)));
             },
             child: Text(
               "${totalPrice}원 결제하기",
@@ -341,14 +385,17 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 }
 
 class _buildPaymentPurpose extends StatefulWidget {
-  const _buildPaymentPurpose({Key? key}) : super(key: key);
+  final MyOrderRespDto orderRespDto;
+  const _buildPaymentPurpose({required this.orderRespDto, Key? key}) : super(key: key);
 
   @override
   State<_buildPaymentPurpose> createState() => __buildPaymentPurposeState();
 }
 
 class __buildPaymentPurposeState extends State<_buildPaymentPurpose> {
-  bool? _ischecked = true;
+  bool? _ischecked = false;
+  bool? _isKakaoChecked = false;
+  bool? _isNaverChecked = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -375,6 +422,7 @@ class __buildPaymentPurposeState extends State<_buildPaymentPurpose> {
                     Checkbox(
                         value: _ischecked,
                         onChanged: (bool? value) {
+                          widget.orderRespDto.payMethod = "card";
                           setState(() {
                             this._ischecked = value;
                           });
@@ -434,26 +482,55 @@ class __buildPaymentPurposeState extends State<_buildPaymentPurpose> {
                   ),
                 ),
                 SizedBox(height: gap_l),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: gap_l),
-                  child: Row(
-                    children: [
-                      Checkbox(
-                          value: _ischecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this._ischecked = value!;
-                            });
-                          }),
-                      SizedBox(
-                        width: gap_l,
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: gap_l),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                              value: _isKakaoChecked,
+                              onChanged: (bool? value) {
+                                widget.orderRespDto.payMethod = "kakaopay";
+                                setState(() {
+                                  this._isKakaoChecked = value!;
+                                });
+                              }),
+                          SizedBox(
+                            width: gap_m,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.asset("assets/kakaoPay.png", fit: BoxFit.cover, height: 30),
+                          ),
+                        ],
                       ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.asset("assets/kakaoPay.png", fit: BoxFit.cover, height: 30),
+                    ),
+                    SizedBox(width: 50),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: gap_l),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                              value: _isNaverChecked,
+                              onChanged: (bool? value) {
+                                widget.orderRespDto.payMethod = "naverpay";
+
+                                setState(() {
+                                  this._isNaverChecked = value!;
+                                });
+                              }),
+                          SizedBox(
+                            width: gap_m,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.asset("assets/naverpay.jpeg", fit: BoxFit.cover, height: 30),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: gap_l),
               ],
@@ -474,6 +551,7 @@ class _buildAgree extends StatefulWidget {
 
 class __buildAgreeState extends State<_buildAgree> {
   bool? _ischecked = true;
+  bool? _checked = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -488,6 +566,7 @@ class __buildAgreeState extends State<_buildAgree> {
                   onChanged: (bool? value) {
                     setState(() {
                       this._ischecked = value;
+                      this._checked = value;
                     });
                   }),
               SizedBox(width: gap_m),

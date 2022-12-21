@@ -16,11 +16,11 @@ class ChatListPage extends StatefulWidget {
 
 class _ChatListPageState extends State<ChatListPage> {
   final List<ChatCard> items = [
-    ChatCard(name: "아이유", message: "충섭아 놀러가자", date: "오후 11:00"),
-    ChatCard(name: "아이유", message: "충섭아 사랑해", date: "오후 11:00"),
-    ChatCard(name: "아이유", message: "충섭아 미안해", date: "오후 11:00"),
-    ChatCard(name: "아이유", message: "충섭아 짜증나", date: "오후 11:00"),
-    ChatCard(name: "아이유", message: "충섭아 연락하지마", date: "오후 11:00"),
+    ChatCard(name: "정수영", message: "충섭아 놀러가자", date: "오후 11:00"),
+    ChatCard(name: "그린아카데미", message: "정충섭씨 출결 체크 확인 부탁드려요", date: "오후 7:01"),
+    ChatCard(name: "정충섭", message: "충섭아...미안해...", date: "오전 11:10"),
+    ChatCard(name: "이현성", message: "충섭아 ....어디야....?", date: "오전 08:52"),
+    ChatCard(name: "조현나", message: "충섭아 기능 완료 됬는지 확인좀 해줘", date: "오후 11:23"),
   ];
   @override
   Widget build(BuildContext context) {
@@ -38,14 +38,9 @@ class _ChatListPageState extends State<ChatListPage> {
                 color: Colors.white,
                 size: 40,
               )),
-          // key: ValueKey(index.toString()),
           key: Key('item ${items[index]}'),
           child: items[index],
-          // onDismissed: (direction) { // 상태관리에 필요함.
-          //   setState(() {
-          //     items.removeAt(index);
-          //   });
-          // },
+
           confirmDismiss: (DismissDirection direction) async {
             return await showDialog(
                 context: context,
@@ -54,9 +49,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     title: Text("정말 삭제를 하시겠습니까?"),
                     content: Text("삭제하면 채팅방의 모든 내용은 삭제 됩니다."),
                     actions: <Widget>[
-                      TextButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text("Delete")),
+                      TextButton(onPressed: () => Navigator.of(context).pop(true), child: const Text("Delete")),
                       SizedBox(width: 10),
                       TextButton(
                         onPressed: () => Navigator.of(context).pop(false),

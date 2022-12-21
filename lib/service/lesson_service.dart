@@ -1,22 +1,25 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:finalproject_front/core/http_connector.dart';
+import 'package:finalproject_front/core/util/response_util.dart';
 import 'package:finalproject_front/dto/request/lesson_req_dto.dart';
 import 'package:finalproject_front/dto/request/lesson_update_req_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_latest_list_resp_dto.dart';
 import 'package:finalproject_front/dto/response/lesson_resp_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
-import 'package:finalproject_front/core/util/response_util.dart';
 import 'package:http/http.dart';
-import 'package:logger/logger.dart';
 
 class LessonService {
   final HttpConnector httpConnector = HttpConnector();
 
+  static final LessonService _instance = LessonService._single();
+  LessonService._single();
+  factory LessonService() {
+    return _instance;
+  }
+
   Future<ResponseDto> fetchLessonDetail(int lessonId) async {
     Response response = await httpConnector.get(path: "/api/category/lesson/${lessonId}");
-    Logger().d(response.body);
     ResponseDto responseDto = toResponseDto(response);
     final value = responseDto.data["lessonAvgGrade"];
     if (value == "NaN") {
@@ -33,7 +36,6 @@ class LessonService {
     if (responseDto.statusCode < 400) {
       List<dynamic> mapList = responseDto.data; //responseDto.data를 dynamic타입으로 바꾸는 것
       List<LessonLatestListRespDto> LessonLatestList = mapList.map((e) => LessonLatestListRespDto.fromJson(e)).toList();
-
       responseDto.data = LessonLatestList;
     }
     return responseDto;

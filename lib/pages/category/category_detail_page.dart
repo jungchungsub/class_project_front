@@ -42,7 +42,6 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
             appBar: _buildAppbar(context, ref, model),
             body: ListView(
               children: [
-                // _buildHeaderCategory("전체", "뷰티", "운동", "댄스", "뮤직", "미술", "문학", "공예", "기타"),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
@@ -56,7 +55,6 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                   fit: BoxFit.cover,
                   height: 120,
                 ),
-
                 _buildCategoryFilter("등록순", categoryList.length, widget.categoryId, ref),
                 ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
@@ -367,6 +365,7 @@ class _DropdownButtonExampleState extends ConsumerState<DropdownButtonExample> {
         setState(() {
           dropdownValue = value!;
           Logger().d("드롭다운 버튼 변경됨 : $dropdownValue");
+
           ref.read(categoryPageViewModel(widget.categoryId).notifier).notifyViewModel(dropdownValue);
         });
       },

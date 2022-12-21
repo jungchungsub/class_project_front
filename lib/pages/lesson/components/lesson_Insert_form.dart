@@ -116,6 +116,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
   @override
   Widget build(BuildContext context) {
     LessonInsertReqDto lessonInsertReqDto = LessonInsertReqDto.origin();
+
     final lessonCT = ref.read(lessonController);
     Size size = MediaQuery.of(context).size;
     return Form(
@@ -199,7 +200,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
 
                         // underline: Container(height: 1.4, color: Color(0xffc0c0c0)),
                         onChanged: (int? newValue) {
-                          lessonInsertReqDto.categoryId = newValue;
+                          lessonInsertReqDto.categoryId = newValue!;
                         },
                         items: [1, 2, 3, 4, 5, 6, 7, 8].map<DropdownMenuItem<int?>>((int? i) {
                           return DropdownMenuItem<int?>(
@@ -257,7 +258,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                   child: Image.file(
                     File(_imagefile!.path),
                     width: 200,
-                    height: 200,
+                    height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),

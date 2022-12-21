@@ -2,13 +2,11 @@ import 'package:extended_image/extended_image.dart';
 import 'package:finalproject_front/constants.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_model.dart';
 import 'package:finalproject_front/pages/lesson/lesson_detail_page/model/lesson_detail_page_view_model.dart';
-import 'package:finalproject_front/dummy_models/lesson_detail_resp_dto.dart';
-import 'package:finalproject_front/pages/main/home/home_page/model/home_page_model.dart';
+import 'package:finalproject_front/pages/order/order_detail_page.dart';
 import 'package:finalproject_front/size.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LessonDetailPage extends ConsumerWidget {
@@ -19,19 +17,18 @@ class LessonDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //final rc = ref.read(lessonController);
-
+    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     return Scaffold(
-      bottomSheet: _buildLessonBar(),
+      bottomSheet: _buildLessonBar(model: model),
       body: CustomScrollView(
         slivers: [
           _buildSliverAppbar(context),
           SliverToBoxAdapter(
             child: Column(
               children: [
-                _buildHeader(ref),
+                _buildHeader(model!),
                 _buildDivider(),
-                _buildBody(ref),
-                //build5(ref),
+                _buildBody(model),
               ],
             ),
           ),
@@ -40,9 +37,12 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildBody(WidgetRef ref) {
-    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
-    return (model == null
+  // Widget _buildBody(WidgetRef ref) {
+  //   LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+  //   return (model == null
+
+  Widget _buildBody(LessonDetailPageModel model) {
+    return model == null
         ? SizedBox()
         : Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -62,17 +62,23 @@ class LessonDetailPage extends ConsumerWidget {
                 _buildLessonContentBox("레슨횟수", "${model.lessonRespDto.lessonDto.lessonCount}", 55, 1),
                 _buildLessonContentBox("장소", "${model.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
                 _buildLessonPossibleDate("${model.lessonRespDto.lessonDto.possibleDays}"),
-                _buildLessonContentBox("취소 및 환불규정", "${model.lessonRespDto.lessonDto.lessonPolicy}", 200, 6),
-                _buildLessonExpertInformation("${model.lessonRespDto.profileDto.expertPhoto}", "전문가정보",
-                    "${model.lessonRespDto.profileDto.expertName}", "${model.lessonRespDto.profileDto.expertIntroduction}"),
+                _buildLessonContentBox(
+                  "취소 및 환불규정",
+                  "${model.lessonRespDto.lessonDto.lessonPolicy}",
+                  200,
+                  6,
+                ),
+                _buildLessonExpertInformation(
+                  "${model.lessonRespDto.profileDto.expertPhoto}",
+                  "전문가정보",
+                  "${model.lessonRespDto.profileDto.expertName}",
+                  "${model.lessonRespDto.profileDto.expertIntroduction}",
+                ),
                 _buildLessonEvaluation(
-                    "${model.lessonRespDto.lessonAvgGrade}", model.lessonRespDto.lessonAvgGrade, "${model.lessonRespDto.lessonTotalReviewsCount}"),
-                // Column(
-                //   children: List.generate(
-                //       model.lessonRespDto.lessonReviewList.length,
-                //       (index) => _buildReview(
-                //           model.lessonRespDto.lessonReviewList[index].username, model.lessonRespDto.lessonReviewList[index].reviewContent)),
-                // ),
+                  "${model.lessonRespDto.lessonAvgGrade}",
+                  model.lessonRespDto.lessonAvgGrade,
+                  "${model.lessonRespDto.lessonTotalReviewsCount}",
+                ),
                 Column(
                   children: model.lessonRespDto.lessonReviewList.map((e) => _buildReview(e.username, e.reviewContent, e.lessonGrade)).toList(),
                 ),
@@ -81,11 +87,10 @@ class LessonDetailPage extends ConsumerWidget {
                 ),
               ],
             )),
-          ));
+          );
   }
 
-  Widget _buildHeader(WidgetRef ref) {
-    LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+  Widget _buildHeader(LessonDetailPageModel model) {
     return model == null
         ? SizedBox()
         : Padding(
@@ -122,7 +127,7 @@ Container _buildLessonEvaluation(String evaluation, double star, String totalRev
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
+            color: gClientColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -156,24 +161,6 @@ Container _buildLessonEvaluation(String evaluation, double star, String totalRev
                     )
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Row(
-                    //   children: [
-                    //     _buildStar(CupertinoIcons.star_fill),
-                    //     SizedBox(width: 5),
-                    //     _buildStar(CupertinoIcons.star_fill),
-                    //     SizedBox(width: 5),
-                    //     _buildStar(CupertinoIcons.star_fill),
-                    //     SizedBox(width: 5),
-                    //     _buildStar(CupertinoIcons.star_fill),
-                    //     SizedBox(width: 5),
-                    //     _buildStar(CupertinoIcons.star_fill),
-                    //   ],
-                    // ),
-                  ],
-                )
               ],
             ),
           ),
@@ -218,19 +205,6 @@ Widget _buildReview(String username, String reviewContent, double lessonGrade) {
                 itemSize: 14.0,
                 direction: Axis.horizontal,
               ),
-              // Row(
-              //   children: [
-              //     _buildStar(CupertinoIcons.star_fill),
-              //     SizedBox(width: 5),
-              //     _buildStar(CupertinoIcons.star_fill),
-              //     SizedBox(width: 5),
-              //     _buildStar(CupertinoIcons.star_fill),
-              //     SizedBox(width: 5),
-              //     _buildStar(CupertinoIcons.star_fill),
-              //     SizedBox(width: 5),
-              //     _buildStar(CupertinoIcons.star_fill),
-              //   ],
-              // ),
             ],
           )
         ],
@@ -263,7 +237,7 @@ Container _buildLessonExpertInformation(String image, String title, String name,
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
+            color: gClientColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -335,7 +309,7 @@ Container _buildLessonPossibleDate(String possibleDays) {
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
+            color: gClientColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -369,7 +343,7 @@ Container _buildLessonContentBox(String title, String content, double heig, int 
           height: heig,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
+            color: gClientColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -406,7 +380,7 @@ Container _buildLessonBox(String title, int content, double heig, int max) {
           height: heig,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xffEAF2FD),
+            color: gClientColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -500,7 +474,8 @@ SliverAppBar _buildSliverAppbar(BuildContext context) {
 }
 
 class _buildLessonBar extends StatefulWidget {
-  const _buildLessonBar({Key? key}) : super(key: key);
+  final LessonDetailPageModel? model;
+  _buildLessonBar({Key? key, required this.model}) : super(key: key);
 
   @override
   State<_buildLessonBar> createState() => _buildLessonBarState();
@@ -520,10 +495,10 @@ class _buildLessonBarState extends State<_buildLessonBar> {
               constraints: BoxConstraints.tightFor(height: 50, width: 270),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: Color(0xff4880ED),
+                  backgroundColor: gButtonOnColor,
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/orderDetail");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailPage(model: widget.model)));
                   //Form에서 현재의 상태 값이 null이 아니라면 /home로 push 해준다.
                 },
                 child: Text(
@@ -558,20 +533,6 @@ class _buildLessonBarState extends State<_buildLessonBar> {
                   ),
                 ),
               ),
-              // child: Padding(
-              //     padding: const EdgeInsets.all(8.0),
-              //     child: (subcribeCheck == true)
-              //         ? Center(
-              //             child: Icon(
-              //             CupertinoIcons.heart,
-              //           ))
-              //         : Center(
-              //             child: Icon(
-              //             CupertinoIcons.heart_fill,
-              //             color: Colors.red,
-              //           ))
-
-              //     ),
             )
           ],
         ),

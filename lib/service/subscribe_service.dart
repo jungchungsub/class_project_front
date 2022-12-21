@@ -9,6 +9,11 @@ import 'package:logger/logger.dart';
 class SubscribeService {
   final HttpConnector httpConnector = HttpConnector();
 
+  static final SubscribeService _instance = SubscribeService._single();
+  SubscribeService._single();
+  factory SubscribeService() {
+    return _instance;
+  }
   Future<ResponseDto> subscribeList(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/subscribe");
 

@@ -2,6 +2,64 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<array>
+					<string>kftc-bankpay</string>
+					<string>ispmobile</string>
+					<string>itms-apps</string>
+					<string>hdcardappcardansimclick</string>
+					<string>smhyundaiansimclick</string>
+					<string>shinhan-sr-ansimclick</string>
+					<string>smshinhanansimclick</string>
+					<string>kb-acp</string>
+					<string>mpocket.online.ansimclick</string>
+					<string>ansimclickscard</string>
+					<string>ansimclickipcollect</string>
+					<string>vguardstart</string>
+					<string>samsungpay</string>
+					<string>scardcertiapp</string>
+					<string>lottesmartpay</string>
+					<string>lotteappcard</string>
+					<string>cloudpay</string>
+					<string>nhappcardansimclick</string>
+					<string>nonghyupcardansimclick</string>
+					<string>citispay</string>
+					<string>citicardappkr</string>
+					<string>citimobileapp</string>
+					<string>kakaotalk</string>
+					<string>payco</string>
+					<string>lpayapp</string>
+					<string>hanamopmoasign</string>
+					<string>wooripay</string>
+					<string>nhallonepayansimclick</string>
+					<string>hanawalletmembers</string>
+					<string>chaipayment</string>
+					<string>kb-auth</string>
+					<string>hyundaicardappcardid</string>
+					<string>com.wooricard.wcard</string>
+					<string>lmslpay</string>
+					<string>lguthepay-xpay</string>
+					<string>liivbank</string>
+					<string>supertoss</string>
+					<string>newsmartpib</string>
+				</array>
+				<string>example</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string></string>
+		</dict>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -46,10 +104,10 @@
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-		<string>Access to take a photo by camera</string>
+	<string>Access to take a photo by camera</string>
 	<key>NSAppleMusicUsageDescription</key>
-		<string>Access to pick a photo</string>
+	<string>Access to pick a photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-		<string>Access to pick a photo</string>
+	<string>Access to pick a photo</string>
 </dict>
 </plist>
