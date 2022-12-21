@@ -2,13 +2,13 @@
 
 import 'package:finalproject_front/core/util/move_profile_insert_dialog.dart';
 import 'package:finalproject_front/domain/user_session.dart';
-import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/respone_dto.dart';
 import 'package:finalproject_front/main.dart';
 import 'package:finalproject_front/pages/auth/join_page.dart';
 
 import 'package:finalproject_front/pages/lesson/lesson_master_list/lesson_master_list.dart';
+import 'package:finalproject_front/pages/user/user_login_my_page/master_model/master_my_page_view_model.dart';
 
 import 'package:finalproject_front/pages/user/user_login_my_page/user_model/user_my_page_view_model.dart';
 import 'package:finalproject_front/pages/user/user_profile_detail_page/model/user_profile_detail_page_view_model.dart';
@@ -136,7 +136,7 @@ class UserController {
       Navigator.pop(gContext);
     } else {
       ScaffoldMessenger.of(gContext).showSnackBar(
-        SnackBar(content: Text("게시글 수정 실패 : ${responseDto.msg}")),
+        SnackBar(content: Text("회원정보 수정 실패 : ${responseDto.msg}")),
       );
     }
   }
@@ -146,8 +146,12 @@ class UserController {
     if (responseDto.statusCode < 400) {
       //이전 페이지가 수정된 데이터로 업데이트
       _ref.read(userProfileDetailPageViewModel(id).notifier).notifyViewModel();
-      _ref.read(userMyPageViewModel.notifier).initViewModel();
-      LocalService().fetchJwtToken();
+      if (UserSession.user.role == "일반유저") {
+        _ref.read(userMyPageViewModel.notifier).initViewModel();
+      }
+      if (UserSession.user.role == "전문가") {
+        _ref.read(masterMyPageViewModel.notifier).initViewModel();
+      }
       Navigator.pop(gContext);
     }
   }
@@ -156,7 +160,13 @@ class UserController {
     ResponseDto responseDto = await userService.fetchInsertProfile(profileInsertReqDto);
     if (responseDto.statusCode < 400) {
       // MyPage에서 profile의 여부에 따라 사진이 달라지기때문에 초기화
-      _ref.read(userMyPageViewModel.notifier).initViewModel();
+      //마스터, 일반인 페이지 초기화 필요함.
+      if (UserSession.user.role == "일반유저") {
+        _ref.read(userMyPageViewModel.notifier).initViewModel();
+      }
+      if (UserSession.user.role == "전문가") {
+        _ref.read(masterMyPageViewModel.notifier).initViewModel();
+      }
       _ref.read(userProfileDetailPageViewModel(userId).notifier).notifyViewModel();
       Navigator.pop(gContext);
     } else {

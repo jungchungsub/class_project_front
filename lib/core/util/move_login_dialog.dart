@@ -40,7 +40,6 @@ class MoveLoginDialog extends StatelessWidget {
                 style: TextStyle(),
               ),
               onPressed: () {
-                //현재 페이지를 스택에서 제거 후 이동 , 그냥 이동하면 alert창이 띄워져있음
                 Navigator.pushNamed(context, "/joinDivision");
               },
             ),
@@ -51,7 +50,6 @@ class MoveLoginDialog extends StatelessWidget {
                 style: TextStyle(),
               ),
               onPressed: () {
-                //현재 페이지를 스택에서 제거 후 이동 , 그냥 이동하면 alert창이 띄워져있음
                 Navigator.pushNamed(context, "/loginDivision");
               },
             ),
