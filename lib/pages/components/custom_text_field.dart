@@ -49,6 +49,7 @@ class CustomTextField extends StatelessWidget {
             controller: fieldController,
             keyboardType: TextInputType.multiline,
             maxLines: lines,
+            obscureText: hint == "비밀번호를 입력해주세요." ? true : false,
             decoration: InputDecoration(
               hintText: "${hint}",
               hintStyle: TextStyle(

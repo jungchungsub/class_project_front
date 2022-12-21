@@ -22,7 +22,7 @@ class LessonMasterListViewModel extends StateNotifier<LessonMasterListModel?> {
   Future<void> notifyViewModel() async {
     String? jwtToken;
     ResponseDto responseDto = await userService.fetchSellingList(userId, UserSession.jwtToken);
-    if (responseDto.statusCode < 300) {
+    if (responseDto.statusCode < 400) {
       LessonMasterListModel model = LessonMasterListModel(responseDto.data);
 
       state = model;

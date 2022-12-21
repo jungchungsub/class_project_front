@@ -1,4 +1,5 @@
 import 'package:finalproject_front/constants.dart';
+import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/lesson_update_info.dart';
 import 'package:finalproject_front/dummy_models/master_lesson_list_resp_dto.dart';
 import 'package:finalproject_front/pages/lesson/lesson_master_list/model/lesson_master_list_model.dart';
@@ -9,6 +10,7 @@ import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class LessonMasterListPage extends ConsumerWidget {
   final userId;
@@ -17,6 +19,7 @@ class LessonMasterListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     LessonMasterListModel? model = ref.watch(lessonMasterListViewModel(userId));
+
     if (model == null) {
       return Center(
         child: CircularProgressIndicator(),
@@ -28,7 +31,7 @@ class LessonMasterListPage extends ConsumerWidget {
             shrinkWrap: true,
             itemCount: 5,
             itemBuilder: ((BuildContext context, int index) {
-              return _buildLessonExpertList(context, index, ref, model!);
+              return _buildLessonExpertList(context, index, ref, model);
             })));
   }
 
@@ -138,7 +141,13 @@ Widget _buildLessonExpertList(BuildContext context, int index, WidgetRef ref, Le
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: (() {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => LessonUpdatePage(model: ))); //아이디 넘겨줘야함
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LessonUpdatePage(
+                                  lessonId: model.sellingList.lessonDtoList[index].lessonId,
+                                ),
+                              )); //아이디 넘겨줘야함
                         }),
                         child: Text(
                           "수정하기",

@@ -40,6 +40,10 @@ class LessonDetailPage extends ConsumerWidget {
     );
   }
 
+  // Widget _buildBody(WidgetRef ref) {
+  //   LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+  //   return (model == null
+
   Widget _buildBody(LessonDetailPageModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
