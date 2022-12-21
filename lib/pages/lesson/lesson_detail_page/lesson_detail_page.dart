@@ -19,7 +19,9 @@ class LessonDetailPage extends ConsumerWidget {
     //final rc = ref.read(lessonController);
     LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
     if (model == null) {
-      return Center(child: CircularProgressIndicator());
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
     return Scaffold(
       bottomSheet: _buildLessonBar(model: model),
@@ -39,6 +41,10 @@ class LessonDetailPage extends ConsumerWidget {
       ),
     );
   }
+
+  // Widget _buildBody(WidgetRef ref) {
+  //   LessonDetailPageModel? model = ref.watch(lessonDetailPageViewModel(lessonId));
+  //   return (model == null
 
   Widget _buildBody(LessonDetailPageModel model) {
     return Padding(

@@ -221,6 +221,7 @@ class _LessonInsertFormState extends ConsumerState<LessonInsertForm> {
                     Logger().d("레슨 이미지 확인 : ${lessonInsertReqDto.photo}");
 
                     lessonCT.lessonInsert(lessonInsertReqDto: lessonInsertReqDto);
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: gButtonOffColor,

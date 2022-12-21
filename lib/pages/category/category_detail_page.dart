@@ -10,6 +10,7 @@ import 'package:finalproject_front/pages/category/components/category_page_view_
 import 'package:finalproject_front/size.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:logger/logger.dart';
@@ -114,15 +115,15 @@ class _CategoryDetailPageState extends ConsumerState<CategoryDetailPage> {
                     ),
                     Row(
                       children: [
-                        Text(
-                          "${categoryList[index].avgGrade}",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                        SizedBox(width: gap_s),
-                        Icon(
-                          CupertinoIcons.star_fill,
-                          color: Colors.yellow,
-                          size: 16,
+                        RatingBarIndicator(
+                          rating: categoryList[index].avgGrade,
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 14.0,
+                          direction: Axis.horizontal,
                         ),
                         SizedBox(
                           width: gap_s,
