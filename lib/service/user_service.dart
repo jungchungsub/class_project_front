@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:finalproject_front/core/http_connector.dart';
 import 'package:finalproject_front/domain/user_session.dart';
 import 'package:finalproject_front/dto/request/auth_req_dto.dart';
-import 'package:finalproject_front/dto/request/profile_insert_req_dto.dart';
 import 'package:finalproject_front/dto/request/profile_req_dto.dart';
 import 'package:finalproject_front/dto/response/buying_list_resp_dto.dart';
 import 'package:finalproject_front/dto/response/selling_List_resp_dto.dart';
@@ -32,19 +31,15 @@ class UserService {
   Future<ResponseDto> fetchJoin(JoinReqDto joinReqDto) async {
     // 1. json변환
     String requestBody = jsonEncode(joinReqDto.toJson());
-    Logger().d("회원가입 데이터 확인 : ${requestBody}");
     // 2. 통신 시작
     Response response = await httpConnector.post(path: "/api/join", body: requestBody);
-
     return toResponseDto(response); // ResponseDto 응답
   }
 
   Future<ResponseDto> fetchLogin(LoginReqDto loginReqDto) async {
     String requestBody = jsonEncode(loginReqDto.toJson());
     Response response = await httpConnector.post(path: "/login", body: requestBody);
-
     String jwtToken = response.headers["authorization"].toString();
-
     await secureStorage.write(key: "jwtToken", value: jwtToken); // 토큰 값 디바이스에 저장
     ResponseDto responseDto = toResponseDto(response);
 

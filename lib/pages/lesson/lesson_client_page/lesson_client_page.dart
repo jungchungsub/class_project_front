@@ -9,10 +9,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LessonClientListPage extends ConsumerWidget {
-  const LessonClientListPage({Key? key}) : super(key: key);
+  // const LessonClientListPage({Key? key}) : super(key: key);
+
+  // @override
+  // Widget build(BuildContext context, WidgetRef ref) {
+
+  final userId;
+  const LessonClientListPage({required this.userId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    LessonClientListModel? model = ref.watch(lessonClientListViewModel(userId));
+
+    if (model == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     return Scaffold(
       appBar: _buildAppbar(context),
       body: ListView.builder(

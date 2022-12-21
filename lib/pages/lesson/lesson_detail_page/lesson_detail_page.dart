@@ -31,7 +31,7 @@ class LessonDetailPage extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                _buildHeader(model!),
+                _buildHeader(model),
                 _buildDivider(),
                 _buildBody(model),
               ],
@@ -47,52 +47,50 @@ class LessonDetailPage extends ConsumerWidget {
   //   return (model == null
 
   Widget _buildBody(LessonDetailPageModel model) {
-    return model == null
-        ? SizedBox()
-        : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 16),
-                  child: Text(
-                    "${model.lessonRespDto.lessonDto.lessonPrice}원",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                _buildLessonContentBox("커리큘럼", "${model.lessonRespDto.lessonDto.curriculum}", 120, 2),
-                _buildLessonContentBox("레슨시간", "${model.lessonRespDto.lessonDto.lessonTime}", 55, 1),
-                _buildLessonContentBox("레슨횟수", "${model.lessonRespDto.lessonDto.lessonCount}", 55, 1),
-                _buildLessonContentBox("장소", "${model.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
-                _buildLessonPossibleDate("${model.lessonRespDto.lessonDto.possibleDays}"),
-                _buildLessonContentBox(
-                  "취소 및 환불규정",
-                  "${model.lessonRespDto.lessonDto.lessonPolicy}",
-                  200,
-                  6,
-                ),
-                _buildLessonExpertInformation(
-                  "${model.lessonRespDto.profileDto.expertPhoto}",
-                  "전문가정보",
-                  "${model.lessonRespDto.profileDto.expertName}",
-                  "${model.lessonRespDto.profileDto.expertIntroduction}",
-                ),
-                _buildLessonEvaluation(
-                  "${model.lessonRespDto.lessonAvgGrade}",
-                  model.lessonRespDto.lessonAvgGrade,
-                  "${model.lessonRespDto.lessonTotalReviewsCount}",
-                ),
-                Column(
-                  children: model.lessonRespDto.lessonReviewList.map((e) => _buildReview(e.username, e.reviewContent, e.lessonGrade)).toList(),
-                ),
-                SizedBox(
-                  height: gap_xxl,
-                ),
-              ],
-            )),
-          );
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: Text(
+              "${model.lessonRespDto.lessonDto.lessonPrice}원",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+          _buildLessonContentBox("커리큘럼", "${model.lessonRespDto.lessonDto.curriculum}", 120, 2),
+          _buildLessonContentBox("레슨시간", "${model.lessonRespDto.lessonDto.lessonTime}", 55, 1),
+          _buildLessonContentBox("레슨횟수", "${model.lessonRespDto.lessonDto.lessonCount}", 55, 1),
+          _buildLessonContentBox("장소", "${model.lessonRespDto.lessonDto.lessonPlace}", 55, 1),
+          _buildLessonPossibleDate("${model.lessonRespDto.lessonDto.possibleDays}"),
+          _buildLessonContentBox(
+            "취소 및 환불규정",
+            "${model.lessonRespDto.lessonDto.lessonPolicy}",
+            200,
+            6,
+          ),
+          _buildLessonExpertInformation(
+            "${model.lessonRespDto.profileDto.expertPhoto}",
+            "전문가정보",
+            "${model.lessonRespDto.profileDto.expertName}",
+            "${model.lessonRespDto.profileDto.expertIntroduction}",
+          ),
+          _buildLessonEvaluation(
+            "${model.lessonRespDto.lessonAvgGrade}",
+            model.lessonRespDto.lessonAvgGrade,
+            "${model.lessonRespDto.lessonTotalReviewsCount}",
+          ),
+          Column(
+            children: model.lessonRespDto.lessonReviewList.map((e) => _buildReview(e.username, e.reviewContent, e.lessonGrade)).toList(),
+          ),
+          SizedBox(
+            height: gap_xxl,
+          ),
+        ],
+      )),
+    );
   }
 
   Widget _buildHeader(LessonDetailPageModel model) {
@@ -132,7 +130,7 @@ Container _buildLessonEvaluation(String evaluation, double star, String totalRev
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: gClientColor,
+            color: gContentBoxColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -242,7 +240,7 @@ Container _buildLessonExpertInformation(String image, String title, String name,
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: gClientColor,
+            color: gContentBoxColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -314,7 +312,7 @@ Container _buildLessonPossibleDate(String possibleDays) {
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: gClientColor,
+            color: gContentBoxColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -348,7 +346,7 @@ Container _buildLessonContentBox(String title, String content, double heig, int 
           height: heig,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: gClientColor,
+            color: gContentBoxColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -385,7 +383,7 @@ Container _buildLessonBox(String title, int content, double heig, int max) {
           height: heig,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: gClientColor,
+            color: gContentBoxColor,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -500,7 +498,7 @@ class _buildLessonBarState extends State<_buildLessonBar> {
               constraints: BoxConstraints.tightFor(height: 50, width: 270),
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: gButtonOnColor,
+                  backgroundColor: gButtonOffColor,
                 ),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => OrderDetailPage(model: widget.model)));

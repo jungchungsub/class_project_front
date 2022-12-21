@@ -63,6 +63,7 @@ class ProfileDto {
 
 class MasterPageRespDto {
   MasterPageRespDto({
+    this.profileId,
     this.profilePhoto,
     required this.username,
     required this.satisfaction,
@@ -74,9 +75,11 @@ class MasterPageRespDto {
   String username;
   int satisfaction;
   int totalLesson;
+  int? profileId;
   // bool isApproval;
 
   factory MasterPageRespDto.fromJson(Map<String, dynamic> json) => MasterPageRespDto(
+        profileId: json["profileId"] ?? 0,
         profilePhoto: json["profilePhoto"] ?? '',
         username: json["username"],
         satisfaction: json["satisfaction"],

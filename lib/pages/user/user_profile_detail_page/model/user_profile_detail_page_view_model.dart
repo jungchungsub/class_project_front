@@ -25,7 +25,7 @@ class UserProfileDetailPageViewModel extends StateNotifier<UserProfileDetailPage
 
   Future<void> notifyViewModel() async {
     ResponseDto responseDto = await userService.fetchGetDetailProfile(userId);
-    if (responseDto.statusCode < 300) {
+    if (responseDto.statusCode < 400) {
       state = UserProfileDetailPageModel(responseDto.data);
     } else {
       ScaffoldMessenger.of(mContext!).showSnackBar(
