@@ -90,8 +90,11 @@ class UserService {
   Future<ResponseDto> fetchBuyingList(int userId, String? jwtToken) async {
     Response response = await httpConnector.get(path: "/api/user/${userId}/buyingList");
     ResponseDto responseDto = toResponseDto(response);
+
     if (responseDto.data != null) {
-      responseDto.data = buyingListRespDto.fromJson(responseDto.data);
+      List<dynamic> mapList = responseDto.data; //responseDto.
+      List<buyingListRespDto> buyListRespDto = mapList.map((e) => buyingListRespDto.fromJson(e)).toList();
+      responseDto.data = buyListRespDto;
     }
     return responseDto;
   }
